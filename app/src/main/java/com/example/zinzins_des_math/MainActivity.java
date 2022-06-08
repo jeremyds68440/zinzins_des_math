@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
                 jouer.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent difficulty = new Intent(getApplicationContext(), DifficultyActivity.class);
                 startActivity(difficulty);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
         });
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 Parameter.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent menuParametre = new Intent(getApplicationContext(), ParametreActivity.class);
                 startActivity(menuParametre);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
         });
