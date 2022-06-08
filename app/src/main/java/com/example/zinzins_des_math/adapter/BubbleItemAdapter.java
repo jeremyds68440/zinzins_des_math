@@ -1,7 +1,6 @@
 package com.example.zinzins_des_math.adapter;
 
 import android.app.ActionBar;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,15 +56,17 @@ public class BubbleItemAdapter extends BaseAdapter {
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int random = (int) (Math.random()*8+2);
-                String imageName = "bubble_" + random;
-                int resId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
-                image.setImageResource(resId);
-                context.multCounter(bubble.getNumber());
-                TextView countText = context.findViewById(R.id.bubbleScore);
-                countText.setText("Score : " + context.getCounter());
-                bubble.setNumber(random);
-                context.verify();
+                if(!context.isBlocked()) {
+                    int random = (int) (Math.random() * 8 + 2);
+                    String imageName = "bubble_" + random;
+                    int resId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
+                    image.setImageResource(resId);
+                    context.multCounter(bubble.getNumber());
+                    TextView countText = context.findViewById(R.id.bubbleScore);
+                    countText.setText("Score : " + context.getCounter());
+                    bubble.setNumber(random);
+                    context.verify();
+                }
             }
         });
 

@@ -1,13 +1,14 @@
 package com.example.zinzins_des_math;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
@@ -17,11 +18,9 @@ import android.widget.TextView;
 
 import com.example.zinzins_des_math.adapter.BubbleItemAdapter;
 import com.example.zinzins_des_math.models.BubbleItem;
-import com.example.zinzins_des_math.thread.BubbleThread;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.Attributes;
 
 public class FirstGameActivity extends AppCompatActivity {
 
@@ -90,14 +89,57 @@ public class FirstGameActivity extends AppCompatActivity {
 
     public void verify() {
         if(counter > target) {
-            countText.setTextColor(Color.RED);
-            Thread t = new BubbleThread(this, false);
-            t.start();
+            countText.setTextColor(context.getResources().getColor(R.color.lose));
+            blocked = true;
+
+            AlertDialog.Builder lose = new AlertDialog.Builder(this);
+            lose.setTitle("Perdu !");
+            lose.setMessage("Cible dépassée !");
+            lose.setPositiveButton("Réssayer", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    resetCounter();
+                    unBlocked();
+                }
+            });
+            lose.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent difficulte = new Intent(getApplicationContext(), DifficultyActivity.class);
+                    startActivity(difficulte);
+                    finish();
+                }
+            });
+
+            lose.setCancelable(false);
+            lose.show();
         }
         else if(counter == target) {
-            countText.setTextColor(Color.GREEN);
-            Thread t = new BubbleThread(this, true);
-            t.start();
+            countText.setTextColor(context.getResources().getColor(R.color.win));
+            blocked = true;
+
+            AlertDialog.Builder win = new AlertDialog.Builder(this);
+            win.setTitle("Bravo !");
+            win.setMessage("Cible atteinte !");
+            win.setPositiveButton("Rejouer", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    resetCounter();
+                    newTarget();
+                    unBlocked();
+                }
+            });
+            win.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent difficulte = new Intent(getApplicationContext(), DifficultyActivity.class);
+                    startActivity(difficulte);
+                    finish();
+                }
+            });
+
+            win.setCancelable(false);
+            win.show();
         }
     }
 
@@ -113,5 +155,13 @@ public class FirstGameActivity extends AppCompatActivity {
             target *= (int)(Math.random()*8)+2;
         }
         targetText.setText("Target : " + target);
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void unBlocked() {
+        blocked = false;
     }
 }
