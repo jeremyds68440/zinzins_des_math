@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="50sp"
+        android:fontFamily="@string/font"
         />
 
     <TextView
@@ -22,6 +23,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="50sp"
+        android:fontFamily="@string/font"
         />
 
 

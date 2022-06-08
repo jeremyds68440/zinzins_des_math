@@ -74,7 +74,7 @@ public class DifficultyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 IA.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent evolution  = new Intent(getApplicationContext(), LevelActivity.class);
+                Intent evolution = new Intent(getApplicationContext(), LevelActivity.class);
                 startActivity(evolution);
                 finish();
             }

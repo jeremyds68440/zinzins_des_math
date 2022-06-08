@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.zinzins_des_math.adapter.BubbleItemAdapter;
 import com.example.zinzins_des_math.models.BubbleItem;
+import com.example.zinzins_des_math.thread.BubbleThread;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,7 @@ public class FirstGameActivity extends AppCompatActivity {
     private int target;
     private TextView targetText;
     private TextView countText;
+    private boolean blocked = false;
     public static final int BUBBLESIZE = 190;
     public static final int NUMBERBUBBLEROW = 6;
     public static final int NUMBERBUBBLECOLUMN = 6;
@@ -89,24 +91,13 @@ public class FirstGameActivity extends AppCompatActivity {
     public void verify() {
         if(counter > target) {
             countText.setTextColor(Color.RED);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            countText.setTextColor(Color.BLACK);
-            countText.setText("Score : 0");
-            counter = 0;
+            Thread t = new BubbleThread(this, false);
+            t.start();
         }
         else if(counter == target) {
             countText.setTextColor(Color.GREEN);
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            resetCounter();
-            newTarget();
+            Thread t = new BubbleThread(this, true);
+            t.start();
         }
     }
 

@@ -1,3 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Z2M</string>
+    <string name="font" tools:ignore="ReferenceType">@font/nirmala_b</string>
 </resources>
