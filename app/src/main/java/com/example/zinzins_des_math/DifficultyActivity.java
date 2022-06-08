@@ -3,6 +3,8 @@ package com.example.zinzins_des_math;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,17 +12,20 @@ import android.widget.ImageView;
 public class DifficultyActivity extends AppCompatActivity {
 
     ImageView back,easy,medium,hard,IA;
+    private MediaPlayer mediaPlayer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_difficulty);
-
+        mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.zinzin_sound);
         back = findViewById(R.id.back);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                back.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent main = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(main);
                 finish();
@@ -32,6 +37,7 @@ public class DifficultyActivity extends AppCompatActivity {
         easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                easy.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent Facile = new Intent(getApplicationContext(), LevelActivity.class);
                 startActivity(Facile);
                 finish();
@@ -43,6 +49,7 @@ public class DifficultyActivity extends AppCompatActivity {
         medium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                medium.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent moyen = new Intent(getApplicationContext(), LevelActivity.class);
                 startActivity(moyen);
                 finish();
@@ -54,6 +61,7 @@ public class DifficultyActivity extends AppCompatActivity {
         hard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                hard.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent difficile = new Intent(getApplicationContext(), LevelActivity.class);
                 startActivity(difficile);
                 finish();
@@ -65,10 +73,24 @@ public class DifficultyActivity extends AppCompatActivity {
         IA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                IA.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent evolution  = new Intent(getApplicationContext(), LevelActivity.class);
                 startActivity(evolution);
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mediaPlayer.start();
+
     }
 }
