@@ -40,6 +40,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     ex.printStackTrace();
                 } finally {
                     startActivity(i);
+                    overridePendingTransition(R.anim.slide_in_top, R.anim.slide_out_bottom);
                     finish();
                 }
             }
