@@ -16,6 +16,7 @@
         <activity
             android:name=".LevelActivity"
             android:exported="false" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ParametreActivity"
             android:exported="false"
