@@ -38,7 +38,7 @@ public class DifficultyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 easy.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent Facile = new Intent(getApplicationContext(), LevelActivity.class);
+                Intent Facile = new Intent(getApplicationContext(), FirstGameActivity.class);
                 startActivity(Facile);
                 finish();
             }
