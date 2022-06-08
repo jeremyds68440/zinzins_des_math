@@ -28,6 +28,7 @@ public class DifficultyActivity extends AppCompatActivity {
                 back.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent main = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(main);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
         });
@@ -40,6 +41,7 @@ public class DifficultyActivity extends AppCompatActivity {
                 easy.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent Facile = new Intent(getApplicationContext(), FirstGameActivity.class);
                 startActivity(Facile);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
         });
@@ -52,6 +54,7 @@ public class DifficultyActivity extends AppCompatActivity {
                 medium.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent moyen = new Intent(getApplicationContext(), LevelActivity.class);
                 startActivity(moyen);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
         });
@@ -64,6 +67,7 @@ public class DifficultyActivity extends AppCompatActivity {
                 hard.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent difficile = new Intent(getApplicationContext(), LevelActivity.class);
                 startActivity(difficile);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
         });
@@ -76,6 +80,7 @@ public class DifficultyActivity extends AppCompatActivity {
                 IA.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent evolution = new Intent(getApplicationContext(), LevelActivity.class);
                 startActivity(evolution);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
         });
