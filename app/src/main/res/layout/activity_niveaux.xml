@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/chargement_bg"
-    tools:context=".Niveaux">
+    tools:context=".DifficultyActivity">
 
     <ImageView
         android:id="@+id/difficulte"
