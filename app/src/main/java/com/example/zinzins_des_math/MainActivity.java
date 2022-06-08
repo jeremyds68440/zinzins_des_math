@@ -9,20 +9,29 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageView jouer;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        jouer = findViewById(R.id.jouer);
+        ImageView jouer = findViewById(R.id.jouer);
 
         jouer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent difficulty = new Intent(getApplicationContext(), DifficultyActivity.class);
                 startActivity(difficulty);
+                finish();
+            }
+        });
+
+        ImageView Parameter = findViewById(R.id.parametres);
+
+        Parameter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent menuParametre = new Intent(getApplicationContext(), ParametreActivity.class);
+                startActivity(menuParametre);
                 finish();
             }
         });
