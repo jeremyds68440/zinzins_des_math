@@ -7,12 +7,50 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:id="@+id/accueil_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/accueil_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/logo_blanc"
+        android:layout_width="147dp"
+        android:layout_height="153dp"
+        android:layout_marginTop="84dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/jouer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/accueil_bg"
+        app:srcCompat="@drawable/logo_blanc" />
+
+    <ImageView
+        android:id="@+id/jouer"
+        android:layout_width="176dp"
+        android:layout_height="79dp"
+        app:layout_constraintBottom_toBottomOf="@+id/accueil_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/accueil_bg"
+        app:layout_constraintVertical_bias="0.566"
+        app:srcCompat="@drawable/jouer" />
+
+    <ImageView
+        android:id="@+id/parametres"
+        android:layout_width="176dp"
+        android:layout_height="79dp"
+        app:layout_constraintBottom_toBottomOf="@+id/accueil_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jouer"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/parametres" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
