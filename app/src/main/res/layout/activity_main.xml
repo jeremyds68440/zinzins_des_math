@@ -20,6 +20,18 @@
 
     <ImageView
         android:id="@+id/jouer"
+        android:layout_width="176dp"
+        android:layout_height="@dimen/height_Jouer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.515"
+        app:srcCompat="@drawable/jouer" />
+
+    <ImageView
+        android:id="@+id/multiplayer"
         android:layout_width="@dimen/wight_Jouer"
         android:layout_height="@dimen/height_Jouer"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,7 +39,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.567"
+        app:layout_constraintVertical_bias="0.636"
         app:srcCompat="@drawable/jouer" />
 
     <ImageView

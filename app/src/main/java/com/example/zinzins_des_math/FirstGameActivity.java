@@ -42,7 +42,7 @@ public class FirstGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_game);
-
+        System.out.println(findViewById(R.id.btn_ans1));
         activity = (LinearLayout) findViewById(R.id.firstGame);
         context = getApplicationContext();
 

@@ -11,13 +11,14 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
+    ImageView jouer, Parameter, multiplayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView jouer = findViewById(R.id.jouer);
+        jouer = findViewById(R.id.jouer);
         jouer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -29,8 +30,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ImageView Parameter = findViewById(R.id.parametres);
+        multiplayer = findViewById(R.id.multiplayer);
+        multiplayer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                multiplayer.setColorFilter(Color.argb(80, 0, 0, 0));
+                Intent multiPlayerActivity = new Intent(getApplicationContext(), MultiplayerActivity.class);
+                startActivity(multiPlayerActivity);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
+            }
+        });
 
+
+        Parameter = findViewById(R.id.parametres);
         Parameter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
