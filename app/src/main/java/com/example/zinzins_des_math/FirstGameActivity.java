@@ -2,7 +2,6 @@ package com.example.zinzins_des_math;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,11 +9,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.zinzins_des_math.adapter.BubbleItemAdapter;
@@ -25,7 +22,7 @@ import java.util.List;
 
 public class FirstGameActivity extends AppCompatActivity {
 
-    private LinearLayout activity;
+    private RelativeLayout activity;
     private Context context;
     private int counter = 0;
     private int countMult = 0;
@@ -43,7 +40,7 @@ public class FirstGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_game);
         System.out.println(findViewById(R.id.btn_ans1));
-        activity = (LinearLayout) findViewById(R.id.firstGame);
+        activity = (RelativeLayout) findViewById(R.id.grid_relative_layout);
         context = getApplicationContext();
 
         ImageView back = findViewById(R.id.first_game_back);
@@ -71,8 +68,8 @@ public class FirstGameActivity extends AppCompatActivity {
         for(int i = 0; i < NUMBERBUBBLECOLUMN*NUMBERBUBBLEROW; i++) {
             bubbles.add(new BubbleItem((int) (Math.random()*8+2)));
         }
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(NUMBERBUBBLECOLUMN*BUBBLECOLUMN+100,BUBBLEROW*NUMBERBUBBLEROW);
-        params.setMargins(120,0,0,0);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(NUMBERBUBBLECOLUMN*BUBBLECOLUMN+100,BUBBLEROW*NUMBERBUBBLEROW);
+        params.setMargins(120,30,0,0);
         GridView grid = new GridView(getApplicationContext());
         grid.setLayoutParams(params);
         grid.setNumColumns(NUMBERBUBBLECOLUMN);
@@ -162,7 +159,7 @@ public class FirstGameActivity extends AppCompatActivity {
     public void newTarget() {
         target = 1;
         for(int i = 0; i < 3; i++) {
-            target *= (int)(Math.random()*8)+2;
+            target *= (int)(Math.random()*9)+2;
         }
         targetText.setText("" + target);
     }
