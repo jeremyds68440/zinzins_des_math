@@ -52,7 +52,7 @@ public class DifficultyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 medium.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent moyen = new Intent(getApplicationContext(), LevelActivity.class);
+                Intent moyen = new Intent(getApplicationContext(), SecondGameActivity.class);
                 startActivity(moyen);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
