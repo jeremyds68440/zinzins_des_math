@@ -60,6 +60,8 @@ public class SecondGameActivity extends AppCompatActivity {
 
             fini.setCancelable(false);
             fini.show();
+            g.setNumberCorrect(0);
+            g.setNumberIncorrect(0);
             g.setScore(0);
             score.setText(Integer.toString(g.getScore()));
         }
@@ -199,6 +201,8 @@ public class SecondGameActivity extends AppCompatActivity {
         equation.setText(g.getCurrentEquation().getEquationPhrase());
         soluaff.setText(g.getNumberCorrect() + "/" + (g.getTotalEquations()-1));
         if(g.getScore() < 0){
+            g.setNumberIncorrect(0);
+            g.setNumberCorrect(0);
             g.setScore(0);
             score.setText(Integer.toString(g.getScore()));
         }
