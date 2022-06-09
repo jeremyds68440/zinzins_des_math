@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Z2M</string>
     <string name="font" tools:ignore="ReferenceType">@font/nirmala_b</string>
+    <string name="font2" tools:ignore="ReferenceType">@font/showg</string>
     <string name="equation">0</string>
     <string name="reponse1">0</string>
     <string name="reponse2">0</string>

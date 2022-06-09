@@ -3,108 +3,180 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/second_game_bg"
     android:layout_height="match_parent"
     tools:context=".SecondGameActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="365dp"
+        android:layout_height="223dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.381"
+        app:srcCompat="@drawable/grosnuage" />
 
     <TextView
         android:id="@+id/equation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="192dp"
+        android:fontFamily="@string/font"
         android:text="@string/equation"
-        app:layout_constraintStart_toEndOf="@+id/timer"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toEndOf="@+id/equation"
-        tools:layout_editor_absoluteY="64dp" />
-
-    <TextView
-        android:id="@+id/timer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:text="@string/timer"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="64dp" />
-
-    <Button
-        android:id="@+id/btn_ans1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.801"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.571" />
-
-    <Button
-        android:id="@+id/btn_ans2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.816" />
-
-    <Button
-        android:id="@+id/btn_ans3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.801"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.797" />
-
-    <Button
-        android:id="@+id/btn_ans0"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.123"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.581" />
-
-    <TextView
-        android:id="@+id/answersolus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar"
+        app:layout_constraintVertical_bias="0.77" />
 
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="4dp"
         android:max="30"
         android:progress="20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timer" />
+
+    <TextView
+        android:id="@+id/answersolus"
+        android:layout_width="100dp"
+        android:layout_height="31dp"
+        android:layout_marginBottom="4dp"
+        android:fontFamily="@string/font"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@string/font"
+        android:text="@string/timer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="87dp"
+        android:layout_height="50dp"
+        android:fontFamily="@string/font2"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ScoreImg" />
+
+    <ImageView
+        android:id="@+id/ScoreImg"
+        android:layout_width="172dp"
+        android:layout_height="82dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/score" />
+
+    <ImageView
+        android:id="@+id/btn_ans0"
+        android:layout_width="175dp"
+        android:layout_height="128dp"
+        app:srcCompat="@drawable/nuage3"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="442dp" />
+
+    <TextView
+        android:id="@+id/btn_ans0_txtv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@string/font"
+        android:text="TextView"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_ans0"
+        app:layout_constraintEnd_toEndOf="@+id/btn_ans0"
+        app:layout_constraintStart_toStartOf="@+id/btn_ans0"
+        app:layout_constraintTop_toTopOf="@+id/btn_ans0"
+        app:layout_constraintVertical_bias="0.504" />
+
+    <ImageView
+        android:id="@+id/btn_ans1"
+        android:layout_width="175dp"
+        android:layout_height="128dp"
+        app:srcCompat="@drawable/nuage3"
+        tools:layout_editor_absoluteX="213dp"
+        tools:layout_editor_absoluteY="417dp" />
+
+    <TextView
+        android:id="@+id/btn_ans1_txtv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@string/font"
+        android:text="TextView"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_ans1"
+        app:layout_constraintEnd_toEndOf="@+id/btn_ans1"
+        app:layout_constraintStart_toStartOf="@+id/btn_ans1"
+        app:layout_constraintTop_toTopOf="@+id/btn_ans1" />
+
+    <ImageView
+        android:id="@+id/btn_ans2"
+        android:layout_width="175dp"
+        android:layout_height="128dp"
+        app:srcCompat="@drawable/nuage2"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="570dp" />
+
+    <TextView
+        android:id="@+id/btn_ans2_txtv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@string/font"
+        android:text="TextView"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_ans2"
+        app:layout_constraintEnd_toEndOf="@+id/btn_ans2"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="@+id/btn_ans2"
+        app:layout_constraintTop_toTopOf="@+id/btn_ans2"
+        app:layout_constraintVertical_bias="0.474" />
+
+    <ImageView
+        android:id="@+id/btn_ans3"
+        android:layout_width="175dp"
+        android:layout_height="128dp"
+        app:srcCompat="@drawable/nuage4"
+        tools:layout_editor_absoluteX="213dp"
+        tools:layout_editor_absoluteY="545dp" />
+
+    <TextView
+        android:id="@+id/btn_ans3_txtv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@string/font"
+        android:text="TextView"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_ans3"
+        app:layout_constraintEnd_toEndOf="@+id/btn_ans3"
+        app:layout_constraintStart_toStartOf="@+id/btn_ans3"
+        app:layout_constraintTop_toTopOf="@+id/btn_ans3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
