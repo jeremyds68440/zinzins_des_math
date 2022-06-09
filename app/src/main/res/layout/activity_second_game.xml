@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:max="30"
-        android:progress="10"
+        android:progress="20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
