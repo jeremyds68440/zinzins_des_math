@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,9 +33,10 @@ public class FirstGameActivity extends AppCompatActivity {
     private TextView targetText;
     private TextView countText;
     private boolean blocked = false;
-    public static final int BUBBLESIZE = 190;
+    public static final int BUBBLECOLUMN = 190;
+    public static final int BUBBLEROW = 190;
     public static final int NUMBERBUBBLEROW = 6;
-    public static final int NUMBERBUBBLECOLUMN = 6;
+    public static final int NUMBERBUBBLECOLUMN = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +46,23 @@ public class FirstGameActivity extends AppCompatActivity {
         activity = (LinearLayout) findViewById(R.id.firstGame);
         context = getApplicationContext();
 
+        ImageView back = findViewById(R.id.first_game_back);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.setColorFilter(Color.argb(80, 0, 0, 0));
+                Intent main = new Intent(getApplicationContext(), DifficultyActivity.class);
+                startActivity(main);
+                finish();
+            }
+        });
+
         targetText = findViewById(R.id.bubbleTarget);
-        targetText.setTextSize(50);
-        targetText.setLastBaselineToBottomHeight(250);
-        targetText.setFirstBaselineToTopHeight(150);
+        targetText.setTextColor(context.getResources().getColor(R.color.first_game_text));
         newTarget();
 
         countText = findViewById(R.id.bubbleScore);
-        countText.setTextSize(50);
-        countText.setLastBaselineToBottomHeight(150);
-        countText.setFirstBaselineToTopHeight(250);
         resetCounter();
 
 
@@ -62,13 +71,14 @@ public class FirstGameActivity extends AppCompatActivity {
         for(int i = 0; i < NUMBERBUBBLECOLUMN*NUMBERBUBBLEROW; i++) {
             bubbles.add(new BubbleItem((int) (Math.random()*8+2)));
         }
-        ViewGroup.LayoutParams params = new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(NUMBERBUBBLECOLUMN*BUBBLECOLUMN+100,BUBBLEROW*NUMBERBUBBLEROW);
+        params.setMargins(120,0,0,0);
         GridView grid = new GridView(getApplicationContext());
         grid.setLayoutParams(params);
         grid.setNumColumns(NUMBERBUBBLECOLUMN);
 
         grid.setAdapter(new BubbleItemAdapter(this, bubbles));
-        grid.setGravity(View.TEXT_ALIGNMENT_CENTER);
+
 
         activity.addView(grid);
     }
@@ -144,17 +154,17 @@ public class FirstGameActivity extends AppCompatActivity {
     }
 
     public void resetCounter() {
-        countText.setTextColor(Color.BLACK);
-        countText.setText("Score : 0");
+        countText.setTextColor(context.getResources().getColor(R.color.first_game_text));
+        countText.setText("0");
         counter = 0;
     }
 
     public void newTarget() {
         target = 1;
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 3; i++) {
             target *= (int)(Math.random()*8)+2;
         }
-        targetText.setText("Target : " + target);
+        targetText.setText("" + target);
     }
 
     public boolean isBlocked() {

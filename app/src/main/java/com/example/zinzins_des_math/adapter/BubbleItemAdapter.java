@@ -44,7 +44,7 @@ public class BubbleItemAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView image = new ImageView(context);
-        ViewGroup.LayoutParams params = new ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT ,context.BUBBLESIZE);
+        ViewGroup.LayoutParams params = new ActionBar.LayoutParams(context.BUBBLECOLUMN ,context.BUBBLEROW);
 
         BubbleItem bubble = getItem(position);
         image.setLayoutParams(params);
@@ -63,7 +63,7 @@ public class BubbleItemAdapter extends BaseAdapter {
                     image.setImageResource(resId);
                     context.multCounter(bubble.getNumber());
                     TextView countText = context.findViewById(R.id.bubbleScore);
-                    countText.setText("Score : " + context.getCounter());
+                    countText.setText("" + context.getCounter());
                     bubble.setNumber(random);
                     context.verify();
                 }

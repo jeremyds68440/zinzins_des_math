@@ -6,7 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".FirstGameActivity"
-    android:id="@+id/firstGame">
+    android:id="@+id/firstGame"
+    android:background="@drawable/first_game_template">
+
+    <ImageView
+        android:id="@+id/first_game_back"
+        android:layout_width="48dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24" />
 
     <TextView
         android:id="@+id/bubbleScore"
@@ -15,16 +23,17 @@
         android:gravity="center"
         android:textSize="50sp"
         android:fontFamily="@string/font"
+        android:layout_marginTop="41dp"
         />
 
     <TextView
         android:id="@+id/bubbleTarget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="50sp"
         android:fontFamily="@string/font"
-        />
-
+        android:gravity="center"
+        android:layout_marginTop="65dp"
+        android:layout_marginBottom="24dp"
+        android:textSize="50sp" />
 
 </LinearLayout>
