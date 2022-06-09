@@ -100,9 +100,13 @@
         android:id="@+id/btn_ans0"
         android:layout_width="175dp"
         android:layout_height="128dp"
-        app:srcCompat="@drawable/nuage3"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="442dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.733"
+        app:srcCompat="@drawable/nuage3" />
 
     <TextView
         android:id="@+id/btn_ans0_txtv"
@@ -121,9 +125,13 @@
         android:id="@+id/btn_ans1"
         android:layout_width="175dp"
         android:layout_height="128dp"
-        app:srcCompat="@drawable/nuage3"
-        tools:layout_editor_absoluteX="213dp"
-        tools:layout_editor_absoluteY="417dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.885"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/timer"
+        app:layout_constraintVertical_bias="0.689"
+        app:srcCompat="@drawable/nuage3" />
 
     <TextView
         android:id="@+id/btn_ans1_txtv"
@@ -141,9 +149,13 @@
         android:id="@+id/btn_ans2"
         android:layout_width="175dp"
         android:layout_height="128dp"
-        app:srcCompat="@drawable/nuage2"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="570dp" />
+        app:layout_constraintBottom_toBottomOf="@+id/answersolus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/timer"
+        app:layout_constraintVertical_bias="0.951"
+        app:srcCompat="@drawable/nuage2" />
 
     <TextView
         android:id="@+id/btn_ans2_txtv"
@@ -163,9 +175,13 @@
         android:id="@+id/btn_ans3"
         android:layout_width="175dp"
         android:layout_height="128dp"
-        app:srcCompat="@drawable/nuage4"
-        tools:layout_editor_absoluteX="213dp"
-        tools:layout_editor_absoluteY="545dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.889"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.903"
+        app:srcCompat="@drawable/nuage4" />
 
     <TextView
         android:id="@+id/btn_ans3_txtv"
