@@ -79,7 +79,7 @@
         android:fontFamily="@string/font2"
         android:text="0"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +102,7 @@
         android:layout_height="128dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.733"
@@ -129,10 +129,10 @@
         android:layout_height="128dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.885"
+        app:layout_constraintHorizontal_bias="0.902"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/timer"
-        app:layout_constraintVertical_bias="0.689"
+        app:layout_constraintVertical_bias="0.731"
         app:srcCompat="@drawable/nuage3" />
 
     <TextView
@@ -155,10 +155,10 @@
         android:layout_height="128dp"
         app:layout_constraintBottom_toBottomOf="@+id/answersolus"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/timer"
-        app:layout_constraintVertical_bias="0.951"
+        app:layout_constraintVertical_bias="0.974"
         app:srcCompat="@drawable/nuage2" />
 
     <TextView
@@ -186,7 +186,7 @@
         app:layout_constraintHorizontal_bias="0.889"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.903"
+        app:layout_constraintVertical_bias="0.968"
         app:srcCompat="@drawable/nuage4" />
 
     <TextView

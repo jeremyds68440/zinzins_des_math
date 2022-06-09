@@ -82,7 +82,7 @@ public class Game {
             numberIncorrect++;
             isCorrect=false;
         }
-        score = numberCorrect *10 - numberIncorrect * 30;
+        score = numberCorrect *10 - numberIncorrect * 5;
         return isCorrect;
     }
 }

@@ -18,15 +18,15 @@ public class Equation {
         this.firstNbr = randomNbr.nextInt(maxNbr);
         this.secondNbr = randomNbr.nextInt(maxNbr);
         this.answer = this.firstNbr + this.secondNbr;
-        this.equationPhrase = firstNbr + "+" + secondNbr + "=";
+        this.equationPhrase = firstNbr + "+" + secondNbr;
 
         this.answerSol = randomNbr.nextInt(4);
         this.answerArray = new int[] {0,1,2,3};
 
-        this.answerArray[0] = answer + 1;
-        this.answerArray[1] = answer + 10;
-        this.answerArray[2] = answer - 5;
-        this.answerArray[3] = answer - 2;
+        this.answerArray[0] = answer + randomNbr.nextInt(20);
+        this.answerArray[1] = answer + randomNbr.nextInt(40);
+        this.answerArray[2] = answer + randomNbr.nextInt(60);
+        this.answerArray[3] = answer + randomNbr.nextInt(80);
 
         this.answerArray = shuffleArray(this.answerArray);
 

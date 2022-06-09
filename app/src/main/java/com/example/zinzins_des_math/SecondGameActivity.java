@@ -2,23 +2,31 @@ package com.example.zinzins_des_math;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class SecondGameActivity extends AppCompatActivity {
 
-    Button btn_ans0,btn_ans1,btn_ans2,btn_ans3;
-    TextView equation,timer,score,soluaff;
+    ImageView btn_ans0,btn_ans1,btn_ans2,btn_ans3;
+
+    TextView equation,timer,score,soluaff,btn_ans0_txtv,btn_ans1_txtv,btn_ans2_txtv,btn_ans3_txtv;
     ProgressBar progresstimer;
+    private SecondGameActivity secondGameActivity;
 
     Game g = new Game();
     int secondsRemaining = 30;
     CountDownTimer temps = new CountDownTimer(30000,1000) {
+        @SuppressLint("SetTextI18n")
         @Override
         public void onTick(long millisUntilFinished) {
             secondsRemaining--;
@@ -28,8 +36,33 @@ public class SecondGameActivity extends AppCompatActivity {
 
         @Override
         public void onFinish() {
+            g.setScore(0);
+            score.setText(Integer.toString(g.getScore()));
+            AlertDialog.Builder fini = new AlertDialog.Builder(secondGameActivity);
+            fini.setTitle("Bien joué");
+            fini.setMessage("Vous avez fait : " + score.getText() + " pts" );
+            fini.setPositiveButton("Réssayer", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    secondsRemaining =30;
+                    g = new Game();
+                    nextTurn();
+                    temps.start();
+                }
+            });
+            fini.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent difficulte = new Intent(getApplicationContext(), DifficultyActivity.class);
+                    startActivity(difficulte);
+                    finish();
+                }
+            });
 
+            fini.setCancelable(false);
+            fini.show();
         }
+
     };
 
     @Override
@@ -37,10 +70,17 @@ public class SecondGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_game);
         temps.start();
+
+        this.secondGameActivity = this;
         btn_ans0 = findViewById(R.id.btn_ans0);
         btn_ans1 = findViewById(R.id.btn_ans1);
         btn_ans2 = findViewById(R.id.btn_ans2);
         btn_ans3 = findViewById(R.id.btn_ans3);
+
+        btn_ans0_txtv = findViewById(R.id.btn_ans0_txtv);
+        btn_ans1_txtv = findViewById(R.id.btn_ans1_txtv);
+        btn_ans2_txtv = findViewById(R.id.btn_ans2_txtv);
+        btn_ans3_txtv = findViewById(R.id.btn_ans3_txtv);
 
         progresstimer = findViewById(R.id.progressBar);
         timer = findViewById(R.id.timer);
@@ -52,22 +92,85 @@ public class SecondGameActivity extends AppCompatActivity {
         equation.setText("");
         nextTurn();
 
-        View.OnClickListener answerButtonClickListener = new View.OnClickListener() {
+        btn_ans0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Button buttonClicked = (Button) v;
-                int answerselec = Integer.parseInt(buttonClicked.getText().toString());
-
-                g.checkAnswer(answerselec);
+                g.checkAnswer(Integer.parseInt(btn_ans0_txtv.getText().toString()));
                 score.setText(Integer.toString(g.getScore()));
                 nextTurn();
             }
-        };
+        });
 
-        btn_ans0.setOnClickListener(answerButtonClickListener);
-        btn_ans1.setOnClickListener(answerButtonClickListener);
-        btn_ans2.setOnClickListener(answerButtonClickListener);
-        btn_ans3.setOnClickListener(answerButtonClickListener);
+        btn_ans1.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                g.checkAnswer(Integer.parseInt(btn_ans1_txtv.getText().toString()));
+                score.setText(Integer.toString(g.getScore()));
+                nextTurn();
+            }
+        });
+
+        btn_ans2.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                g.checkAnswer(Integer.parseInt(btn_ans2_txtv.getText().toString()));
+                score.setText(Integer.toString(g.getScore()));
+                nextTurn();
+            }
+        });
+
+        btn_ans3.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                g.checkAnswer(Integer.parseInt(btn_ans3_txtv.getText().toString()));
+                score.setText(Integer.toString(g.getScore()));
+                nextTurn();
+            }
+        });
+
+
+
+        btn_ans0_txtv.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                g.checkAnswer(Integer.parseInt(btn_ans0_txtv.getText().toString()));
+                score.setText(Integer.toString(g.getScore()));
+                nextTurn();
+            }
+        });
+
+        btn_ans1_txtv.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                g.checkAnswer(Integer.parseInt(btn_ans1_txtv.getText().toString()));
+                score.setText(Integer.toString(g.getScore()));
+                nextTurn();
+            }
+        });
+
+        btn_ans2_txtv.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                g.checkAnswer(Integer.parseInt(btn_ans2_txtv.getText().toString()));
+                score.setText(Integer.toString(g.getScore()));
+                nextTurn();
+            }
+        });
+
+        btn_ans3_txtv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                g.checkAnswer(Integer.parseInt(btn_ans3_txtv.getText().toString()));
+                score.setText(Integer.toString(g.getScore()));
+                nextTurn();
+            }
+        });
 
     }
 
@@ -75,18 +178,18 @@ public class SecondGameActivity extends AppCompatActivity {
 
         g.newEquation();
         int [] answer = g.getCurrentEquation().getAnswerArray();
-        btn_ans0.setText(Integer.toString(answer[0]));
-        btn_ans1.setText(Integer.toString(answer[1]));
-        btn_ans2.setText(Integer.toString(answer[2]));
-        btn_ans3.setText(Integer.toString(answer[3]));
+        btn_ans0_txtv.setText(Integer.toString(answer[0]));
+        btn_ans1_txtv.setText(Integer.toString(answer[1]));
+        btn_ans2_txtv.setText(Integer.toString(answer[2]));
+        btn_ans3_txtv.setText(Integer.toString(answer[3]));
 
-        btn_ans0.setEnabled(true);
-        btn_ans1.setEnabled(true);
-        btn_ans2.setEnabled(true);
-        btn_ans3.setEnabled(true);
 
         equation.setText(g.getCurrentEquation().getEquationPhrase());
         soluaff.setText(g.getNumberCorrect() + "/" + (g.getTotalEquations()-1));
-
+        if(g.getScore() < 0){
+            g.setScore(0);
+            score.setText(Integer.toString(g.getScore()));
+        }
     }
+
 }
