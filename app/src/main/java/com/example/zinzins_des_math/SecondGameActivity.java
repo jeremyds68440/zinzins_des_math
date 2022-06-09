@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -36,8 +37,6 @@ public class SecondGameActivity extends AppCompatActivity {
 
         @Override
         public void onFinish() {
-            g.setScore(0);
-            score.setText(Integer.toString(g.getScore()));
             AlertDialog.Builder fini = new AlertDialog.Builder(secondGameActivity);
             fini.setTitle("Bien joué");
             fini.setMessage("Vous avez fait : " + score.getText() + " pts" );
@@ -61,6 +60,8 @@ public class SecondGameActivity extends AppCompatActivity {
 
             fini.setCancelable(false);
             fini.show();
+            g.setScore(0);
+            score.setText(Integer.toString(g.getScore()));
         }
 
     };
@@ -172,6 +173,17 @@ public class SecondGameActivity extends AppCompatActivity {
             }
         });
 
+        ImageView back = findViewById(R.id.second_game_back2);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.setColorFilter(Color.argb(80, 0, 0, 0));
+                Intent main = new Intent(getApplicationContext(), DifficultyActivity.class);
+                startActivity(main);
+                finish();
+            }
+        });
     }
 
     private void nextTurn(){
