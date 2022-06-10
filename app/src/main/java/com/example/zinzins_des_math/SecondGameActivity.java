@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.Random;
+
 public class SecondGameActivity extends AppCompatActivity {
 
     ImageView btn_ans0,btn_ans1,btn_ans2,btn_ans3;
@@ -186,7 +188,7 @@ public class SecondGameActivity extends AppCompatActivity {
 
     private void nextTurn(){
 
-        int difficulty = 2;
+        int difficulty = new Random().nextInt(4);
         if(difficulty == 0){
             g.newEquationFacile();
         }else if(difficulty == 1){
