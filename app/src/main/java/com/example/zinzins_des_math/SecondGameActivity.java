@@ -15,6 +15,11 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Random;
 
 public class SecondGameActivity extends AppCompatActivity {
@@ -39,6 +44,10 @@ public class SecondGameActivity extends AppCompatActivity {
         @Override
         public void onFinish() {
             AlertDialog.Builder fini = new AlertDialog.Builder(secondGameActivity);
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            DatabaseReference mDatabase = database.getReference("users").child(user.getUid());
+            mDatabase.child("scoreMathemaquizz").setValue(Integer.parseInt((String) score.getText()));
             fini.setTitle("Bien joué");
             fini.setMessage("Vous avez fait : " + score.getText() + " pts" );
             fini.setPositiveButton("Réssayer", new DialogInterface.OnClickListener() {

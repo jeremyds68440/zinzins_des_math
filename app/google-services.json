@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "745248674935",
+    "project_id": "zinzinsdesmath",
+    "storage_bucket": "zinzinsdesmath.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745248674935:android:6dbf933027bfb82a21e272",
+        "android_client_info": {
+          "package_name": "com.example.zinzins_des_math"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "745248674935-m75eefsf3oirktgbkionr1q3tcelg763.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAcLvx53u2zTceVTtQVxvleP07nw2G3ns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "745248674935-m75eefsf3oirktgbkionr1q3tcelg763.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
