@@ -63,12 +63,24 @@ public class Game {
         numberIncorrect = 0;
         totalEquations = 0;
         score = 0;
-        currentEquation = new Equation(10);
+        currentEquation = new Equation(10,0);
         equation = new ArrayList<Equation>();
     }
 
-    public void newEquation(){
-        currentEquation = new Equation(totalEquations * 2+5);
+    public void newEquationFacile(){
+        currentEquation = new Equation(100,0);
+        totalEquations ++;
+        equation.add(currentEquation);
+    }
+
+    public void newEquationMoyen(){
+        currentEquation = new Equation(100,1);
+        totalEquations ++;
+        equation.add(currentEquation);
+    }
+
+    public void newEquationDifficile(){
+        currentEquation = new Equation(100,2);
         totalEquations ++;
         equation.add(currentEquation);
     }

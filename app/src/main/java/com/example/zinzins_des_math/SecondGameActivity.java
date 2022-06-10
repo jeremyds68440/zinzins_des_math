@@ -10,11 +10,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SecondGameActivity extends AppCompatActivity {
 
@@ -47,6 +45,9 @@ public class SecondGameActivity extends AppCompatActivity {
                     g = new Game();
                     nextTurn();
                     temps.start();
+                    g.setNumberCorrect(0);
+                    g.setNumberIncorrect(0);
+                    score.setText(Integer.toString(g.getScore()));
                 }
             });
             fini.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
@@ -54,16 +55,11 @@ public class SecondGameActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     Intent difficulte = new Intent(getApplicationContext(), DifficultyActivity.class);
                     startActivity(difficulte);
-                    finish();
                 }
             });
 
             fini.setCancelable(false);
             fini.show();
-            g.setNumberCorrect(0);
-            g.setNumberIncorrect(0);
-            g.setScore(0);
-            score.setText(Integer.toString(g.getScore()));
         }
 
     };
@@ -190,7 +186,15 @@ public class SecondGameActivity extends AppCompatActivity {
 
     private void nextTurn(){
 
-        g.newEquation();
+        int difficulty = 2;
+        if(difficulty == 0){
+            g.newEquationFacile();
+        }else if(difficulty == 1){
+            g.newEquationMoyen();
+        }else if(difficulty == 2){
+            g.newEquationDifficile();
+        }
+
         int [] answer = g.getCurrentEquation().getAnswerArray();
         btn_ans0_txtv.setText(Integer.toString(answer[0]));
         btn_ans1_txtv.setText(Integer.toString(answer[1]));
