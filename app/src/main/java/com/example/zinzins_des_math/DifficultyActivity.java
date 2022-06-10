@@ -65,7 +65,7 @@ public class DifficultyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 hard.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent difficile = new Intent(getApplicationContext(), LevelActivity.class);
+                Intent difficile = new Intent(getApplicationContext(), RouletteActivity.class);
                 startActivity(difficile);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
