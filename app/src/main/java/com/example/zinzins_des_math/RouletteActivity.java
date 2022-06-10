@@ -30,13 +30,6 @@ public class RouletteActivity extends AppCompatActivity {
     private int degree = 0;
     private ImageView wheel;
 
-    private Button test;
-
-    private RouletteActivity activity;
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,8 +48,6 @@ public class RouletteActivity extends AppCompatActivity {
                 spin();
             }
         });
-
-
 
     }
 
