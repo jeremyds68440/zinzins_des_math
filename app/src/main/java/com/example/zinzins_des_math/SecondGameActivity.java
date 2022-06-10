@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -18,9 +19,9 @@ import java.util.Random;
 
 public class SecondGameActivity extends AppCompatActivity {
 
-    ImageView btn_ans0,btn_ans1,btn_ans2,btn_ans3;
+    Button btn_ans0,btn_ans1,btn_ans2,btn_ans3;
 
-    TextView equation,timer,score,soluaff,btn_ans0_txtv,btn_ans1_txtv,btn_ans2_txtv,btn_ans3_txtv;
+    TextView equation,timer,score,soluaff;
     ProgressBar progresstimer;
     private SecondGameActivity secondGameActivity;
 
@@ -78,11 +79,6 @@ public class SecondGameActivity extends AppCompatActivity {
         btn_ans2 = findViewById(R.id.btn_ans2);
         btn_ans3 = findViewById(R.id.btn_ans3);
 
-        btn_ans0_txtv = findViewById(R.id.btn_ans0_txtv);
-        btn_ans1_txtv = findViewById(R.id.btn_ans1_txtv);
-        btn_ans2_txtv = findViewById(R.id.btn_ans2_txtv);
-        btn_ans3_txtv = findViewById(R.id.btn_ans3_txtv);
-
         progresstimer = findViewById(R.id.progressBar);
         timer = findViewById(R.id.timer);
         equation = findViewById(R.id.equation);
@@ -96,7 +92,7 @@ public class SecondGameActivity extends AppCompatActivity {
         btn_ans0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                g.checkAnswer(Integer.parseInt(btn_ans0_txtv.getText().toString()));
+                g.checkAnswer(Integer.parseInt(btn_ans0.getText().toString()));
                 score.setText(Integer.toString(g.getScore()));
                 nextTurn();
             }
@@ -106,7 +102,7 @@ public class SecondGameActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                g.checkAnswer(Integer.parseInt(btn_ans1_txtv.getText().toString()));
+                g.checkAnswer(Integer.parseInt(btn_ans1.getText().toString()));
                 score.setText(Integer.toString(g.getScore()));
                 nextTurn();
             }
@@ -116,7 +112,7 @@ public class SecondGameActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                g.checkAnswer(Integer.parseInt(btn_ans2_txtv.getText().toString()));
+                g.checkAnswer(Integer.parseInt(btn_ans2.getText().toString()));
                 score.setText(Integer.toString(g.getScore()));
                 nextTurn();
             }
@@ -126,48 +122,7 @@ public class SecondGameActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {
-                g.checkAnswer(Integer.parseInt(btn_ans3_txtv.getText().toString()));
-                score.setText(Integer.toString(g.getScore()));
-                nextTurn();
-            }
-        });
-
-
-
-        btn_ans0_txtv.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View v) {
-                g.checkAnswer(Integer.parseInt(btn_ans0_txtv.getText().toString()));
-                score.setText(Integer.toString(g.getScore()));
-                nextTurn();
-            }
-        });
-
-        btn_ans1_txtv.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View v) {
-                g.checkAnswer(Integer.parseInt(btn_ans1_txtv.getText().toString()));
-                score.setText(Integer.toString(g.getScore()));
-                nextTurn();
-            }
-        });
-
-        btn_ans2_txtv.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View v) {
-                g.checkAnswer(Integer.parseInt(btn_ans2_txtv.getText().toString()));
-                score.setText(Integer.toString(g.getScore()));
-                nextTurn();
-            }
-        });
-
-        btn_ans3_txtv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                g.checkAnswer(Integer.parseInt(btn_ans3_txtv.getText().toString()));
+                g.checkAnswer(Integer.parseInt(btn_ans3.getText().toString()));
                 score.setText(Integer.toString(g.getScore()));
                 nextTurn();
             }
@@ -198,10 +153,10 @@ public class SecondGameActivity extends AppCompatActivity {
         }
 
         int [] answer = g.getCurrentEquation().getAnswerArray();
-        btn_ans0_txtv.setText(Integer.toString(answer[0]));
-        btn_ans1_txtv.setText(Integer.toString(answer[1]));
-        btn_ans2_txtv.setText(Integer.toString(answer[2]));
-        btn_ans3_txtv.setText(Integer.toString(answer[3]));
+        btn_ans0.setText(Integer.toString(answer[0]));
+        btn_ans1.setText(Integer.toString(answer[1]));
+        btn_ans2.setText(Integer.toString(answer[2]));
+        btn_ans3.setText(Integer.toString(answer[3]));
 
 
         equation.setText(g.getCurrentEquation().getEquationPhrase());
