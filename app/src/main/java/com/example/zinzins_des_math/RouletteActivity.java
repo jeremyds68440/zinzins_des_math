@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -29,7 +30,9 @@ public class RouletteActivity extends AppCompatActivity {
     private static final Random random = new Random();
     private int degree = 0;
     private ImageView wheel;
-
+    private RouletteActivity activity;
+    int cpt1 = 0;
+    int cpt2 = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +68,12 @@ public class RouletteActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                Toast.makeText(RouletteActivity.this, "Enigme"+sectors[sectors.length - (degree + 1)], Toast.LENGTH_SHORT).show();
+                //Toast.makeText(RouletteActivity.this, "Enigme" + sectors[sectors.length - (degree + 1)], Toast.LENGTH_SHORT).show();
+
+                Intent enigme = new Intent(getApplicationContext(), EnigmeActivity.class);
+                startActivity(enigme);
+                finish();
+
             }
 
             @Override
