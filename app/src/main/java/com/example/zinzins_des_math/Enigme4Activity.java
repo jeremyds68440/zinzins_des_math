@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class EnigmeActivity extends AppCompatActivity {
+public class Enigme4Activity extends AppCompatActivity {
 
-    private EnigmeActivity enigmeActivity = this;
+    private Enigme4Activity enigme4Activity = this;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -24,7 +24,7 @@ public class EnigmeActivity extends AppCompatActivity {
 
         //Titre de l'énigme
         TextView titre = (TextView) findViewById(R.id.titre_enigme);
-        titre.setText("Enigme 1");
+        titre.setText("Enigme 4");
 
         //L'image s'il y en a une
 
@@ -45,7 +45,7 @@ public class EnigmeActivity extends AppCompatActivity {
         explication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder expli = new AlertDialog.Builder(enigmeActivity);
+                AlertDialog.Builder expli = new AlertDialog.Builder(enigme4Activity);
                 expli.setTitle("Explication");
                 expli.setMessage("..." );
                 expli.setPositiveButton("OK", new DialogInterface.OnClickListener() {

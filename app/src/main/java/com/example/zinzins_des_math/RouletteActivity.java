@@ -2,25 +2,14 @@ package com.example.zinzins_des_math;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.RotateAnimation;
-import android.widget.Button;
 import android.widget.ImageView;
 import java.util.Random;
-
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class RouletteActivity extends AppCompatActivity {
@@ -69,10 +58,53 @@ public class RouletteActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 //Toast.makeText(RouletteActivity.this, "Enigme" + sectors[sectors.length - (degree + 1)], Toast.LENGTH_SHORT).show();
+                switch (sectors[sectors.length - (degree + 1)]){
+                    case "1" :
+                        Intent enigme1 = new Intent(getApplicationContext(), Enigme1Activity.class);
+                        startActivity(enigme1);
+                        finish();
+                        break;
+                    case "2" :
+                        Intent enigme2 = new Intent(getApplicationContext(), Enigme2Activity.class);
+                        startActivity(enigme2);
+                        finish();
+                        break;
+                    case "3" :
+                        Intent enigme3 = new Intent(getApplicationContext(), Enigme3Activity.class);
+                        startActivity(enigme3);
+                        finish();
+                        break;
+                    case "4" :
+                        Intent enigme4 = new Intent(getApplicationContext(), Enigme4Activity.class);
+                        startActivity(enigme4);
+                        finish();
+                        break;
+                    case "5" :
+                        Intent enigme5 = new Intent(getApplicationContext(), Enigme5Activity.class);
+                        startActivity(enigme5);
+                        finish();
+                        break;
+                    case "6" :
+                        Intent enigme6 = new Intent(getApplicationContext(), Enigme6Activity.class);
+                        startActivity(enigme6);
+                        finish();break;
+                    case "7" :
+                        Intent enigme7 = new Intent(getApplicationContext(), Enigme7Activity.class);
+                        startActivity(enigme7);
+                        finish();
+                        break;
+                    case "8" :
+                        Intent enigme8 = new Intent(getApplicationContext(), Enigme8Activity.class);
+                        startActivity(enigme8);
+                        finish();
+                        break;
+                    case "9" :
+                        Intent enigme9 = new Intent(getApplicationContext(), Enigme9Activity.class);
+                        startActivity(enigme9);
+                        finish();
+                        break;
+                }
 
-                Intent enigme = new Intent(getApplicationContext(), EnigmeActivity.class);
-                startActivity(enigme);
-                finish();
 
             }
 
