@@ -40,29 +40,28 @@
             android:layout_marginTop="50dp"
             android:text="énigme" />
 
-        <Button
-            android:id="@+id/choix1"
-            android:layout_width="350dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:layout_gravity="center"
-            android:inputType="number" />
+            android:layout_marginTop="20dp">
 
-        <Button
-            android:id="@+id/choix2"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_gravity="center"
-            android:inputType="number" />
+            <EditText
+                android:id="@+id/answer_attempt"
+                android:layout_width="200dp"
+                android:layout_height="50dp" />
 
-        <Button
-            android:id="@+id/choix3"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_gravity="center"
-            android:inputType="number" />
+            <Button
+                android:id="@+id/submit_answer_btn"
+                android:layout_width="55dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="10dp"
+                android:text="OK"
+                android:textSize="15dp"/>
+
+
+        </LinearLayout>
+
 
         <ImageView
             android:id="@+id/explication"

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,7 +25,7 @@ public class Enigme3Activity extends AppCompatActivity {
         setContentView(R.layout.activity_enigme1);
 
         //Titre de l'énigme
-        TextView titre = (TextView) findViewById(R.id.titre_enigme);
+        TextView titre = findViewById(R.id.titre_enigme);
         titre.setText("Enigme 3");
 
         //L'image s'il y en a une
@@ -33,16 +34,19 @@ public class Enigme3Activity extends AppCompatActivity {
         //Enoncé de l'énigme
         ((TextView) findViewById(R.id.question)).setText("Enoncé de l'énigme...");
 
-        //Les trois choix
-        final Button choix1 = (Button) findViewById(R.id.choix1);
-        choix1.setText("Choix 1");
-        final Button choix2 = (Button) findViewById(R.id.choix2);
-        choix2.setText("Choix 2");
-        final Button choix3 = (Button) findViewById(R.id.choix3);
-        choix3.setText("Choix 3");
+        //Bouton submit
+        Button submit_answer_btn = findViewById(R.id.submit_answer_btn);
+        submit_answer_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(Enigme3Activity.this, "Réponse soumise", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
 
         //L'explication de la réponse
-        ImageView explication = (ImageView) findViewById(R.id.explication);
+        ImageView explication = findViewById(R.id.explication);
         explication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

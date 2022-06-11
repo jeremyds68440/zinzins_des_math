@@ -2,6 +2,8 @@ package com.example.zinzins_des_math;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -138,8 +140,23 @@ public class RouletteActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent difficulty = new Intent(getApplicationContext(), DifficultyActivity.class);
-        startActivity(difficulty);
+        AlertDialog.Builder quit = new AlertDialog.Builder(rouletteActivity);
+        quit.setTitle("Quitter");
+        quit.setMessage("Es-tu sûr(e) de vouloir quitter le jeu ? " );
+        quit.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent difficulty = new Intent(getApplicationContext(), DifficultyActivity.class);
+                startActivity(difficulty);
+            }
+        });
+        quit.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        quit.show();
     }
 
 }
