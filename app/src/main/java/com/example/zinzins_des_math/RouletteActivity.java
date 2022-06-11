@@ -19,7 +19,7 @@ public class RouletteActivity extends AppCompatActivity {
     private static final Random random = new Random();
     private int degree = 0;
     private ImageView wheel;
-    private RouletteActivity activity;
+    private RouletteActivity rouletteActivity = this;
     int cpt1 = 0;
     int cpt2 = 0;
 
@@ -62,45 +62,55 @@ public class RouletteActivity extends AppCompatActivity {
                     case "1" :
                         Intent enigme1 = new Intent(getApplicationContext(), Enigme1Activity.class);
                         startActivity(enigme1);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                     case "2" :
                         Intent enigme2 = new Intent(getApplicationContext(), Enigme2Activity.class);
                         startActivity(enigme2);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                     case "3" :
                         Intent enigme3 = new Intent(getApplicationContext(), Enigme3Activity.class);
                         startActivity(enigme3);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                     case "4" :
                         Intent enigme4 = new Intent(getApplicationContext(), Enigme4Activity.class);
                         startActivity(enigme4);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                     case "5" :
                         Intent enigme5 = new Intent(getApplicationContext(), Enigme5Activity.class);
                         startActivity(enigme5);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                     case "6" :
                         Intent enigme6 = new Intent(getApplicationContext(), Enigme6Activity.class);
                         startActivity(enigme6);
-                        finish();break;
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                        break;
                     case "7" :
                         Intent enigme7 = new Intent(getApplicationContext(), Enigme7Activity.class);
                         startActivity(enigme7);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                     case "8" :
                         Intent enigme8 = new Intent(getApplicationContext(), Enigme8Activity.class);
                         startActivity(enigme8);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                     case "9" :
                         Intent enigme9 = new Intent(getApplicationContext(), Enigme9Activity.class);
                         startActivity(enigme9);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                 }
@@ -112,6 +122,7 @@ public class RouletteActivity extends AppCompatActivity {
             public void onAnimationRepeat(Animation animation) {
 
             }
+
         });
 
         wheel.startAnimation(rotateAnimation);
@@ -125,4 +136,10 @@ public class RouletteActivity extends AppCompatActivity {
             sectorDegrees[i] = (i + 1) * sectorDegree;
         }
     }
+    @Override
+    public void onBackPressed() {
+        Intent difficulty = new Intent(getApplicationContext(), DifficultyActivity.class);
+        startActivity(difficulty);
+    }
+
 }
