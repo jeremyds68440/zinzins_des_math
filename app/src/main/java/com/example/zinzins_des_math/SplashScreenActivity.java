@@ -26,12 +26,13 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        logo = (ImageView) findViewById(R.id.logo_icon);
-        loading = (ProgressBar) findViewById(R.id.loading);
+
+        this.logo = (ImageView) findViewById(R.id.logo_icon);
+        this.loading = (ProgressBar) findViewById(R.id.loading);
 
         Animation myanim = AnimationUtils.loadAnimation(this,R.anim.mytransition);
-        logo.startAnimation(myanim);
-        loading.startAnimation(myanim);
+        this.logo.startAnimation(myanim);
+        this.loading.startAnimation(myanim);
 
         final Intent i = new Intent(this, MainActivity.class);
         Thread timer = new Thread() {

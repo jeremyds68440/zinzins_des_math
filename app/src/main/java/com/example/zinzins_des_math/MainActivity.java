@@ -11,47 +11,30 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageView jouer, Parameter, multiplayer;
+    private ImageView jouer, multiplayer, settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        jouer = findViewById(R.id.jouer);
-        jouer.setOnClickListener(new View.OnClickListener() {
+        this.jouer = findViewById(R.id.jouer);
+        this.multiplayer = findViewById(R.id.multiplayer);
+        this.settings = findViewById(R.id.parametres);
+
+        actionClickImage(this.jouer, DifficultyActivity.class);
+        actionClickImage(this.multiplayer, RegisterActivity.class);
+        actionClickImage(this.settings, ParametreActivity.class);
+
+    }
+
+    public void actionClickImage(ImageView button, Class act){
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                jouer.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent difficulty = new Intent(getApplicationContext(), DifficultyActivity.class);
-                startActivity(difficulty);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-            }
-        });
-
-        multiplayer = findViewById(R.id.multiplayer);
-        multiplayer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                multiplayer.setColorFilter(Color.argb(80, 0, 0, 0));
-                //Intent multiPlayerActivity = new Intent(getApplicationContext(), MultiplayerActivity.class);
-                //startActivity(multiPlayerActivity);
-                Intent auth = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(auth);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-            }
-        });
-
-
-        Parameter = findViewById(R.id.parametres);
-        Parameter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Parameter.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent menuParametre = new Intent(getApplicationContext(), ParametreActivity.class);
-                startActivity(menuParametre);
+                button.setColorFilter(Color.argb(80, 0, 0, 0));
+                Intent intent = new Intent(getApplicationContext(), act);
+                startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
