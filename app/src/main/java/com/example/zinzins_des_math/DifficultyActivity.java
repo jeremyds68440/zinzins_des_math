@@ -11,79 +11,27 @@ import android.widget.ImageView;
 
 public class DifficultyActivity extends AppCompatActivity {
 
-    ImageView back,easy,medium,hard,IA;
+    private ImageView back,easy,medium,hard,IA;
     private MediaPlayer mediaPlayer;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_difficulty);
-        mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.zinzin_sound);
-        back = findViewById(R.id.back);
+        this.mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.zinzin_sound);
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                back.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent main = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(main);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-            }
-        });
+        this.back = findViewById(R.id.back);
+        this.easy = findViewById(R.id.facile);
+        this.medium = findViewById(R.id.moyen);
+        this.hard = findViewById(R.id.difficile);
+        this.IA = findViewById(R.id.evolution);
 
-        easy = findViewById(R.id.facile);
+        actionClickImage(this.back, MainActivity.class);
+        actionClickImage(this.easy, FirstGameActivity.class);
+        actionClickImage(this.medium, SecondGameActivity.class);
+        actionClickImage(this.hard, RouletteActivity.class);
+        actionClickImage(this.IA, LevelActivity.class);
 
-        easy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                easy.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent Facile = new Intent(getApplicationContext(), FirstGameActivity.class);
-                startActivity(Facile);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-            }
-        });
-
-        medium = findViewById(R.id.moyen);
-
-        medium.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                medium.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent moyen = new Intent(getApplicationContext(), SecondGameActivity.class);
-                startActivity(moyen);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-            }
-        });
-
-        hard = findViewById(R.id.difficile);
-
-        hard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hard.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent difficile = new Intent(getApplicationContext(), RouletteActivity.class);
-                startActivity(difficile);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-            }
-        });
-
-        IA = findViewById(R.id.evolution);
-
-        IA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IA.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent evolution = new Intent(getApplicationContext(), LevelActivity.class);
-                startActivity(evolution);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-            }
-        });
     }
 
     @Override
@@ -97,5 +45,18 @@ public class DifficultyActivity extends AppCompatActivity {
         super.onResume();
         mediaPlayer.start();
 
+    }
+
+    public void actionClickImage(ImageView button, Class act){
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                button.setColorFilter(Color.argb(80, 0, 0, 0));
+                Intent intent = new Intent(getApplicationContext(), act);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
+            }
+        });
     }
 }
