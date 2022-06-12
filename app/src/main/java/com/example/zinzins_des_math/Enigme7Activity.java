@@ -56,7 +56,7 @@ public class Enigme7Activity extends AppCompatActivity {
         });
 
         //L'explication de la réponse
-        ImageView explication = findViewById(R.id.explication);
+        Button explication = findViewById(R.id.explication);
         explication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
