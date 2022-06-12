@@ -5,8 +5,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +19,9 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Enigme1Activity extends AppCompatActivity {
 
     private Enigme1Activity enigme1Activity = this;
+    EditText inputAnswer;
+    Button submit_answer_btn;
+    TextView titre, enonce;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -25,26 +31,29 @@ public class Enigme1Activity extends AppCompatActivity {
         setContentView(R.layout.activity_enigme1);
 
         //Titre de l'énigme
-        TextView titre = findViewById(R.id.titre_enigme);
+        titre = findViewById(R.id.titre_enigme);
         titre.setText("Enigme 1");
 
         //L'image s'il y en a une
 
 
         //Enoncé de l'énigme
-        ((TextView) findViewById(R.id.question)).setText("Enoncé de l'énigme...");
+        enonce = findViewById(R.id.question);
+        enonce.setText("Enoncé de l'énigme...");
 
-        //Bouton submit
-        Button submit_answer_btn = findViewById(R.id.submit_answer_btn);
+        //Réponse entrée par le joueur
+        inputAnswer = findViewById(R.id.answer_attempt);
+
+        submit_answer_btn= findViewById(R.id.submit_answer_btn);
+        inputAnswer.addTextChangedListener(textWatcher);
+
         submit_answer_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Enigme1Activity.this, "Réponse soumise", Toast.LENGTH_SHORT).show();
-
+                checkAnswer();
             }
+
         });
-
-
 
         //L'explication de la réponse
         ImageView explication = findViewById(R.id.explication);
@@ -70,5 +79,28 @@ public class Enigme1Activity extends AppCompatActivity {
         Intent roulette = new Intent(getApplicationContext(), RouletteActivity.class);
         startActivity(roulette);
     }
+
+    public void checkAnswer(){
+
+    }
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String answer = inputAnswer.getText().toString();
+
+            submit_answer_btn.setEnabled(!answer.isEmpty());
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 
 }

@@ -7,4 +7,6 @@
     <string name="reponse2">0</string>
     <string name="reponse3">0</string>
     <string name="timer">0</string>
+    <string name="ok_enigme">OK</string>
+    <string name="reponse_enigme">Réponse</string>
 </resources>
