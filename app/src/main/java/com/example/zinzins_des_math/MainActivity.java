@@ -19,11 +19,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         this.jouer = findViewById(R.id.jouer);
-        this.multiplayer = findViewById(R.id.multiplayer);
         this.settings = findViewById(R.id.parametres);
 
-        actionClickImage(this.jouer, DifficultyActivity.class);
-        actionClickImage(this.multiplayer, RegisterActivity.class);
+        actionClickImage(this.jouer, choosesolomultiActivity.class);
         actionClickImage(this.settings, ParametreActivity.class);
 
     }

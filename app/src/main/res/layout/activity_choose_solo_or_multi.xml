@@ -8,7 +8,7 @@
     tools:context=".choosesolomultiActivity">
 
     <ImageView
-        android:id="@+id/second_game_back"
+        android:id="@+id/choix_mode_de_jeu_back"
         android:layout_width="48dp"
         android:layout_height="36dp"
         android:layout_marginTop="16dp"
