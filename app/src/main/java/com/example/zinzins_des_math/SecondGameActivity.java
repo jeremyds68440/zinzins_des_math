@@ -55,11 +55,26 @@ public class SecondGameActivity extends AppCompatActivity {
             mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    int dbScore;
                     final User utilisateur = new User();
                     final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                    int dbScore =  Math.toIntExact((long) dataSnapshot.child(fields[2].getName()).getValue());
-                    if (dbScore < Integer.parseInt((String) score.getText()))
-                        mDatabase.child("scoreMathemaquizzFacile").setValue(Integer.parseInt((String) score.getText()));
+                    switch (getIntent().getFlags()) {
+                        case 0 :
+                            dbScore = Math.toIntExact((long) dataSnapshot.child(fields[2].getName()).getValue());
+                            if (dbScore < Integer.parseInt((String) score.getText()))
+                                mDatabase.child("scoreMathemaquizzFacile").setValue(Integer.parseInt((String) score.getText()));
+                            break;
+                        case 1 :
+                            dbScore = Math.toIntExact((long) dataSnapshot.child(fields[3].getName()).getValue());
+                            if (dbScore < Integer.parseInt((String) score.getText()))
+                                mDatabase.child("scoreMathemaquizzMoyen").setValue(Integer.parseInt((String) score.getText()));
+                            break;
+                        case 2 :
+                            dbScore = Math.toIntExact((long) dataSnapshot.child(fields[1].getName()).getValue());
+                            if (dbScore < Integer.parseInt((String) score.getText()))
+                                mDatabase.child("scoreMathemaquizzDifficile").setValue(Integer.parseInt((String) score.getText()));
+                            break;
+                    }
                 }
 
                 @Override
