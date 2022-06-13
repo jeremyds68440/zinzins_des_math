@@ -10,4 +10,5 @@
     <color name="win">#00FF00</color>
     <color name="lose">#FF0000</color>
     <color name="first_game_text">#DDDDDD</color>
+    <color name="orange">#FFA500</color>
 </resources>
