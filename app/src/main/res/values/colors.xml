@@ -11,4 +11,5 @@
     <color name="lose">#FF0000</color>
     <color name="first_game_text">#DDDDDD</color>
     <color name="orange">#FFA500</color>
+    <color name="gray">#333333</color>
 </resources>

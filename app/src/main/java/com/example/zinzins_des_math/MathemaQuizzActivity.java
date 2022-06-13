@@ -34,7 +34,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     TextView equation,timer,score,soluaff;
     ProgressBar progresstimer;
     ConstraintLayout bg;
-
+    ImageView nuage_equation;
     private MathemaQuizzActivity mathemaQuizzActivity;
 
     Game g = new Game();
@@ -130,6 +130,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         score = findViewById(R.id.score);
         soluaff = findViewById(R.id.answersolus);
         bg = findViewById(R.id.bg_math_quizz);
+        nuage_equation = findViewById(R.id.nuage_enigme);
 
         timer.setText("0sec");
         equation.setText("");
@@ -228,6 +229,9 @@ public class MathemaQuizzActivity extends AppCompatActivity {
             g.newEquationMoyen();
         }else if(difficulty == 2){
             bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
+            nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
+            equation.setTextColor(getColor(R.color.gray));
+            this.setTheme(R.style.background_nuage_theme1);
             g.newEquationDifficile();
         }
 
