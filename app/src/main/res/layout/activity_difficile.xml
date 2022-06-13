@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_difficile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_facile"
-    tools:context=".FacileActivity">
+    tools:context=".DifficileActivity">
 
     <ImageView
-        android:id="@+id/back_to_facile"
+        android:id="@+id/back_to_difficile"
         android:layout_width="48dp"
         android:layout_height="36dp"
         android:layout_marginTop="44dp"
@@ -19,7 +19,7 @@
         app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
     <ImageView
-        android:id="@+id/multifactor_facile"
+        android:id="@+id/multifactor_difficile"
         android:layout_width="351dp"
         android:layout_height="105dp"
         android:layout_marginTop="196dp"
@@ -29,22 +29,23 @@
         app:srcCompat="@drawable/multifactor" />
 
     <ImageView
-        android:id="@+id/mathemaquizz_facile"
+        android:id="@+id/mathemaquizz_difficile"
         android:layout_width="351dp"
         android:layout_height="105dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/multifactor_facile"
+        app:layout_constraintTop_toBottomOf="@+id/multifactor_difficile"
         app:srcCompat="@drawable/mathemaquizz" />
 
     <ImageView
-        android:id="@+id/roulette_facile"
+        android:id="@+id/roulette_difficile"
         android:layout_width="351dp"
         android:layout_height="105dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mathemaquizz_facile"
+        app:layout_constraintTop_toBottomOf="@+id/mathemaquizz_difficile"
         app:srcCompat="@drawable/roulette_boutton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
