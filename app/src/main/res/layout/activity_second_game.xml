@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:theme="@style/Theme2"
+    android:id="@+id/bg_math_quizz"
     android:layout_width="match_parent"
-    android:background="@drawable/second_game_bg"
     android:layout_height="match_parent"
+    android:background="@drawable/second_game_bg"
+    android:theme="@style/Theme2"
     tools:context=".SecondGameActivity">
 
     <ImageView

@@ -2,6 +2,7 @@ package com.example.zinzins_des_math;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -32,6 +33,8 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
     TextView equation,timer,score,soluaff;
     ProgressBar progresstimer;
+    ConstraintLayout bg;
+
     private MathemaQuizzActivity mathemaQuizzActivity;
 
     Game g = new Game();
@@ -126,6 +129,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         equation = findViewById(R.id.equation);
         score = findViewById(R.id.score);
         soluaff = findViewById(R.id.answersolus);
+        bg = findViewById(R.id.bg_math_quizz);
 
         timer.setText("0sec");
         equation.setText("");
@@ -217,6 +221,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
         int difficulty = getIntent().getFlags();
         if(difficulty == 0){
+            bg.setBackground(getDrawable(R.drawable.chargement_bg));
             g.newEquationFacile();
         }else if(difficulty == 1){
             g.newEquationMoyen();

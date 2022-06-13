@@ -74,7 +74,7 @@ public class Equation {
                 this.secondNbr = randomNbr.nextInt(maxNbr);
                 this.thirdNbr = randomNbr.nextInt(10);
                 this.answer = this.firstNbr + this.secondNbr + this.thirdNbr * this.thirdNbr;
-                this.equationPhrase = firstNbr + "+" + secondNbr + "+" + thirdNbr + "^2" ;
+                this.equationPhrase = firstNbr + "+" + secondNbr + "+" + thirdNbr + "²" ;
             }else{
                 this.firstNbr = randomNbr.nextInt(20);
                 this.secondNbr = randomNbr.nextInt(20);
