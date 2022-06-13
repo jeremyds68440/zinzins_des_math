@@ -8,6 +8,30 @@
     tools:context=".DifficileActivity">
 
     <ImageView
+        android:id="@+id/info_roulette_difficile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.905"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.625"
+        app:srcCompat="@android:drawable/ic_menu_info_details" />
+
+    <ImageView
+        android:id="@+id/info_mathemaquizz_difficile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.905"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466"
+        app:srcCompat="@android:drawable/ic_menu_info_details" />
+
+    <ImageView
         android:id="@+id/back_to_difficile"
         android:layout_width="@dimen/wight_backbutton"
         android:layout_height="@dimen/height_backbutton"
@@ -55,6 +79,7 @@
                 app:srcCompat="@drawable/multifactor_difficile"
                 tools:layout_editor_absoluteX="95dp"
                 tools:layout_editor_absoluteY="268dp" />
+
         </TableRow>
 
         <TableRow
@@ -84,5 +109,17 @@
                 tools:layout_editor_absoluteY="568dp" />
         </TableRow>
     </TableLayout>
+
+    <ImageView
+        android:id="@+id/info_multifactor_difficile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.905"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.307"
+        app:srcCompat="@android:drawable/ic_menu_info_details" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

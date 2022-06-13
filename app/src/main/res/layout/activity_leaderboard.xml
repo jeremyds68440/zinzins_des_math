@@ -5,75 +5,114 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/multiplayer_bg"
-    tools:context=".LeaderboardActivity">
+    tools:context=".LeaderboardActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="93dp">
+
+    <ImageView
+        android:id="@+id/back_menu2"
+        android:layout_width="48dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.011"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
     <ListView
         android:id="@+id/leaderboard"
-        android:layout_width="411dp"
-        android:layout_height="625dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="409dp"
+        android:layout_height="465dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleLeaderboard" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/leadMultifactor"
-        android:layout_width="134dp"
-        android:layout_height="93dp"
+        android:layout_width="117dp"
+        android:layout_height="43dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.138"
         app:srcCompat="@drawable/multifactor" />
 
     <ImageView
         android:id="@+id/leadMathemaquizz"
-        android:layout_width="134dp"
-        android:layout_height="93dp"
-        app:layout_constraintEnd_toStartOf="@+id/leadRoulette"
-        app:layout_constraintStart_toEndOf="@+id/leadMultifactor"
+        android:layout_width="117dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.141"
         app:srcCompat="@drawable/mathemaquizz" />
 
     <ImageView
         android:id="@+id/leadRoulette"
-        android:layout_width="134dp"
-        android:layout_height="93dp"
+        android:layout_width="117dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/roulette_boutton" />
-
-    <ImageView
-        android:id="@+id/leadFacile"
-        android:layout_width="134dp"
-        android:layout_height="93dp"
+        app:layout_constraintHorizontal_bias="0.925"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/leadMultifactor"
-        app:srcCompat="@drawable/facile" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.141"
+        app:srcCompat="@drawable/roulette_boutton" />
 
     <ImageView
         android:id="@+id/leadMoyen"
         android:layout_width="134dp"
-        android:layout_height="93dp"
-        app:layout_constraintEnd_toStartOf="@+id/leadDifficile"
-        app:layout_constraintStart_toEndOf="@+id/leadFacile"
-        app:layout_constraintTop_toBottomOf="@+id/leadMathemaquizz"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26"
         app:srcCompat="@drawable/moyen" />
+
+    <ImageView
+        android:id="@+id/leadFacile"
+        android:layout_width="134dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.014"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26"
+        app:srcCompat="@drawable/facile" />
 
     <ImageView
         android:id="@+id/leadDifficile"
         android:layout_width="134dp"
-        android:layout_height="93dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/leadRoulette"
+        app:layout_constraintHorizontal_bias="0.981"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26"
         app:srcCompat="@drawable/difficile" />
 
     <TextView
         android:id="@+id/titleLeaderboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="Choisissez un jeu puis une difficulté"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/leadMoyen" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.331" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
