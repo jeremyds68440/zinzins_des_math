@@ -143,8 +143,22 @@ public class SecondGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 back.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent main = new Intent(getApplicationContext(), DifficultyActivity.class);
-                startActivity(main);
+                Intent main;
+                switch (getIntent().getFlags()){
+                    case 0 :
+                        main = new Intent(getApplicationContext(), FacileActivity.class);
+                        startActivity(main);
+                        break;
+                    case 1 :
+                        main = new Intent(getApplicationContext(), MoyenActivity.class);
+                        startActivity(main);
+                        break;
+                    case 2 :
+                        main = new Intent(getApplicationContext(), DifficileActivity.class);
+                        startActivity(main);
+                        break;
+
+                }
                 finish();
             }
         });

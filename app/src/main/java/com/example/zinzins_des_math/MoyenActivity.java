@@ -14,8 +14,10 @@ public class MoyenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moyen);
+        ImageView back = findViewById(R.id.back_to_moyen);
         ImageView multifactor = findViewById(R.id.multifactor_moyen);
         ImageView mathemaquizz = findViewById(R.id.mathemaquizz_moyen);
+        actionClickImageMoyen(back, DifficultyActivity.class,12);
         actionClickImageMoyen(multifactor, MultiFactorActivity.class,1);
         actionClickImageMoyen(mathemaquizz, SecondGameActivity.class,1);
     }

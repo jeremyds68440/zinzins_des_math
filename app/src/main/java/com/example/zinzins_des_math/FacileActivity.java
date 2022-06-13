@@ -16,8 +16,11 @@ public class FacileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_facile);
 
+        ImageView back = findViewById(R.id.back_to_facile);
         ImageView multifactor = findViewById(R.id.multifactor_facile);
         ImageView mathemaquizz = findViewById(R.id.mathemaquizz_facile);
+
+        actionClickImagefacile(back, DifficultyActivity.class,12);
         actionClickImagefacile(multifactor, MultiFactorActivity.class,0);
         actionClickImagefacile(mathemaquizz, SecondGameActivity.class,0);
     }
