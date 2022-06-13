@@ -1,5 +1,6 @@
 package com.example.zinzins_des_math;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -17,9 +18,13 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Field;
 import java.util.Random;
 
 public class SecondGameActivity extends AppCompatActivity {
@@ -47,7 +52,21 @@ public class SecondGameActivity extends AppCompatActivity {
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             DatabaseReference mDatabase = database.getReference("users").child(user.getUid());
-            mDatabase.child("scoreMathemaquizz").setValue(Integer.parseInt((String) score.getText()));
+            mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    final User utilisateur = new User();
+                    final Field[] fields = utilisateur.getClass().getDeclaredFields();
+                    int dbScore =  Math.toIntExact((long) dataSnapshot.child(fields[2].getName()).getValue());
+                    if (dbScore < Integer.parseInt((String) score.getText()))
+                        mDatabase.child("scoreMathemaquizzFacile").setValue(Integer.parseInt((String) score.getText()));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
             fini.setTitle("Bien joué");
             fini.setMessage("Vous avez fait : " + score.getText() + " pts" );
             fini.setPositiveButton("Réssayer", new DialogInterface.OnClickListener() {

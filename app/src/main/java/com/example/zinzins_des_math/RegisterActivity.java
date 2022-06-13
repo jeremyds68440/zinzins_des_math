@@ -33,7 +33,6 @@ public class RegisterActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference mDatabase;
     User user;
-    String TAG = "RegisterActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = registerPassword.getText().toString().trim();
                 String username = registerUsername.getText().toString();
                 if(TextUtils.isEmpty(username) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
-                    Toast.makeText(getApplicationContext(), "Enter email and password", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Remplir tous les champs", Toast.LENGTH_LONG).show();
                     return;
                 } else {
                     registerUser(email, username, password);
@@ -83,35 +82,20 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Log.d(TAG, "createUserWithEmail:success");
+                    Toast.makeText(RegisterActivity.this,"Connecté",Toast.LENGTH_SHORT).show();
                     user.setUsername(username);
                     user.setEmail(email);
                     updateUI(user);
                 }else{
-                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                    Toast.makeText(RegisterActivity.this,"Auth fail",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this,"Echec d'authentification",Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
     public void updateUI(User user){
         mDatabase.child(fAuth.getCurrentUser().getUid()).setValue(user);
-        Toast.makeText(RegisterActivity.this, "data added", Toast.LENGTH_SHORT).show();
-        /*String userId = mDatabase.push().getKey();
-        user.setUserID(userId);
-        mDatabase.addValueEventListener((new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                mDatabase.child(userId).setValue(user);
-                Toast.makeText(RegisterActivity.this, "data added", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(RegisterActivity.this, "Fail to add data" + error, Toast.LENGTH_SHORT).show();
-            }
-        }));*/
-        Intent loginIntent = new Intent(this, MainActivity.class);
+        Toast.makeText(RegisterActivity.this, "Votre compte a été créé", Toast.LENGTH_SHORT).show();
+        Intent loginIntent = new Intent(this, MultiplayerActivity.class);
         startActivity(loginIntent);
         finish();
     }

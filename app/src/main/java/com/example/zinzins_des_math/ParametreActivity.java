@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,7 +20,7 @@ import java.lang.reflect.Field;
 
 public class ParametreActivity extends AppCompatActivity {
 
-    TextView username, scoreMathemaquizz;
+    TextView username, scoreMathemaquizzFacile;
 
     FirebaseUser user;
     DatabaseReference mDatabase;
@@ -31,7 +30,7 @@ public class ParametreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_parametre);
 
         username = (TextView) findViewById(R.id.nomUtil);
-        scoreMathemaquizz = (TextView) findViewById(R.id.scoreMathemaquizz);
+        scoreMathemaquizzFacile = (TextView) findViewById(R.id.scoreMathemaquizz);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
@@ -41,8 +40,8 @@ public class ParametreActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final User utilisateur = new User();
                 final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                username.setText((String) dataSnapshot.child(fields[3].getName()).getValue());
-                scoreMathemaquizz.setText(Long.toString((Long) dataSnapshot.child(fields[1].getName()).getValue()));
+                username.setText((String) dataSnapshot.child(fields[10].getName()).getValue());
+                scoreMathemaquizzFacile.setText(Long.toString((Long) dataSnapshot.child(fields[2].getName()).getValue()));
             }
 
             @Override
