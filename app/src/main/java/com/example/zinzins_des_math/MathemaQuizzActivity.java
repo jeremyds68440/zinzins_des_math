@@ -230,8 +230,6 @@ public class MathemaQuizzActivity extends AppCompatActivity {
             equation.setTextColor(getColor(R.color.white));
             g.newEquationMoyen();
         }else if(difficulty == 2){
-
-            this.setTheme(android.R.style.Theme);
             bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
             nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
             equation.setTextColor(getColor(R.color.white));
