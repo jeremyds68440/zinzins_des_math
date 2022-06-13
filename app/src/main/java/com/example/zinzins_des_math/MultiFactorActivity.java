@@ -8,8 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
-import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -50,7 +48,9 @@ public class MultiFactorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first_game);
+        setContentView(R.layout.activity_multifactor);
+
+        difficulty = getIntent().getFlags();
 
         context = getApplicationContext();
 
@@ -69,7 +69,6 @@ public class MultiFactorActivity extends AppCompatActivity {
 
 
         layout = findViewById(R.id.multifactor);
-        layout.setBackground(getResources().getDrawable(R.drawable.multifactor_bg_facile));
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(132, 96);
         params.setMargins(44,121,0,0);
@@ -101,7 +100,6 @@ public class MultiFactorActivity extends AppCompatActivity {
         ImageView scorePlace = new ImageView(getApplicationContext());
         params = new LinearLayout.LayoutParams(width, 220);
         scorePlace.setLayoutParams(params);
-        scorePlace.setImageResource(R.drawable.multifactor_score);
 
         relativeScore.addView(scorePlace);
 
@@ -131,7 +129,6 @@ public class MultiFactorActivity extends AppCompatActivity {
         ImageView targetPlace = new ImageView(getApplicationContext());
         params = new LinearLayout.LayoutParams(width, 220);
         targetPlace.setLayoutParams(params);
-        targetPlace.setImageResource(R.drawable.multifactor_target_facile);
 
         relativeTarget.addView(targetPlace);
 
@@ -153,8 +150,27 @@ public class MultiFactorActivity extends AppCompatActivity {
 
         ImageView gridBackground = new ImageView(getApplicationContext());
         params = new LinearLayout.LayoutParams(width, height - 1066);
-        gridBackground.setImageResource(R.drawable.multifactor_terrain_facile);
         gridBackground.setLayoutParams(params);
+
+        if(difficulty == 0) {
+            layout.setBackground(getDrawable(R.drawable.multifactor_bg_facile));
+            scorePlace.setImageResource(R.drawable.multifactor_score_facile);
+            targetPlace.setImageResource(R.drawable.multifactor_target_facile);
+            gridBackground.setImageResource(R.drawable.multifactor_terrain_facile);
+        }
+        else if(difficulty == 1) {
+            layout.setBackground(getDrawable(R.drawable.multifactor_bg_moyen));
+            scorePlace.setImageResource(R.drawable.multifactor_score_moyen);
+            targetPlace.setImageResource(R.drawable.multifactor_target_moyen);
+            gridBackground.setImageResource(R.drawable.multifactor_terrain_moyen);
+        }
+        else if(difficulty == 2) {
+            layout.setBackground(getDrawable(R.drawable.multifactor_bg_difficile));
+            scorePlace.setImageResource(R.drawable.multifactor_score_difficile);
+            targetPlace.setImageResource(R.drawable.multifactor_target_difficile);
+            gridBackground.setImageResource(R.drawable.multifactor_terrain_difficile);
+        }
+
 
         while(BUBBLEROW*NUMBERBUBBLEROW > height - 1136) {
             BUBBLECOLUMN--;
@@ -162,8 +178,6 @@ public class MultiFactorActivity extends AppCompatActivity {
         }
 
         context = getApplicationContext();
-
-        difficulty = getIntent().getFlags();
 
         newTarget();
         resetCounter();
