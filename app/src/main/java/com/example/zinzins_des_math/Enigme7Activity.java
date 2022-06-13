@@ -50,7 +50,7 @@ public class Enigme7Activity extends AppCompatActivity {
         titre.setText("Enigme 7");
 
         //L'image
-        //image.setImageResource(R.drawable);
+        image.setImageResource(R.drawable.img_enigme_7);
 
         //Enoncé de l'énigme
         question.setText("Il faut 1min25s pour couper une bûche en deux. \n" +

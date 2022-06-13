@@ -54,7 +54,7 @@ public class Enigme6Activity extends AppCompatActivity {
         titre.setText("Enigme 6");
 
         //L'image
-        //image.setImageResource(R.drawable);
+        image.setImageResource(R.drawable.img_enigme_6);
 
         //Enoncé de l'énigme
         question.setText("Quel est le seul nombre premier compris entre 1908 et 1930 ?");

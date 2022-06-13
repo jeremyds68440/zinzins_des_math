@@ -49,7 +49,7 @@ public class Enigme9Activity extends AppCompatActivity {
         titre.setText("Enigme 9");
 
         //L'image
-        //image.setImageResource(R.drawable);
+        image.setImageResource(R.drawable.img_enigme_9);
 
         //Enoncé de l'énigme
         question.setText("En se rendant à un point d’eau, un zèbre croise 6 girafes qui s’y rendaient également. Chaque girafe portait sur son dos 3 singes. Chaque singe portait 2 oiseaux qui eux-mêmes portaient chacun 4 mouches.\n" +

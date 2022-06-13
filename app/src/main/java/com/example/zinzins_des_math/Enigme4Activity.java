@@ -49,7 +49,7 @@ public class Enigme4Activity extends AppCompatActivity {
         titre.setText("Enigme 4");
 
         //L'image
-        //image.setImageResource(R.drawable);
+        image.setImageResource(R.drawable.img_enigme_4);
 
         //Enoncé de l'énigme
         question.setText("Un père promet à son fils de lui offrir 5€ pour chaque bonne réponse mais le fiston devra lui donner 8€ à chaque mauvaise réponse.\n" +

@@ -49,7 +49,7 @@ public class Enigme8Activity extends AppCompatActivity {
         titre.setText("Enigme 7");
 
         //L'image
-        //image.setImageResource(R.drawable);
+        image.setImageResource(R.drawable.img_enigme_8);
 
         //Enoncé de l'énigme
         question.setText("Sept personnes se rencontrent et se serrent la main. Sachant que chaque personne a donné la main une et une seule fois à chaque autre personne, combien de poignées de mains y a-t-il eu ?");

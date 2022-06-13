@@ -53,22 +53,13 @@ public class Enigme1Activity extends AppCompatActivity {
         submit_answer_btn= findViewById(R.id.submit_answer_btn);
         explication = findViewById(R.id.explication);
 
-
-
-
-
-
-
         //diff.getFlag().enigme
-
-
-
 
         //Titre de l'énigme
         titre.setText("Enigme 3");
 
         //L'image
-        //image.setImageResource(R.drawable);
+        image.setImageResource(R.drawable.img_enigme_1);
 
         //Enoncé de l'énigme
         question.setText("Dans ce cube plein, toutes les rangées aux extrémités noircies sont constituées de petits cubes noirs. Tous les autres petits cubes sont blancs.\n" +
@@ -81,6 +72,7 @@ public class Enigme1Activity extends AppCompatActivity {
         submit_answer_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cpt++;
                 String input = inputAnswer.getText().toString();
                 if (input != "85"){
 
