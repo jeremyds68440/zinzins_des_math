@@ -14,52 +14,41 @@ import android.widget.ScrollView;
 
 public class LevelActivity extends AppCompatActivity {
 
-    private ImageView back_diff;
-    private Button win;
-    private ScrollView scroll;
-    private LevelActivity activity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level);
+        ImageView back = findViewById(R.id.back_evolution);
+        ImageView multifactor = findViewById(R.id.multifactor_evolution);
+        ImageView mathemaquizz = findViewById(R.id.mathemaquizz_evolution);
+        ImageView roulette = findViewById(R.id.roulette_evolution);
 
-        this.back_diff = findViewById(R.id.back_diffAct);
-        actionClickImage(this.back_diff, DifficultyActivity.class);
-
-        this.activity = this;
-        this.win = findViewById(R.id.reussi);
-        this.win.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder myPopup = new AlertDialog.Builder(activity);
-                myPopup.setTitle("YES");
-                myPopup.setMessage("J'ai reussi");
-                myPopup.show();
-            }
-        });
-
-
-        scroll = findViewById(R.id.scroll);
-        scroll.post(new Runnable() {
-            @Override
-            public void run() {
-                scroll.fullScroll(View.FOCUS_DOWN);
-            }
-        });
+        actionClickImagefacile(back, DifficultyActivity.class,12);
+        actionClickImagefacile(multifactor, MultiFactorActivity.class,0);
+        actionClickImagefacile(mathemaquizz, MathemaQuizzActivity.class,0);
+        actionClickImagefacile(roulette, RouletteActivity.class,0);
 
     }
 
-    public void actionClickImage(ImageView button, Class act){
+    private void actionClickImagefacile(ImageView button, Class act, int difficulty) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 button.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent intent = new Intent(getApplicationContext(), act);
+                intent.setFlags(difficulty);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
         });
+    }
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), DifficultyActivity.class);
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish();
     }
 }

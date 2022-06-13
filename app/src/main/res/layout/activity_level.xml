@@ -4,44 +4,95 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/img_enigme_9"
     tools:context=".LevelActivity">
 
-    <ScrollView
-        android:id="@+id/scroll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ImageView
+        android:id="@+id/info_multifactor_facile2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.905"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/bgfacile"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/reussi"
-                android:layout_width="80dp"
-                android:layout_height="88dp"
-                android:translationY="7050dp"
-                android:translationX="200dp"
-                android:background="@drawable/boutton_jaune"
-                android:foreground="@drawable/boutton_jaune" />
-
-
-
-
-        </LinearLayout>
-
-    </ScrollView>
+        app:layout_constraintVertical_bias="0.307"
+        app:srcCompat="@android:drawable/ic_menu_info_details" />
 
     <ImageView
-        android:id="@+id/back_diffAct"
+        android:id="@+id/info_mathemaquizz_facile2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.905"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.466"
+        app:srcCompat="@android:drawable/ic_menu_info_details" />
+
+    <ImageView
+        android:id="@+id/info_roulette_facile2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.905"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.625"
+        app:srcCompat="@android:drawable/ic_menu_info_details" />
+
+    <ImageView
+        android:id="@+id/mathemaquizz_evolution"
+        android:layout_width="@dimen/wight_imageview"
+        android:layout_height="@dimen/height_imageview"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mathemaquizz" />
+
+    <ImageView
+        android:id="@+id/roulette_evolution"
+        android:layout_width="@dimen/wight_imageview"
+        android:layout_height="@dimen/height_imageview"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.67"
+        app:srcCompat="@drawable/roulette_boutton" />
+
+    <ImageView
+        android:id="@+id/multifactor_evolution"
+        android:layout_width="@dimen/wight_imageview"
+        android:layout_height="@dimen/height_imageview"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.329"
+        app:srcCompat="@drawable/multifactor" />
+
+    <TextView
+        android:id="@+id/textView_difficile4"
+        android:layout_width="321dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="68dp"
+        android:fontFamily="@font/nirmala_b"
+        android:text="Evolution"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.62" />
+
+    <ImageView
+        android:id="@+id/back_evolution"
         android:layout_width="48dp"
         android:layout_height="36dp"
         android:layout_marginTop="16dp"
