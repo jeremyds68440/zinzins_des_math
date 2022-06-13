@@ -44,7 +44,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FirstGameActivity"
+            android:name=".MultiFactorActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

@@ -18,7 +18,7 @@ public class FacileActivity extends AppCompatActivity {
 
         ImageView multifactor = findViewById(R.id.multifactor_facile);
         ImageView mathemaquizz = findViewById(R.id.mathemaquizz_facile);
-        actionClickImagefacile(multifactor, FirstGameActivity.class,0);
+        actionClickImagefacile(multifactor, MultiFactorActivity.class,0);
         actionClickImagefacile(mathemaquizz, SecondGameActivity.class,0);
     }
 

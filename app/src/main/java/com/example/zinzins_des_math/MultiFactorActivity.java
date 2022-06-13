@@ -21,7 +21,7 @@ import com.example.zinzins_des_math.models.BubbleItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FirstGameActivity extends AppCompatActivity {
+public class MultiFactorActivity extends AppCompatActivity {
 
     private DisplayMetrics displayMetrics;
     private RelativeLayout activity;

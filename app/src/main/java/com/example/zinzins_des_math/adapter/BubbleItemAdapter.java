@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.zinzins_des_math.FirstGameActivity;
+import com.example.zinzins_des_math.MultiFactorActivity;
 import com.example.zinzins_des_math.R;
 import com.example.zinzins_des_math.models.BubbleItem;
 
@@ -16,11 +16,11 @@ import java.util.List;
 
 public class BubbleItemAdapter extends BaseAdapter {
 
-    private FirstGameActivity context;
+    private MultiFactorActivity context;
     private List<BubbleItem> bubbles;
     private LayoutInflater inflater;
 
-    public BubbleItemAdapter(FirstGameActivity context, List<BubbleItem> bubbles) {
+    public BubbleItemAdapter(MultiFactorActivity context, List<BubbleItem> bubbles) {
         this.context = context;
         this.bubbles = bubbles;
         this.inflater = LayoutInflater.from(context);

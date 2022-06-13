@@ -34,7 +34,7 @@ public class MultiplayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 multifactor.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent multifactorView = new Intent(getApplicationContext(), FirstGameActivity.class);
+                Intent multifactorView = new Intent(getApplicationContext(), MultiFactorActivity.class);
                 startActivity(multifactorView);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
