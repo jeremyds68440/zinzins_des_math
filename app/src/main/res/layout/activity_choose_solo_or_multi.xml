@@ -18,25 +18,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/multiView"
-        android:layout_width="@dimen/wight_imageview"
-        android:layout_height="@dimen/height_imageview"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/soloView"
-        app:layout_constraintVertical_bias="0.044"
-        app:srcCompat="@drawable/bouton_multi" />
 
-    <ImageView
-        android:id="@+id/soloView"
+    <TableLayout
         android:layout_width="@dimen/wight_imageview"
-        android:layout_height="@dimen/height_imageview"
+        android:layout_height="190dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.406"
-        app:srcCompat="@drawable/bouton_solo" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="32dp">
+
+            <ImageView
+                android:id="@+id/soloView"
+                android:layout_width="@dimen/wight_imageview"
+                android:layout_height="@dimen/height_imageview"
+                app:srcCompat="@drawable/bouton_solo"
+                tools:layout_editor_absoluteX="95dp"
+                tools:layout_editor_absoluteY="268dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/multiView"
+                android:layout_width="@dimen/wight_imageview"
+                android:layout_height="@dimen/height_imageview"
+                app:srcCompat="@drawable/bouton_multi"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="371dp" />
+        </TableRow>
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
