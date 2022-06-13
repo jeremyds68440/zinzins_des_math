@@ -177,10 +177,26 @@ public class SecondGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 back.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent main;
+                setQuitPopup();
+            }
+        });
+    }
+
+    public void onBackPressed() {
+        setQuitPopup();
+    }
+
+    private void setQuitPopup(){
+        AlertDialog.Builder quit = new AlertDialog.Builder(this);
+        quit.setTitle("Quitter");
+        quit.setMessage("Êtes-vous sûre de vouloir quitter ?");
+        quit.setNegativeButton("Retour", null);
+        quit.setPositiveButton("Quitter", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
                 switch (getIntent().getFlags()){
                     case 0 :
-                        main = new Intent(getApplicationContext(), FacileActivity.class);
+                        Intent main = new Intent(getApplicationContext(), FacileActivity.class);
                         startActivity(main);
                         break;
                     case 1 :
@@ -196,8 +212,8 @@ public class SecondGameActivity extends AppCompatActivity {
                 finish();
             }
         });
+        quit.show();
     }
-
     private void nextTurn(){
 
         int difficulty = getIntent().getFlags();
