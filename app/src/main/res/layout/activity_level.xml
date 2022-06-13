@@ -44,61 +44,66 @@
         app:srcCompat="@android:drawable/ic_menu_info_details" />
 
     <ImageView
-        android:id="@+id/mathemaquizz_evolution"
-        android:layout_width="@dimen/wight_imageview"
-        android:layout_height="@dimen/height_imageview"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/mathemaquizz" />
-
-    <ImageView
-        android:id="@+id/roulette_evolution"
-        android:layout_width="@dimen/wight_imageview"
-        android:layout_height="@dimen/height_imageview"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.67"
-        app:srcCompat="@drawable/roulette_boutton" />
-
-    <ImageView
-        android:id="@+id/multifactor_evolution"
-        android:layout_width="@dimen/wight_imageview"
-        android:layout_height="@dimen/height_imageview"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.329"
-        app:srcCompat="@drawable/multifactor" />
-
-    <TextView
-        android:id="@+id/textView_difficile4"
-        android:layout_width="321dp"
-        android:layout_height="97dp"
-        android:layout_marginTop="68dp"
-        android:fontFamily="@font/nirmala_b"
-        android:text="Evolution"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.62" />
-
-    <ImageView
-        android:id="@+id/back_evolution"
-        android:layout_width="48dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/back_to_facile"
+        android:layout_width="@dimen/wight_backbutton"
+        android:layout_height="@dimen/height_backbutton"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TableLayout
+        android:id="@+id/tableLayout3"
+        android:layout_width="@dimen/wight_imageview"
+        android:layout_height="301dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="32dp">
+
+            <ImageView
+                android:id="@+id/multifactor_facile"
+                android:layout_width="@dimen/wight_imageview"
+                android:layout_height="@dimen/height_imageview"
+                app:srcCompat="@drawable/multifactor"
+                tools:layout_editor_absoluteX="95dp"
+                tools:layout_editor_absoluteY="268dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="32dp">
+
+            <ImageView
+                android:id="@+id/mathemaquizz_facile"
+                android:layout_width="@dimen/wight_imageview"
+                android:layout_height="@dimen/height_imageview"
+                app:srcCompat="@drawable/mathemaquizz"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="371dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/roulette_facile"
+                android:layout_width="@dimen/wight_imageview"
+                android:layout_height="@dimen/height_imageview"
+                app:srcCompat="@drawable/roulette_boutton"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="568dp" />
+        </TableRow>
+    </TableLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
