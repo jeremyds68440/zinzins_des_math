@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 public class RegisterActivity extends AppCompatActivity {
 
     EditText registerEmail, registerPassword, registerUsername;
-    Button register;
+    ImageView register;
     TextView toLogin;
     FirebaseAuth fAuth;
     FirebaseDatabase database;
@@ -42,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerEmail = (EditText) findViewById(R.id.registerEmail);
         registerPassword = (EditText) findViewById(R.id.registerPassword);
         registerUsername = (EditText) findViewById(R.id.registerUsername);
-        register = (Button) findViewById(R.id.register);
+        register = (ImageView) findViewById(R.id.register);
         toLogin = (TextView) findViewById(R.id.btnToLogin);
 
         database = FirebaseDatabase.getInstance();
