@@ -2,57 +2,51 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/roulette_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RouletteActivity"
     android:id="@+id/fractionLayout">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginTop="60dp"
-        android:text="La roulette aux énigmes"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="25dp" />
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
-
-        <ImageView
-            android:id="@+id/wheel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            android:adjustViewBounds="true"
-            android:scaleType="centerInside"
-            android:src="@drawable/wheel" />
-
-    </RelativeLayout>
-
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="230dp"
-        android:adjustViewBounds="true"
-        android:scaleType="centerInside"
-        android:src="@drawable/fleche" />
-
-    <ImageView
-        android:id="@+id/startBtn"
-        android:layout_width="127dp"
-        android:layout_height="61dp"
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="491dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp"
-        android:src="@drawable/start" />
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="0dp">
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/wheel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/roulette" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/startBtn"
+                android:layout_width="285dp"
+                android:layout_height="66dp"
+                android:layout_marginTop="50dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/lancer_roulette" />
+        </TableRow>
+    </TableLayout>
 
 
 </RelativeLayout>
