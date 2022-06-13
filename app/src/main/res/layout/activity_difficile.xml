@@ -27,7 +27,7 @@
         android:text="DIFFICILE"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="50"
+        android:textSize="50dp"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
