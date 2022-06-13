@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/second_game_bg"
     android:theme="@style/Theme2"
-    tools:context=".SecondGameActivity">
+    tools:context=".MathemaQuizzActivity">
 
     <ImageView
         android:id="@+id/second_game_back2"
@@ -82,7 +82,7 @@
         android:fontFamily="@string/font"
         android:text="@string/timer"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
