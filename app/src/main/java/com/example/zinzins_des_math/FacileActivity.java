@@ -6,37 +6,33 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class FacileActivity extends AppCompatActivity {
 
-    private ImageView jouer, settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_facile);
 
-        this.jouer = findViewById(R.id.jouer);
-        this.settings = findViewById(R.id.parametres);
-
-        actionClickImage(this.jouer, choosesolomultiActivity.class);
-        actionClickImage(this.settings, ParametreActivity.class);
-
+        ImageView multifactor = findViewById(R.id.multifactor_facile);
+        ImageView mathemaquizz = findViewById(R.id.mathemaquizz_facile);
+        actionClickImagefacile(multifactor, FirstGameActivity.class,0);
+        actionClickImagefacile(mathemaquizz, SecondGameActivity.class,0);
     }
 
-    public void actionClickImage(ImageView button, Class act){
+    private void actionClickImagefacile(ImageView button, Class act, int difficulty) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 button.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent intent = new Intent(getApplicationContext(), act);
+                intent.setFlags(difficulty);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
             }
         });
     }
-
 }
