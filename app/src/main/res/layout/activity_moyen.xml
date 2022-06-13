@@ -115,7 +115,7 @@
                 android:id="@+id/roulette_moyen"
                 android:layout_width="@dimen/wight_imageview"
                 android:layout_height="@dimen/height_imageview"
-                app:srcCompat="@drawable/roulette_boutton"
+                app:srcCompat="@drawable/roulette_moyen"
                 tools:layout_editor_absoluteX="32dp"
                 tools:layout_editor_absoluteY="568dp" />
         </TableRow>

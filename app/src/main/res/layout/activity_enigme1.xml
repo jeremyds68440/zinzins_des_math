@@ -2,51 +2,62 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/enigme_bg_facile"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="889dp"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="1dp"
-        tools:ignore="MissingConstraints">
+    <TextView
+        android:id="@+id/titre_enigme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="TITRE"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/titre_enigme"
-            android:layout_width="350dp"
-            android:layout_height="45dp"
-            android:text="TITRE"
-            android:textSize="25sp"
-            android:textColor="@color/black"
-            android:layout_marginBottom="20dp"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:layout_marginTop="60dp"/>
+    <TableLayout
+        android:layout_width="415dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.620">
 
-        <ImageView
-            android:id="@+id/figure_optionelle"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:src="@drawable/img_default_enigme" />
-
-        <TextView
-            android:id="@+id/question"
-            android:layout_width="350dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:text="énigme"
-            android:textSize="18sp"
-            android:textColor="@color/black"/>
-
-        <LinearLayout
+        <TableRow
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp">
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/figure_optionelle"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/img_default_enigme" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/question"
+                android:layout_width="wrap_content"
+                android:layout_height="180dp"
+                android:layout_marginTop="10dp"
+                android:text="énigme"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
             <EditText
                 android:id="@+id/answer_attempt"
@@ -55,8 +66,7 @@
                 android:lines="1"
                 android:inputType="number"
                 android:hint="@string/reponse_enigme"
-                android:textSize="20sp"
-                />
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/submit_answer_btn"
@@ -69,21 +79,25 @@
                 android:textSize="20dp"
                 android:enabled="false"/>
 
+        </TableRow>
 
-        </LinearLayout>
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
+            <Button
+                android:id="@+id/explication"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:layout_gravity="center"
+                android:text="@string/solution_enigme"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:enabled="false"
+                />
+        </TableRow>
 
-        <Button
-            android:id="@+id/explication"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="80dp"
-            android:layout_gravity="center"
-            android:text="@string/solution_enigme"
-            android:textColor="@color/white"
-            android:textSize="15dp"
-            android:enabled="false"
-            />
+    </TableLayout>
 
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
