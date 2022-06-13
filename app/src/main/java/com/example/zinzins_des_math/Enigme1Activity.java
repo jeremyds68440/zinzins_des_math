@@ -56,7 +56,7 @@ public class Enigme1Activity extends AppCompatActivity {
         //diff.getFlag().enigme
 
         //Titre de l'énigme
-        titre.setText("Enigme 3");
+        titre.setText("Enigme 1");
 
         //L'image
         image.setImageResource(R.drawable.img_enigme_1);
@@ -72,9 +72,8 @@ public class Enigme1Activity extends AppCompatActivity {
         submit_answer_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cpt++;
                 String input = inputAnswer.getText().toString();
-                if (input != "85"){
+                if (!input.equals("85")){
 
                     if (cpt<4){
                         cpt++;
@@ -109,23 +108,28 @@ public class Enigme1Activity extends AppCompatActivity {
 
                 } else {
                     //score++;
+                    cpt = 0 ;
                     AlertDialog.Builder sucess = new AlertDialog.Builder(enigmeActivity);
                     sucess.setTitle("Bravo !");
                     sucess.setMessage("Tu as trouvé la bonne réponse." );
                     sucess.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent roulette = new Intent(getApplicationContext(), RouletteActivity.class);
-                            startActivity(roulette);                        }
+                            explication.setEnabled(true);
+                            inputAnswer.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        }
                     });
                     sucess.show();
 
-                 }
+                }
 
-                //inputAnswer.setText("");
+                inputAnswer.setText("");
             }
 
         });
+
 
         //L'explication de la réponse
         explication.setOnClickListener(new View.OnClickListener() {
@@ -172,5 +176,7 @@ public class Enigme1Activity extends AppCompatActivity {
 
         }
     };
+
+
 
 }

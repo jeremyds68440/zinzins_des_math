@@ -62,7 +62,7 @@ public class Enigme2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String input = inputAnswer.getText().toString();
-                if (input != "81"){
+                if (!input.equals("81")){
 
                     if (cpt<4){
                         cpt++;
@@ -97,20 +97,24 @@ public class Enigme2Activity extends AppCompatActivity {
 
                 } else {
                     //score++;
+                    cpt = 0 ;
                     AlertDialog.Builder sucess = new AlertDialog.Builder(enigmeActivity);
                     sucess.setTitle("Bravo !");
                     sucess.setMessage("Tu as trouvé la bonne réponse." );
                     sucess.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent roulette = new Intent(getApplicationContext(), RouletteActivity.class);
-                            startActivity(roulette);                        }
+                            explication.setEnabled(true);
+                            inputAnswer.setInputType(InputType.TYPE_CLASS_NUMBER);
+                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        }
                     });
                     sucess.show();
 
-                 }
+                }
 
-                //inputAnswer.setText("");
+                inputAnswer.setText("");
             }
 
         });

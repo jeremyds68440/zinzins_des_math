@@ -60,7 +60,11 @@ public class RouletteActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 //Toast.makeText(RouletteActivity.this, "Enigme" + sectors[sectors.length - (degree + 1)], Toast.LENGTH_SHORT).show();
-
+                Intent enigme1 = new Intent(getApplicationContext(), Enigme1Activity.class);
+                startActivity(enigme1);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
+                /*
                 switch (sectors[sectors.length - (degree + 1)]){
                     case "1" :
                         Intent enigme1 = new Intent(getApplicationContext(), Enigme1Activity.class);
@@ -116,7 +120,7 @@ public class RouletteActivity extends AppCompatActivity {
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
-                }
+                }*/
             }
 
             @Override
