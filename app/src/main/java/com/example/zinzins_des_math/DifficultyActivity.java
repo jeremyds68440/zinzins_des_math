@@ -27,7 +27,7 @@ public class DifficultyActivity extends AppCompatActivity {
         this.IA = findViewById(R.id.evolution);
 
         actionClickImage(this.back, choosesolomultiActivity.class);
-        actionClickImage(this.easy, FirstGameActivity.class);
+        actionClickImage(this.easy, FacileActivity.class);
         actionClickImage(this.medium, SecondGameActivity.class);
         actionClickImage(this.hard, RouletteActivity.class);
         actionClickImage(this.IA, LevelActivity.class);

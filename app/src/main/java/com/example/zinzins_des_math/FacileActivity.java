@@ -6,27 +6,24 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
-public class MainActivity extends AppCompatActivity {
+public class FacileActivity extends AppCompatActivity {
 
-    private ImageView jouer, settings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_facile);
 
-        this.jouer = findViewById(R.id.jouer);
-        this.settings = findViewById(R.id.parametres);
+        ImageView multifactor = findViewById(R.id.multifactor_facile);
+        ImageView mathemaquizz = findViewById(R.id.mathemaquizz_facile);
 
-        actionClickImage(this.jouer, choosesolomultiActivity.class);
-        actionClickImage(this.settings, ParametreActivity.class);
-
+        actionClickImagefacile(multifactor, FirstGameActivity.class);
+        actionClickImagefacile(mathemaquizz, SecondGameActivity.class);
     }
 
-    public void actionClickImage(ImageView button, Class act){
+    private void actionClickImagefacile(ImageView button, Class act) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,5 +35,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 }

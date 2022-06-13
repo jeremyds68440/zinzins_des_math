@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Zinzins_des_math"
         tools:targetApi="31">
         <activity
+            android:name=".FacileActivity"
+            android:exported="false" />
+        <activity
             android:name=".choosesolomultiActivity"
             android:exported="false" />
         <activity
