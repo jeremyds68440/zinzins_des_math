@@ -60,7 +60,7 @@ public class MultiplayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mathemaQuizz.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent mathemaQuizzView = new Intent(getApplicationContext(), SecondGameActivity.class);
+                Intent mathemaQuizzView = new Intent(getApplicationContext(), MathemaQuizzActivity.class);
                 startActivity(mathemaQuizzView);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();

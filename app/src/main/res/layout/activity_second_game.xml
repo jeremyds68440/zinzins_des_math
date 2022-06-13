@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/second_game_bg"
     android:layout_height="match_parent"
-    tools:context=".SecondGameActivity">
+    tools:context=".MathemaQuizzActivity">
 
     <ImageView
         android:id="@+id/second_game_back2"

@@ -23,7 +23,7 @@ public class FacileActivity extends AppCompatActivity {
 
         actionClickImagefacile(back, DifficultyActivity.class,12);
         actionClickImagefacile(multifactor, MultiFactorActivity.class,0);
-        actionClickImagefacile(mathemaquizz, SecondGameActivity.class,0);
+        actionClickImagefacile(mathemaquizz, MathemaQuizzActivity.class,0);
         actionClickImagefacile(roulette, RouletteActivity.class,0);
 
     }

@@ -22,7 +22,7 @@ public class MoyenActivity extends AppCompatActivity {
 
         actionClickImageMoyen(back, DifficultyActivity.class,12);
         actionClickImageMoyen(multifactor, MultiFactorActivity.class,1);
-        actionClickImageMoyen(mathemaquizz, SecondGameActivity.class,1);
+        actionClickImageMoyen(mathemaquizz, MathemaQuizzActivity.class,1);
         actionClickImageMoyen(roulette, RouletteActivity.class,1);
 
     }

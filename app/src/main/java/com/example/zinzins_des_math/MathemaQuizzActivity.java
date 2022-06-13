@@ -25,15 +25,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.lang.reflect.Field;
-import java.util.Random;
 
-public class SecondGameActivity extends AppCompatActivity {
+public class MathemaQuizzActivity extends AppCompatActivity {
 
     Button btn_ans0,btn_ans1,btn_ans2,btn_ans3;
 
     TextView equation,timer,score,soluaff;
     ProgressBar progresstimer;
-    private SecondGameActivity secondGameActivity;
+    private MathemaQuizzActivity mathemaQuizzActivity;
 
     Game g = new Game();
     int secondsRemaining = 30;
@@ -48,7 +47,7 @@ public class SecondGameActivity extends AppCompatActivity {
 
         @Override
         public void onFinish() {
-            AlertDialog.Builder fini = new AlertDialog.Builder(secondGameActivity);
+            AlertDialog.Builder fini = new AlertDialog.Builder(mathemaQuizzActivity);
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             DatabaseReference mDatabase = database.getReference("users").child(user.getUid());
@@ -116,7 +115,7 @@ public class SecondGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second_game);
         temps.start();
 
-        this.secondGameActivity = this;
+        this.mathemaQuizzActivity = this;
         btn_ans0 = findViewById(R.id.btn_ans0);
         btn_ans1 = findViewById(R.id.btn_ans1);
         btn_ans2 = findViewById(R.id.btn_ans2);

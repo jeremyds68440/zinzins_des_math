@@ -40,7 +40,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SecondGameActivity"
+            android:name=".MathemaQuizzActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

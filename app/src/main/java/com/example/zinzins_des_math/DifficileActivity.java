@@ -22,7 +22,7 @@ public class DifficileActivity extends AppCompatActivity {
 
         actionClickImageDifficile(back, DifficultyActivity.class,12);
         actionClickImageDifficile(multifactor, MultiFactorActivity.class,2);
-        actionClickImageDifficile(mathemaquizz, SecondGameActivity.class,2);
+        actionClickImageDifficile(mathemaquizz, MathemaQuizzActivity.class,2);
         actionClickImageDifficile(roulette, RouletteActivity.class,2);
 
     }
