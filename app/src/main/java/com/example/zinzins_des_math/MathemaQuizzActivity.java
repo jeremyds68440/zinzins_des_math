@@ -226,12 +226,14 @@ public class MathemaQuizzActivity extends AppCompatActivity {
             g.newEquationFacile();
         }else if(difficulty == 1){
             bg.setBackground(getDrawable(R.drawable.bg_quizz_moyen));
+            nuage_equation.setImageDrawable(getDrawable(R.drawable.grosnuage_quizz_moyen));
+            equation.setTextColor(getColor(R.color.white));
             g.newEquationMoyen();
         }else if(difficulty == 2){
             bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
             nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
-            equation.setTextColor(getColor(R.color.gray));
-            this.setTheme(R.style.background_nuage_theme1);
+            equation.setTextColor(getColor(R.color.white));
+            mathemaQuizzActivity.setTheme(R.style.background_nuage_theme1);
             g.newEquationDifficile();
         }
 
