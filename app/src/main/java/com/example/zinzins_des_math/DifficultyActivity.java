@@ -28,8 +28,8 @@ public class DifficultyActivity extends AppCompatActivity {
 
         actionClickImage(this.back, choosesolomultiActivity.class);
         actionClickImage(this.easy, FacileActivity.class);
-        actionClickImage(this.medium, SecondGameActivity.class);
-        actionClickImage(this.hard, RouletteActivity.class);
+        actionClickImage(this.medium, MoyenActivity.class);
+        actionClickImage(this.hard, DifficileActivity.class);
         actionClickImage(this.IA, LevelActivity.class);
 
     }
