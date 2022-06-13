@@ -29,16 +29,6 @@
         app:srcCompat="@drawable/multifactor" />
 
     <ImageView
-        android:id="@+id/roulette_moyen"
-        android:layout_width="351dp"
-        android:layout_height="105dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mathemaquizz_moyen"
-        app:srcCompat="@drawable/roulette_boutton" />
-
-    <ImageView
         android:id="@+id/mathemaquizz_moyen"
         android:layout_width="351dp"
         android:layout_height="105dp"
@@ -47,5 +37,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/multifactor_moyen"
         app:srcCompat="@drawable/mathemaquizz" />
+
+    <ImageView
+        android:id="@+id/roulette_moyen"
+        android:layout_width="351dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mathemaquizz_moyen"
+        app:srcCompat="@drawable/roulette_boutton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

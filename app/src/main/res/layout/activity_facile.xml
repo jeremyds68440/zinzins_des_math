@@ -4,28 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/multiplayer_bg"
+    android:background="@drawable/bg_facile"
     tools:context=".FacileActivity">
 
     <ImageView
+        android:id="@+id/back_to_moyen"
+        android:layout_width="48dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
+
+    <ImageView
         android:id="@+id/multifactor_facile"
-        android:layout_width="275dp"
-        android:layout_height="@dimen/height_Jouer"
-        android:layout_marginTop="56dp"
-        app:layout_constraintBottom_toTopOf="@+id/mathemaquizz_facile"
+        android:layout_width="351dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="196dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.879"
         app:srcCompat="@drawable/multifactor" />
 
     <ImageView
         android:id="@+id/mathemaquizz_facile"
-        android:layout_width="275dp"
-        android:layout_height="@dimen/height_Jouer"
-        android:layout_marginBottom="244dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="351dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/multifactor_facile"
         app:srcCompat="@drawable/mathemaquizz" />
+
+    <ImageView
+        android:id="@+id/roulette_facile"
+        android:layout_width="351dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mathemaquizz_facile"
+        app:srcCompat="@drawable/roulette_boutton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
