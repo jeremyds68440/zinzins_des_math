@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -19,12 +20,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import org.w3c.dom.Text;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class LeaderboardActivity extends AppCompatActivity {
 
     ImageView leadMultifactor,leadMathemaquizz, leadRoulette,leadFacile,leadMoyen,leadDifficile;
+    TextView titleLeaderboard;
     DatabaseReference mDatabase;
     ListView listView;
     ArrayList<String> arrayList = new ArrayList<>();
@@ -37,6 +41,7 @@ public class LeaderboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_leaderboard);
         mDatabase = (DatabaseReference) FirebaseDatabase.getInstance().getReference("users");
         listView = (ListView) findViewById(R.id.leaderboard);
+        titleLeaderboard = (TextView) findViewById(R.id.titleLeaderboard);
         leadMultifactor = (ImageView) findViewById(R.id.leadMultifactor);
         leadMathemaquizz = (ImageView) findViewById(R.id.leadMathemaquizz);
         leadRoulette = (ImageView) findViewById(R.id.leadRoulette);
@@ -49,18 +54,21 @@ public class LeaderboardActivity extends AppCompatActivity {
                 leadFacile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        titleLeaderboard.setText("Classement Multifactor Facile");
                         showFacile("Multifactor", 5);
                     }
                 });
                 leadMoyen.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        titleLeaderboard.setText("Classement Multifactor Moyen");
                         showMoyen("Multifactor", 6);
                     }
                 });
                 leadDifficile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        titleLeaderboard.setText("Classement Multifactor Difficile");
                         showDifficile("Multifactor", 4);
                     }
                 });
@@ -72,18 +80,21 @@ public class LeaderboardActivity extends AppCompatActivity {
                 leadFacile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        titleLeaderboard.setText("Classement Mathemaquizz Facile");
                         showFacile("Mathemaquizz", 2);
                     }
                 });
                 leadMoyen.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        titleLeaderboard.setText("Classement Mathemaquizz Moyen");
                         showMoyen("Mathemaquizz", 3);
                     }
                 });
                 leadDifficile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        titleLeaderboard.setText("Classement Mathemaquizz Difficile");
                         showDifficile("Mathemaquizz", 1);
                     }
                 });
@@ -95,18 +106,21 @@ public class LeaderboardActivity extends AppCompatActivity {
                 leadFacile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        titleLeaderboard.setText("Classement Roulette Facile");
                         showFacile("Roulette", 8);
                     }
                 });
                 leadMoyen.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        titleLeaderboard.setText("Classement Roulette Moyen");
                         showMoyen("Roulette", 9);
                     }
                 });
                 leadDifficile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        titleLeaderboard.setText("Classement Roulette Difficile");
                         showDifficile("Roulette", 7);
                     }
                 });
