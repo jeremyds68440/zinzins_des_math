@@ -12,6 +12,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -43,19 +44,36 @@ public class MultiFactorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_game);
-        activity = (RelativeLayout) findViewById(R.id.grid_relative_layout);
-        context = getApplicationContext();
 
-        ImageView back = findViewById(R.id.first_game_back);
+        displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-        difficulty = getIntent().getFlags();
+        LinearLayout layout = findViewById(R.id.multifactor);
 
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(132, 96);
+        params.setMargins(44,121,0,0);
+        ImageView back = new ImageView(getApplicationContext());
+        back.setLayoutParams(params);
+        back.setImageResource(R.drawable.ic_baseline_arrow_back_ios_24);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setQuitButton();
+                setQuitPopup();
             }
         });
+        layout.addView(back, 0);
+
+        ImageView scoreImage = new ImageView(getApplicationContext());
+        params = new LinearLayout.LayoutParams(displayMetrics.widthPixels, 107);
+        scoreImage.setLayoutParams(params);
+        scoreImage.setImageResource(R.drawable.scoretext);
+
+        layout.addView(scoreImage, 1);
+
+        activity = (RelativeLayout) findViewById(R.id.grid_relative_layout);
+        context = getApplicationContext();
+
+        difficulty = getIntent().getFlags();
 
         targetText = findViewById(R.id.bubbleTarget);
         targetText.setTextColor(context.getResources().getColor(R.color.first_game_text));
@@ -65,20 +83,11 @@ public class MultiFactorActivity extends AppCompatActivity {
         resetCounter();
 
 
-        List<BubbleItem> bubbles = new ArrayList<BubbleItem>();
+        List<BubbleItem> bubbles = new ArrayList<>();
         ImageView number;
         for(int i = 0; i < NUMBERBUBBLECOLUMN*NUMBERBUBBLEROW; i++) {
             bubbles.add(new BubbleItem((int) (Math.random()*8+2)));
         }
-
-        displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        /*System.out.println("Dpi : " + displayMetrics.densityDpi);
-        System.out.println("Densité : " + displayMetrics.density);
-        System.out.println("Scale Densité : " + displayMetrics.scaledDensity);
-        System.out.println("XDpi : " + displayMetrics.xdpi);
-        System.out.println("YDpi : " + displayMetrics.ydpi);*/
-
 
         RelativeLayout.LayoutParams gridParams = new RelativeLayout.LayoutParams(NUMBERBUBBLECOLUMN*BUBBLECOLUMN+100,BUBBLEROW*NUMBERBUBBLEROW);
         RelativeLayout.LayoutParams bgParams = new RelativeLayout.LayoutParams(displayMetrics.widthPixels,BUBBLEROW*NUMBERBUBBLEROW + 100);
@@ -92,6 +101,10 @@ public class MultiFactorActivity extends AppCompatActivity {
         bg.setLayoutParams(bgParams);
 
         activity.addView(grid);
+    }
+
+    public void onBackPressed() {
+        setQuitPopup();
     }
 
     public void multCounter(int x) {
@@ -109,9 +122,6 @@ public class MultiFactorActivity extends AppCompatActivity {
     }
 
     public void verify() {
-        ImageView test = findViewById(R.id.mesure);
-        System.out.println("80dp = " + test.getHeight());
-        System.out.println("width : " + displayMetrics.widthPixels + " height : " + displayMetrics.heightPixels);
         if(counter >= target) {
             blocked = true;
             setGameOver(counter == target);
@@ -156,7 +166,7 @@ public class MultiFactorActivity extends AppCompatActivity {
         popup.show();
     }
 
-    public void setQuitButton() {
+    public void setQuitPopup() {
         AlertDialog.Builder quit = new AlertDialog.Builder(this);
         quit.setTitle("Quitter");
         quit.setMessage("Êtes-vous sûre de vouloir quitter ?");

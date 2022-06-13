@@ -6,20 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MultiFactorActivity"
-    android:id="@+id/firstGame"
+    android:id="@+id/multifactor"
     android:background="@drawable/first_game_bg">
-
-    <ImageView
-        android:id="@+id/first_game_back"
-        android:layout_width="48dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_baseline_arrow_back_ios_24" />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="39dp"
-        android:src="@drawable/scoretext" />
 
     <RelativeLayout
         android:layout_width="match_parent"
