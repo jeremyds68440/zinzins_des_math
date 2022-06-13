@@ -52,7 +52,7 @@
                 android:id="@+id/multifactor_moyen"
                 android:layout_width="@dimen/wight_imageview"
                 android:layout_height="@dimen/height_imageview"
-                app:srcCompat="@drawable/multifactor"
+                app:srcCompat="@drawable/multifactor_moyen"
                 tools:layout_editor_absoluteX="95dp"
                 tools:layout_editor_absoluteY="268dp" />
         </TableRow>
@@ -66,7 +66,7 @@
                 android:id="@+id/mathemaquizz_moyen"
                 android:layout_width="@dimen/wight_imageview"
                 android:layout_height="@dimen/height_imageview"
-                app:srcCompat="@drawable/mathemaquizz"
+                app:srcCompat="@drawable/mathemaquizz_moyen"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="371dp" />
         </TableRow>
