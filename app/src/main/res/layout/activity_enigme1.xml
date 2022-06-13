@@ -38,7 +38,9 @@
             android:layout_height="200dp"
             android:layout_gravity="center"
             android:layout_marginTop="50dp"
-            android:text="énigme" />
+            android:text="énigme"
+            android:textSize="18sp"
+            android:textColor="@color/black"/>
 
         <LinearLayout
             android:layout_width="wrap_content"

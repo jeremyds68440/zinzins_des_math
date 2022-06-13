@@ -21,9 +21,17 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
 public class Enigme1Activity extends AppCompatActivity {
 
-    private Enigme1Activity enigme1Activity = this;
+    private Enigme1Activity enigmeActivity = this;
     private EditText inputAnswer;
     private Button submit_answer_btn;
     private Button explication;
@@ -31,17 +39,9 @@ public class Enigme1Activity extends AppCompatActivity {
     private ImageView image;
     int cpt = 0;
 
-    //private DatabaseReference databaseRef1;
-    //private DatabaseReference databaseRef2;
-    //private DatabaseReference databaseRef3;
-
-
-
-
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
@@ -54,50 +54,25 @@ public class Enigme1Activity extends AppCompatActivity {
         explication = findViewById(R.id.explication);
 
 
-/*
-        //Récupération de l'énigme depuis la base de données
-        databaseRef1 = FireBaseDatabase.getInstance().getReference().child("enigmeQuestion").orderByChild("id").equalTo("1");
-        databaseRef1.addValueEventListener(new ValueEventListener(){
-            @Override
-            public  void  onDataChange(@NonNull DataSnapshot dataSnapshot){
-                if (dataSnapshot.exists()){
-                    String data = dataSnapshot.getValue.toString();
-                    question.setText(data);
-                }
-            }
-            @Override
-            public  void  onCancelled(@NonNull DatabaseError databaseError){
-
-            }
-        });
-
-        //Récupération de l'image depuis la base de données
-        databaseRef2 = FireBaseDatabase.getInstance().getReference().child("enigmaImage").orderByChild("id").equalTo("1");
-        databaseRef2.addValueEventListener(new ValueEventListener(){
-            @Override
-            public  void  onDataChange(@NonNull DataSnapshot dataSnapshot){
-                if (dataSnapshot.exists()) {
-                    String data = dataSnapshot.getValue.toString();
-                    image.setImageResource(R.drawable.data);
-                }
-            }
-            @Override
-            public  void  onCancelled(@NonNull DatabaseError databaseError){
-
-            }
-        });
 
 
 
-*/
+
+
+        //diff.getFlag().enigme
+
+
+
+
         //Titre de l'énigme
-        titre.setText("Enigme 1");
+        titre.setText("Enigme 3");
 
-        //L'image s'il y en a une
-
+        //L'image
+        //image.setImageResource(R.drawable);
 
         //Enoncé de l'énigme
-        question.setText("Enoncé de l'énigme...");
+        question.setText("Dans ce cube plein, toutes les rangées aux extrémités noircies sont constituées de petits cubes noirs. Tous les autres petits cubes sont blancs.\n" +
+                "Combien y a-t-il de petits cubes blancs ?\n");
 
         //Réponse entrée par le joueur
 
@@ -107,7 +82,7 @@ public class Enigme1Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String input = inputAnswer.getText().toString();
-                //if (!checkAnswer(input)){
+                if (input != "387"){
 
                     if (cpt<4){
                         cpt++;
@@ -118,7 +93,7 @@ public class Enigme1Activity extends AppCompatActivity {
                     if (cpt==3){
                         cpt=0;
                         //Toast.makeText(Enigme1Activity.this, "Veux-tu la réponse?" , Toast.LENGTH_SHORT).show();
-                        AlertDialog.Builder echec = new AlertDialog.Builder(enigme1Activity);
+                        AlertDialog.Builder echec = new AlertDialog.Builder(enigmeActivity);
                         echec.setTitle("Oops !");
                         echec.setMessage("Tu as épuisé le nombre de tentatives. Tu peux retenter ta chance ou voir la solution." );
                         echec.setPositiveButton("Réessayer", new DialogInterface.OnClickListener() {
@@ -140,10 +115,9 @@ public class Enigme1Activity extends AppCompatActivity {
                         echec.show();
                     }
 
-                /*
                 } else {
-                    score++;
-                    AlertDialog.Builder sucess = new AlertDialog.Builder(enigme1Activity);
+                    //score++;
+                    AlertDialog.Builder sucess = new AlertDialog.Builder(enigmeActivity);
                     sucess.setTitle("Bravo !");
                     sucess.setMessage("Tu as trouvé la bonne réponse." );
                     sucess.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -154,10 +128,9 @@ public class Enigme1Activity extends AppCompatActivity {
                     });
                     sucess.show();
 
-                 }*/
+                 }
 
-
-                inputAnswer.setText("");
+                //inputAnswer.setText("");
             }
 
         });
@@ -166,25 +139,11 @@ public class Enigme1Activity extends AppCompatActivity {
         explication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder expli = new AlertDialog.Builder(enigme1Activity);
-                expli.setTitle("Solution");
+                AlertDialog.Builder expli = new AlertDialog.Builder(enigmeActivity);
+                expli.setTitle("Réponse : 85");
 
                 //Récupération de la réponse depuis la base de données
-                /*
-                databaseRef3 = FireBaseDatabase.getInstance().getReference().child("enigmeReponse").orderByChild("id").equalTo("1");
-                databaseRef3.addValueEventListener(new ValueEventListener(){
-                    @Override
-                    public  void  onDataChange(@NonNull DataSnapshot dataSnapshot){
-                        if (dataSnapshot.exists()) {
-                            String data = dataSnapshot.getValue.toString();
-                            expli.setMessage(data);
-                        }
-                    }
-                    @Override
-                    public  void  onCancelled(@NonNull DatabaseError databaseError){
-
-                    }
-                });*/
+                expli.setMessage("Explication : Le nombre de cartes nécessaires pour n étages est égal n(3n+1)/2. Trouver n revient à résoudre l’équation n(3n+1)/2 = 10880.");
                 expli.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -202,31 +161,6 @@ public class Enigme1Activity extends AppCompatActivity {
         startActivity(roulette);
     }
 
-    /*
-    public boolean checkAnswer(String s){
-
-        String reponseData;
-        //Récupération de la réponse depuis la base de données
-        databaseRef1 = FireBaseDatabase.getInstance().getReference().child("enigmeReponse").orderByChild("id").equalTo("1");
-        databaseRef1.addValueEventListener(new ValueEventListener(){
-            @Override
-            public  void  onDataChange(@NonNull DataSnapshot dataSnapshot){
-                if (dataSnapshot.exists()){
-                    reponseData = dataSnapshot.getValue.toString();
-                }
-            }
-            @Override
-            public  void  onCancelled(@NonNull DatabaseError databaseError){
-
-            }
-        });
-        if (reponseData == s){
-            return true;
-        } else {
-            return false;
-        }
-
-    }*/
 
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
