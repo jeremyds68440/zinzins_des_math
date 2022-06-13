@@ -43,8 +43,24 @@
         app:layout_constraintVertical_bias="0.625"
         app:srcCompat="@android:drawable/ic_menu_info_details" />
 
+    <TextView
+        android:id="@+id/textView_difficile3"
+        android:layout_width="321dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="68dp"
+        android:fontFamily="@font/nirmala_b"
+        android:text="EVOLUTION"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.62" />
+
     <ImageView
-        android:id="@+id/back_to_facile"
+        android:id="@+id/back_to_evolution"
         android:layout_width="@dimen/wight_backbutton"
         android:layout_height="@dimen/height_backbutton"
         android:layout_marginTop="44dp"
@@ -69,7 +85,7 @@
             android:layout_marginBottom="32dp">
 
             <ImageView
-                android:id="@+id/multifactor_facile"
+                android:id="@+id/multifactor_evolution"
                 android:layout_width="@dimen/wight_imageview"
                 android:layout_height="@dimen/height_imageview"
                 app:srcCompat="@drawable/multifactor"
@@ -83,7 +99,7 @@
             android:layout_marginBottom="32dp">
 
             <ImageView
-                android:id="@+id/mathemaquizz_facile"
+                android:id="@+id/mathemaquizz_evolution"
                 android:layout_width="@dimen/wight_imageview"
                 android:layout_height="@dimen/height_imageview"
                 app:srcCompat="@drawable/mathemaquizz"
@@ -96,7 +112,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/roulette_facile"
+                android:id="@+id/roulette_evolution"
                 android:layout_width="@dimen/wight_imageview"
                 android:layout_height="@dimen/height_imageview"
                 app:srcCompat="@drawable/roulette_boutton"
