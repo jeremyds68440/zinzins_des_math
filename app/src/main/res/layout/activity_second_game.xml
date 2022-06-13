@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/nuage_enigme"
         android:layout_width="365dp"
         android:layout_height="223dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,9 +40,9 @@
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/nuage_enigme"
+        app:layout_constraintEnd_toEndOf="@+id/nuage_enigme"
+        app:layout_constraintStart_toStartOf="@+id/nuage_enigme"
         app:layout_constraintTop_toBottomOf="@+id/progressBar"
         app:layout_constraintVertical_bias="0.77" />
 
@@ -119,7 +119,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView"
+        app:layout_constraintTop_toBottomOf="@id/nuage_enigme"
         app:layout_constraintVertical_bias="0.2">
 
         <TableRow
