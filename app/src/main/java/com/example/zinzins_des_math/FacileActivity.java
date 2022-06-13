@@ -19,10 +19,13 @@ public class FacileActivity extends AppCompatActivity {
         ImageView back = findViewById(R.id.back_to_facile);
         ImageView multifactor = findViewById(R.id.multifactor_facile);
         ImageView mathemaquizz = findViewById(R.id.mathemaquizz_facile);
+        ImageView roulette = findViewById(R.id.roulette_facile);
 
         actionClickImagefacile(back, DifficultyActivity.class,12);
         actionClickImagefacile(multifactor, MultiFactorActivity.class,0);
         actionClickImagefacile(mathemaquizz, SecondGameActivity.class,0);
+        actionClickImagefacile(roulette, RouletteActivity.class,0);
+
     }
 
     private void actionClickImagefacile(ImageView button, Class act, int difficulty) {
