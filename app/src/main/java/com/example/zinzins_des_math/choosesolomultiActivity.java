@@ -53,4 +53,12 @@ public class choosesolomultiActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    public void onBackPressed() {
+        Intent difficulty = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(difficulty);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish();
+    }
 }

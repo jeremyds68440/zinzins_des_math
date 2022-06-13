@@ -11,14 +11,14 @@ import android.widget.ImageView;
 
 public class DifficultyActivity extends AppCompatActivity {
 
-    private ImageView back,easy,medium,hard,IA;
+    private ImageView back, easy, medium, hard, IA;
     private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_difficulty);
-        this.mediaPlayer = MediaPlayer.create(getApplicationContext(),R.raw.zinzin_sound);
+        this.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.zinzin_sound);
 
         this.back = findViewById(R.id.back);
         this.easy = findViewById(R.id.facile);
@@ -47,7 +47,7 @@ public class DifficultyActivity extends AppCompatActivity {
 
     }
 
-    public void actionClickImage(ImageView button, Class act){
+    public void actionClickImage(ImageView button, Class act) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,5 +58,12 @@ public class DifficultyActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), choosesolomultiActivity.class);
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish();
     }
 }

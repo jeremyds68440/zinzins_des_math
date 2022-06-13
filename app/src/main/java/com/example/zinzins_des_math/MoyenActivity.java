@@ -40,4 +40,11 @@ public class MoyenActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), DifficultyActivity.class);
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish();
+    }
 }
