@@ -221,11 +221,13 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
         int difficulty = getIntent().getFlags();
         if(difficulty == 0){
-            bg.setBackground(getDrawable(R.drawable.chargement_bg));
+            bg.setBackground(getDrawable(R.drawable.bg_quizz_facile));
             g.newEquationFacile();
         }else if(difficulty == 1){
+            bg.setBackground(getDrawable(R.drawable.bg_quizz_moyen));
             g.newEquationMoyen();
         }else if(difficulty == 2){
+            bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
             g.newEquationDifficile();
         }
 
