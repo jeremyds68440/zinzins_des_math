@@ -152,7 +152,7 @@ public class SecondGameActivity extends AppCompatActivity {
 
     private void nextTurn(){
 
-        int difficulty = new Random().nextInt(4);
+        int difficulty = getIntent().getFlags();
         if(difficulty == 0){
             g.newEquationFacile();
         }else if(difficulty == 1){

@@ -18,17 +18,17 @@ public class FacileActivity extends AppCompatActivity {
 
         ImageView multifactor = findViewById(R.id.multifactor_facile);
         ImageView mathemaquizz = findViewById(R.id.mathemaquizz_facile);
-
-        actionClickImagefacile(multifactor, FirstGameActivity.class);
-        actionClickImagefacile(mathemaquizz, SecondGameActivity.class);
+        actionClickImagefacile(multifactor, FirstGameActivity.class,0);
+        actionClickImagefacile(mathemaquizz, SecondGameActivity.class,0);
     }
 
-    private void actionClickImagefacile(ImageView button, Class act) {
+    private void actionClickImagefacile(ImageView button, Class act, int difficulty) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 button.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent intent = new Intent(getApplicationContext(), act);
+                intent.setFlags(difficulty);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
