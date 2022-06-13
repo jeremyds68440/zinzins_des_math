@@ -8,6 +8,17 @@
     tools:context=".DifficultyActivity">
 
     <ImageView
+        android:id="@+id/back"
+        android:layout_width="@dimen/wight_backbutton"
+        android:layout_height="@dimen/height_backbutton"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/difficulte"
         android:layout_width="321dp"
         android:layout_height="97dp"
@@ -60,16 +71,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/difficile"
         app:srcCompat="@drawable/evolution" />
-
-    <ImageView
-        android:id="@+id/back"
-        android:layout_width="48dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

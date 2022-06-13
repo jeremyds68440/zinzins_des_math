@@ -7,6 +7,22 @@
     android:background="@drawable/bg_facile"
     tools:context=".FacileActivity">
 
+    <TextView
+        android:id="@+id/textView_difficile3"
+        android:layout_width="321dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="68dp"
+        android:fontFamily="@font/nirmala_b"
+        android:text="FACILE"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="50"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.62" />
+
     <ImageView
         android:id="@+id/back_to_facile"
         android:layout_width="@dimen/wight_backbutton"
@@ -19,6 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TableLayout
+        android:id="@+id/tableLayout3"
         android:layout_width="@dimen/wight_imageview"
         android:layout_height="301dp"
         app:layout_constraintBottom_toBottomOf="parent"

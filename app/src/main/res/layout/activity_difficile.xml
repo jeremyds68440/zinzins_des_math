@@ -18,7 +18,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView_difficile"
+        android:layout_width="321dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="68dp"
+        android:fontFamily="@font/nirmala_b"
+        android:text="DIFFICILE"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="50"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.62" />
+
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="@dimen/wight_imageview"
         android:layout_height="301dp"
         app:layout_constraintBottom_toBottomOf="parent"
