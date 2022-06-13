@@ -8,10 +8,59 @@
 
     <ListView
         android:id="@+id/leaderboard"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_width="411dp"
+        android:layout_height="680dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/leadMoyen" />
+
+    <ImageView
+        android:id="@+id/leadMultifactor"
+        android:layout_width="134dp"
+        android:layout_height="93dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/multifactor" />
+
+    <ImageView
+        android:id="@+id/leadMathemaquizz"
+        android:layout_width="134dp"
+        android:layout_height="93dp"
+        app:layout_constraintEnd_toStartOf="@+id/leadRoulette"
+        app:layout_constraintStart_toEndOf="@+id/leadMultifactor"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mathemaquizz" />
+
+    <ImageView
+        android:id="@+id/leadRoulette"
+        android:layout_width="134dp"
+        android:layout_height="93dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/roulette_boutton" />
+
+    <ImageView
+        android:id="@+id/leadFacile"
+        android:layout_width="134dp"
+        android:layout_height="93dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/leadMultifactor"
+        app:srcCompat="@drawable/facile" />
+
+    <ImageView
+        android:id="@+id/leadMoyen"
+        android:layout_width="134dp"
+        android:layout_height="93dp"
+        app:layout_constraintEnd_toStartOf="@+id/leadDifficile"
+        app:layout_constraintStart_toEndOf="@+id/leadFacile"
+        app:layout_constraintTop_toBottomOf="@+id/leadMathemaquizz"
+        app:srcCompat="@drawable/moyen" />
+
+    <ImageView
+        android:id="@+id/leadDifficile"
+        android:layout_width="134dp"
+        android:layout_height="93dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/leadRoulette"
+        app:srcCompat="@drawable/difficile" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
