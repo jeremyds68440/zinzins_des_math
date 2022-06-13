@@ -82,7 +82,7 @@ public class Enigme1Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String input = inputAnswer.getText().toString();
-                if (input != "387"){
+                if (input != "85"){
 
                     if (cpt<4){
                         cpt++;
@@ -159,6 +159,8 @@ public class Enigme1Activity extends AppCompatActivity {
     public void onBackPressed() {
         Intent roulette = new Intent(getApplicationContext(), RouletteActivity.class);
         startActivity(roulette);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish();
     }
 
 

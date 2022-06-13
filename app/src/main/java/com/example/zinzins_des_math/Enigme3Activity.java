@@ -139,6 +139,8 @@ public class Enigme3Activity extends AppCompatActivity {
     public void onBackPressed() {
         Intent roulette = new Intent(getApplicationContext(), RouletteActivity.class);
         startActivity(roulette);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish();
     }
 
     private final TextWatcher textWatcher = new TextWatcher() {

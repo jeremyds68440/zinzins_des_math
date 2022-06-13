@@ -146,6 +146,7 @@ public class RouletteActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 Intent difficulty = new Intent(getApplicationContext(), DifficultyActivity.class);
                 startActivity(difficulty);
+                finish();
             }
         });
         quit.setNegativeButton("Non", new DialogInterface.OnClickListener() {
