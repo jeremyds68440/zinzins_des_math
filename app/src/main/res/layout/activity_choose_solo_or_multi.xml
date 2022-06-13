@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/choix_mode_de_jeu_back"
-        android:layout_width="48dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="@dimen/wight_backbutton"
+        android:layout_height="@dimen/height_backbutton"
+        android:layout_marginTop="44dp"
         android:src="@drawable/ic_baseline_arrow_back_ios_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/multiView"
-        android:layout_width="275dp"
-        android:layout_height="@dimen/height_Jouer"
+        android:layout_width="@dimen/wight_imageview"
+        android:layout_height="@dimen/height_imageview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,8 +31,8 @@
 
     <ImageView
         android:id="@+id/soloView"
-        android:layout_width="275dp"
-        android:layout_height="@dimen/height_Jouer"
+        android:layout_width="@dimen/wight_imageview"
+        android:layout_height="@dimen/height_imageview"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
