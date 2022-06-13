@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -22,10 +23,13 @@ import java.util.List;
 
 public class FirstGameActivity extends AppCompatActivity {
 
+    private DisplayMetrics displayMetrics;
     private RelativeLayout activity;
     private Context context;
+    private GridView grid;
     private int counter = 0;
     private int countMult = 0;
+    private int difficulty;
     private int target;
     private TextView targetText;
     private TextView countText;
@@ -39,19 +43,17 @@ public class FirstGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_game);
-        System.out.println(findViewById(R.id.btn_ans1));
         activity = (RelativeLayout) findViewById(R.id.grid_relative_layout);
         context = getApplicationContext();
 
         ImageView back = findViewById(R.id.first_game_back);
 
+        difficulty = getIntent().getFlags();
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                back.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent main = new Intent(getApplicationContext(), DifficultyActivity.class);
-                startActivity(main);
-                finish();
+                setQuitButton();
             }
         });
 
@@ -68,14 +70,26 @@ public class FirstGameActivity extends AppCompatActivity {
         for(int i = 0; i < NUMBERBUBBLECOLUMN*NUMBERBUBBLEROW; i++) {
             bubbles.add(new BubbleItem((int) (Math.random()*8+2)));
         }
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(NUMBERBUBBLECOLUMN*BUBBLECOLUMN+100,BUBBLEROW*NUMBERBUBBLEROW);
-        params.setMargins(120,30,0,0);
-        GridView grid = new GridView(getApplicationContext());
-        grid.setLayoutParams(params);
-        grid.setNumColumns(NUMBERBUBBLECOLUMN);
 
+        displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        /*System.out.println("Dpi : " + displayMetrics.densityDpi);
+        System.out.println("Densité : " + displayMetrics.density);
+        System.out.println("Scale Densité : " + displayMetrics.scaledDensity);
+        System.out.println("XDpi : " + displayMetrics.xdpi);
+        System.out.println("YDpi : " + displayMetrics.ydpi);*/
+
+
+        RelativeLayout.LayoutParams gridParams = new RelativeLayout.LayoutParams(NUMBERBUBBLECOLUMN*BUBBLECOLUMN+100,BUBBLEROW*NUMBERBUBBLEROW);
+        RelativeLayout.LayoutParams bgParams = new RelativeLayout.LayoutParams(displayMetrics.widthPixels,BUBBLEROW*NUMBERBUBBLEROW + 100);
+        gridParams.setMargins((displayMetrics.widthPixels - (NUMBERBUBBLECOLUMN*BUBBLECOLUMN+70))/2,30,0,0);
+        grid = new GridView(getApplicationContext());
+        grid.setNumColumns(NUMBERBUBBLECOLUMN);
+        grid.setLayoutParams(gridParams);
         grid.setAdapter(new BubbleItemAdapter(this, bubbles));
 
+        ImageView bg = findViewById(R.id.grid_bg);
+        bg.setLayoutParams(bgParams);
 
         activity.addView(grid);
     }
@@ -95,59 +109,67 @@ public class FirstGameActivity extends AppCompatActivity {
     }
 
     public void verify() {
-        if(counter > target) {
-            countText.setTextColor(context.getResources().getColor(R.color.lose));
+        ImageView test = findViewById(R.id.mesure);
+        System.out.println("80dp = " + test.getHeight());
+        System.out.println("width : " + displayMetrics.widthPixels + " height : " + displayMetrics.heightPixels);
+        if(counter >= target) {
             blocked = true;
-
-            AlertDialog.Builder lose = new AlertDialog.Builder(this);
-            lose.setTitle("Perdu !");
-            lose.setMessage("Cible dépassée !");
-            lose.setPositiveButton("Réssayer", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    resetCounter();
-                    unBlocked();
-                }
-            });
-            lose.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent difficulte = new Intent(getApplicationContext(), DifficultyActivity.class);
-                    startActivity(difficulte);
-                    finish();
-                }
-            });
-
-            lose.setCancelable(false);
-            lose.show();
+            setGameOver(counter == target);
         }
-        else if(counter == target) {
+    }
+
+    public void setGameOver(boolean win) {
+        AlertDialog.Builder popup = new AlertDialog.Builder(this);
+        String positive;
+        if(win) {
             countText.setTextColor(context.getResources().getColor(R.color.win));
-            blocked = true;
-
-            AlertDialog.Builder win = new AlertDialog.Builder(this);
-            win.setTitle("Bravo !");
-            win.setMessage("Cible atteinte !");
-            win.setPositiveButton("Rejouer", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    resetCounter();
-                    newTarget();
-                    unBlocked();
-                }
-            });
-            win.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent difficulte = new Intent(getApplicationContext(), DifficultyActivity.class);
-                    startActivity(difficulte);
-                    finish();
-                }
-            });
-
-            win.setCancelable(false);
-            win.show();
+            popup.setTitle("Bravo !");
+            popup.setMessage("Cible atteinte !");
+            positive = "Rejouer";
         }
+        else {
+            countText.setTextColor(context.getResources().getColor(R.color.lose));
+            popup.setTitle("Perdu !");
+            popup.setMessage("Cible dépassée !");
+            positive = "Réssayer";
+        }
+        popup.setPositiveButton(positive, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(win) {
+                    newTarget();
+                }
+                resetCounter();
+                unBlocked();
+            }
+        });
+        popup.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent difficulte = new Intent(getApplicationContext(), DifficultyActivity.class);
+                startActivity(difficulte);
+                finish();
+            }
+        });
+
+        popup.setCancelable(false);
+        popup.show();
+    }
+
+    public void setQuitButton() {
+        AlertDialog.Builder quit = new AlertDialog.Builder(this);
+        quit.setTitle("Quitter");
+        quit.setMessage("Êtes-vous sûre de vouloir quitter ?");
+        quit.setNegativeButton("Retour", null);
+        quit.setPositiveButton("Quitter", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent difficulte = new Intent(getApplicationContext(), DifficultyActivity.class);
+                startActivity(difficulte);
+                finish();
+            }
+        });
+        quit.show();
     }
 
     public void resetCounter() {
@@ -158,8 +180,10 @@ public class FirstGameActivity extends AppCompatActivity {
 
     public void newTarget() {
         target = 1;
-        for(int i = 0; i < 3; i++) {
+        int i = 0;
+        while(i < difficulty + 2 || target < Math.pow(10, difficulty+1)) {
             target *= (int)(Math.random()*9)+2;
+            i++;
         }
         targetText.setText("" + target);
     }
