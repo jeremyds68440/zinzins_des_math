@@ -6,10 +6,16 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.res.Resources;
+import android.graphics.Rect;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -24,19 +30,20 @@ import java.util.List;
 
 public class MultiFactorActivity extends AppCompatActivity {
 
-    private DisplayMetrics displayMetrics;
-    private RelativeLayout activity;
     private Context context;
     private GridView grid;
+    private int height;
+    private int width;
     private int counter = 0;
     private int countMult = 0;
     private int difficulty;
     private int target;
-    private TextView targetText;
-    private TextView countText;
+    private LinearLayout layout;
+    private TextView targetCount;
+    private TextView scoreCount;
     private boolean blocked = false;
-    public static final int BUBBLECOLUMN = 190;
-    public static final int BUBBLEROW = 190;
+    public int BUBBLECOLUMN = 190;
+    public int BUBBLEROW = 190;
     public static final int NUMBERBUBBLEROW = 6;
     public static final int NUMBERBUBBLECOLUMN = 4;
 
@@ -45,43 +52,121 @@ public class MultiFactorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_game);
 
-        displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        context = getApplicationContext();
 
-        LinearLayout layout = findViewById(R.id.multifactor);
+        DisplayMetrics displayrealMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getRealMetrics(displayrealMetrics);
+
+        Resources resources = context.getResources();
+        int resourcesId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
+        height = displayrealMetrics.heightPixels - resources.getDimensionPixelSize(resourcesId);
+        width = displayrealMetrics.widthPixels;
+
+
+        Rect rectangle = new Rect();
+        Window window = getWindow();
+        window.getDecorView().getWindowVisibleDisplayFrame(rectangle);
+
+
+        layout = findViewById(R.id.multifactor);
+        layout.setBackground(getResources().getDrawable(R.drawable.multifactor_bg_facile));
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(132, 96);
         params.setMargins(44,121,0,0);
         ImageView back = new ImageView(getApplicationContext());
         back.setLayoutParams(params);
         back.setImageResource(R.drawable.ic_baseline_arrow_back_ios_24);
-        back.setOnClickListener(new View.OnClickListener() {
+                back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setQuitPopup();
             }
         });
-        layout.addView(back, 0);
+        layout.addView(back);
 
         ImageView scoreImage = new ImageView(getApplicationContext());
-        params = new LinearLayout.LayoutParams(displayMetrics.widthPixels, 107);
+        params = new LinearLayout.LayoutParams(width, 107);
         scoreImage.setLayoutParams(params);
-        scoreImage.setImageResource(R.drawable.scoretext);
+        scoreImage.setImageResource(R.drawable.multifactor_scoretext);
 
-        layout.addView(scoreImage, 1);
+        layout.addView(scoreImage);
 
-        activity = (RelativeLayout) findViewById(R.id.grid_relative_layout);
+        RelativeLayout relativeScore = new RelativeLayout(getApplicationContext());
+        RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(width, 220);
+        relativeParams.setMargins(0, 27, 0, 66);
+        relativeScore.setLayoutParams(relativeParams);
+
+        layout.addView(relativeScore);
+
+        ImageView scorePlace = new ImageView(getApplicationContext());
+        params = new LinearLayout.LayoutParams(width, 220);
+        scorePlace.setLayoutParams(params);
+        scorePlace.setImageResource(R.drawable.multifactor_score);
+
+        relativeScore.addView(scorePlace);
+
+        scoreCount = new TextView(getApplicationContext());
+        params = new LinearLayout.LayoutParams(width, 220);
+        scoreCount.setLayoutParams(params);
+        scoreCount.setGravity(Gravity.CENTER);
+        scoreCount.setTextColor(context.getResources().getColor(R.color.first_game_text));
+        scoreCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+
+        relativeScore.addView(scoreCount);
+
+        ImageView targetImage = new ImageView(getApplicationContext());
+        params = new LinearLayout.LayoutParams(width, 107);
+        targetImage.setLayoutParams(params);
+        targetImage.setImageResource(R.drawable.multifactor_targettext);
+
+        layout.addView(targetImage);
+
+        RelativeLayout relativeTarget = new RelativeLayout(getApplicationContext());
+        relativeParams = new RelativeLayout.LayoutParams(width, 220);
+        relativeParams.setMargins(0, 27, 0, 55);
+        relativeTarget.setLayoutParams(relativeParams);
+
+        layout.addView(relativeTarget);
+
+        ImageView targetPlace = new ImageView(getApplicationContext());
+        params = new LinearLayout.LayoutParams(width, 220);
+        targetPlace.setLayoutParams(params);
+        targetPlace.setImageResource(R.drawable.multifactor_target_facile);
+
+        relativeTarget.addView(targetPlace);
+
+        targetCount = new TextView(getApplicationContext());
+        params = new LinearLayout.LayoutParams(width, 220);
+        targetCount.setLayoutParams(params);
+        targetCount.setGravity(Gravity.CENTER);
+        targetCount.setTextColor(context.getResources().getColor(R.color.first_game_text));
+        targetCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+
+        relativeTarget.addView(targetCount);
+
+
+        RelativeLayout gridLayout = new RelativeLayout(getApplicationContext());
+        relativeParams = new RelativeLayout.LayoutParams(width, height - 1066);
+        relativeParams.setMargins(0,0,0,14);
+        gridLayout.setLayoutParams(relativeParams);
+
+
+        ImageView gridBackground = new ImageView(getApplicationContext());
+        params = new LinearLayout.LayoutParams(width, height - 1066);
+        gridBackground.setImageResource(R.drawable.multifactor_terrain_facile);
+        gridBackground.setLayoutParams(params);
+
+        while(BUBBLEROW*NUMBERBUBBLEROW > height - 1136) {
+            BUBBLECOLUMN--;
+            BUBBLEROW--;
+        }
+
         context = getApplicationContext();
 
         difficulty = getIntent().getFlags();
 
-        targetText = findViewById(R.id.bubbleTarget);
-        targetText.setTextColor(context.getResources().getColor(R.color.first_game_text));
         newTarget();
-
-        countText = findViewById(R.id.bubbleScore);
         resetCounter();
-
 
         List<BubbleItem> bubbles = new ArrayList<>();
         ImageView number;
@@ -90,18 +175,18 @@ public class MultiFactorActivity extends AppCompatActivity {
         }
 
         RelativeLayout.LayoutParams gridParams = new RelativeLayout.LayoutParams(NUMBERBUBBLECOLUMN*BUBBLECOLUMN+100,BUBBLEROW*NUMBERBUBBLEROW);
-        RelativeLayout.LayoutParams bgParams = new RelativeLayout.LayoutParams(displayMetrics.widthPixels,BUBBLEROW*NUMBERBUBBLEROW + 100);
-        gridParams.setMargins((displayMetrics.widthPixels - (NUMBERBUBBLECOLUMN*BUBBLECOLUMN+70))/2,30,0,0);
+        RelativeLayout.LayoutParams bgParams = new RelativeLayout.LayoutParams(width,BUBBLEROW*NUMBERBUBBLEROW + 100);
+        gridParams.setMargins((width - (NUMBERBUBBLECOLUMN*BUBBLECOLUMN+70))/2,30,0,0);
         grid = new GridView(getApplicationContext());
         grid.setNumColumns(NUMBERBUBBLECOLUMN);
         grid.setLayoutParams(gridParams);
         grid.setAdapter(new BubbleItemAdapter(this, bubbles));
 
-        ImageView bg = findViewById(R.id.grid_bg);
-        bg.setLayoutParams(bgParams);
-
-        activity.addView(grid);
+        gridLayout.addView(gridBackground);
+        gridLayout.addView(grid);
+        layout.addView(gridLayout);
     }
+
 
     public void onBackPressed() {
         setQuitPopup();
@@ -121,6 +206,10 @@ public class MultiFactorActivity extends AppCompatActivity {
         return counter;
     }
 
+    public TextView getScoreCount() {
+        return scoreCount;
+    }
+
     public void verify() {
         if(counter >= target) {
             blocked = true;
@@ -132,13 +221,13 @@ public class MultiFactorActivity extends AppCompatActivity {
         AlertDialog.Builder popup = new AlertDialog.Builder(this);
         String positive;
         if(win) {
-            countText.setTextColor(context.getResources().getColor(R.color.win));
+            scoreCount.setTextColor(context.getResources().getColor(R.color.win));
             popup.setTitle("Bravo !");
             popup.setMessage("Cible atteinte !");
-            positive = "Rejouer";
+            positive = "Continuer";
         }
         else {
-            countText.setTextColor(context.getResources().getColor(R.color.lose));
+            scoreCount.setTextColor(context.getResources().getColor(R.color.lose));
             popup.setTitle("Perdu !");
             popup.setMessage("Cible dépassée !");
             positive = "Réssayer";
@@ -174,7 +263,16 @@ public class MultiFactorActivity extends AppCompatActivity {
         quit.setPositiveButton("Quitter", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent difficulte = new Intent(getApplicationContext(), DifficultyActivity.class);
+                Intent difficulte;
+                if(difficulty == 0) {
+                    difficulte = new Intent(getApplicationContext(), FacileActivity.class);
+                }
+                else if(difficulty == 1) {
+                    difficulte = new Intent(getApplicationContext(), MoyenActivity.class);
+                }
+                else {
+                    difficulte = new Intent(getApplicationContext(), DifficileActivity.class);
+                }
                 startActivity(difficulte);
                 finish();
             }
@@ -183,8 +281,8 @@ public class MultiFactorActivity extends AppCompatActivity {
     }
 
     public void resetCounter() {
-        countText.setTextColor(context.getResources().getColor(R.color.first_game_text));
-        countText.setText("0");
+        scoreCount.setTextColor(context.getResources().getColor(R.color.first_game_text));
+        scoreCount.setText("0");
         counter = 0;
     }
 
@@ -195,7 +293,7 @@ public class MultiFactorActivity extends AppCompatActivity {
             target *= (int)(Math.random()*9)+2;
             i++;
         }
-        targetText.setText("" + target);
+        targetCount.setText("" + target);
     }
 
     public boolean isBlocked() {

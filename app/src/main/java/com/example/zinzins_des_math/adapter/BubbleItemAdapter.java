@@ -62,8 +62,8 @@ public class BubbleItemAdapter extends BaseAdapter {
                     int resId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
                     image.setImageResource(resId);
                     context.multCounter(bubble.getNumber());
-                    TextView countText = context.findViewById(R.id.bubbleScore);
-                    countText.setText("" + context.getCounter());
+                    TextView scoreCount = context.getScoreCount();
+                    scoreCount.setText("" + context.getCounter());
                     bubble.setNumber(random);
                     context.verify();
                 }
