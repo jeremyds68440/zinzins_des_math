@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class Enigme8Activity extends AppCompatActivity {
 
@@ -35,7 +36,7 @@ public class Enigme8Activity extends AppCompatActivity {
     private String valueRepByDifficulty;
     private String expliByDifficulty = "";
     private int imgByDifficulty;
-    public LinearLayout root;
+    public ConstraintLayout root;
 
     @SuppressLint("ResourceAsColor")
     @Override

@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -46,7 +47,7 @@ public class Enigme1Activity extends AppCompatActivity {
     private String valueRepByDifficulty;
     private String expliByDifficulty = "";
     private int imgByDifficulty;
-    public LinearLayout root;
+    public ConstraintLayout root;
 
     @SuppressLint("ResourceAsColor")
     @Override
