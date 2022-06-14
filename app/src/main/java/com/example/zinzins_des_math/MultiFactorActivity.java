@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
@@ -57,18 +58,32 @@ public class MultiFactorActivity extends AppCompatActivity {
     public static final int NUMBERBUBBLEROW = 6;
     public static final int NUMBERBUBBLECOLUMN = 4;
 
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String ETAT_SOUND_THEME = "etat_sound_theme";
+    public static final String ETAT_SOUND_EFFECT = "etat_sound_effect";
+
+    private boolean sound_theme_state;
+    private boolean sound_effect_state;
+
+    public void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        sound_theme_state = sharedPreferences.getBoolean(ETAT_SOUND_THEME, true);
+        sound_effect_state = sharedPreferences.getBoolean(ETAT_SOUND_EFFECT, true);
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multifactor);
-
+        loadData();
         iterBubble = new ArrayList<>();
         for(int i = 0; i < 10; i++) {
             iterBubble.add(0);
         }
         difficulty = getIntent().getFlags();
-        this.soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.multifactor_sound);
-
+        if (sound_theme_state) {
+            this.soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.multifactor_sound);
+        }
         context = getApplicationContext();
 
         DisplayMetrics displayrealMetrics = new DisplayMetrics();
@@ -334,9 +349,15 @@ public class MultiFactorActivity extends AppCompatActivity {
         AlertDialog.Builder popup = new AlertDialog.Builder(this);
         String positive;
         if(win) {
-            this.soundgood = MediaPlayer.create(getApplicationContext(), R.raw.good_sound);
-            soundtheme.setVolume(0.2f,0.2f);
-            soundgood.start();
+            if (sound_effect_state){
+                this.soundgood = MediaPlayer.create(getApplicationContext(), R.raw.good_sound);
+                soundgood.start();
+            }
+
+            if (sound_theme_state) {
+                soundtheme.setVolume(0.2f, 0.2f);
+            }
+
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             DatabaseReference mDatabase = database.getReference("users").child(user.getUid());
@@ -371,14 +392,19 @@ public class MultiFactorActivity extends AppCompatActivity {
                 }
             });
             scoreCount.setTextColor(context.getResources().getColor(R.color.win));
-            this.soundvrong = MediaPlayer.create(getApplicationContext(), R.raw.vrong_sound);
-            soundtheme.setVolume(Float.parseFloat(getString(R.string.sound_0_2)),Float.parseFloat(getString(R.string.sound_0_2)));
-            soundvrong.start();
             popup.setTitle("Bravo !");
             popup.setMessage("Cible atteinte !\nVous avez gagné " + point + " points.\nVous avez " + points + " points au total.");
             positive = "Continuer";
         }
         else {
+            if (sound_effect_state){
+                this.soundvrong = MediaPlayer.create(getApplicationContext(), R.raw.vrong_sound);
+                soundvrong.start();
+            }
+
+            if (sound_theme_state) {
+                soundtheme.setVolume(Float.parseFloat(getString(R.string.sound_0_2)),Float.parseFloat(getString(R.string.sound_0_2)));
+            }
             scoreCount.setTextColor(context.getResources().getColor(R.color.lose));
             popup.setTitle("Perdu !");
             popup.setMessage("Cible dépassée !");
@@ -390,7 +416,10 @@ public class MultiFactorActivity extends AppCompatActivity {
                 if(win) {
                     newTarget();
                 }
-                soundtheme.setVolume(1f,1f);
+
+                if (sound_theme_state) {
+                    soundtheme.setVolume(Float.parseFloat(getString(R.string.sound_on)),Float.parseFloat(getString(R.string.sound_on)));
+                }
                 resetCounter();
                 unBlocked();
             }
@@ -475,7 +504,9 @@ public class MultiFactorActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        soundtheme.setVolume(Float.parseFloat(getString(R.string.sound_on)), Float.parseFloat(getString(R.string.sound_on)));
-        soundtheme.start();
+        if (sound_theme_state) {
+            soundtheme.setVolume(Float.parseFloat(getString(R.string.sound_on)), Float.parseFloat(getString(R.string.sound_on)));
+            soundtheme.start();
+        }
     }
 }
