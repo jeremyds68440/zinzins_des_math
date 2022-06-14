@@ -40,16 +40,32 @@ import java.util.List;
 public class MultiFactorActivity extends AppCompatActivity {
 
     private Context context;
-    int points = 0;
-    int numberoftry = 1;
+    private int points = 0;
+    private int numberOfTry = 1;
     private int counter = 0;
     private int countMult = 0;
     private int difficulty;
     private int target;
+    private int evolutionScore = 0;
+    private Bundle extras;
+    private String defi;
+    private String role;
+    private String roomName;
     private TextView targetCount;
     private TextView scoreCount;
+    private LinearLayout layout;
+    private ImageView scorePlace;
+    private ImageView targetPlace;
+    private ImageView gridBackground;
+
+
     private boolean blocked = false;
+    private boolean evolution = false;
     private ArrayList<Integer> iterBubble;
+    private FirebaseDatabase database;
+    private FirebaseUser user;
+    private DatabaseReference uDatabase;
+    private DatabaseReference rDatabase;
     private MediaPlayer soundtheme;
     private MediaPlayer soundgood;
     private MediaPlayer soundvrong;
@@ -57,11 +73,9 @@ public class MultiFactorActivity extends AppCompatActivity {
     public int BUBBLEROW = 190;
     public static final int NUMBERBUBBLEROW = 6;
     public static final int NUMBERBUBBLECOLUMN = 4;
-
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String ETAT_SOUND_THEME = "etat_sound_theme";
     public static final String ETAT_SOUND_EFFECT = "etat_sound_effect";
-
     private boolean sound_theme_state;
     private boolean sound_effect_state;
 
@@ -76,11 +90,23 @@ public class MultiFactorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multifactor);
         loadData();
+
+        extras = getIntent().getExtras();
+        if (extras != null) {
+            defi = extras.getString("defi");
+            role = extras.getString("role");
+            roomName = extras.getString("roomName");
+            database = FirebaseDatabase.getInstance();
+            user = FirebaseAuth.getInstance().getCurrentUser();
+            uDatabase = database.getReference("users").child(user.getUid());
+            rDatabase = database.getReference("rooms").child(roomName);
+        }
+
         iterBubble = new ArrayList<>();
         for(int i = 0; i < 10; i++) {
             iterBubble.add(0);
         }
-        difficulty = getIntent().getFlags();
+
         if (sound_theme_state) {
             this.soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.multifactor_sound);
         }
@@ -100,7 +126,7 @@ public class MultiFactorActivity extends AppCompatActivity {
         window.getDecorView().getWindowVisibleDisplayFrame(rectangle);
 
 
-        LinearLayout layout = findViewById(R.id.multifactor);
+        layout = findViewById(R.id.multifactor);
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)getResources().getDimension(R.dimen.wight_backbutton), (int)getResources().getDimension(R.dimen.height_backbutton));
         params.setMargins((int)(16*displayrealMetrics.density),(int)(44*displayrealMetrics.density),0,0);
@@ -129,7 +155,7 @@ public class MultiFactorActivity extends AppCompatActivity {
 
         layout.addView(relativeScore);
 
-        ImageView scorePlace = new ImageView(getApplicationContext());
+        scorePlace = new ImageView(getApplicationContext());
         params = new LinearLayout.LayoutParams(width, 220);
         scorePlace.setLayoutParams(params);
 
@@ -158,7 +184,7 @@ public class MultiFactorActivity extends AppCompatActivity {
 
         layout.addView(relativeTarget);
 
-        ImageView targetPlace = new ImageView(getApplicationContext());
+        targetPlace = new ImageView(getApplicationContext());
         params = new LinearLayout.LayoutParams(width, 220);
         targetPlace.setLayoutParams(params);
 
@@ -180,11 +206,16 @@ public class MultiFactorActivity extends AppCompatActivity {
         relativeParams.setMargins(0,0,0,14);
         gridLayout.setLayoutParams(relativeParams);
 
-        ImageView gridBackground = new ImageView(getApplicationContext());
+        gridBackground = new ImageView(getApplicationContext());
         params = new LinearLayout.LayoutParams(width, gridBgHeight);
         gridBackground.setLayoutParams(params);
 
-        setDifficulty(layout, scorePlace, targetPlace, gridBackground, getIntent().getFlags());
+        difficulty = getIntent().getFlags();
+        if(difficulty == 3) {
+            evolution = true;
+            difficulty = 0;
+        }
+        setDifficultyTheme();
 
         while(BUBBLEROW*NUMBERBUBBLEROW < gridBgHeight-70) {
             BUBBLECOLUMN++;
@@ -267,8 +298,7 @@ public class MultiFactorActivity extends AppCompatActivity {
         return candidate;
     }
 
-    public void setDifficulty(LinearLayout layout, ImageView scorePlace, ImageView targetPlace, ImageView gridBackground, int difficulty) {
-        this.difficulty = difficulty;
+    public void setDifficultyTheme() {
         if(difficulty == 0) {
             layout.setBackground(getDrawable(R.drawable.multifactor_bg_facile));
             scorePlace.setImageResource(R.drawable.multifactor_score_facile);
@@ -281,7 +311,7 @@ public class MultiFactorActivity extends AppCompatActivity {
             targetPlace.setImageResource(R.drawable.multifactor_target_moyen);
             gridBackground.setImageResource(R.drawable.multifactor_terrain_moyen);
         }
-        else if(difficulty == 2) {
+        else {
             layout.setBackground(getDrawable(R.drawable.multifactor_bg_difficile));
             scorePlace.setImageResource(R.drawable.multifactor_score_difficile);
             targetPlace.setImageResource(R.drawable.multifactor_target_difficile);
@@ -318,17 +348,31 @@ public class MultiFactorActivity extends AppCompatActivity {
             int point = 0;
             if(counter == target) {
                 int varMult = (difficulty+2)*2;
-                point += 120 * ((float)(varMult - countMult + getMinMult() + difficulty*2) /varMult/numberoftry);
-                numberoftry = 1;
+                point += 120 * ((float)(varMult - countMult + getMinMult() + difficulty*2) /varMult/ numberOfTry);
+                numberOfTry = 1;
                 countMult = 0;
                 points += point;
+                evolutionScore += point - 60 * (varMult + difficulty*2)/varMult;
+                evolutionDifficulty();
             }
             else {
                 countMult = 0;
-                numberoftry++;
+                numberOfTry++;
             }
             setGameOver(counter == target, point);
         }
+    }
+
+    public void evolutionDifficulty() {
+        difficulty = 0;
+        int varMult = (difficulty+2)*2;
+        int palier = 600 * (varMult + difficulty*2)/varMult;
+        while(evolutionScore > palier) {
+            difficulty++;
+            varMult = (difficulty+2)*2;
+            palier += 600 * (varMult + difficulty*2)/varMult;
+        }
+        setDifficultyTheme();
     }
 
     public int getMinMult() {
@@ -478,11 +522,14 @@ public class MultiFactorActivity extends AppCompatActivity {
     }
 
     public void newTarget() {
-        target = 1;
-        int i = 0;
-        while(i < difficulty + 2 || target < Math.pow(10, difficulty+1)) {
-            target *= (int)(Math.random()*9)+2;
-            i++;
+        int ancienTarget = target;
+        while(target == ancienTarget) {
+            target = 1;
+            int i = 0;
+            while (i < difficulty + 2 || target < Math.pow(10, difficulty + 1)) {
+                target *= (int) (Math.random() * 9) + 2;
+                i++;
+            }
         }
         targetCount.setText("" + target);
     }
