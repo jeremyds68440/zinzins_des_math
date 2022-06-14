@@ -149,12 +149,28 @@ public class RouletteActivity extends AppCompatActivity {
         quit.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent difficile = new Intent(getApplicationContext(), DifficileActivity.class);
-                startActivity(difficile);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
+                switch (getIntent().getFlags()) {
+                    case 0:
+                        Intent facile = new Intent(getApplicationContext(), FacileActivity.class);
+                        startActivity(facile);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                        break;
+                    case 1:
+                        Intent moyen = new Intent(getApplicationContext(), MoyenActivity.class);
+                        startActivity(moyen);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                        break;
+                    case 2:
+                        Intent difficile = new Intent(getApplicationContext(), DifficileActivity.class);
+                        startActivity(difficile);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                }
             }
         });
+
         quit.setNegativeButton("Non", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

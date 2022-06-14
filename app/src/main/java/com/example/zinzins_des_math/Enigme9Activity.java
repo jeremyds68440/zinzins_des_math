@@ -29,12 +29,38 @@ public class Enigme9Activity extends AppCompatActivity {
     private ImageView image;
     int cpt = 0;
 
+    private String questByDifficulty;
+    private String repByDifficulty;
+    private String valueRepByDifficulty;
+    private String expliByDifficulty = "";
+    private int imgByDifficulty;
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
+
+        switch(getIntent().getFlags()){
+            case 0 :
+                questByDifficulty = "";
+                repByDifficulty = "";
+                //imgByDifficulty =  ;
+                break;
+            case 1 :
+                questByDifficulty = "";
+                repByDifficulty = " ";
+                expliByDifficulty = "";
+                imgByDifficulty = R.drawable.img_enigme_9;
+                break;
+            case 2 :
+                questByDifficulty = "";
+                repByDifficulty = "";
+                expliByDifficulty = "";
+                //imgByDifficulty = ;
+                break;
+        }
 
         titre = findViewById(R.id.titre_enigme);
         question = findViewById(R.id.question);
@@ -43,17 +69,15 @@ public class Enigme9Activity extends AppCompatActivity {
         submit_answer_btn= findViewById(R.id.submit_answer_btn);
         explication = findViewById(R.id.explication);
 
-        //diff.getFlag().enigme
 
         //Titre de l'énigme
         titre.setText("Enigme 9");
 
         //L'image
-        image.setImageResource(R.drawable.img_enigme_9);
+        image.setImageResource(imgByDifficulty);
 
         //Enoncé de l'énigme
-        question.setText("En se rendant à un point d’eau, un zèbre croise 6 girafes qui s’y rendaient également. Chaque girafe portait sur son dos 3 singes. Chaque singe portait 2 oiseaux qui eux-mêmes portaient chacun 4 mouches.\n" +
-                "Combien d’animaux au total se retrouvent au point d’eau ? ");
+        question.setText(questByDifficulty);
 
         //Réponse entrée par le joueur
 
@@ -63,7 +87,7 @@ public class Enigme9Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String input = inputAnswer.getText().toString();
-                if (!input.equals("205")){
+                if (!input.equals(valueRepByDifficulty)){
 
                     if (cpt<4){
                         cpt++;
@@ -125,8 +149,10 @@ public class Enigme9Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder expli = new AlertDialog.Builder(enigmeActivity);
-                expli.setTitle("Réponse : 205 animaux ");
-                expli.setMessage("Explication : 1 zèbre + 6 girafes + 18 (3x6) singes + 36 (2x18) oiseaux + 144 (4x36) mouches");
+                expli.setTitle("Réponse : "+ repByDifficulty);
+
+                //Récupération de la réponse depuis la base de données
+                expli.setMessage(expliByDifficulty);
                 expli.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -136,6 +162,7 @@ public class Enigme9Activity extends AppCompatActivity {
                 expli.show();
             }
         });
+
     }
 
     @Override

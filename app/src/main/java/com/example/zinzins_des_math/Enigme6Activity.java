@@ -29,9 +29,11 @@ public class Enigme6Activity extends AppCompatActivity {
     private ImageView image;
     int cpt = 0;
 
-
-
-
+    private String questByDifficulty;
+    private String repByDifficulty;
+    private String valueRepByDifficulty;
+    private String expliByDifficulty = "";
+    private int imgByDifficulty;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -41,6 +43,27 @@ public class Enigme6Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
 
+        switch(getIntent().getFlags()){
+            case 0 :
+                questByDifficulty = "J’ai gagné au LOTO la somme de 1 534 €. J’ai maintenant 2 000 €. Combien avais-je d’argent avant de gagner ?";
+                repByDifficulty = "466€";
+                valueRepByDifficulty = "466";
+                //imgByDifficulty =  ;
+                break;
+            case 1 :
+                questByDifficulty = "Quel est le seul nombre premier compris entre 1908 et 1930 ?";
+                repByDifficulty = "1913";
+                valueRepByDifficulty = "1913";
+                imgByDifficulty = R.drawable.img_enigme_6;
+                break;
+            case 2 :
+                questByDifficulty = "";
+                repByDifficulty = "";
+                expliByDifficulty = "";
+                //imgByDifficulty = ;
+                break;
+        }
+
         titre = findViewById(R.id.titre_enigme);
         question = findViewById(R.id.question);
         image = findViewById(R.id.figure_optionelle);
@@ -48,16 +71,15 @@ public class Enigme6Activity extends AppCompatActivity {
         submit_answer_btn= findViewById(R.id.submit_answer_btn);
         explication = findViewById(R.id.explication);
 
-        //diff.getFlag().enigme
 
         //Titre de l'énigme
         titre.setText("Enigme 6");
 
         //L'image
-        image.setImageResource(R.drawable.img_enigme_6);
+        image.setImageResource(imgByDifficulty);
 
         //Enoncé de l'énigme
-        question.setText("Quel est le seul nombre premier compris entre 1908 et 1930 ?");
+        question.setText(questByDifficulty);
 
         //Réponse entrée par le joueur
 
@@ -67,7 +89,7 @@ public class Enigme6Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String input = inputAnswer.getText().toString();
-                if (!input.equals("1913")){
+                if (!input.equals(valueRepByDifficulty)){
 
                     if (cpt<4){
                         cpt++;
@@ -129,7 +151,10 @@ public class Enigme6Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder expli = new AlertDialog.Builder(enigmeActivity);
-                expli.setTitle("Réponse : 1913");
+                expli.setTitle("Réponse : "+ repByDifficulty);
+
+                //Récupération de la réponse depuis la base de données
+                expli.setMessage(expliByDifficulty);
                 expli.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -139,6 +164,7 @@ public class Enigme6Activity extends AppCompatActivity {
                 expli.show();
             }
         });
+
     }
 
     @Override

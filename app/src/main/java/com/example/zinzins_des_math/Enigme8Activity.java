@@ -29,12 +29,38 @@ public class Enigme8Activity extends AppCompatActivity {
     private ImageView image;
     int cpt = 0;
 
+    private String questByDifficulty;
+    private String repByDifficulty;
+    private String valueRepByDifficulty;
+    private String expliByDifficulty = "";
+    private int imgByDifficulty;
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
+
+        switch(getIntent().getFlags()){
+            case 0 :
+                questByDifficulty = "";
+                repByDifficulty = "";
+                //imgByDifficulty =  ;
+                break;
+            case 1 :
+                questByDifficulty = "";
+                repByDifficulty = " ";
+                expliByDifficulty = "";
+                imgByDifficulty = R.drawable.img_enigme_8;
+                break;
+            case 2 :
+                questByDifficulty = "";
+                repByDifficulty = "";
+                expliByDifficulty = "";
+                //imgByDifficulty = ;
+                break;
+        }
 
         titre = findViewById(R.id.titre_enigme);
         question = findViewById(R.id.question);
@@ -43,16 +69,15 @@ public class Enigme8Activity extends AppCompatActivity {
         submit_answer_btn= findViewById(R.id.submit_answer_btn);
         explication = findViewById(R.id.explication);
 
-        //diff.getFlag().enigme
 
         //Titre de l'énigme
         titre.setText("Enigme 7");
 
         //L'image
-        image.setImageResource(R.drawable.img_enigme_8);
+        image.setImageResource(imgByDifficulty);
 
         //Enoncé de l'énigme
-        question.setText("Sept personnes se rencontrent et se serrent la main. Sachant que chaque personne a donné la main une et une seule fois à chaque autre personne, combien de poignées de mains y a-t-il eu ?");
+        question.setText(questByDifficulty);
 
         //Réponse entrée par le joueur
 
@@ -62,7 +87,7 @@ public class Enigme8Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String input = inputAnswer.getText().toString();
-                if (!input.equals("21")){
+                if (!input.equals(valueRepByDifficulty)){
 
                     if (cpt<4){
                         cpt++;
@@ -124,7 +149,10 @@ public class Enigme8Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder expli = new AlertDialog.Builder(enigmeActivity);
-                expli.setTitle("Réponse : 21 poignées de main");
+                expli.setTitle("Réponse : "+ repByDifficulty);
+
+                //Récupération de la réponse depuis la base de données
+                expli.setMessage(expliByDifficulty);
                 expli.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -134,6 +162,7 @@ public class Enigme8Activity extends AppCompatActivity {
                 expli.show();
             }
         });
+
     }
 
     @Override

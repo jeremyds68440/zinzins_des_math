@@ -39,12 +39,42 @@ public class Enigme1Activity extends AppCompatActivity {
     private ImageView image;
     int cpt = 0;
 
+    private String questByDifficulty;
+    private String repByDifficulty;
+    private String valueRepByDifficulty;
+    private String expliByDifficulty = "";
+    private int imgByDifficulty;
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
+
+        switch(getIntent().getFlags()){
+            case 0 :
+                questByDifficulty = "Combien y a-t-il de triangles ?";
+                repByDifficulty = "24 triangles";
+                valueRepByDifficulty= "24";
+                imgByDifficulty = R.drawable.img_enigme1_facile ;
+                break;
+            case 1 :
+                questByDifficulty = "On désire construire un château de cartes avec 340 paquets de 32 cartes.\n" +
+                        "Combien d’étages peut-on construire avec ces 340 paquets ?\n";
+                repByDifficulty = "85 étages";
+                valueRepByDifficulty = "85";
+                expliByDifficulty = "Explication : nombre de cartes nécessaires pour n étages est égal n(3n+1)/2. Trouver n revient à résoudre l’équation n(3n+1)/2 = 10880.";
+                imgByDifficulty = R.drawable.img_enigme_1;
+                break;
+            case 2 :
+                questByDifficulty = "";
+                repByDifficulty = "";
+                expliByDifficulty = "";
+                //imgByDifficulty = ;
+                break;
+        }
+
 
         titre = findViewById(R.id.titre_enigme);
         question = findViewById(R.id.question);
@@ -53,17 +83,15 @@ public class Enigme1Activity extends AppCompatActivity {
         submit_answer_btn= findViewById(R.id.submit_answer_btn);
         explication = findViewById(R.id.explication);
 
-        //diff.getFlag().enigme
 
         //Titre de l'énigme
         titre.setText("Enigme 1");
 
         //L'image
-        image.setImageResource(R.drawable.img_enigme_1);
+        image.setImageResource(imgByDifficulty);
 
         //Enoncé de l'énigme
-        question.setText("Dans ce cube plein, toutes les rangées aux extrémités noircies sont constituées de petits cubes noirs. Tous les autres petits cubes sont blancs.\n" +
-                "Combien y a-t-il de petits cubes blancs ?\n");
+        question.setText(questByDifficulty);
 
         //Réponse entrée par le joueur
 
@@ -73,7 +101,7 @@ public class Enigme1Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String input = inputAnswer.getText().toString();
-                if (!input.equals("85")){
+                if (!input.equals(valueRepByDifficulty)){
 
                     if (cpt<4){
                         cpt++;
@@ -130,16 +158,15 @@ public class Enigme1Activity extends AppCompatActivity {
 
         });
 
-
         //L'explication de la réponse
         explication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder expli = new AlertDialog.Builder(enigmeActivity);
-                expli.setTitle("Réponse : 85");
+                expli.setTitle("Réponse : "+ repByDifficulty);
 
                 //Récupération de la réponse depuis la base de données
-                expli.setMessage("Explication : Le nombre de cartes nécessaires pour n étages est égal n(3n+1)/2. Trouver n revient à résoudre l’équation n(3n+1)/2 = 10880.");
+                expli.setMessage(expliByDifficulty);
                 expli.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -151,6 +178,7 @@ public class Enigme1Activity extends AppCompatActivity {
         });
 
     }
+
     @Override
     public void onBackPressed() {
         Intent roulette = new Intent(getApplicationContext(), RouletteActivity.class);
@@ -158,7 +186,6 @@ public class Enigme1Activity extends AppCompatActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
     }
-
 
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -176,7 +203,4 @@ public class Enigme1Activity extends AppCompatActivity {
 
         }
     };
-
-
-
 }

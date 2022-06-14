@@ -29,12 +29,40 @@ public class Enigme3Activity extends AppCompatActivity {
     private ImageView image;
     int cpt = 0;
 
+    private String questByDifficulty;
+    private String repByDifficulty;
+    private String valueRepByDifficulty;
+    private String expliByDifficulty = "";
+    private int imgByDifficulty;
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
+
+        switch(getIntent().getFlags()){
+            case 0 :
+                questByDifficulty = "Monsieur X donne de l’argent de poche à ses trois enfants : il donne 46€ aux deux jumeaux, et à l’aîné 4€ de plus qu’au jumeaux réunis.  Quelle somme Monsieur X a¬-t-il donné en tout ? ";
+                repByDifficulty = "188€";
+                valueRepByDifficulty = "188";
+                //imgByDifficulty =  ;
+                break;
+            case 1 :
+                questByDifficulty = "Dans ce cube plein, toutes les rangées aux extrémités noircies sont constituées de petits cubes noirs. Tous les autres petits cubes sont blancs.\n" +
+                        "Combien y a-t-il de petits cubes blancs ?\n";
+                repByDifficulty = "387 cubes blancs";
+                expliByDifficulty = "387";
+                imgByDifficulty = R.drawable.img_enigme_3;
+                break;
+            case 2 :
+                questByDifficulty = "";
+                repByDifficulty = "";
+                expliByDifficulty = "";
+                //imgByDifficulty = ;
+                break;
+        }
 
         titre = findViewById(R.id.titre_enigme);
         question = findViewById(R.id.question);
@@ -49,11 +77,10 @@ public class Enigme3Activity extends AppCompatActivity {
         titre.setText("Enigme 3");
 
         //L'image
-        image.setImageResource(R.drawable.img_enigme_3);
+        image.setImageResource(imgByDifficulty);
 
         //Enoncé de l'énigme
-        question.setText("Dans ce cube plein, toutes les rangées aux extrémités noircies sont constituées de petits cubes noirs. Tous les autres petits cubes sont blancs.\n" +
-                "Combien y a-t-il de petits cubes blancs ?\n");
+        question.setText(questByDifficulty);
 
         //Réponse entrée par le joueur
 
@@ -63,7 +90,7 @@ public class Enigme3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String input = inputAnswer.getText().toString();
-                if (!input.equals("387")){
+                if (!input.equals(valueRepByDifficulty)){
 
                     if (cpt<4){
                         cpt++;
@@ -125,9 +152,10 @@ public class Enigme3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder expli = new AlertDialog.Builder(enigmeActivity);
-                expli.setTitle("Réponse : 387 cubes blancs");
+                expli.setTitle(repByDifficulty);
 
-
+                //Récupération de la réponse depuis la base de données
+                expli.setMessage("Explication : " + expliByDifficulty);
                 expli.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -137,6 +165,7 @@ public class Enigme3Activity extends AppCompatActivity {
                 expli.show();
             }
         });
+
     }
 
     @Override

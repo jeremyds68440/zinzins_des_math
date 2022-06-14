@@ -29,12 +29,42 @@ public class Enigme2Activity extends AppCompatActivity {
     private ImageView image;
     int cpt = 0;
 
+    private String questByDifficulty;
+    private String repByDifficulty;
+    private String valueRepByDifficulty;
+    private String expliByDifficulty = "";
+    private int imgByDifficulty;
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
+
+        switch(getIntent().getFlags()){
+            case 0 :
+                questByDifficulty = "Pyramide mathématique";
+                repByDifficulty = "8";
+                valueRepByDifficulty = "8";
+                imgByDifficulty = R.drawable.img_enigme2_facile ;
+                break;
+            case 1 :
+                questByDifficulty = "Un cube a des arêtes de 5cm. On perfore ce cube de part en part : chaque trou a la forme d’un parallélépipède rectangle dont la section est un carré de 1cm de côté. Les douze trous ainsi formés sont disposés « régulièrement » comme l’indique la figure ci-contre. Quel est le volume total du cube ainsi perforé en cm3 .";
+                repByDifficulty = "81 cm3";
+                valueRepByDifficulty = "81";
+                expliByDifficulty = "Explication : 1er étage = 3e étage = 5e étage = 21 cm3\n" +
+                        "2e étage = 4e étage = 9cm3\n" +
+                        "Le tout = 3 x 21 + 2 x 9 = 81 cm3\n";
+                imgByDifficulty = R.drawable.img_enigme_2;
+                break;
+            case 2 :
+                questByDifficulty = "";
+                repByDifficulty = "";
+                expliByDifficulty = "";
+                //imgByDifficulty = ;
+                break;
+        }
 
         titre = findViewById(R.id.titre_enigme);
         question = findViewById(R.id.question);
@@ -49,10 +79,10 @@ public class Enigme2Activity extends AppCompatActivity {
         titre.setText("Enigme 2");
 
         //L'image
-        image.setImageResource(R.drawable.img_enigme_2);
+        image.setImageResource(imgByDifficulty);
 
         //Enoncé de l'énigme
-        question.setText("Un cube a des arêtes de 5cm. On perfore ce cube de part en part : chaque trou a la forme d’un parallélépipède rectangle dont la section est un carré de 1cm de côté. Les douze trous ainsi formés sont disposés « régulièrement » comme l’indique la figure ci-contre. Quel est le volume total du cube ainsi perforé en cm3 .");
+        question.setText(questByDifficulty);
 
         //Réponse entrée par le joueur
 
@@ -62,7 +92,7 @@ public class Enigme2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String input = inputAnswer.getText().toString();
-                if (!input.equals("81")){
+                if (!input.equals(valueRepByDifficulty)){
 
                     if (cpt<4){
                         cpt++;
@@ -124,12 +154,10 @@ public class Enigme2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder expli = new AlertDialog.Builder(enigmeActivity);
-                expli.setTitle("Réponse : 81 cm3");
+                expli.setTitle("Réponse : "+ repByDifficulty);
 
                 //Récupération de la réponse depuis la base de données
-                expli.setMessage("Explication : 1er étage = 3e étage = 5e étage = 21 cm3\n" +
-                        "                      2e étage = 4e étage = 9cm3\n" +
-                        "                      Le tout = 3 x 21 + 2 x 9 = 81cm3\n");
+                expli.setMessage(expliByDifficulty);
                 expli.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -141,6 +169,7 @@ public class Enigme2Activity extends AppCompatActivity {
         });
 
     }
+
     @Override
     public void onBackPressed() {
         Intent roulette = new Intent(getApplicationContext(), RouletteActivity.class);
@@ -148,7 +177,6 @@ public class Enigme2Activity extends AppCompatActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
     }
-
 
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -166,5 +194,4 @@ public class Enigme2Activity extends AppCompatActivity {
 
         }
     };
-
 }

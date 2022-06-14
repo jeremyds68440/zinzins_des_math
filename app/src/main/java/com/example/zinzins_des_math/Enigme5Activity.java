@@ -29,12 +29,40 @@ public class Enigme5Activity extends AppCompatActivity {
     private ImageView image;
     int cpt = 0;
 
+    private String questByDifficulty;
+    private String repByDifficulty;
+    private String valueRepByDifficulty;
+    private String expliByDifficulty = "";
+    private int imgByDifficulty;
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
+
+        switch(getIntent().getFlags()){
+            case 0 :
+                questByDifficulty = "La taille de Sylvain est de 137 cm. Il mesure 25 cm de moins que sa mère et 12 cm de plus que sa sœur. Combien mesurent la mère de Sylvain ?";
+                repByDifficulty = "162 cm ";
+                valueRepByDifficulty ="162";
+                //imgByDifficulty =  ;
+                break;
+            case 1 :
+                questByDifficulty = "Compléter la pyramide de telle sorte que chaque case soit égale à la somme des deux cases sur lesquelles elle repose.\n" +
+                        "Quelle est la valeur de la case grisée ? \n";
+                repByDifficulty = "2";
+                valueRepByDifficulty= "2";
+                imgByDifficulty = R.drawable.img_enigme_5;
+                break;
+            case 2 :
+                questByDifficulty = "";
+                repByDifficulty = "";
+                expliByDifficulty = "";
+                //imgByDifficulty = ;
+                break;
+        }
 
         titre = findViewById(R.id.titre_enigme);
         question = findViewById(R.id.question);
@@ -43,17 +71,15 @@ public class Enigme5Activity extends AppCompatActivity {
         submit_answer_btn= findViewById(R.id.submit_answer_btn);
         explication = findViewById(R.id.explication);
 
-        //diff.getFlag().enigme
 
         //Titre de l'énigme
         titre.setText("Enigme 5");
 
         //L'image
-        image.setImageResource(R.drawable.img_enigme_5);
+        image.setImageResource(imgByDifficulty);
 
         //Enoncé de l'énigme
-        question.setText("Compléter la pyramide de telle sorte que chaque case soit égale à la somme des deux cases sur lesquelles elle repose.\n" +
-                "Quelle est la valeur de la case grisée ? \n");
+        question.setText(questByDifficulty);
 
         //Réponse entrée par le joueur
 
@@ -63,7 +89,7 @@ public class Enigme5Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String input = inputAnswer.getText().toString();
-                if (!input.equals("2")){
+                if (!input.equals(valueRepByDifficulty)){
 
                     if (cpt<4){
                         cpt++;
@@ -125,7 +151,10 @@ public class Enigme5Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder expli = new AlertDialog.Builder(enigmeActivity);
-                expli.setTitle("Réponse : 2");
+                expli.setTitle("Réponse : "+ repByDifficulty);
+
+                //Récupération de la réponse depuis la base de données
+                expli.setMessage(expliByDifficulty);
                 expli.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -135,6 +164,7 @@ public class Enigme5Activity extends AppCompatActivity {
                 expli.show();
             }
         });
+
     }
 
     @Override
