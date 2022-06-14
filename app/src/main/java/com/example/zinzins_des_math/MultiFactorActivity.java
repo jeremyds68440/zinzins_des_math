@@ -472,7 +472,13 @@ public class MultiFactorActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent difficulte;
-                if(difficulty == 0) {
+                if(extras != null) {
+                    difficulte = new Intent(getApplicationContext(), RoomListActivity.class);
+                }
+                else if(evolution) {
+                    difficulte = new Intent(getApplicationContext(), LevelActivity.class);
+                }
+                else if(difficulty == 0) {
                     difficulte = new Intent(getApplicationContext(), FacileActivity.class);
                 }
                 else if(difficulty == 1) {
@@ -499,7 +505,13 @@ public class MultiFactorActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent difficulte;
-                if(difficulty == 0) {
+                if(extras != null) {
+                    difficulte = new Intent(getApplicationContext(), RoomListActivity.class);
+                }
+                else if(evolution) {
+                    difficulte = new Intent(getApplicationContext(), LevelActivity.class);
+                }
+                else if(difficulty == 0) {
                     difficulte = new Intent(getApplicationContext(), FacileActivity.class);
                 }
                 else if(difficulty == 1) {
