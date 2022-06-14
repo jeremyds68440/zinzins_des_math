@@ -13,9 +13,12 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -31,18 +34,19 @@ import java.lang.reflect.Field;
 
 public class MathemaQuizzActivity extends AppCompatActivity {
 
-    Button btn_ans0, btn_ans1, btn_ans2, btn_ans3;
+    Button btn_ans0, btn_ans1, btn_ans2, btn_ans3,reprendre,quitter;
     MediaPlayer soundtheme, chrono;
 
     TextView equation, timer, score, soluaff;
     ProgressBar progresstimer;
     ConstraintLayout bg;
-    ImageView nuage_equation;
+    ImageView nuage_equation,back;
     String defi, role, roomName;
     FirebaseDatabase database;
     FirebaseUser user;
     DatabaseReference uDatabase;
     DatabaseReference rDatabase;
+    LinearLayout popup_back;
     private MathemaQuizzActivity mathemaQuizzActivity;
     Bundle extras;
     public static final String SHARED_PREFS = "sharedPrefs";
@@ -242,7 +246,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
             }
         });
 
-        ImageView back = findViewById(R.id.second_game_back2);
+        back = findViewById(R.id.second_game_back2);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -279,14 +283,19 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         setQuitPopup();
     }
 
-    private void setQuitPopup() {
-        AlertDialog.Builder quit = new AlertDialog.Builder(this);
-        quit.setTitle("Quitter");
-        quit.setMessage("Êtes-vous sûre de vouloir quitter ?");
-        quit.setNegativeButton("Retour", null);
-        quit.setPositiveButton("Quitter", new DialogInterface.OnClickListener() {
+    private void setQuitPopup(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.custom_popup_back, viewGroup, false);
+        builder.setView(dialogView);
+        AlertDialog alertDialog = builder.create();
+
+        quitter = dialogView.findViewById(R.id.button_quitter);
+        reprendre = dialogView.findViewById((R.id.button_rep_jeu));
+
+        quitter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
                 switch (getIntent().getFlags()) {
                     case 0:
                         Intent main = new Intent(getApplicationContext(), FacileActivity.class);
@@ -305,7 +314,15 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                 finish();
             }
         });
-        quit.show();
+
+        reprendre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                back.setColorFilter(Color.argb(0, 0, 0, 0));
+            }
+        });
+        alertDialog.show();
     }
 
     private void nextTurn() {

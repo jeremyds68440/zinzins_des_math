@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_popup_back"
+        android:layout_width="wrap_content"
+        android:layout_height="201dp"
+        android:background="@drawable/quitter_mj2_facile"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="105dp"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_quitter"
+                android:layout_width="170dp"
+                android:layout_height="64dp"
+                android:background="@android:color/transparent"
+                android:textColor="#FFF" />
+
+            <Button
+                android:id="@+id/button_rep_jeu"
+                android:layout_width="170dp"
+                android:layout_height="64dp"
+                android:background="@android:color/transparent"
+                android:textColor="#FFF" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
