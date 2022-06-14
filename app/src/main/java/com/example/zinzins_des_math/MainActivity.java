@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         actionClickImage(this.jouer, choosesolomultiActivity.class);
         actionClickImage(this.settings, ParametreActivity.class);
-
     }
 
     public void actionClickImage(ImageView button, Class act){
