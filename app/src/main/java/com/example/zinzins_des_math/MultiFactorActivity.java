@@ -48,19 +48,24 @@ public class MultiFactorActivity extends AppCompatActivity {
     private TextView targetCount;
     private TextView scoreCount;
     private boolean blocked = false;
+    private ArrayList<Integer> iterBubble;
+    private MediaPlayer soundtheme;
+    private MediaPlayer soundgood;
+    private MediaPlayer soundvrong;
     public int BUBBLECOLUMN = 190;
     public int BUBBLEROW = 190;
     public static final int NUMBERBUBBLEROW = 6;
     public static final int NUMBERBUBBLECOLUMN = 4;
-    MediaPlayer soundtheme;
-    MediaPlayer soundgood;
-    MediaPlayer soundvrong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multifactor);
 
+        iterBubble = new ArrayList<>();
+        for(int i = 0; i < 10; i++) {
+            iterBubble.add(0);
+        }
         difficulty = getIntent().getFlags();
         this.soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.multifactor_sound);
 
@@ -87,7 +92,7 @@ public class MultiFactorActivity extends AppCompatActivity {
         ImageView back = new ImageView(getApplicationContext());
         back.setLayoutParams(params);
         back.setImageResource(R.drawable.ic_baseline_arrow_back_ios_24);
-                back.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setQuitPopup();
@@ -183,8 +188,16 @@ public class MultiFactorActivity extends AppCompatActivity {
 
         List<BubbleItem> bubbles = new ArrayList<>();
         ImageView number;
+        int notPlaced = 0;
+        int random;
         for(int i = 0; i < NUMBERBUBBLECOLUMN*NUMBERBUBBLEROW; i++) {
-            bubbles.add(new BubbleItem((int) (Math.random()*8+2)));
+            random = (int) (Math.random()*8+2);
+            while(i > NUMBERBUBBLECOLUMN*NUMBERBUBBLEROW/2 && notPlaced != -1 && notPlaced != random) {
+                notPlaced = numberNotPlaced();
+                random = Math.max(notPlaced, 2);
+            }
+            iterBubble.set(random, iterBubble.get(random) + 1);
+            bubbles.add(new BubbleItem(random));
         }
 
         RelativeLayout.LayoutParams gridParams = new RelativeLayout.LayoutParams(NUMBERBUBBLECOLUMN*BUBBLECOLUMN+100,BUBBLEROW*NUMBERBUBBLEROW);
@@ -198,6 +211,45 @@ public class MultiFactorActivity extends AppCompatActivity {
         gridLayout.addView(gridBackground);
         gridLayout.addView(grid);
         layout.addView(gridLayout);
+    }
+
+    public int numberNotPlaced() {
+        for(int i = 2; i < iterBubble.size(); i++) {
+            if(iterBubble.get(i) == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void decreaseByOne(int i) {
+        iterBubble.set(i, iterBubble.get(i) - 1);
+    }
+
+    public int getLessPlaced() {
+        ArrayList<Integer> lessPlaced = new ArrayList<>();
+        lessPlaced.add(2);
+        int timePlaced = iterBubble.get(2);
+        for(int i = 3; i < iterBubble.size(); i++) {
+            if(timePlaced > iterBubble.get(i)) {
+                lessPlaced = new ArrayList<>();
+                lessPlaced.add(i);
+                timePlaced = iterBubble.get(i);
+            }
+            else if(timePlaced == iterBubble.get(i)) {
+                lessPlaced.add(i);
+            }
+        }
+        int candidate;
+        if(timePlaced == 0 && (lessPlaced.get(0) == 2 || lessPlaced.get(0) == 3 || lessPlaced.get(0) == 5 || lessPlaced.get(0) == 7)) {
+            candidate = lessPlaced.get(0);
+            iterBubble.set(candidate, iterBubble.get(candidate) + 1);
+        }
+        else {
+            candidate = (int) (Math.random() * 8 + 2);
+            iterBubble.set(candidate, iterBubble.get(candidate) + 1);
+        }
+        return candidate;
     }
 
     public void setDifficulty(LinearLayout layout, ImageView scorePlace, ImageView targetPlace, ImageView gridBackground, int difficulty) {
@@ -319,15 +371,15 @@ public class MultiFactorActivity extends AppCompatActivity {
                 }
             });
             scoreCount.setTextColor(context.getResources().getColor(R.color.win));
+            this.soundvrong = MediaPlayer.create(getApplicationContext(), R.raw.vrong_sound);
+            soundtheme.setVolume(Float.parseFloat(getString(R.string.sound_0_2)),Float.parseFloat(getString(R.string.sound_0_2)));
+            soundvrong.start();
             popup.setTitle("Bravo !");
             popup.setMessage("Cible atteinte !\nVous avez gagné " + point + " points.\nVous avez " + points + " points au total.");
             positive = "Continuer";
         }
         else {
             scoreCount.setTextColor(context.getResources().getColor(R.color.lose));
-            this.soundvrong = MediaPlayer.create(getApplicationContext(), R.raw.vrong_sound);
-            soundtheme.setVolume(Float.parseFloat(getString(R.string.sound_0_2)),Float.parseFloat(getString(R.string.sound_0_2)));
-            soundvrong.start();
             popup.setTitle("Perdu !");
             popup.setMessage("Cible dépassée !");
             positive = "Réssayer";

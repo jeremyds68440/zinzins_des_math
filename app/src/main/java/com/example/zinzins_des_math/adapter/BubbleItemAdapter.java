@@ -57,14 +57,15 @@ public class BubbleItemAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if(!context.isBlocked()) {
-                    int random = (int) (Math.random() * 8 + 2);
-                    String imageName = "bubble_" + random;
+                    context.decreaseByOne(bubble.getNumber());
+                    int i = context.getLessPlaced();
+                    String imageName = "bubble_" + i;
                     int resId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
                     image.setImageResource(resId);
                     context.multCounter(bubble.getNumber());
                     TextView scoreCount = context.getScoreCount();
                     scoreCount.setText("" + context.getCounter());
-                    bubble.setNumber(random);
+                    bubble.setNumber(i);
                     context.verify();
                 }
             }
