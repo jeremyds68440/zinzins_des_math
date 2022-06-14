@@ -68,8 +68,8 @@ public class MultiFactorActivity extends AppCompatActivity {
 
         LinearLayout layout = findViewById(R.id.multifactor);
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(132, 96);
-        params.setMargins(44,121,0,0);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)(48*displayrealMetrics.density), (int)(35*displayrealMetrics.density));
+        params.setMargins((int)(16*displayrealMetrics.density),(int)(44*displayrealMetrics.density),0,0);
         ImageView back = new ImageView(getApplicationContext());
         back.setLayoutParams(params);
         back.setImageResource(R.drawable.ic_baseline_arrow_back_ios_24);
@@ -139,20 +139,25 @@ public class MultiFactorActivity extends AppCompatActivity {
 
         relativeTarget.addView(targetCount);
 
+        int gridBgHeight = height - 849 - (int)(44*displayrealMetrics.density) - (int)(35*displayrealMetrics.density);
 
         RelativeLayout gridLayout = new RelativeLayout(getApplicationContext());
-        relativeParams = new RelativeLayout.LayoutParams(width, height - 1066);
+        relativeParams = new RelativeLayout.LayoutParams(width, gridBgHeight);
         relativeParams.setMargins(0,0,0,14);
         gridLayout.setLayoutParams(relativeParams);
 
-
         ImageView gridBackground = new ImageView(getApplicationContext());
-        params = new LinearLayout.LayoutParams(width, height - 1066);
+        params = new LinearLayout.LayoutParams(width, gridBgHeight);
         gridBackground.setLayoutParams(params);
 
         setDifficulty(layout, scorePlace, targetPlace, gridBackground, getIntent().getFlags());
 
-        while(BUBBLEROW*NUMBERBUBBLEROW > height - 1136) {
+        while(BUBBLEROW*NUMBERBUBBLEROW < gridBgHeight-70) {
+            BUBBLECOLUMN++;
+            BUBBLEROW++;
+        }
+
+        while(BUBBLEROW*NUMBERBUBBLEROW > gridBgHeight-70) {
             BUBBLECOLUMN--;
             BUBBLEROW--;
         }
@@ -170,7 +175,7 @@ public class MultiFactorActivity extends AppCompatActivity {
 
         RelativeLayout.LayoutParams gridParams = new RelativeLayout.LayoutParams(NUMBERBUBBLECOLUMN*BUBBLECOLUMN+100,BUBBLEROW*NUMBERBUBBLEROW);
         RelativeLayout.LayoutParams bgParams = new RelativeLayout.LayoutParams(width,BUBBLEROW*NUMBERBUBBLEROW + 100);
-        gridParams.setMargins((width - (NUMBERBUBBLECOLUMN*BUBBLECOLUMN+70))/2,(height - 1136 - BUBBLEROW*NUMBERBUBBLEROW)/2+30,0,0);
+        gridParams.setMargins((width - (NUMBERBUBBLECOLUMN*BUBBLECOLUMN+70))/2,(gridBgHeight - BUBBLEROW*NUMBERBUBBLEROW)/2,0,0);
         GridView grid = new GridView(getApplicationContext());
         grid.setNumColumns(NUMBERBUBBLECOLUMN);
         grid.setLayoutParams(gridParams);
