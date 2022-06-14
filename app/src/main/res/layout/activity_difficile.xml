@@ -7,29 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".DifficileActivity">
 
-    <ImageView
-        android:id="@+id/info_roulette_difficile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.905"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.625"
-        app:srcCompat="@android:drawable/ic_menu_info_details" />
-
-    <ImageView
-        android:id="@+id/info_mathemaquizz_difficile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.905"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.466"
-        app:srcCompat="@android:drawable/ic_menu_info_details" />
 
     <ImageView
         android:id="@+id/back_to_difficile"
@@ -79,7 +56,6 @@
                 app:srcCompat="@drawable/multifactor_difficile"
                 tools:layout_editor_absoluteX="95dp"
                 tools:layout_editor_absoluteY="268dp" />
-
         </TableRow>
 
         <TableRow
@@ -110,16 +86,57 @@
         </TableRow>
     </TableLayout>
 
-    <ImageView
-        android:id="@+id/info_multifactor_difficile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <TableLayout
+        android:layout_width="32dp"
+        android:layout_height="302dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.905"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.307"
-        app:srcCompat="@android:drawable/ic_menu_info_details" />
+        app:layout_constraintHorizontal_bias="0.0"
 
+        app:layout_constraintStart_toEndOf="@+id/tableLayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="79dp">
+
+            <ImageView
+                android:id="@+id/info_multifactor_difficile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_menu_info_details"
+                tools:layout_editor_absoluteX="343dp"
+                tools:layout_editor_absoluteY="655dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="79dp">
+
+            <ImageView
+                android:id="@+id/info_mathemaquizz_difficile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_menu_info_details"
+                tools:layout_editor_absoluteX="311dp"
+                tools:layout_editor_absoluteY="647dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/info_roulette_difficile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_menu_info_details"
+                tools:layout_editor_absoluteX="319dp"
+                tools:layout_editor_absoluteY="631dp" />
+
+        </TableRow>
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
