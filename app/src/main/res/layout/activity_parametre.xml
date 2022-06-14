@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ParametreActivity">
 
+    <Switch
+        android:id="@+id/effect_etat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="effect"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.234"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.627" />
+
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"
@@ -53,4 +65,17 @@
         android:layout_marginTop="84dp"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/logout" />
+
+    <Switch
+        android:id="@+id/Sound_etat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="son"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.226"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.569" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

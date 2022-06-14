@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,6 +23,37 @@ import java.lang.reflect.Field;
 public class ParametreActivity extends AppCompatActivity {
 
     TextView username, scoreMathemaquizzFacile;
+    Switch switch_sound_theme;
+    Switch switch_sound_effect;
+
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String ETAT_SOUND_THEME = "etat_sound_theme";
+    public static final String ETAT_SOUND_EFFECT = "etat_sound_effect";
+
+    private boolean sound_theme_state;
+    private boolean sound_effect_state;
+
+    public void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(ETAT_SOUND_THEME, switch_sound_theme.isChecked());
+        editor.putBoolean(ETAT_SOUND_EFFECT, switch_sound_effect.isChecked());
+
+        editor.apply();
+    }
+
+    public void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        sound_theme_state = sharedPreferences.getBoolean(ETAT_SOUND_THEME, true);
+        sound_effect_state = sharedPreferences.getBoolean(ETAT_SOUND_EFFECT, true);
+
+    }
+
+    public void updateViews(){
+        switch_sound_theme.setChecked(sound_theme_state);
+        switch_sound_effect.setChecked(sound_effect_state);
+
+    }
 
     FirebaseUser user;
     DatabaseReference mDatabase;
@@ -28,9 +61,13 @@ public class ParametreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parametre);
-
+        switch_sound_theme = (Switch) findViewById(R.id.Sound_etat);
+        switch_sound_effect = (Switch) findViewById(R.id.effect_etat);
         username = (TextView) findViewById(R.id.nomUtil);
         scoreMathemaquizzFacile = (TextView) findViewById(R.id.scoreMathemaquizz);
+
+        loadData();
+        updateViews();
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
@@ -49,6 +86,22 @@ public class ParametreActivity extends AppCompatActivity {
 
             }
         });
+
+        switch_sound_theme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveData();
+            }
+        });
+
+        switch_sound_effect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveData();
+            }
+        });
+
+
     }
 
     public void logout(View view) {
@@ -56,4 +109,12 @@ public class ParametreActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
         finish();
     }
+
+    public void onBackPressed() {
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish();
+    }
+
 }

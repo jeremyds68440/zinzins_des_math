@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -37,7 +38,20 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     ProgressBar progresstimer;
     ConstraintLayout bg;
     ImageView nuage_equation;
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String ETAT_SOUND_THEME = "etat_sound_theme";
+    public static final String ETAT_SOUND_EFFECT = "etat_sound_effect";
+
+    private boolean sound_theme_state;
+    private boolean sound_effect_state;
+
     private MathemaQuizzActivity mathemaQuizzActivity;
+    public void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        sound_theme_state = sharedPreferences.getBoolean(ETAT_SOUND_THEME, true);
+        sound_effect_state = sharedPreferences.getBoolean(ETAT_SOUND_EFFECT, true);
+
+    }
 
     Game g = new Game();
     int secondsRemaining = 30;
@@ -144,7 +158,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         soluaff = findViewById(R.id.answersolus);
         bg = findViewById(R.id.bg_math_quizz);
         nuage_equation = findViewById(R.id.nuage_enigme);
-
+        loadData();
         timer.setText("0sec");
         equation.setText("");
         nextTurn();
@@ -210,11 +224,15 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        soundtheme.setVolume(1f, 1f);
-        soundtheme.start();
-        chrono.setVolume(0.2f, 0.2f);
-        chrono.start();
+        if (sound_theme_state){
+            soundtheme.setVolume(1f, 1f);
+            soundtheme.start();
+        }
 
+        if (sound_effect_state){
+            chrono.setVolume(0.2f, 0.2f);
+            chrono.start();
+        }
     }
 
     public void onBackPressed() {
