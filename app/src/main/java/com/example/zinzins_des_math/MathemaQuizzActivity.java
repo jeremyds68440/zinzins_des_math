@@ -134,7 +134,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                 }
             });
 
-            AlertDialog.Builder fini = new AlertDialog.Builder(mathemaQuizzActivity);
+            AlertDialog.Builder fini = new AlertDialog.Builder(mathemaQuizzActivity, R.style.MyDialogTheme);
             ViewGroup viewGroup = findViewById(android.R.id.content);
             dialogView_endgame = LayoutInflater.from(mathemaQuizzActivity).inflate(R.layout.custom_popup_endgame, viewGroup, false);
             fini.setView(dialogView_endgame);
@@ -313,7 +313,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     }
 
     private void setQuitPopup(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
         ViewGroup viewGroup = findViewById(android.R.id.content);
         dialogView_back = LayoutInflater.from(this).inflate(R.layout.custom_popup_back, viewGroup, false);
         builder.setView(dialogView_back);
