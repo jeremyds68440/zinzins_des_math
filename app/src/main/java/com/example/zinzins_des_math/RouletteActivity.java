@@ -11,6 +11,8 @@ import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
 import java.util.Random;
 
 
@@ -24,11 +26,35 @@ public class RouletteActivity extends AppCompatActivity {
     private RouletteActivity rouletteActivity = this;
     int cpt1 = 0;
     int cpt2 = 0;
+    public RelativeLayout rootRoulette;
+    private ImageView fleche;
+    private ImageView lancerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roulette);
+
+        rootRoulette = findViewById(R.id.rootRoulette);
+        wheel = findViewById(R.id.wheel);
+        fleche = findViewById(R.id.flecheRoulette);
+        lancerBtn = findViewById(R.id.startBtn);
+
+        //Backgrounds
+        switch(getIntent().getFlags()){
+            case 1 :
+                rootRoulette.setBackground(getDrawable(R.drawable.background_roulette_moyen));
+                fleche.setImageResource(R.drawable.fleche_roulette_moyen);
+                wheel.setImageResource(R.drawable.accueil_roulette_difficile);
+                lancerBtn.setImageResource(R.drawable.lancer_roulette_difficile);
+                break;
+            case 2 :
+                rootRoulette.setBackground(getDrawable(R.drawable.background_roulette_difficile));
+                fleche.setImageResource(R.drawable.fleche_roulette_moyen);
+                wheel.setImageResource(R.drawable.accueil_roulette_difficile);
+                lancerBtn.setImageResource(R.drawable.lancer_roulette_difficile);
+                break;
+        }
 
 
         final ImageView startBtn = findViewById(R.id.startBtn);

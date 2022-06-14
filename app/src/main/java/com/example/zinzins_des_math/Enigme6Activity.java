@@ -52,7 +52,7 @@ public class Enigme6Activity extends AppCompatActivity {
                 questByDifficulty = "J’ai gagné au LOTO la somme de 1 534 €. J’ai maintenant 2 000 €. Combien avais-je d’argent avant de gagner ?";
                 repByDifficulty = "466€";
                 valueRepByDifficulty = "466";
-                //imgByDifficulty =  ;
+                imgByDifficulty = R.drawable.img_enigme6_facile ;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
@@ -79,8 +79,6 @@ public class Enigme6Activity extends AppCompatActivity {
         explication = findViewById(R.id.explication);
 
 
-        //Titre de l'énigme
-        titre.setText("Enigme 6");
 
         //L'image
         image.setImageResource(imgByDifficulty);

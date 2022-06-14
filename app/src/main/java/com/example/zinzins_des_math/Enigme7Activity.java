@@ -54,7 +54,7 @@ public class Enigme7Activity extends AppCompatActivity {
                 repByDifficulty = "3 chaussettes";
                 valueRepByDifficulty = "3";
 
-                //imgByDifficulty =  ;
+                imgByDifficulty = R.drawable.img_enigme7_facile ;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
@@ -83,8 +83,6 @@ public class Enigme7Activity extends AppCompatActivity {
         explication = findViewById(R.id.explication);
 
 
-        //Titre de l'énigme
-        titre.setText("Enigme 7");
 
         //L'image
         image.setImageResource(imgByDifficulty);

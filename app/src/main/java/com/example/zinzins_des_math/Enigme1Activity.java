@@ -94,8 +94,7 @@ public class Enigme1Activity extends AppCompatActivity {
         explication = findViewById(R.id.explication);
 
 
-        //Titre de l'énigme
-        titre.setText("Enigme 1");
+
 
         //L'image
         image.setImageResource(imgByDifficulty);

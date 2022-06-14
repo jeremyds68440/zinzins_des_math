@@ -51,7 +51,7 @@ public class Enigme5Activity extends AppCompatActivity {
                 questByDifficulty = "La taille de Sylvain est de 137 cm. Il mesure 25 cm de moins que sa mère et 12 cm de plus que sa sœur. Combien mesurent la mère de Sylvain ?";
                 repByDifficulty = "162 cm ";
                 valueRepByDifficulty ="162";
-                //imgByDifficulty =  ;
+                imgByDifficulty = R.drawable.img_enigme5_facile ;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
@@ -79,8 +79,6 @@ public class Enigme5Activity extends AppCompatActivity {
         explication = findViewById(R.id.explication);
 
 
-        //Titre de l'énigme
-        titre.setText("Enigme 5");
 
         //L'image
         image.setImageResource(imgByDifficulty);

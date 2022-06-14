@@ -84,8 +84,7 @@ public class Enigme2Activity extends AppCompatActivity {
 
 
 
-        //Titre de l'énigme
-        titre.setText("Enigme 2");
+
 
         //L'image
         image.setImageResource(imgByDifficulty);

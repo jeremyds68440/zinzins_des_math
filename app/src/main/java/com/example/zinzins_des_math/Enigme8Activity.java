@@ -51,7 +51,7 @@ public class Enigme8Activity extends AppCompatActivity {
                 questByDifficulty = "2A + B = 2C + A = 2B + 2C = 3B + A = 10. Quelle est la valeur de B ?";
                 repByDifficulty = "2";
                 valueRepByDifficulty = "2";
-                //imgByDifficulty =  ;
+                imgByDifficulty = R.drawable.img_enigme8_facile ;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
@@ -78,8 +78,7 @@ public class Enigme8Activity extends AppCompatActivity {
         explication = findViewById(R.id.explication);
 
 
-        //Titre de l'énigme
-        titre.setText("Enigme 7");
+
 
         //L'image
         image.setImageResource(imgByDifficulty);
