@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean sound_theme_state;
     private boolean sound_effect_state;
 
-    private MathemaQuizzActivity mathemaQuizzActivity;
     private MediaPlayer soundtheme;
 
     public void loadData(){
@@ -36,14 +34,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loadData();
-        this.soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.theme_zinzins_lofi);
-        if (sound_theme_state) {
-            soundtheme.start();
-        }
         this.jouer = findViewById(R.id.jouer);
         this.settings = findViewById(R.id.parametres);
-
         actionClickImage(this.jouer, choosesolomultiActivity.class);
         actionClickImage(this.settings, ParametreActivity.class);
     }
