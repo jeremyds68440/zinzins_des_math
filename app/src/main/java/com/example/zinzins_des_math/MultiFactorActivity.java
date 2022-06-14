@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -51,6 +52,9 @@ public class MultiFactorActivity extends AppCompatActivity {
     public int BUBBLEROW = 190;
     public static final int NUMBERBUBBLEROW = 6;
     public static final int NUMBERBUBBLECOLUMN = 4;
+    MediaPlayer soundtheme;
+    MediaPlayer soundgood;
+    MediaPlayer soundvrong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class MultiFactorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_multifactor);
 
         difficulty = getIntent().getFlags();
+        this.soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.multifactor_sound);
 
         context = getApplicationContext();
 
@@ -277,6 +282,9 @@ public class MultiFactorActivity extends AppCompatActivity {
         AlertDialog.Builder popup = new AlertDialog.Builder(this);
         String positive;
         if(win) {
+            this.soundgood = MediaPlayer.create(getApplicationContext(), R.raw.good_sound);
+            soundtheme.setVolume(0.2f,0.2f);
+            soundgood.start();
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             DatabaseReference mDatabase = database.getReference("users").child(user.getUid());
@@ -317,6 +325,9 @@ public class MultiFactorActivity extends AppCompatActivity {
         }
         else {
             scoreCount.setTextColor(context.getResources().getColor(R.color.lose));
+            this.soundvrong = MediaPlayer.create(getApplicationContext(), R.raw.vrong_sound);
+            soundtheme.setVolume(Float.parseFloat(getString(R.string.sound_0_2)),Float.parseFloat(getString(R.string.sound_0_2)));
+            soundvrong.start();
             popup.setTitle("Perdu !");
             popup.setMessage("Cible dépassée !");
             positive = "Réssayer";
@@ -327,6 +338,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                 if(win) {
                     newTarget();
                 }
+                soundtheme.setVolume(1f,1f);
                 resetCounter();
                 unBlocked();
             }
@@ -400,5 +412,18 @@ public class MultiFactorActivity extends AppCompatActivity {
 
     public void unBlocked() {
         blocked = false;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        soundtheme.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        soundtheme.setVolume(Float.parseFloat(getString(R.string.sound_on)), Float.parseFloat(getString(R.string.sound_on)));
+        soundtheme.start();
     }
 }

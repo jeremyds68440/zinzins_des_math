@@ -10,6 +10,8 @@
     <string name="ok_enigme">OK</string>
     <string name="reponse_enigme">Réponse</string>
     <string name="solution_enigme">Solution</string>
-
+    <string name="no_sound">0f</string>
+    <string name="sound_on">1f</string>
+    <string name="sound_0.2">0.2f</string>
 
 </resources>
