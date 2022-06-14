@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean sound_theme_state;
     private boolean sound_effect_state;
 
-    private MediaPlayer soundtheme;
+    private MediaPlayer bouton_sound;
 
     public void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         this.jouer = findViewById(R.id.jouer);
         this.settings = findViewById(R.id.parametres);
+        loadData();
         actionClickImage(this.jouer, choosesolomultiActivity.class);
         actionClickImage(this.settings, ParametreActivity.class);
     }
@@ -44,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(sound_effect_state){
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
                 button.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent intent = new Intent(getApplicationContext(), act);
                 startActivity(intent);

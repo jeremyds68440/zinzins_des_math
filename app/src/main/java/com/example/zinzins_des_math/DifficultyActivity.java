@@ -3,6 +3,7 @@ package com.example.zinzins_des_math;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -14,12 +15,28 @@ public class DifficultyActivity extends AppCompatActivity {
     private ImageView back, easy, medium, hard, IA;
     private MediaPlayer mediaPlayer;
 
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String ETAT_SOUND_THEME = "etat_sound_theme";
+    public static final String ETAT_SOUND_EFFECT = "etat_sound_effect";
+
+    private boolean sound_theme_state;
+    private boolean sound_effect_state;
+
+    private MediaPlayer bouton_sound;
+
+    public void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        sound_theme_state = sharedPreferences.getBoolean(ETAT_SOUND_THEME, true);
+        sound_effect_state = sharedPreferences.getBoolean(ETAT_SOUND_EFFECT, true);
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_difficulty);
         this.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.zinzin_sound);
-
+        loadData();
         this.back = findViewById(R.id.back);
         this.easy = findViewById(R.id.facile);
         this.medium = findViewById(R.id.moyen);
@@ -43,7 +60,9 @@ public class DifficultyActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mediaPlayer.start();
+        if(sound_theme_state){
+            mediaPlayer.start();
+        }
 
     }
 
@@ -51,6 +70,10 @@ public class DifficultyActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(sound_effect_state){
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
                 button.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent intent = new Intent(getApplicationContext(), act);
                 startActivity(intent);
