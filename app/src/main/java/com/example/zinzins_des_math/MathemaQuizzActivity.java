@@ -9,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -30,6 +31,7 @@ import java.lang.reflect.Field;
 public class MathemaQuizzActivity extends AppCompatActivity {
 
     Button btn_ans0,btn_ans1,btn_ans2,btn_ans3;
+    MediaPlayer soundtheme,chrono;
 
     TextView equation,timer,score,soluaff;
     ProgressBar progresstimer;
@@ -93,6 +95,14 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                     g = new Game();
                     nextTurn();
                     temps.start();
+
+                    soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.mathemaquizz_sound);
+                    chrono = MediaPlayer.create(getApplicationContext(), R.raw.chrono_sound);
+                    soundtheme.setVolume(1f, 1f);
+                    soundtheme.start();
+                    chrono.setVolume(0.2f, 0.2f);
+                    chrono.start();
+
                     g.setNumberCorrect(0);
                     g.setNumberIncorrect(0);
                     score.setText(Integer.toString(g.getScore()));
@@ -117,6 +127,9 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_game);
         temps.start();
+
+        this.soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.mathemaquizz_sound);
+        this.chrono = MediaPlayer.create(getApplicationContext(), R.raw.chrono_sound);
 
         this.mathemaQuizzActivity = this;
         btn_ans0 = findViewById(R.id.btn_ans0);
@@ -186,6 +199,24 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        soundtheme.pause();
+        chrono.pause();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        soundtheme.setVolume(1f, 1f);
+        soundtheme.start();
+        chrono.setVolume(0.2f, 0.2f);
+        chrono.start();
+
+    }
+
     public void onBackPressed() {
         setQuitPopup();
     }
@@ -235,9 +266,9 @@ public class MathemaQuizzActivity extends AppCompatActivity {
             equation.setTextColor(getColor(R.color.white));
             g.newEquationDifficile(g);
         }else if(difficulty == 3){
-            bg.setBackground(getDrawable(R.drawable.accueil_bg));
-            nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
-            equation.setTextColor(getColor(R.color.white));
+            bg.setBackground(getDrawable(R.drawable.bg_quizz_facile));
+            nuage_equation.setImageDrawable(getDrawable(R.drawable.grosnuage));
+            equation.setTextColor(getColor(R.color.black));
             g.newEquationEvolution(g);
         }
 
