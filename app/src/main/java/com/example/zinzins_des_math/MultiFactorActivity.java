@@ -68,7 +68,7 @@ public class MultiFactorActivity extends AppCompatActivity {
 
         LinearLayout layout = findViewById(R.id.multifactor);
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)(48*displayrealMetrics.density), (int)(35*displayrealMetrics.density));
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)getResources().getDimension(R.dimen.wight_backbutton), (int)getResources().getDimension(R.dimen.height_backbutton));
         params.setMargins((int)(16*displayrealMetrics.density),(int)(44*displayrealMetrics.density),0,0);
         ImageView back = new ImageView(getApplicationContext());
         back.setLayoutParams(params);
@@ -139,7 +139,7 @@ public class MultiFactorActivity extends AppCompatActivity {
 
         relativeTarget.addView(targetCount);
 
-        int gridBgHeight = height - 849 - (int)(44*displayrealMetrics.density) - (int)(35*displayrealMetrics.density);
+        int gridBgHeight = height - 849 - (int)(44*displayrealMetrics.density) - (int)getResources().getDimension(R.dimen.height_backbutton);
 
         RelativeLayout gridLayout = new RelativeLayout(getApplicationContext());
         relativeParams = new RelativeLayout.LayoutParams(width, gridBgHeight);
