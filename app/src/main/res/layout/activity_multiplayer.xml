@@ -5,44 +5,148 @@
     android:layout_width="match_parent"
     android:background="@drawable/multiplayer_bg"
     android:layout_height="match_parent"
+    android:theme="@style/theme4"
     tools:context=".MultiplayerActivity">
-
-    <ImageView
-        android:id="@+id/back_menu"
-        android:layout_width="48dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
-
-    <ImageView
-        android:id="@+id/multifactor"
-        android:layout_width="351dp"
-        android:layout_height="105dp"
-        android:layout_marginTop="276dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/multifactor" />
-
-    <ImageView
-        android:id="@+id/mathemaquizz"
-        android:layout_width="351dp"
-        android:layout_height="105dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/multifactor"
-        app:srcCompat="@drawable/mathemaquizz" />
 
     <Button
         android:id="@+id/toLeaderboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_width="47dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/classement_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/back_menu"
+        android:layout_width="@dimen/wight_backbutton"
+        android:layout_height="@dimen/height_backbutton"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_mutli"
+        android:layout_width="367dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="68dp"
+        android:fontFamily="@font/nirmala_b"
+        android:text="MULTIJOUEUR"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.62" />
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="@dimen/wight_imageview"
+        android:layout_height="301dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="32dp">
+
+            <ImageView
+                android:id="@+id/multifactor"
+                android:layout_width="@dimen/wight_imageview"
+                android:layout_height="@dimen/height_imageview"
+                app:srcCompat="@drawable/multifactor_difficile"
+                tools:layout_editor_absoluteX="95dp"
+                tools:layout_editor_absoluteY="268dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="32dp">
+
+            <ImageView
+                android:id="@+id/mathemaquizz"
+                android:layout_width="@dimen/wight_imageview"
+                android:layout_height="@dimen/height_imageview"
+                app:srcCompat="@drawable/mathemaquizz_difficile"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="371dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/roulette"
+                android:layout_width="@dimen/wight_imageview"
+                android:layout_height="@dimen/height_imageview"
+                app:srcCompat="@drawable/roulette_difficile"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="568dp" />
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="32dp"
+        android:layout_height="302dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+
+        app:layout_constraintStart_toEndOf="@+id/tableLayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="79dp">
+
+            <ImageView
+                android:id="@+id/info_multifactor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_menu_info_details"
+                tools:layout_editor_absoluteX="343dp"
+                tools:layout_editor_absoluteY="655dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="79dp">
+
+            <ImageView
+                android:id="@+id/info_mathemaquizz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_menu_info_details"
+                tools:layout_editor_absoluteX="311dp"
+                tools:layout_editor_absoluteY="647dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/info_roulette"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_menu_info_details"
+                tools:layout_editor_absoluteX="319dp"
+                tools:layout_editor_absoluteY="631dp" />
+
+        </TableRow>
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

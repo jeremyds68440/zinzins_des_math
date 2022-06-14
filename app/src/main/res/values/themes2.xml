@@ -25,4 +25,17 @@
         <item name="colorPrimaryVariant">@color/gray</item>
         <item name="colorOnPrimary">@color/black</item>
     </style>
+
+    <style name="theme4" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/or</item>
+        <item name="colorPrimaryVariant">@color/or</item>
+        <item name="colorOnPrimary">@color/black</item>
+    </style>
 </resources>
