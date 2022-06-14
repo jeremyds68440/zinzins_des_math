@@ -34,10 +34,13 @@ import java.lang.reflect.Field;
 
 public class MathemaQuizzActivity extends AppCompatActivity {
 
-    Button btn_ans0, btn_ans1, btn_ans2, btn_ans3,reprendre,quitter;
+    Button btn_ans0, btn_ans1, btn_ans2, btn_ans3,reprendre,quitter,reprendre_endgame,quitter_endgame;
     MediaPlayer soundtheme, chrono;
 
-    TextView equation, timer, score, soluaff;
+    View dialogView_back, dialogView_endgame;
+    LinearLayout popup_back, popup_endgame;
+
+    TextView equation, timer, score, soluaff, score_dialog;
     ProgressBar progresstimer;
     ConstraintLayout bg;
     ImageView nuage_equation,back;
@@ -46,7 +49,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     FirebaseUser user;
     DatabaseReference uDatabase;
     DatabaseReference rDatabase;
-    LinearLayout popup_back;
+
     private MathemaQuizzActivity mathemaQuizzActivity;
     Bundle extras;
     public static final String SHARED_PREFS = "sharedPrefs";
@@ -76,7 +79,6 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
         @Override
         public void onFinish() {
-            AlertDialog.Builder fini = new AlertDialog.Builder(mathemaQuizzActivity);
             uDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -131,11 +133,44 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
                 }
             });
-            fini.setTitle("Bien joué");
-            fini.setMessage("Vous avez fait : " + score.getText() + " pts");
-            fini.setPositiveButton("Réssayer", new DialogInterface.OnClickListener() {
+
+            AlertDialog.Builder fini = new AlertDialog.Builder(mathemaQuizzActivity);
+            ViewGroup viewGroup = findViewById(android.R.id.content);
+            dialogView_endgame = LayoutInflater.from(mathemaQuizzActivity).inflate(R.layout.custom_popup_endgame, viewGroup, false);
+            fini.setView(dialogView_endgame);
+            AlertDialog alertDialog = fini.create();
+
+            score_dialog = dialogView_endgame.findViewById(R.id.text_score_mj2);
+            quitter_endgame = dialogView_endgame.findViewById(R.id.button_quitter_endgame);
+            reprendre_endgame = dialogView_endgame.findViewById((R.id.button_rep_jeu_endgame));
+            popup_endgame = dialogView_endgame.findViewById((R.id.layout_popup_endGame));
+
+            score_dialog.setText(score.getText());
+
+            quitter_endgame.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
+                public void onClick(View v) {
+                    switch (getIntent().getFlags()) {
+                        case 0:
+                            Intent main = new Intent(getApplicationContext(), FacileActivity.class);
+                            startActivity(main);
+                            break;
+                        case 1:
+                            main = new Intent(getApplicationContext(), MoyenActivity.class);
+                            startActivity(main);
+                            break;
+                        case 2:
+                            main = new Intent(getApplicationContext(), DifficileActivity.class);
+                            startActivity(main);
+                            break;
+                    }
+                    temps.cancel();
+                    finish();
+                }
+            });
+            reprendre_endgame.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     secondsRemaining = 30;
                     g = new Game();
                     nextTurn();
@@ -151,22 +186,12 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                     g.setNumberCorrect(0);
                     g.setNumberIncorrect(0);
                     score.setText(Integer.toString(g.getScore()));
+                    alertDialog.dismiss();
+                    back.setColorFilter(Color.argb(0, 0, 0, 0));
                 }
             });
-            fini.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent difficulte = new Intent(getApplicationContext(), DifficultyActivity.class);
-                    startActivity(difficulte);
-                    temps.cancel();
-                    finish();
-                }
-            });
-
-            fini.setCancelable(false);
-            fini.show();
+            alertDialog.show();
         }
-
     };
 
     @Override
@@ -286,12 +311,13 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     private void setQuitPopup(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         ViewGroup viewGroup = findViewById(android.R.id.content);
-        View dialogView = LayoutInflater.from(this).inflate(R.layout.custom_popup_back, viewGroup, false);
-        builder.setView(dialogView);
+        dialogView_back = LayoutInflater.from(this).inflate(R.layout.custom_popup_back, viewGroup, false);
+        builder.setView(dialogView_back);
         AlertDialog alertDialog = builder.create();
 
-        quitter = dialogView.findViewById(R.id.button_quitter);
-        reprendre = dialogView.findViewById((R.id.button_rep_jeu));
+        quitter = dialogView_back.findViewById(R.id.button_quitter);
+        reprendre = dialogView_back.findViewById((R.id.button_rep_jeu));
+        popup_back = dialogView_back.findViewById((R.id.layout_popup_back));
 
         quitter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -323,6 +349,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
             }
         });
         alertDialog.show();
+
     }
 
     private void nextTurn() {
