@@ -170,7 +170,7 @@ public class MultiFactorActivity extends AppCompatActivity {
 
         RelativeLayout.LayoutParams gridParams = new RelativeLayout.LayoutParams(NUMBERBUBBLECOLUMN*BUBBLECOLUMN+100,BUBBLEROW*NUMBERBUBBLEROW);
         RelativeLayout.LayoutParams bgParams = new RelativeLayout.LayoutParams(width,BUBBLEROW*NUMBERBUBBLEROW + 100);
-        gridParams.setMargins((width - (NUMBERBUBBLECOLUMN*BUBBLECOLUMN+70))/2,30,0,0);
+        gridParams.setMargins((width - (NUMBERBUBBLECOLUMN*BUBBLECOLUMN+70))/2,(height - 1136 - BUBBLEROW*NUMBERBUBBLEROW)/2+30,0,0);
         GridView grid = new GridView(getApplicationContext());
         grid.setNumColumns(NUMBERBUBBLECOLUMN);
         grid.setLayoutParams(gridParams);
