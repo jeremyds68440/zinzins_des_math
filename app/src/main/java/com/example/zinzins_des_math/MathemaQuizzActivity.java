@@ -223,17 +223,22 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         int difficulty = getIntent().getFlags();
         if(difficulty == 0){
             bg.setBackground(getDrawable(R.drawable.bg_quizz_facile));
-            g.newEquationFacile();
+            g.newEquationFacile(g);
         }else if(difficulty == 1){
             bg.setBackground(getDrawable(R.drawable.bg_quizz_moyen));
             nuage_equation.setImageDrawable(getDrawable(R.drawable.grosnuage_quizz_moyen));
             equation.setTextColor(getColor(R.color.white));
-            g.newEquationMoyen();
+            g.newEquationMoyen(g);
         }else if(difficulty == 2){
             bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
             nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
             equation.setTextColor(getColor(R.color.white));
-            g.newEquationDifficile();
+            g.newEquationDifficile(g);
+        }else if(difficulty == 3){
+            bg.setBackground(getDrawable(R.drawable.accueil_bg));
+            nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
+            equation.setTextColor(getColor(R.color.white));
+            g.newEquationEvolution(g);
         }
 
         int [] answer = g.getCurrentEquation().getAnswerArray();

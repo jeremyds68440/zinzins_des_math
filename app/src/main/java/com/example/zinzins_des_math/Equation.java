@@ -10,7 +10,7 @@ public class Equation {
     private int maxNbr;
     private String equationPhrase;
 
-    public Equation(int maxNbr, int difficulty){
+    public Equation(int maxNbr, int difficulty, Game g){
 
         if (difficulty == 0){
             this.maxNbr = maxNbr;
@@ -81,6 +81,48 @@ public class Equation {
                 this.answer = this.firstNbr * this.secondNbr;
                 this.equationPhrase = firstNbr + "*" + secondNbr;
             }
+
+            this.answerSol = randomNbr.nextInt(4);
+            this.answerArray = new int[] {0,1,2,3};
+
+            this.answerArray[0] = answer - randomNbr.nextInt(100);
+            this.answerArray[1] = answer + randomNbr.nextInt(100);
+            this.answerArray[2] = answer - randomNbr.nextInt(100);
+            this.answerArray[3] = answer + randomNbr.nextInt(100);
+
+            this.answerArray = shuffleArray(this.answerArray);
+
+            answerArray[answerSol] = answer;
+        }
+
+        if (difficulty == 3){
+            this.maxNbr = maxNbr;
+            Random randomNbr = new Random();
+
+            if (g.getNumberCorrect() < 3) {
+                this.firstNbr = randomNbr.nextInt(maxNbr);
+                this.secondNbr = randomNbr.nextInt(maxNbr);
+                this.answer = this.firstNbr + this.secondNbr;
+                this.equationPhrase = firstNbr + "+" + secondNbr ;
+            }else  if (g.getNumberCorrect() < 6) {
+                this.firstNbr = randomNbr.nextInt(maxNbr);
+                this.secondNbr = randomNbr.nextInt(maxNbr);
+                this.thirdNbr = randomNbr.nextInt(maxNbr);
+                this.answer = this.firstNbr + this.secondNbr * this.thirdNbr;
+                this.equationPhrase = firstNbr + "+" + secondNbr + "*" + thirdNbr;
+            }else if (g.getNumberCorrect() < 6) {
+                this.firstNbr = randomNbr.nextInt(20);
+                this.secondNbr = randomNbr.nextInt(20);
+                this.answer = this.firstNbr * this.secondNbr;
+                this.equationPhrase = firstNbr + "*" + secondNbr;
+            }else  if (g.getNumberCorrect() < 9) {
+                this.firstNbr = randomNbr.nextInt(maxNbr);
+                this.secondNbr = randomNbr.nextInt(maxNbr);
+                this.thirdNbr = randomNbr.nextInt(maxNbr);
+                this.answer = this.firstNbr + this.secondNbr * this.thirdNbr;
+                this.equationPhrase = firstNbr + "+" + secondNbr + "*" + thirdNbr;
+            }
+
 
             this.answerSol = randomNbr.nextInt(4);
             this.answerArray = new int[] {0,1,2,3};

@@ -26,9 +26,9 @@ public class LevelActivity extends AppCompatActivity {
         ImageView roulette = findViewById(R.id.roulette_evolution);
 
         actionClickImagefacile(back, DifficultyActivity.class,12);
-        actionClickImagefacile(multifactor, MultiFactorActivity.class,0);
-        actionClickImagefacile(mathemaquizz, MathemaQuizzActivity.class,0);
-        actionClickImagefacile(roulette, RouletteActivity.class,0);
+        actionClickImagefacile(multifactor, MultiFactorActivity.class,3);
+        actionClickImagefacile(mathemaquizz, MathemaQuizzActivity.class,3);
+        actionClickImagefacile(roulette, RouletteActivity.class,3);
 
     }
 
