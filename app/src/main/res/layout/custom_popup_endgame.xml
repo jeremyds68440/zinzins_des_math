@@ -10,7 +10,7 @@
         android:layout_height="201dp"
         android:background="@drawable/fin_mj2_facile"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"  >
 
         <TableLayout
             android:layout_width="match_parent"
