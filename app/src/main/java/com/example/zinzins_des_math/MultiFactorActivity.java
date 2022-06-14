@@ -234,18 +234,19 @@ public class MultiFactorActivity extends AppCompatActivity {
     public void verify() {
         if(counter >= target) {
             blocked = true;
-            setGameOver(counter == target);
+            int point = 0;
             if(counter == target) {
                 int varMult = (difficulty+2)*2;
-                points += 120 * ((float)(varMult - countMult + getMinMult() + difficulty*2) /varMult/numberoftry);
+                point += 120 * ((float)(varMult - countMult + getMinMult() + difficulty*2) /varMult/numberoftry);
                 numberoftry = 1;
                 countMult = 0;
-                points = 0;
+                points += point;
             }
             else {
                 countMult = 0;
                 numberoftry++;
             }
+            setGameOver(counter == target, point);
         }
     }
 
@@ -263,13 +264,13 @@ public class MultiFactorActivity extends AppCompatActivity {
         return res;
     }
 
-    public void setGameOver(boolean win) {
+    public void setGameOver(boolean win , int point) {
         AlertDialog.Builder popup = new AlertDialog.Builder(this);
         String positive;
         if(win) {
             scoreCount.setTextColor(context.getResources().getColor(R.color.win));
             popup.setTitle("Bravo !");
-            popup.setMessage("Cible atteinte !");
+            popup.setMessage("Cible atteinte !\nVous avez gagné " + point + " points.\nVous avez " + points + " points au total.");
             positive = "Continuer";
         }
         else {
