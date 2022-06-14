@@ -53,12 +53,12 @@ public class Enigme1Activity extends AppCompatActivity {
         setContentView(R.layout.activity_enigme1);
 
         switch(getIntent().getFlags()){
+
             case 0 :
                 questByDifficulty = "Combien y a-t-il de triangles ?";
                 repByDifficulty = "24 triangles";
                 valueRepByDifficulty= "24";
                 imgByDifficulty = R.drawable.img_enigme1_facile ;
-                System.out.println(questByDifficulty);
                 break;
             case 1 :
                 questByDifficulty = "On désire construire un château de cartes avec 340 paquets de 32 cartes.\n" +

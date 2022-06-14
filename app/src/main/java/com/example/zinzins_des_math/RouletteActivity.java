@@ -60,67 +60,77 @@ public class RouletteActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 //Toast.makeText(RouletteActivity.this, "Enigme" + sectors[sectors.length - (degree + 1)], Toast.LENGTH_SHORT).show();
-                Intent enigme1 = new Intent(getApplicationContext(), Enigme2Activity.class);
+                /*Intent enigme1 = new Intent(getApplicationContext(), Enigme4Activity.class);
+                enigme1.setFlags(getIntent().getFlags());
                 startActivity(enigme1);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
-                /*
+                */
                 switch (sectors[sectors.length - (degree + 1)]){
                     case "1" :
                         Intent enigme1 = new Intent(getApplicationContext(), Enigme1Activity.class);
+                        enigme1.setFlags(getIntent().getFlags());
                         startActivity(enigme1);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                     case "2" :
                         Intent enigme2 = new Intent(getApplicationContext(), Enigme2Activity.class);
+                        enigme2.setFlags(getIntent().getFlags());
                         startActivity(enigme2);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                     case "3" :
                         Intent enigme3 = new Intent(getApplicationContext(), Enigme3Activity.class);
+                        enigme3.setFlags(getIntent().getFlags());
                         startActivity(enigme3);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                     case "4" :
                         Intent enigme4 = new Intent(getApplicationContext(), Enigme4Activity.class);
+                        enigme4.setFlags(getIntent().getFlags());
                         startActivity(enigme4);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                     case "5" :
                         Intent enigme5 = new Intent(getApplicationContext(), Enigme5Activity.class);
+                        enigme5.setFlags(getIntent().getFlags());
                         startActivity(enigme5);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                     case "6" :
                         Intent enigme6 = new Intent(getApplicationContext(), Enigme6Activity.class);
+                        enigme6.setFlags(getIntent().getFlags());
                         startActivity(enigme6);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                     case "7" :
                         Intent enigme7 = new Intent(getApplicationContext(), Enigme7Activity.class);
+                        enigme7.setFlags(getIntent().getFlags());
                         startActivity(enigme7);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                     case "8" :
                         Intent enigme8 = new Intent(getApplicationContext(), Enigme8Activity.class);
+                        enigme8.setFlags(getIntent().getFlags());
                         startActivity(enigme8);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
                     case "9" :
                         Intent enigme9 = new Intent(getApplicationContext(), Enigme9Activity.class);
+                        enigme9.setFlags(getIntent().getFlags());
                         startActivity(enigme9);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
-                }*/
+                }
             }
 
             @Override
