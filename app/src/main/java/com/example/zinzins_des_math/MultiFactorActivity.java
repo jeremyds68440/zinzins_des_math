@@ -1,5 +1,6 @@
 package com.example.zinzins_des_math;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -22,7 +23,15 @@ import android.widget.TextView;
 
 import com.example.zinzins_des_math.adapter.BubbleItemAdapter;
 import com.example.zinzins_des_math.models.BubbleItem;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -268,6 +277,39 @@ public class MultiFactorActivity extends AppCompatActivity {
         AlertDialog.Builder popup = new AlertDialog.Builder(this);
         String positive;
         if(win) {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            DatabaseReference mDatabase = database.getReference("users").child(user.getUid());
+            mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    int dbScore;
+                    final User utilisateur = new User();
+                    final Field[] fields = utilisateur.getClass().getDeclaredFields();
+                    switch (getIntent().getFlags()) {
+                        case 0 :
+                            dbScore = Math.toIntExact((long) dataSnapshot.child(fields[5].getName()).getValue());
+                            if (dbScore < points)
+                                mDatabase.child("scoreMultifactorFacile").setValue(points);
+                            break;
+                        case 1 :
+                            dbScore = Math.toIntExact((long) dataSnapshot.child(fields[6].getName()).getValue());
+                            if (dbScore < points)
+                                mDatabase.child("scoreMultifactorMoyen").setValue(points);
+                            break;
+                        case 2 :
+                            dbScore = Math.toIntExact((long) dataSnapshot.child(fields[4].getName()).getValue());
+                            if (dbScore < points)
+                                mDatabase.child("scoreMultifactorDifficile").setValue(points);
+                            break;
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
             scoreCount.setTextColor(context.getResources().getColor(R.color.win));
             popup.setTitle("Bravo !");
             popup.setMessage("Cible atteinte !\nVous avez gagné " + point + " points.\nVous avez " + points + " points au total.");
