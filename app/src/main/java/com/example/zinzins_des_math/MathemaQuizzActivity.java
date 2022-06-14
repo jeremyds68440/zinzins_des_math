@@ -84,7 +84,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                             dbScore = Math.toIntExact((long) dataSnapshot.child(fields[2].getName()).getValue());
                             if (dbScore < Integer.parseInt((String) score.getText()))
                                 uDatabase.child("scoreMathemaquizzFacile").setValue(Integer.parseInt((String) score.getText()));
-                            if (defi.equals("defi")) {
+                            if (defi!=null) {
                                 if (role.equals("host")) {
                                     rDatabase.child("scorePlayer1").setValue(Integer.parseInt((String) score.getText()));
                                 } else if (role.equals("client")) {
@@ -97,7 +97,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                             dbScore = Math.toIntExact((long) dataSnapshot.child(fields[3].getName()).getValue());
                             if (dbScore < Integer.parseInt((String) score.getText()))
                                 uDatabase.child("scoreMathemaquizzMoyen").setValue(Integer.parseInt((String) score.getText()));
-                            if (defi.equals("defi")) {
+                            if (defi!=null) {
                                 if (role.equals("host")) {
                                     rDatabase.child("scorePlayer1").setValue(Integer.parseInt((String) score.getText()));
                                 } else if (role.equals("client")) {
@@ -110,7 +110,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                             dbScore = Math.toIntExact((long) dataSnapshot.child(fields[1].getName()).getValue());
                             if (dbScore < Integer.parseInt((String) score.getText()))
                                 uDatabase.child("scoreMathemaquizzDifficile").setValue(Integer.parseInt((String) score.getText()));
-                            if (defi.equals("defi")) {
+                            if (defi!=null) {
                                 if (role.equals("host")) {
                                     rDatabase.child("scorePlayer1").setValue(Integer.parseInt((String) score.getText()));
                                 } else if (role.equals("client")) {
@@ -178,7 +178,8 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         user = FirebaseAuth.getInstance().getCurrentUser();
         uDatabase = database.getReference("users").child(user.getUid());
-        rDatabase = database.getReference("rooms").child(roomName);
+        if(defi != null)
+            rDatabase = database.getReference("rooms").child(roomName);
         temps.start();
 
         this.soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.mathemaquizz_sound);
