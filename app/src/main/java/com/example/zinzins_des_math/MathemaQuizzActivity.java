@@ -44,7 +44,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     ProgressBar progresstimer;
     ConstraintLayout bg;
     ImageView nuage_equation,back;
-    String defi, role, roomName;
+    String defi, role, roomName, difficultyString;
     FirebaseDatabase database;
     FirebaseUser user;
     DatabaseReference uDatabase;
@@ -144,6 +144,10 @@ public class MathemaQuizzActivity extends AppCompatActivity {
             quitter_endgame = dialogView_endgame.findViewById(R.id.button_quitter_endgame);
             reprendre_endgame = dialogView_endgame.findViewById((R.id.button_rep_jeu_endgame));
             popup_endgame = dialogView_endgame.findViewById((R.id.layout_popup_endGame));
+
+            String imagePopup = "fin_mj2_" + difficultyString;
+            int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
+            popup_endgame.setBackground(getDrawable(resId));
 
             score_dialog.setText(score.getText());
 
@@ -315,9 +319,14 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         builder.setView(dialogView_back);
         AlertDialog alertDialog = builder.create();
 
+
         quitter = dialogView_back.findViewById(R.id.button_quitter);
         reprendre = dialogView_back.findViewById((R.id.button_rep_jeu));
         popup_back = dialogView_back.findViewById((R.id.layout_popup_back));
+
+        String imagePopup = "quitter_mj2_" + difficultyString;
+        int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
+        popup_back.setBackground(getDrawable(resId));
 
         quitter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -357,21 +366,25 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         int difficulty = getIntent().getFlags();
         if (difficulty == 0) {
             bg.setBackground(getDrawable(R.drawable.bg_quizz_facile));
+            difficultyString = "facile";
             g.newEquationFacile(g);
         } else if (difficulty == 1) {
             bg.setBackground(getDrawable(R.drawable.bg_quizz_moyen));
             nuage_equation.setImageDrawable(getDrawable(R.drawable.grosnuage_quizz_moyen));
             equation.setTextColor(getColor(R.color.white));
+            difficultyString = "moyen";
             g.newEquationMoyen(g);
         } else if (difficulty == 2) {
             bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
             nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
             equation.setTextColor(getColor(R.color.white));
+            difficultyString = "difficile";
             g.newEquationDifficile(g);
         } else if (difficulty == 3) {
             bg.setBackground(getDrawable(R.drawable.bg_quizz_facile));
             nuage_equation.setImageDrawable(getDrawable(R.drawable.grosnuage));
             equation.setTextColor(getColor(R.color.black));
+            difficultyString = "facile";
             g.newEquationEvolution(g);
         }
 
