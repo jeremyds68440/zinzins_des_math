@@ -10,8 +10,7 @@ import android.widget.ImageView;
 
 public class choosesolomultiActivity extends AppCompatActivity {
 
-    ImageView Back, multi, solo;
-
+    ImageView Back, multi, solo, toDuel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +46,18 @@ public class choosesolomultiActivity extends AppCompatActivity {
             public void onClick(View v) {
                 multi.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent multiPlayerActivity = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(multiPlayerActivity);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
+            }
+        });
+
+        toDuel = findViewById(R.id.toDuel);
+        toDuel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toDuel.setColorFilter(Color.argb(80, 0, 0, 0));
+                Intent multiPlayerActivity = new Intent(getApplicationContext(), RoomListActivity.class);
                 startActivity(multiPlayerActivity);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();

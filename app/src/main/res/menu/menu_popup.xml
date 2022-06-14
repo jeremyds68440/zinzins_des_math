@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/roomMultifactorFacile"
+        android:title="Multifactor Facile"/>
+    <item
+        android:id="@+id/roomMultifactorMoyen"
+        android:title="Multifactor Moyen"/>
+    <item
+        android:id="@+id/roomMultifactorDifficile"
+        android:title="Multifactor Difficile"/>
+    <item
+        android:id="@+id/roomMathemaquizzFacile"
+        android:title="Mathemaquizz Facile"/>
+    <item
+        android:id="@+id/roomMathemaquizzMoyen"
+        android:title="Mathemaquizz Moyen"/>
+    <item
+        android:id="@+id/roomMathemaquizzDifficile"
+        android:title="Mathemaquizz Difficile"/>
+    <item
+        android:id="@+id/roomRouletteFacile"
+        android:title="Roulette Facile"/>
+    <item
+        android:id="@+id/roomRouletteMoyen"
+        android:title="Roulette Moyen"/>
+    <item
+        android:id="@+id/roomRouletteDifficile"
+        android:title="Roulette Difficile"/>
+</menu>
