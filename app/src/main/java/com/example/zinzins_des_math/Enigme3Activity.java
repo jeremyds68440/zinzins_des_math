@@ -44,7 +44,7 @@ public class Enigme3Activity extends AppCompatActivity {
 
         switch(getIntent().getFlags()){
             case 0 :
-                questByDifficulty = "Monsieur X donne de l’argent de poche à ses trois enfants : il donne 46€ aux deux jumeaux, et à l’aîné 4€ de plus qu’au jumeaux réunis.  Quelle somme Monsieur X a¬-t-il donné en tout ? ";
+                questByDifficulty = "Monsieur X donne de l’argent de poche à ses trois enfants : il donne 46€ aux deux jumeaux, et à l’aîné 4€ de plus qu’au jumeaux réunis.  Quelle somme Monsieur X a-t-il donné en tout ? ";
                 repByDifficulty = "188€";
                 valueRepByDifficulty = "188";
                 //imgByDifficulty =  ;

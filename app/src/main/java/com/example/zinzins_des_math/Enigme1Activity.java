@@ -58,6 +58,7 @@ public class Enigme1Activity extends AppCompatActivity {
                 repByDifficulty = "24 triangles";
                 valueRepByDifficulty= "24";
                 imgByDifficulty = R.drawable.img_enigme1_facile ;
+                System.out.println(questByDifficulty);
                 break;
             case 1 :
                 questByDifficulty = "On désire construire un château de cartes avec 340 paquets de 32 cartes.\n" +
@@ -66,6 +67,7 @@ public class Enigme1Activity extends AppCompatActivity {
                 valueRepByDifficulty = "85";
                 expliByDifficulty = "Explication : nombre de cartes nécessaires pour n étages est égal n(3n+1)/2. Trouver n revient à résoudre l’équation n(3n+1)/2 = 10880.";
                 imgByDifficulty = R.drawable.img_enigme_1;
+                System.out.println(questByDifficulty);
                 break;
             case 2 :
                 questByDifficulty = "";

@@ -44,14 +44,17 @@ public class Enigme9Activity extends AppCompatActivity {
 
         switch(getIntent().getFlags()){
             case 0 :
-                questByDifficulty = "";
-                repByDifficulty = "";
+                questByDifficulty = "Cinq machines sont capables de rédiger cinq articles en cinq minutes. Avec ce rythme de production, en combien de temps 100 machines peuvent-elles écrire 100 articles ?";
+                repByDifficulty = "5 minutes";
+                valueRepByDifficulty = "5";
                 //imgByDifficulty =  ;
                 break;
             case 1 :
-                questByDifficulty = "";
-                repByDifficulty = " ";
-                expliByDifficulty = "";
+                questByDifficulty = "En se rendant à un point d’eau, un zèbre croise 6 girafes qui s’y rendaient également. Chaque girafe portait sur son dos 3 singes. Chaque singe portait 2 oiseaux qui eux-mêmes portaient chacun 4 mouches.\n" +
+                        "Combien d’animaux au total se retrouvent au point d’eau ? ";
+                repByDifficulty = "205 animaux";
+                valueRepByDifficulty = "205";
+                expliByDifficulty = "Explication : 1 zèbre + 6 girafes + 18 (3x6) singes + 36 (2x18) oiseaux + 144 (4x36) mouches";
                 imgByDifficulty = R.drawable.img_enigme_9;
                 break;
             case 2 :

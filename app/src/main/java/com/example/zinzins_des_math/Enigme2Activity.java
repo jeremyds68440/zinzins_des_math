@@ -43,6 +43,7 @@ public class Enigme2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_enigme1);
 
         switch(getIntent().getFlags()){
+
             case 0 :
                 questByDifficulty = "Pyramide mathématique";
                 repByDifficulty = "8";

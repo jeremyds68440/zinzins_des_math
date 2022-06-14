@@ -44,14 +44,15 @@ public class Enigme8Activity extends AppCompatActivity {
 
         switch(getIntent().getFlags()){
             case 0 :
-                questByDifficulty = "";
-                repByDifficulty = "";
+                questByDifficulty = "2A + B = 2C + A = 2B + 2C = 3B + A = 10. Quelle est la valeur de B ?";
+                repByDifficulty = "2";
+                valueRepByDifficulty = "2";
                 //imgByDifficulty =  ;
                 break;
             case 1 :
-                questByDifficulty = "";
-                repByDifficulty = " ";
-                expliByDifficulty = "";
+                questByDifficulty = "Sept personnes se rencontrent et se serrent la main. Sachant que chaque personne a donné la main une et une seule fois à chaque autre personne, combien de poignées de mains y a-t-il eu ?";
+                repByDifficulty = "21 poignées de main";
+                valueRepByDifficulty = "21";
                 imgByDifficulty = R.drawable.img_enigme_8;
                 break;
             case 2 :

@@ -44,15 +44,20 @@ public class Enigme7Activity extends AppCompatActivity {
         setContentView(R.layout.activity_enigme1);
 
         switch(getIntent().getFlags()){
+
             case 0 :
-                questByDifficulty = "";
-                repByDifficulty = "";
+                questByDifficulty = "Une personne se réveille et sort de son lit. Elle se rend compte qu’il n’y a plus d’électricité. Elle ouvre un tiroir à chaussettes dans lequel il y a 10 chaussettes noires et 10 chaussettes bleues. Combien de chaussettes faut-il prendre pour être sûr d’avoir 1 paire de chaussettes identiques ?";
+                repByDifficulty = "3 chaussettes";
+                valueRepByDifficulty = "3";
+
                 //imgByDifficulty =  ;
                 break;
             case 1 :
-                questByDifficulty = "";
-                repByDifficulty = " ";
-                expliByDifficulty = "";
+                questByDifficulty = "Il faut 1min25s pour couper une bûche en deux. \n" +
+                        "Combien de minutes faut-il pour couper une bûche en 13 morceaux  ?\n";
+                repByDifficulty = "17 min";
+                valueRepByDifficulty = "17";
+                expliByDifficulty = "Explication :  Pour couper une bûche en 13 morceaux, il faut faire 12 coupes prenant chacune 1min25s, soit : 12 x 1 min 25s = 17 min";
                 imgByDifficulty = R.drawable.img_enigme_7;
                 break;
             case 2 :
