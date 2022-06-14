@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class Enigme4Activity extends AppCompatActivity {
     private String valueRepByDifficulty;
     private String expliByDifficulty = "";
     private int imgByDifficulty;
+    public LinearLayout root;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -41,6 +43,7 @@ public class Enigme4Activity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
+        root = findViewById(R.id.root);
 
         switch(getIntent().getFlags()){
             case 0 :
@@ -50,6 +53,7 @@ public class Enigme4Activity extends AppCompatActivity {
                 repByDifficulty = "54 places";
                 valueRepByDifficulty = "54";
                 //imgByDifficulty =  ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
                 questByDifficulty = "Un père promet à son fils de lui offrir 5€ pour chaque bonne réponse mais le fiston devra lui donner 8€ à chaque mauvaise réponse.\n" +
@@ -67,12 +71,14 @@ public class Enigme4Activity extends AppCompatActivity {
                         "13x = 208\n" +
                         "x = 208/13 = 16\n";
                 imgByDifficulty = R.drawable.img_enigme_4;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
                 questByDifficulty = "";
                 repByDifficulty = "";
                 expliByDifficulty = "";
                 //imgByDifficulty = ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }
 

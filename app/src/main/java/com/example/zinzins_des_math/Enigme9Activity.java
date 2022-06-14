@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class Enigme9Activity extends AppCompatActivity {
     private String valueRepByDifficulty;
     private String expliByDifficulty = "";
     private int imgByDifficulty;
+    public LinearLayout root;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -41,6 +43,7 @@ public class Enigme9Activity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
+        root = findViewById(R.id.root);
 
         switch(getIntent().getFlags()){
             case 0 :
@@ -48,6 +51,8 @@ public class Enigme9Activity extends AppCompatActivity {
                 repByDifficulty = "5 minutes";
                 valueRepByDifficulty = "5";
                 //imgByDifficulty =  ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
+
                 break;
             case 1 :
                 questByDifficulty = "En se rendant à un point d’eau, un zèbre croise 6 girafes qui s’y rendaient également. Chaque girafe portait sur son dos 3 singes. Chaque singe portait 2 oiseaux qui eux-mêmes portaient chacun 4 mouches.\n" +
@@ -56,12 +61,14 @@ public class Enigme9Activity extends AppCompatActivity {
                 valueRepByDifficulty = "205";
                 expliByDifficulty = "Explication : 1 zèbre + 6 girafes + 18 (3x6) singes + 36 (2x18) oiseaux + 144 (4x36) mouches";
                 imgByDifficulty = R.drawable.img_enigme_9;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
                 questByDifficulty = "";
                 repByDifficulty = "";
                 expliByDifficulty = "";
                 //imgByDifficulty = ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }
 

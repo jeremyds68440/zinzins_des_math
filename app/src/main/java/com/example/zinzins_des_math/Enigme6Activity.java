@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class Enigme6Activity extends AppCompatActivity {
     private String valueRepByDifficulty;
     private String expliByDifficulty = "";
     private int imgByDifficulty;
+    public LinearLayout root;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -42,6 +44,7 @@ public class Enigme6Activity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
+        root = findViewById(R.id.root);
 
         switch(getIntent().getFlags()){
             case 0 :
@@ -49,18 +52,21 @@ public class Enigme6Activity extends AppCompatActivity {
                 repByDifficulty = "466€";
                 valueRepByDifficulty = "466";
                 //imgByDifficulty =  ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
                 questByDifficulty = "Quel est le seul nombre premier compris entre 1908 et 1930 ?";
                 repByDifficulty = "1913";
                 valueRepByDifficulty = "1913";
                 imgByDifficulty = R.drawable.img_enigme_6;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
                 questByDifficulty = "";
                 repByDifficulty = "";
                 expliByDifficulty = "";
                 //imgByDifficulty = ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }
 

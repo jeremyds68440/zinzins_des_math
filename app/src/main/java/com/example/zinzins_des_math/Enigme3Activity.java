@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class Enigme3Activity extends AppCompatActivity {
     private String valueRepByDifficulty;
     private String expliByDifficulty = "";
     private int imgByDifficulty;
+    public LinearLayout root;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -41,6 +43,7 @@ public class Enigme3Activity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
+        root = findViewById(R.id.root);
 
         switch(getIntent().getFlags()){
             case 0 :
@@ -48,6 +51,7 @@ public class Enigme3Activity extends AppCompatActivity {
                 repByDifficulty = "188€";
                 valueRepByDifficulty = "188";
                 //imgByDifficulty =  ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
                 questByDifficulty = "Dans ce cube plein, toutes les rangées aux extrémités noircies sont constituées de petits cubes noirs. Tous les autres petits cubes sont blancs.\n" +
@@ -55,12 +59,14 @@ public class Enigme3Activity extends AppCompatActivity {
                 repByDifficulty = "387 cubes blancs";
                 expliByDifficulty = "387";
                 imgByDifficulty = R.drawable.img_enigme_3;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
                 questByDifficulty = "";
                 repByDifficulty = "";
                 expliByDifficulty = "";
                 //imgByDifficulty = ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }
 

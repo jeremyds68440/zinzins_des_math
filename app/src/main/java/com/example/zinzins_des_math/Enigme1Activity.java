@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,12 +39,14 @@ public class Enigme1Activity extends AppCompatActivity {
     private TextView titre, question;
     private ImageView image;
     int cpt = 0;
+    int score = 0;
 
     private String questByDifficulty;
     private String repByDifficulty;
     private String valueRepByDifficulty;
     private String expliByDifficulty = "";
     private int imgByDifficulty;
+    public LinearLayout root;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -52,6 +55,8 @@ public class Enigme1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
 
+        root = findViewById(R.id.root);
+
         switch(getIntent().getFlags()){
 
             case 0 :
@@ -59,6 +64,7 @@ public class Enigme1Activity extends AppCompatActivity {
                 repByDifficulty = "24 triangles";
                 valueRepByDifficulty= "24";
                 imgByDifficulty = R.drawable.img_enigme1_facile ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
                 questByDifficulty = "On désire construire un château de cartes avec 340 paquets de 32 cartes.\n" +
@@ -67,13 +73,14 @@ public class Enigme1Activity extends AppCompatActivity {
                 valueRepByDifficulty = "85";
                 expliByDifficulty = "Explication : nombre de cartes nécessaires pour n étages est égal n(3n+1)/2. Trouver n revient à résoudre l’équation n(3n+1)/2 = 10880.";
                 imgByDifficulty = R.drawable.img_enigme_1;
-                System.out.println(questByDifficulty);
+                root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
                 questByDifficulty = "";
                 repByDifficulty = "";
                 expliByDifficulty = "";
                 //imgByDifficulty = ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }
 
@@ -109,6 +116,7 @@ public class Enigme1Activity extends AppCompatActivity {
                         cpt++;
                         if (cpt<3){
                             Toast.makeText(Enigme1Activity.this, "Il te reste " + (3-cpt) + " tentative(s)" , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Enigme1Activity.this, score , Toast.LENGTH_SHORT).show();
                         }
                     }
                     if (cpt==3){
@@ -137,7 +145,6 @@ public class Enigme1Activity extends AppCompatActivity {
                     }
 
                 } else {
-                    //score++;
                     cpt = 0 ;
                     AlertDialog.Builder sucess = new AlertDialog.Builder(enigmeActivity);
                     sucess.setTitle("Bravo !");
@@ -152,6 +159,10 @@ public class Enigme1Activity extends AppCompatActivity {
                         }
                     });
                     sucess.show();
+
+                    if(cpt == 1) score += 3;
+                    else if (cpt == 2) score += 2;
+                    else if (cpt == 3) score += 1;
 
                 }
 
