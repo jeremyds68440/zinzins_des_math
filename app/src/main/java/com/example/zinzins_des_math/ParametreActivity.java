@@ -30,6 +30,7 @@ import java.lang.reflect.Field;
 public class ParametreActivity extends AppCompatActivity {
 
     TextView username, scoreMathemaquizzFacile, mail;
+    ImageView avatar;
     Switch switch_sound_theme;
     Switch switch_sound_effect;
 
@@ -66,76 +67,135 @@ public class ParametreActivity extends AppCompatActivity {
     }
 
     FirebaseUser user;
-    FirebaseUser email;
     DatabaseReference mDatabase;
+    FirebaseAuth fAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parametre);
-        switch_sound_theme = (Switch) findViewById(R.id.Sound_etat);
-        switch_sound_effect = (Switch) findViewById(R.id.effect_etat);
-        username = (TextView) findViewById(R.id.nomUtil);
-        scoreMathemaquizzFacile = (TextView) findViewById(R.id.scoreMathemaquizz);
-        mail = (TextView) findViewById(R.id.mailUtil);
-        this.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.zinzin_sound);
+        fAuth = FirebaseAuth.getInstance();
+        if (fAuth.getCurrentUser() != null) {
+            switch_sound_theme = (Switch) findViewById(R.id.Sound_etat);
+            switch_sound_effect = (Switch) findViewById(R.id.effect_etat);
+            username = (TextView) findViewById(R.id.nomUtil);
+            scoreMathemaquizzFacile = (TextView) findViewById(R.id.scoreMathemaquizz);
+            mail = (TextView) findViewById(R.id.mailUtil);
+            avatar = (ImageView) findViewById(R.id.avatarUser);
+            this.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.zinzin_sound);
 
-        loadData();
-        updateViews();
+            loadData();
+            updateViews();
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        mDatabase = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+            user = FirebaseAuth.getInstance().getCurrentUser();
+            mDatabase = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
+            avatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            final User utilisateur = new User();
+                            final Field[] fields = utilisateur.getClass().getDeclaredFields();
+                            int idAvatar = Math.toIntExact((Long) dataSnapshot.child(fields[14].getName()).getValue());
+                            switch (idAvatar) {
+                                case 0:
+                                    mDatabase.child("zAvatar").setValue(1);
+                                    break;
+                                case 1:
+                                    mDatabase.child("zAvatar").setValue(2);
+                                    break;
+                                case 2:
+                                    mDatabase.child("zAvatar").setValue(3);
+                                    break;
+                                case 3:
+                                    mDatabase.child("zAvatar").setValue(4);
+                                    break;
+                                case 4:
+                                    mDatabase.child("zAvatar").setValue(0);
+                                    break;
+                            }
+                        }
 
-        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final User utilisateur = new User();
-                final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                username.setText((String) dataSnapshot.child(fields[10].getName()).getValue());
-                scoreMathemaquizzFacile.setText(Long.toString((Long) dataSnapshot.child(fields[2].getName()).getValue()));
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        switch_sound_theme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveData();
-                if(sound_effect_state){
-                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
-                    bouton_sound.start();
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
                 }
-            }
-        });
-
-        switch_sound_effect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveData();
-                if(sound_effect_state){
-                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
-                    bouton_sound.start();
+            });
+            mDatabase.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    final User utilisateur = new User();
+                    final Field[] fields = utilisateur.getClass().getDeclaredFields();
+                    username.setText((String) dataSnapshot.child(fields[10].getName()).getValue());
+                    mail.setText((String) dataSnapshot.child(fields[0].getName()).getValue());
+                    scoreMathemaquizzFacile.setText(Long.toString((Long) dataSnapshot.child(fields[2].getName()).getValue()));
+                    int idAvatar = Math.toIntExact((Long) dataSnapshot.child(fields[14].getName()).getValue());
+                    switch (idAvatar) {
+                        case 0:
+                            avatar.setImageDrawable(getDrawable(getResources().getIdentifier("avatar_bleu", "drawable", getPackageName())));
+                            break;
+                        case 1:
+                            avatar.setImageDrawable(getDrawable(getResources().getIdentifier("avatar_orange", "drawable", getPackageName())));
+                            break;
+                        case 2:
+                            avatar.setImageDrawable(getDrawable(getResources().getIdentifier("avatar_rouge", "drawable", getPackageName())));
+                            break;
+                        case 3:
+                            avatar.setImageDrawable(getDrawable(getResources().getIdentifier("avatar_vert", "drawable", getPackageName())));
+                            break;
+                        case 4:
+                            avatar.setImageDrawable(getDrawable(getResources().getIdentifier("avatar_violet", "drawable", getPackageName())));
+                            break;
+                    }
                 }
-            }
-        });
 
-        ImageView back = findViewById(R.id.back_to_main);
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(sound_effect_state){
-                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
-                    bouton_sound.start();
                 }
-                back.setColorFilter(Color.argb(80, 0, 0, 0));
-                setQuitPopup();
-            }
-        });
+            });
 
+            switch_sound_theme.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    saveData();
+                    if (sound_effect_state) {
+                        bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                        bouton_sound.start();
+                    }
+                }
+            });
+
+            switch_sound_effect.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    saveData();
+                    if (sound_effect_state) {
+                        bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                        bouton_sound.start();
+                    }
+                }
+            });
+
+            ImageView back = findViewById(R.id.back_to_main);
+
+            back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (sound_effect_state) {
+                        bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                        bouton_sound.start();
+                    }
+                    back.setColorFilter(Color.argb(80, 0, 0, 0));
+                    setQuitPopup();
+                }
+            });
+
+        }else{
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+        }
     }
 
     public void logout(View view) {

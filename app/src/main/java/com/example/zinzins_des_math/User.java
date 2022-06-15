@@ -19,6 +19,7 @@ public class User {
     public int victoiresMathemaquizz;
     public int victoiresMultifactor;
     public int victoiresRoulette;
+    public int zAvatar;
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -141,5 +142,13 @@ public class User {
 
     public void setVictoiresRoulette(int victoiresRoulette) {
         this.victoiresRoulette = victoiresRoulette;
+    }
+
+    public int getzAvatar() {
+        return zAvatar;
+    }
+
+    public void setzAvatar(int zAvatar) {
+        this.zAvatar = zAvatar;
     }
 }

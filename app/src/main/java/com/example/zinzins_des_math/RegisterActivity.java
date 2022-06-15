@@ -86,6 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this,"Connecté",Toast.LENGTH_SHORT).show();
                     user.setUsername(username);
                     user.setEmail(email);
+                    user.setzAvatar(3);
                     updateUI(user);
                 }else{
                     Toast.makeText(RegisterActivity.this,"Echec d'authentification",Toast.LENGTH_SHORT).show();
