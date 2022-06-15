@@ -349,6 +349,7 @@ public class MultiFactorActivity extends AppCompatActivity {
             blocked = true;
             int point = 0;
             if(counter == target) {
+                id = R.layout.custom_popup_endgame;
                 int varMult = (difficulty+2)*2;
                 point += 120 * ((float)(varMult - countMult + getMinMult() + difficulty*2) /varMult/ numberOfTry);
                 numberOfTry = 1;
@@ -361,6 +362,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                 }
             }
             else {
+                id = R.layout.custom_popup_back;
                 countMult = 0;
                 numberOfTry++;
             }
@@ -403,10 +405,11 @@ public class MultiFactorActivity extends AppCompatActivity {
 
         Button quitter = dialogView.findViewById(R.id.button_quitter);
         Button reprendre = dialogView.findViewById((R.id.button_rep_jeu));
-        LinearLayout linearLayout = dialogView.findViewById((R.id.layout_popup_endGame));
+        LinearLayout linearLayout = dialogView.findViewById(R.id.layout_popup_endGame);
 
         String positive;
         if(win) {
+
             if (sound_effect_state){
                 this.soundgood = MediaPlayer.create(getApplicationContext(), R.raw.good_sound);
                 soundgood.start();
@@ -450,14 +453,12 @@ public class MultiFactorActivity extends AppCompatActivity {
                 }
             });
 
-            id = R.layout.custom_popup_endgame;
-
             String imagePopup = "victoire_mj1_" + difficultyString;
             int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
             linearLayout.setBackground(getDrawable(resId));
 
             TextView score_dialog = dialogView.findViewById(R.id.text_score_mj);
-            score_dialog.setText(points);
+            score_dialog.setText("" + points);
         }
         else {
             if (sound_effect_state){
@@ -469,10 +470,9 @@ public class MultiFactorActivity extends AppCompatActivity {
                 soundtheme.setVolume(Float.parseFloat(getString(R.string.sound_0_2)),Float.parseFloat(getString(R.string.sound_0_2)));
             }
 
-            id = R.layout.custom_popup_back;
-
             String imagePopup = "perdu_mj1_" + difficultyString;
             int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
+            linearLayout = dialogView.findViewById(R.id.layout_popup_back);
             linearLayout.setBackground(getDrawable(resId));
 
         }
@@ -515,7 +515,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                 alertDialog.dismiss();
             }
         });
-        popup.setCancelable(false);
+        alertDialog.setCancelable(false);
         alertDialog.show();
     }
 
@@ -566,6 +566,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                 back.setColorFilter(Color.argb(0, 0, 0, 0));
             }
         });
+        alertDialog.setCancelable(false);
         alertDialog.show();
     }
 
