@@ -174,6 +174,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                             break;
                     }
                     temps.cancel();
+                    alertDialog.dismiss();
                     finish();
                 }
             });
@@ -366,6 +367,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                 }
                 startActivity(main);
                 temps.cancel();
+                alertDialog.dismiss();
                 finish();
             }
         });
