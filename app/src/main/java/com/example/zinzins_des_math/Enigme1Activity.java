@@ -49,7 +49,7 @@ public class Enigme1Activity extends AppCompatActivity {
     private String expliByDifficulty = "";
     private int imgByDifficulty;
     public ConstraintLayout root;
-    private ImageView back;
+    private ImageView back_enigme;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -94,7 +94,7 @@ public class Enigme1Activity extends AppCompatActivity {
         inputAnswer = findViewById(R.id.answer_attempt);
         submit_answer_btn= findViewById(R.id.submit_answer_btn);
         explication = findViewById(R.id.explication);
-        back = findViewById(R.id.back_enigme);
+        back_enigme = findViewById(R.id.back_enigme);
 
 
 
@@ -148,10 +148,21 @@ public class Enigme1Activity extends AppCompatActivity {
 
                 } else {
                     cpt = 0 ;
-                    AlertDialog.Builder sucess = new AlertDialog.Builder(enigmeActivity);
-                    sucess.setTitle("Bravo !");
-                    sucess.setMessage("Tu as trouvé la bonne réponse." );
-                    sucess.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    AlertDialog.Builder success = new AlertDialog.Builder(enigmeActivity);
+                    success.setTitle("Bravo !");
+                    success.setMessage("Tu as trouvé la bonne réponse." );
+                    success.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch(getIntent().getFlags()){
+                                case 0 :
+                                case 1 :
+                                case 2 :
+
+                            }
+                        }
+                    });
+                    success.setNegativeButton("Voir la solution", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             explication.setEnabled(true);
@@ -160,7 +171,7 @@ public class Enigme1Activity extends AppCompatActivity {
                             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                         }
                     });
-                    sucess.show();
+                    success.show();
 
                     if(cpt == 1) score += 3;
                     else if (cpt == 2) score += 2;
@@ -192,26 +203,10 @@ public class Enigme1Activity extends AppCompatActivity {
             }
         });
 
-        back.setOnClickListener(new View.OnClickListener() {
+        back_enigme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (getIntent().getFlags()) {
-                    case 0:
-                        Intent rouletteF = new Intent(getApplicationContext(), RouletteActivity.class);
-                        startActivity(rouletteF);
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                        finish();
-                    case 1:
-                        Intent rouletteM = new Intent(getApplicationContext(), RouletteActivity.class);
-                        startActivity(rouletteM);
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                        finish();
-                    case 2:
-                        Intent rouletteD = new Intent(getApplicationContext(), RouletteActivity.class);
-                        startActivity(rouletteD);
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                        finish();
-                }
+                setBackButton();
             }
         });
 
@@ -246,4 +241,13 @@ public class Enigme1Activity extends AppCompatActivity {
     };
 
 
+    public void setBackButton(){
+        Intent intent;
+        System.out.println(getIntent().getFlags());
+        intent = new Intent(getApplicationContext(), RouletteActivity.class); //dificile
+        intent.setFlags(getIntent().getFlags());
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish();
+    }
 }

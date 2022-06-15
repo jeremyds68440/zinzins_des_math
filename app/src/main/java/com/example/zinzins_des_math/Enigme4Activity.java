@@ -141,10 +141,21 @@ public class Enigme4Activity extends AppCompatActivity {
                 } else {
                     //score++;
                     cpt = 0 ;
-                    AlertDialog.Builder sucess = new AlertDialog.Builder(enigmeActivity);
-                    sucess.setTitle("Bravo !");
-                    sucess.setMessage("Tu as trouvé la bonne réponse." );
-                    sucess.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    AlertDialog.Builder success = new AlertDialog.Builder(enigmeActivity);
+                    success.setTitle("Bravo !");
+                    success.setMessage("Tu as trouvé la bonne réponse." );
+                    success.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch(getIntent().getFlags()){
+                                case 0 :
+                                case 1 :
+                                case 2 :
+
+                            }
+                        }
+                    });
+                    success.setNegativeButton("Voir la solution", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             explication.setEnabled(true);
@@ -153,7 +164,7 @@ public class Enigme4Activity extends AppCompatActivity {
                             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                         }
                     });
-                    sucess.show();
+                    success.show();
                 }
                 inputAnswer.setText("");
             }

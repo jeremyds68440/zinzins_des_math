@@ -22,9 +22,9 @@
 
     <ImageView
         android:id="@+id/flecheRoulette"
-        android:layout_width="60dp"
+        android:layout_width="40dp"
         android:layout_height="60dp"
-        android:layout_marginLeft="170dp"
+        android:layout_marginLeft="175dp"
         android:layout_marginTop="190dp"
         android:src="@drawable/fleche_roulette_facile" />
 

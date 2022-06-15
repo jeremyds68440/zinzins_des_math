@@ -49,7 +49,7 @@ public class Enigme5Activity extends AppCompatActivity {
 
         switch(getIntent().getFlags()){
             case 0 :
-                questByDifficulty = "La taille de Sylvain est de 137 cm. Il mesure 25 cm de moins que sa mère et 12 cm de plus que sa sœur. Combien mesurent la mère de Sylvain ?";
+                questByDifficulty = "La taille de Sylvain est de 137 cm. Il mesure 25 cm de moins que sa mère et 12 cm de plus que sa sœur. Combien mesure la mère de Sylvain ?";
                 repByDifficulty = "162 cm ";
                 valueRepByDifficulty ="162";
                 imgByDifficulty = R.drawable.img_enigme5_facile ;
@@ -132,10 +132,21 @@ public class Enigme5Activity extends AppCompatActivity {
                 } else {
                     //score++;
                     cpt = 0 ;
-                    AlertDialog.Builder sucess = new AlertDialog.Builder(enigmeActivity);
-                    sucess.setTitle("Bravo !");
-                    sucess.setMessage("Tu as trouvé la bonne réponse." );
-                    sucess.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    AlertDialog.Builder success = new AlertDialog.Builder(enigmeActivity);
+                    success.setTitle("Bravo !");
+                    success.setMessage("Tu as trouvé la bonne réponse." );
+                    success.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            switch(getIntent().getFlags()){
+                                case 0 :
+                                case 1 :
+                                case 2 :
+
+                            }
+                        }
+                    });
+                    success.setNegativeButton("Voir la solution", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             explication.setEnabled(true);
@@ -144,7 +155,7 @@ public class Enigme5Activity extends AppCompatActivity {
                             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                         }
                     });
-                    sucess.show();
+                    success.show();
 
                 }
 
