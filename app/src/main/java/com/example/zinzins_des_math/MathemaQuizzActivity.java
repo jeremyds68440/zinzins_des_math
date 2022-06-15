@@ -328,20 +328,23 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         quitter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent main;
                 switch (getIntent().getFlags()) {
                     case 0:
-                        Intent main = new Intent(getApplicationContext(), FacileActivity.class);
-                        startActivity(main);
+                        main = new Intent(getApplicationContext(), FacileActivity.class);
                         break;
                     case 1:
                         main = new Intent(getApplicationContext(), MoyenActivity.class);
-                        startActivity(main);
                         break;
                     case 2:
                         main = new Intent(getApplicationContext(), DifficileActivity.class);
-                        startActivity(main);
                         break;
+                    case 3:
+                        main = new Intent(getApplicationContext(), LevelActivity.class);
+                    default:
+                        main = new Intent(getApplicationContext(), DifficileActivity.class);
                 }
+                startActivity(main);
                 temps.cancel();
                 finish();
             }
