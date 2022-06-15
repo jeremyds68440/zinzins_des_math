@@ -37,6 +37,7 @@ public class Enigme3Activity extends AppCompatActivity {
     private String expliByDifficulty = "";
     private int imgByDifficulty;
     public ConstraintLayout root;
+    private ImageView back;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -51,7 +52,7 @@ public class Enigme3Activity extends AppCompatActivity {
                 questByDifficulty = "Monsieur X donne de l’argent de poche à ses trois enfants : il donne 46€ aux deux jumeaux, et à l’aîné 4€ de plus qu’au jumeaux réunis.  Quelle somme Monsieur X a-t-il donné en tout ? ";
                 repByDifficulty = "188€";
                 valueRepByDifficulty = "188";
-                //imgByDifficulty =  ;
+                imgByDifficulty = R.drawable.img_enigme3_facile ;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
@@ -77,11 +78,8 @@ public class Enigme3Activity extends AppCompatActivity {
         inputAnswer = findViewById(R.id.answer_attempt);
         submit_answer_btn= findViewById(R.id.submit_answer_btn);
         explication = findViewById(R.id.explication);
+        back = findViewById(R.id.back_enigme);
 
-        //diff.getFlag().enigme
-
-        //Titre de l'énigme
-        titre.setText("Enigme 3");
 
         //L'image
         image.setImageResource(imgByDifficulty);

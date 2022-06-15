@@ -37,6 +37,7 @@ public class Enigme6Activity extends AppCompatActivity {
     private String expliByDifficulty = "";
     private int imgByDifficulty;
     public ConstraintLayout root;
+    private ImageView back;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -52,7 +53,7 @@ public class Enigme6Activity extends AppCompatActivity {
                 questByDifficulty = "J’ai gagné au LOTO la somme de 1 534 €. J’ai maintenant 2 000 €. Combien avais-je d’argent avant de gagner ?";
                 repByDifficulty = "466€";
                 valueRepByDifficulty = "466";
-                //imgByDifficulty =  ;
+                imgByDifficulty = R.drawable.img_enigme6_facile ;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
@@ -77,10 +78,9 @@ public class Enigme6Activity extends AppCompatActivity {
         inputAnswer = findViewById(R.id.answer_attempt);
         submit_answer_btn= findViewById(R.id.submit_answer_btn);
         explication = findViewById(R.id.explication);
+        back = findViewById(R.id.back_enigme);
 
 
-        //Titre de l'énigme
-        titre.setText("Enigme 6");
 
         //L'image
         image.setImageResource(imgByDifficulty);
