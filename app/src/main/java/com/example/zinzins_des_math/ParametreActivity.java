@@ -41,6 +41,7 @@ public class ParametreActivity extends AppCompatActivity {
 
     private boolean sound_theme_state;
     private boolean sound_effect_state;
+    private MediaPlayer mediaPlayer;
 
     public void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -76,7 +77,7 @@ public class ParametreActivity extends AppCompatActivity {
         username = (TextView) findViewById(R.id.nomUtil);
         scoreMathemaquizzFacile = (TextView) findViewById(R.id.scoreMathemaquizz);
         mail = (TextView) findViewById(R.id.mailUtil);
-
+        this.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.zinzin_sound);
 
         loadData();
         updateViews();
@@ -152,5 +153,20 @@ public class ParametreActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(sound_theme_state){
+            mediaPlayer.start();
+        }
+
     }
 }

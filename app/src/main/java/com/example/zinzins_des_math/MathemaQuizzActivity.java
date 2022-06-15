@@ -164,6 +164,10 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                             main = new Intent(getApplicationContext(), DifficileActivity.class);
                             startActivity(main);
                             break;
+                        case 3:
+                            main = new Intent(getApplicationContext(), LevelActivity.class);
+                            startActivity(main);
+                            break;
                     }
                     temps.cancel();
                     finish();
