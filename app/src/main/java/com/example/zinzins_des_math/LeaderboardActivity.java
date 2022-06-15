@@ -78,7 +78,7 @@ public class LeaderboardActivity extends AppCompatActivity {
                     bouton_sound.start();
                 }
                 back.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent multi = new Intent(getApplicationContext(), MultiplayerActivity.class);
+                Intent multi = new Intent(getApplicationContext(), RoomListActivity.class);
                 startActivity(multi);
                 finish();
             }

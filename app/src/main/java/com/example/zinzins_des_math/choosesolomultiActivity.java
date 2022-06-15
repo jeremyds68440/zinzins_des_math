@@ -9,6 +9,9 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class choosesolomultiActivity extends AppCompatActivity {
     public static final String SHARED_PREFS = "sharedPrefs";
@@ -19,6 +22,8 @@ public class choosesolomultiActivity extends AppCompatActivity {
     private boolean sound_effect_state;
 
     private MediaPlayer bouton_sound;
+
+    FirebaseAuth fAuth;
 
     public void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -32,6 +37,7 @@ public class choosesolomultiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_solo_or_multi);
         loadData();
+        fAuth = FirebaseAuth.getInstance();
         Back = findViewById(R.id.choix_mode_de_jeu_back);
         Back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,26 +79,14 @@ public class choosesolomultiActivity extends AppCompatActivity {
                     bouton_sound.start();
                 }
                 multi.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent multiPlayerActivity = new Intent(getApplicationContext(), RegisterActivity.class);
-                startActivity(multiPlayerActivity);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-            }
-        });
-
-        toDuel = findViewById(R.id.toDuel);
-        toDuel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(sound_effect_state){
-                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
-                    bouton_sound.start();
+                if(fAuth.getCurrentUser() != null) {
+                    Intent multiPlayerActivity = new Intent(getApplicationContext(), RoomListActivity.class);
+                    startActivity(multiPlayerActivity);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    finish();
+                }else{
+                    Toast.makeText(choosesolomultiActivity.this, "Connectez vous dans les paramètres pour accéder", Toast.LENGTH_SHORT).show();
                 }
-                toDuel.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent multiPlayerActivity = new Intent(getApplicationContext(), RoomListActivity.class);
-                startActivity(multiPlayerActivity);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
             }
         });
     }
