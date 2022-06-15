@@ -140,7 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void setQuitPopup() {
-        Intent intent = new Intent(getApplicationContext(), ParametreActivity.class);
+        Intent intent = new Intent(getApplicationContext(), parametreSansConnexionActivity.class);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();

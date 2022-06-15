@@ -10,8 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
 
+    FirebaseAuth fAuth;
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String ETAT_SOUND_THEME = "etat_sound_theme";
     public static final String ETAT_SOUND_EFFECT = "etat_sound_effect";
@@ -36,9 +39,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         this.jouer = findViewById(R.id.jouer);
         this.settings = findViewById(R.id.parametres);
+        fAuth = FirebaseAuth.getInstance();
         loadData();
         actionClickImage(this.jouer, choosesolomultiActivity.class);
-        actionClickImage(this.settings, ParametreActivity.class);
+        if (fAuth.getCurrentUser() != null) {
+            actionClickImage(this.settings, ParametreActivity.class);
+        }else{
+            actionClickImage(this.settings, parametreSansConnexionActivity.class);
+
+        }
     }
 
     public void actionClickImage(ImageView button, Class act){

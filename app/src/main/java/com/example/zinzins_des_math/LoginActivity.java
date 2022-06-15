@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void updateUI(FirebaseUser currentUser) {
-        Intent profileIntent = new Intent(this, MultiplayerActivity.class);
+        Intent profileIntent = new Intent(this, ParametreActivity.class);
         profileIntent.putExtra("email", currentUser.getEmail());
         startActivity(profileIntent);
     }
@@ -126,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setQuitPopup() {
-        Intent intent = new Intent(getApplicationContext(), ParametreActivity.class);
+        Intent intent = new Intent(getApplicationContext(), parametreSansConnexionActivity.class);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();

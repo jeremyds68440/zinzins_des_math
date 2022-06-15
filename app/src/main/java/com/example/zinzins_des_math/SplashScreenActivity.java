@@ -21,7 +21,6 @@ import java.nio.channels.InterruptedByTimeoutException;
 public class SplashScreenActivity extends AppCompatActivity {
 
     private final int SPLASH_SCREEN_TIME = 3000;
-    private ImageView logo;
     private ProgressBar loading;
 
     public static final String SHARED_PREFS = "sharedPrefs";
@@ -49,11 +48,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         if (sound_theme_state) {
             soundtheme.start();
         }
-        this.logo = (ImageView) findViewById(R.id.logo_icon);
         this.loading = (ProgressBar) findViewById(R.id.loading);
 
         Animation myanim = AnimationUtils.loadAnimation(this,R.anim.mytransition);
-        this.logo.startAnimation(myanim);
         this.loading.startAnimation(myanim);
 
         final Intent i = new Intent(this, MainActivity.class);

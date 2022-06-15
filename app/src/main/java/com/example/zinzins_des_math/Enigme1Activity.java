@@ -112,13 +112,13 @@ public class Enigme1Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String input = inputAnswer.getText().toString();
+                System.out.println(input);
                 if (!input.equals(valueRepByDifficulty)){
 
                     if (cpt<4){
                         cpt++;
                         if (cpt<3){
                             Toast.makeText(Enigme1Activity.this, "Il te reste " + (3-cpt) + " tentative(s)" , Toast.LENGTH_SHORT).show();
-                            Toast.makeText(Enigme1Activity.this, score , Toast.LENGTH_SHORT).show();
                         }
                     }
                     if (cpt==3){
@@ -154,12 +154,7 @@ public class Enigme1Activity extends AppCompatActivity {
                     success.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            switch(getIntent().getFlags()){
-                                case 0 :
-                                case 1 :
-                                case 2 :
-
-                            }
+                            setBackButton();
                         }
                     });
                     success.setNegativeButton("Voir la solution", new DialogInterface.OnClickListener() {
@@ -211,17 +206,12 @@ public class Enigme1Activity extends AppCompatActivity {
         });
 
 
-
-
     }
-/*
+
     @Override
     public void onBackPressed() {
-        Intent roulette = new Intent(getApplicationContext(), RouletteActivity.class);
-        startActivity(roulette);
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        finish();
-    }*/
+        setBackButton();
+    }
 
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -244,7 +234,7 @@ public class Enigme1Activity extends AppCompatActivity {
     public void setBackButton(){
         Intent intent;
         System.out.println(getIntent().getFlags());
-        intent = new Intent(getApplicationContext(), RouletteActivity.class); //dificile
+        intent = new Intent(getApplicationContext(), RouletteActivity.class);
         intent.setFlags(getIntent().getFlags());
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
