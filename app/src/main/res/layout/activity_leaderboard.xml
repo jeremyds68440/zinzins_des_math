@@ -35,49 +35,37 @@
 
     <ImageView
         android:id="@+id/leadMultifactor"
-        android:layout_width="117dp"
-        android:layout_height="43dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
+        android:layout_width="134dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="19dp"
+        app:layout_constraintEnd_toStartOf="@+id/leadMathemaquizz"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.138"
+        app:layout_constraintTop_toBottomOf="@+id/leadSolo"
         app:srcCompat="@drawable/multifactor" />
 
     <ImageView
         android:id="@+id/leadMathemaquizz"
-        android:layout_width="117dp"
+        android:layout_width="134dp"
         android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.141"
+        app:layout_constraintTop_toBottomOf="@+id/leadMulti"
         app:srcCompat="@drawable/mathemaquizz" />
-
-    <ImageView
-        android:id="@+id/leadRoulette"
-        android:layout_width="117dp"
-        android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.925"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.141"
-        app:srcCompat="@drawable/roulette_boutton" />
 
     <ImageView
         android:id="@+id/leadMoyen"
         android:layout_width="134dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/leadDifficile"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toEndOf="@+id/leadFacile"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26"
+        app:layout_constraintVertical_bias="0.259"
         app:srcCompat="@drawable/moyen" />
 
     <ImageView
@@ -85,8 +73,6 @@
         android:layout_width="134dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.014"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.26"
@@ -98,8 +84,6 @@
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.981"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.26"
         app:srcCompat="@drawable/difficile" />
@@ -116,5 +100,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.331" />
+
+    <ImageView
+        android:id="@+id/leadSolo"
+        android:layout_width="134dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="104dp"
+        app:layout_constraintEnd_toStartOf="@+id/leadMulti"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bouton_solo" />
+
+    <ImageView
+        android:id="@+id/leadMulti"
+        android:layout_width="134dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bouton_multi" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

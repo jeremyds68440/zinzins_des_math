@@ -35,7 +35,7 @@ import java.util.Collections;
 
 public class LeaderboardActivity extends AppCompatActivity {
 
-    ImageView leadMultifactor,leadMathemaquizz, leadRoulette,leadFacile,leadMoyen,leadDifficile;
+    ImageView leadSolo, leadMulti, leadMultifactor,leadMathemaquizz,leadFacile,leadMoyen,leadDifficile;
     TextView titleLeaderboard;
     FirebaseDatabase database;
     DatabaseReference mDatabase;
@@ -67,9 +67,10 @@ public class LeaderboardActivity extends AppCompatActivity {
         mDatabase = (DatabaseReference) FirebaseDatabase.getInstance().getReference("users");
         listView = (ListView) findViewById(R.id.leaderboard);
         titleLeaderboard = (TextView) findViewById(R.id.titleLeaderboard);
+        leadSolo = (ImageView) findViewById(R.id.leadSolo);
+        leadMulti = (ImageView) findViewById(R.id.leadMulti);
         leadMultifactor = (ImageView) findViewById(R.id.leadMultifactor);
         leadMathemaquizz = (ImageView) findViewById(R.id.leadMathemaquizz);
-        leadRoulette = (ImageView) findViewById(R.id.leadRoulette);
         leadFacile = (ImageView) findViewById(R.id.leadFacile);
         leadMoyen = (ImageView) findViewById(R.id.leadMoyen);
         leadDifficile = (ImageView) findViewById(R.id.leadDifficile);
@@ -88,188 +89,193 @@ public class LeaderboardActivity extends AppCompatActivity {
                 finish();
             }
         });
-        leadMultifactor.setOnClickListener(new View.OnClickListener() {
+        leadSolo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(sound_effect_state){
+                if (sound_effect_state) {
                     MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
                     bouton_sound.start();
                 }
-                leadMultifactor.setColorFilter(Color.argb(80, 0, 0, 0));
+                leadSolo.setColorFilter(Color.argb(80, 0, 0, 0));
+                leadMulti.setColorFilter(Color.argb(0, 0, 0, 0));
+
+                leadMultifactor.setColorFilter(Color.argb(0, 0, 0, 0));
                 leadMathemaquizz.setColorFilter(Color.argb(0, 0, 0, 0));
-                leadRoulette.setColorFilter(Color.argb(0, 0, 0, 0));
 
                 leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
                 leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
                 leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
 
-                leadFacile.setOnClickListener(new View.OnClickListener() {
+                leadFacile.setVisibility(View.VISIBLE);
+                leadMoyen.setVisibility(View.VISIBLE);
+                leadDifficile.setVisibility(View.VISIBLE);
+
+                leadMultifactor.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(sound_effect_state){
+                        if (sound_effect_state) {
                             MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
                             bouton_sound.start();
                         }
-                        leadFacile.setColorFilter(Color.argb(80, 0, 0, 0));
+
+                        leadMultifactor.setColorFilter(Color.argb(80, 0, 0, 0));
+                        leadMathemaquizz.setColorFilter(Color.argb(0, 0, 0, 0));
+
+                        leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
                         leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
                         leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
 
+                        leadFacile.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (sound_effect_state) {
+                                    MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                                    bouton_sound.start();
+                                }
+                                leadFacile.setColorFilter(Color.argb(80, 0, 0, 0));
+                                leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
+                                leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
+
+                                titleLeaderboard.setText("Classement Multifactor Facile");
+                                showFacile("Multifactor", 5);
+                            }
+                        });
+                        leadMoyen.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (sound_effect_state) {
+                                    MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                                    bouton_sound.start();
+                                }
+                                leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
+                                leadMoyen.setColorFilter(Color.argb(80, 0, 0, 0));
+                                leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
+
+                                titleLeaderboard.setText("Classement Multifactor Moyen");
+                                showMoyen("Multifactor", 6);
+                            }
+                        });
+                        leadDifficile.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (sound_effect_state) {
+                                    MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                                    bouton_sound.start();
+                                }
+                                leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
+                                leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
+                                leadDifficile.setColorFilter(Color.argb(80, 0, 0, 0));
+
+                                titleLeaderboard.setText("Classement Multifactor Difficile");
+                                showDifficile("Multifactor", 4);
+                            }
+                        });
+                    }
+                });
+                leadMathemaquizz.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (sound_effect_state) {
+                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                            bouton_sound.start();
+                        }
+                        leadMultifactor.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadMathemaquizz.setColorFilter(Color.argb(80, 0, 0, 0));
+
+                        leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
+
+                        leadFacile.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (sound_effect_state) {
+                                    MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                                    bouton_sound.start();
+                                }
+                                leadFacile.setColorFilter(Color.argb(80, 0, 0, 0));
+                                leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
+                                leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
+
+                                titleLeaderboard.setText("Classement Mathemaquizz Facile");
+                                showFacile("Mathemaquizz", 2);
+                            }
+                        });
+                        leadMoyen.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (sound_effect_state) {
+                                    MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                                    bouton_sound.start();
+                                }
+                                leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
+                                leadMoyen.setColorFilter(Color.argb(80, 0, 0, 0));
+                                leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
+
+                                titleLeaderboard.setText("Classement Mathemaquizz Moyen");
+                                showMoyen("Mathemaquizz", 3);
+                            }
+                        });
+                        leadDifficile.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (sound_effect_state) {
+                                    MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                                    bouton_sound.start();
+                                }
+                                leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
+                                leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
+                                leadDifficile.setColorFilter(Color.argb(80, 0, 0, 0));
+
+                                titleLeaderboard.setText("Classement Mathemaquizz Difficile");
+                                showDifficile("Mathemaquizz", 1);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+
+        leadMulti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (sound_effect_state) {
+                    MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
+                leadSolo.setColorFilter(Color.argb(0, 0, 0, 0));
+                leadMulti.setColorFilter(Color.argb(80, 0, 0, 0));
+
+                leadMultifactor.setColorFilter(Color.argb(0, 0, 0, 0));
+                leadMathemaquizz.setColorFilter(Color.argb(0, 0, 0, 0));
+                leadFacile.setVisibility(View.INVISIBLE);
+                leadMoyen.setVisibility(View.INVISIBLE);
+                leadDifficile.setVisibility(View.INVISIBLE);
+                leadMultifactor.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (sound_effect_state) {
+                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                            bouton_sound.start();
+                        }
+                        leadMultifactor.setColorFilter(Color.argb(80, 0, 0, 0));
+                        leadMathemaquizz.setColorFilter(Color.argb(0, 0, 0, 0));
                         titleLeaderboard.setText("Classement Multifactor Facile");
-                        showFacile("Multifactor", 5);
+                        showMultifactor("Multifactor", 12);
                     }
                 });
-                leadMoyen.setOnClickListener(new View.OnClickListener() {
+                leadMathemaquizz.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(sound_effect_state){
+                        if (sound_effect_state) {
                             MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
                             bouton_sound.start();
                         }
-                        leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
-                        leadMoyen.setColorFilter(Color.argb(80, 0, 0, 0));
-                        leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadMultifactor.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadMathemaquizz.setColorFilter(Color.argb(80, 0, 0, 0));
+                        titleLeaderboard.setText("Classement Victoires Mathemaquizz");
+                        showMathemaquizz("Mathemaquizz", 11);
 
-                        titleLeaderboard.setText("Classement Multifactor Moyen");
-                        showMoyen("Multifactor", 6);
-                    }
-                });
-                leadDifficile.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(sound_effect_state){
-                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
-                            bouton_sound.start();
-                        }
-                        leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
-                        leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
-                        leadDifficile.setColorFilter(Color.argb(80, 0, 0, 0));
-
-                        titleLeaderboard.setText("Classement Multifactor Difficile");
-                        showDifficile("Multifactor", 4);
-                    }
-                });
-            }
-        });
-        leadMathemaquizz.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(sound_effect_state){
-                    MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
-                    bouton_sound.start();
-                }
-                leadMultifactor.setColorFilter(Color.argb(0, 0, 0, 0));
-                leadMathemaquizz.setColorFilter(Color.argb(80, 0, 0, 0));
-                leadRoulette.setColorFilter(Color.argb(0, 0, 0, 0));
-
-                leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
-                leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
-                leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
-
-                leadFacile.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(sound_effect_state){
-                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
-                            bouton_sound.start();
-                        }
-                        leadFacile.setColorFilter(Color.argb(80, 0, 0, 0));
-                        leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
-                        leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
-
-                        titleLeaderboard.setText("Classement Mathemaquizz Facile");
-                        showFacile("Mathemaquizz", 2);
-                    }
-                });
-                leadMoyen.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(sound_effect_state){
-                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
-                            bouton_sound.start();
-                        }
-                        leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
-                        leadMoyen.setColorFilter(Color.argb(80, 0, 0, 0));
-                        leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
-
-                        titleLeaderboard.setText("Classement Mathemaquizz Moyen");
-                        showMoyen("Mathemaquizz", 3);
-                    }
-                });
-                leadDifficile.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(sound_effect_state){
-                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
-                            bouton_sound.start();
-                        }
-                        leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
-                        leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
-                        leadDifficile.setColorFilter(Color.argb(80, 0, 0, 0));
-
-                        titleLeaderboard.setText("Classement Mathemaquizz Difficile");
-                        showDifficile("Mathemaquizz", 1);
-                    }
-                });
-            }
-        });
-        leadRoulette.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(sound_effect_state){
-                    MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
-                    bouton_sound.start();
-                }
-                leadMultifactor.setColorFilter(Color.argb(0, 0, 0, 0));
-                leadMathemaquizz.setColorFilter(Color.argb(0, 0, 0, 0));
-                leadRoulette.setColorFilter(Color.argb(80, 0, 0, 0));
-
-                leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
-                leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
-                leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
-
-                leadFacile.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(sound_effect_state){
-                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
-                            bouton_sound.start();
-                        }
-                        leadFacile.setColorFilter(Color.argb(80, 0, 0, 0));
-                        leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
-                        leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
-
-                        titleLeaderboard.setText("Classement Roulette Facile");
-                        showFacile("Roulette", 8);
-                    }
-                });
-                leadMoyen.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(sound_effect_state){
-                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
-                            bouton_sound.start();
-                        }
-                        leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
-                        leadMoyen.setColorFilter(Color.argb(80, 0, 0, 0));
-                        leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
-
-                        titleLeaderboard.setText("Classement Roulette Moyen");
-                        showMoyen("Roulette", 9);
-                    }
-                });
-                leadDifficile.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if(sound_effect_state){
-                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
-                            bouton_sound.start();
-                        }
-                        leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
-                        leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
-                        leadDifficile.setColorFilter(Color.argb(80, 0, 0, 0));
-
-                        titleLeaderboard.setText("Classement Roulette Difficile");
-                        showDifficile("Roulette", 7);
                     }
                 });
             }
@@ -347,6 +353,68 @@ public class LeaderboardActivity extends AppCompatActivity {
     public void showDifficile(String game, int dbNumber){
         arrayList.clear();
         Query sortedDatabase = mDatabase.orderByChild("score"+game+"Difficile");
+        arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.custom_textview,arrayList);
+        listView.setAdapter(arrayAdapter);
+        sortedDatabase.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
+                final User utilisateur = new User();
+                final Field[] fields = utilisateur.getClass().getDeclaredFields();
+                String username = (String) dataSnapshot.child(fields[10].getName()).getValue();
+                Long newValue = (Long) dataSnapshot.child(fields[dbNumber].getName()).getValue();
+                String value =  Long.toString(-newValue);
+                arrayList.add(username +" : "+ value);
+                arrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {}
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {}
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {}
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
+
+    public void showMultifactor(String game, int dbNumber){
+        arrayList.clear();
+        Query sortedDatabase = mDatabase.orderByChild("victoires"+game);
+        arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.custom_textview,arrayList);
+        listView.setAdapter(arrayAdapter);
+        sortedDatabase.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
+                final User utilisateur = new User();
+                final Field[] fields = utilisateur.getClass().getDeclaredFields();
+                String username = (String) dataSnapshot.child(fields[10].getName()).getValue();
+                Long newValue = (Long) dataSnapshot.child(fields[dbNumber].getName()).getValue();
+                String value =  Long.toString(-newValue);
+                arrayList.add(username +" : "+ value);
+                arrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {}
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {}
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {}
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {}
+        });
+    }
+
+    public void showMathemaquizz(String game, int dbNumber){
+        arrayList.clear();
+        Query sortedDatabase = mDatabase.orderByChild("victoires"+game);
         arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.custom_textview,arrayList);
         listView.setAdapter(arrayAdapter);
         sortedDatabase.addChildEventListener(new ChildEventListener() {
