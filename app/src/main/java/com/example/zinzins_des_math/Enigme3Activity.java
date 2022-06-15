@@ -64,7 +64,7 @@ public class Enigme3Activity extends AppCompatActivity {
                 questByDifficulty = "Dans ce cube plein, toutes les rangées aux extrémités noircies sont constituées de petits cubes noirs. Tous les autres petits cubes sont blancs.\n" +
                         "Combien y a-t-il de petits cubes blancs ?\n";
                 repByDifficulty = "387 cubes blancs";
-                expliByDifficulty = "387";
+                valueRepByDifficulty = "387";
                 imgByDifficulty = R.drawable.img_enigme_3;
                 difficultyString = "moyen";
                 root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
@@ -190,10 +190,10 @@ public class Enigme3Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder expli = new AlertDialog.Builder(enigmeActivity);
-                expli.setTitle(repByDifficulty);
+                expli.setTitle("Réponse : "+repByDifficulty);
 
                 //Récupération de la réponse depuis la base de données
-                expli.setMessage("Explication : " + expliByDifficulty);
+                expli.setMessage(expliByDifficulty);
                 expli.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

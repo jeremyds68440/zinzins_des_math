@@ -86,8 +86,8 @@ public class Enigme4Activity extends AppCompatActivity {
                 repByDifficulty = "1600 clients";
                 valueRepByDifficulty = "1600";
                 expliByDifficulty = "Explication : \n" +
-                        "Un intervalle de confiance au niveau de confiance 95% est [ f − 1 /√n , f + 1/√n]  où f est la fréquence de personnes de plus de 60 ans observée dans l’échantillon et n est l’effectif de l’échantillon. L’amplitude de cet intervalle de confiance est 2/√n. \n" +
-                        "2/√n <= 0, 05\n" +
+                        "Un intervalle de confiance au niveau de confiance 95% est [ f − 1/√n , f + 1/√n]  où f est la fréquence de personnes de plus de 60 ans observée dans l’échantillon et n est l’effectif de l’échantillon. L’amplitude de cet intervalle de confiance est 2/√n. \n" +
+                        "     2/√n <= 0, 05\n" +
                         "⇔ 2/√n <= 5/100 \n" +
                         "⇔ √n/2 >= 100/5 \n" +
                         "⇔ √n >= 40 \n" +
