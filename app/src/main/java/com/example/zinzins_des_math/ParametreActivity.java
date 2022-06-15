@@ -82,10 +82,8 @@ public class ParametreActivity extends AppCompatActivity {
             mail = (TextView) findViewById(R.id.mailUtil);
             avatar = (ImageView) findViewById(R.id.avatarUser);
             this.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.zinzin_sound);
-
             loadData();
             updateViews();
-
             user = FirebaseAuth.getInstance().getCurrentUser();
             mDatabase = FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
             avatar.setOnClickListener(new View.OnClickListener() {
@@ -200,7 +198,7 @@ public class ParametreActivity extends AppCompatActivity {
 
     public void logout(View view) {
         FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), parametreSansConnexionActivity.class));
         finish();
     }
     
