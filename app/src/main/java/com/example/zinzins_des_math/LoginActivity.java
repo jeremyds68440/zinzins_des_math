@@ -74,6 +74,10 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (sound_effect_state) {
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
                 String email = loginEmail.getText().toString();
                 String password = loginPassword.getText().toString();
                 if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
@@ -101,6 +105,10 @@ public class LoginActivity extends AppCompatActivity {
         toRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (sound_effect_state) {
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
                 startActivity(new Intent(getApplicationContext(),RegisterActivity.class));
             }
         });

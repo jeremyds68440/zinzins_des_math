@@ -88,6 +88,10 @@ public class ParametreActivity extends AppCompatActivity {
             avatar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (sound_effect_state) {
+                        bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                        bouton_sound.start();
+                    }
                     mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -202,6 +206,10 @@ public class ParametreActivity extends AppCompatActivity {
 
     public void logout(View view) {
         FirebaseAuth.getInstance().signOut();
+        if (sound_effect_state) {
+            bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+            bouton_sound.start();
+        }
         startActivity(new Intent(getApplicationContext(), parametreSansConnexionActivity.class));
         finish();
     }

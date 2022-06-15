@@ -91,6 +91,10 @@ public class RegisterActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (sound_effect_state) {
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
                 String email = registerEmail.getText().toString();
                 String password = registerPassword.getText().toString().trim();
                 String username = registerUsername.getText().toString();
@@ -106,6 +110,10 @@ public class RegisterActivity extends AppCompatActivity {
         toLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (sound_effect_state) {
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finish();
             }
