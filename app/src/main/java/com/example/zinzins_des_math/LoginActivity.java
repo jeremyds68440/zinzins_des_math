@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 String email = loginEmail.getText().toString();
                 String password = loginPassword.getText().toString();
                 if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
-                    Toast.makeText(getApplicationContext(), "Enter email and password", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Remplir tout les champs", Toast.LENGTH_LONG).show();
                     return;
                 }
                 fAuth.signInWithEmailAndPassword(email, password)
@@ -90,7 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                                     updateUI(user);
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.makeText(LoginActivity.this, "Echec d'authentification",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }

@@ -9,7 +9,7 @@
     tools:context=".MultiplayerActivity">
 
     <Button
-        android:id="@+id/toLeaderboard"
+        android:id="@+id/toLeaderboarddead"
         android:layout_width="47dp"
         android:layout_height="37dp"
         android:layout_marginTop="44dp"

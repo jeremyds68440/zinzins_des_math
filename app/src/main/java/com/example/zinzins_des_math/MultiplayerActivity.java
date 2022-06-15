@@ -19,7 +19,7 @@ public class MultiplayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multiplayer);
 
-        toLeaderboard = findViewById(R.id.toLeaderboard);
+        toLeaderboard = findViewById(R.id.toLeaderboarddead);
         toLeaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

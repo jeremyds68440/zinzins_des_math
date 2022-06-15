@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -29,7 +31,8 @@ import java.util.List;
 public class RoomListActivity extends AppCompatActivity {
 
     ListView listView;
-    Button button;
+    Button toLeaderboard, button;
+    ImageView back;
 
     List<String> roomsList;
 
@@ -49,6 +52,30 @@ public class RoomListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_list);
+
+        toLeaderboard = findViewById(R.id.toLeaderboard);
+        toLeaderboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.setColorFilter(Color.argb(80, 0, 0, 0));
+                Intent main = new Intent(getApplicationContext(), LeaderboardActivity.class);
+                startActivity(main);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
+            }
+        });
+
+        back = findViewById(R.id.back_choose);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                back.setColorFilter(Color.argb(80, 0, 0, 0));
+                Intent main = new Intent(getApplicationContext(), choosesolomultiActivity.class);
+                startActivity(main);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
+            }
+        });
 
         database = FirebaseDatabase.getInstance();
 

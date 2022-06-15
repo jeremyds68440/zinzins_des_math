@@ -85,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         if (fAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), MultiplayerActivity.class));
+            startActivity(new Intent(getApplicationContext(), ParametreActivity.class));
             finish();
         }
         register.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void updateUI(User user){
         mDatabase.child(fAuth.getCurrentUser().getUid()).setValue(user);
         Toast.makeText(RegisterActivity.this, "Votre compte a été créé", Toast.LENGTH_SHORT).show();
-        Intent loginIntent = new Intent(this, MultiplayerActivity.class);
+        Intent loginIntent = new Intent(this, ParametreActivity.class);
         startActivity(loginIntent);
         finish();
     }
