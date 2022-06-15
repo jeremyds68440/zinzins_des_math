@@ -69,18 +69,6 @@
 
     </TableLayout>
 
-    <TextView
-        android:id="@+id/scoreMathemaquizz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nirmala_b"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.309"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.872" />
-
     <ImageView
         android:id="@+id/logout"
         android:layout_width="181dp"
@@ -92,21 +80,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.749"
         app:srcCompat="@drawable/deconnexion" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="72dp"
-        android:layout_height="24dp"
-        android:fontFamily="@font/nirmala_b"
-        android:text="Score"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.126"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871" />
 
     <Switch
         android:id="@+id/Sound_etat"

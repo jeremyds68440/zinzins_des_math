@@ -285,7 +285,7 @@ public class LeaderboardActivity extends AppCompatActivity {
     public void showFacile(String game, int dbNumber){
         arrayList.clear();
         Query sortedDatabase = mDatabase.orderByChild("score"+game+"Facile");
-        arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,arrayList);
+        arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.custom_textview,arrayList);
         listView.setAdapter(arrayAdapter);
         sortedDatabase.addChildEventListener(new ChildEventListener() {
             @Override
@@ -316,7 +316,7 @@ public class LeaderboardActivity extends AppCompatActivity {
     public void showMoyen(String game, int dbNumber){
         arrayList.clear();
         Query sortedDatabase = mDatabase.orderByChild("score"+game+"Moyen");
-        arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,arrayList);
+        arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.custom_textview,arrayList);
         listView.setAdapter(arrayAdapter);
         sortedDatabase.addChildEventListener(new ChildEventListener() {
             @Override
@@ -347,7 +347,7 @@ public class LeaderboardActivity extends AppCompatActivity {
     public void showDifficile(String game, int dbNumber){
         arrayList.clear();
         Query sortedDatabase = mDatabase.orderByChild("score"+game+"Difficile");
-        arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_list_item_1,arrayList);
+        arrayAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.custom_textview,arrayList);
         listView.setAdapter(arrayAdapter);
         sortedDatabase.addChildEventListener(new ChildEventListener() {
             @Override
