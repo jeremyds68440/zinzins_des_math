@@ -521,7 +521,7 @@ public class MultiFactorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent difficulte;
                 if(extras != null) {
-                    difficulte = new Intent(getApplicationContext(), FacileActivity.class);
+                    difficulte = new Intent(getApplicationContext(), RoomListActivity.class);
                 }
                 else if(evolution) {
                     difficulte = new Intent(getApplicationContext(), LevelActivity.class);
@@ -595,7 +595,7 @@ public class MultiFactorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent difficulte;
                 if(extras != null) {
-                    difficulte = new Intent(getApplicationContext(), FacileActivity.class);
+                    difficulte = new Intent(getApplicationContext(), RoomListActivity.class);
                 }
                 else if(evolution) {
                     difficulte = new Intent(getApplicationContext(), LevelActivity.class);
