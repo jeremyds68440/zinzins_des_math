@@ -668,6 +668,7 @@ public class MultiFactorActivity extends AppCompatActivity {
         if (sound_theme_state) {
             SplashScreenActivity.general_sound.pause();
             soundtheme.setVolume(Float.parseFloat(getString(R.string.sound_on)), Float.parseFloat(getString(R.string.sound_on)));
+            soundtheme.setLooping(true);
             soundtheme.start();
         }
     }
