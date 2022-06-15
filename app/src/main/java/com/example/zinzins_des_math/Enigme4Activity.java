@@ -72,7 +72,7 @@ public class Enigme4Activity extends AppCompatActivity {
                         "5x + 8x = 208\n" +
                         "13x = 208\n" +
                         "x = 208/13 = 16\n";
-                imgByDifficulty = R.drawable.img_enigme_4;
+                imgByDifficulty = R.drawable.img_enigme_10;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
