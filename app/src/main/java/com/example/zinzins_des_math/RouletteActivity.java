@@ -47,7 +47,7 @@ public class RouletteActivity extends AppCompatActivity {
     private boolean sound_theme_state;
     private boolean sound_effect_state;
 
-    private MediaPlayer bouton_sound;
+    private MediaPlayer bouton_sound,soundtheme;
 
     public void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -65,6 +65,9 @@ public class RouletteActivity extends AppCompatActivity {
         wheel = findViewById(R.id.wheel);
         fleche = findViewById(R.id.flecheRoulette);
         lancerBtn = findViewById(R.id.startBtn);
+        if (sound_theme_state) {
+            this.soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.roulette_sound);
+        }
 
         //Backgrounds
         switch(getIntent().getFlags()){
@@ -103,7 +106,7 @@ public class RouletteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(sound_effect_state){
-                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.roulette_button_sound);
                     bouton_sound.start();
                 }
                 startBtn.setColorFilter(Color.argb(80, 0, 0, 0));
@@ -114,6 +117,7 @@ public class RouletteActivity extends AppCompatActivity {
         back_roulette.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(sound_effect_state){
                     bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
                     bouton_sound.start();
@@ -218,7 +222,6 @@ public class RouletteActivity extends AppCompatActivity {
         builder.setView(dialogView_back);
         AlertDialog alertDialog = builder.create();
 
-
         Button quitter = dialogView_back.findViewById(R.id.button_quitter);
         Button repJeu = dialogView_back.findViewById((R.id.button_rep_jeu));
         LinearLayout popup_back = dialogView_back.findViewById((R.id.layout_popup_back));
@@ -244,6 +247,9 @@ public class RouletteActivity extends AppCompatActivity {
                     default:
                         difficulte = new Intent(getApplicationContext(), DifficultyActivity.class);
                 }
+                if (sound_theme_state) {
+                    soundtheme.pause();
+                }
                 startActivity(difficulte);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 alertDialog.dismiss();
@@ -260,5 +266,13 @@ public class RouletteActivity extends AppCompatActivity {
         });
         alertDialog.setCancelable(false);
         alertDialog.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (sound_theme_state) {
+            soundtheme.start();
+        }
     }
 }
