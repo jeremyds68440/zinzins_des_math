@@ -56,19 +56,15 @@ public class MultiFactorActivity extends AppCompatActivity {
     private TextView targetCount, scoreCount;
     private LinearLayout layout;
     private ImageView scorePlace, targetPlace, gridBackground, back;
-
-
     private boolean blocked = false;
     private boolean evolution = false;
     private boolean sound_theme_state, sound_effect_state;
     private ArrayList<Integer> iterBubble;
     private FirebaseDatabase database;
     private FirebaseUser user;
-    private DatabaseReference uDatabase;
-    private DatabaseReference rDatabase;
-    private MediaPlayer soundtheme;
-    private MediaPlayer soundgood;
-    private MediaPlayer soundvrong;
+    private FirebaseAuth fAuth;
+    private DatabaseReference uDatabase, rDatabase;
+    private MediaPlayer soundtheme, soundgood, soundvrong;
     public int BUBBLECOLUMN = 190;
     public int BUBBLEROW = 190;
     public static final int NUMBERBUBBLEROW = 6;
@@ -88,17 +84,19 @@ public class MultiFactorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multifactor);
-        loadData();
-
-        extras = getIntent().getExtras();
-        if (extras != null) {
-            defi = extras.getString("defi");
-            role = extras.getString("role");
-            roomName = extras.getString("roomName");
+        fAuth = FirebaseAuth.getInstance();
+        if (fAuth.getCurrentUser() != null) {
+            extras = getIntent().getExtras();
+            if (extras != null) {
+                defi = extras.getString("defi");
+                role = extras.getString("role");
+                roomName = extras.getString("roomName");
+            }
             database = FirebaseDatabase.getInstance();
             user = FirebaseAuth.getInstance().getCurrentUser();
             uDatabase = database.getReference("users").child(user.getUid());
-            rDatabase = database.getReference("rooms").child(roomName);
+            if (defi != null)
+                rDatabase = database.getReference("rooms").child(roomName);
         }
 
         iterBubble = new ArrayList<>();
@@ -348,6 +346,7 @@ public class MultiFactorActivity extends AppCompatActivity {
         if(counter >= target) {
             blocked = true;
             int point = 0;
+            int evolutionScoreTour = 0;
             if(counter == target) {
                 id = R.layout.custom_popup_mj1;
                 int varMult = (difficulty+2)*2;
@@ -356,7 +355,8 @@ public class MultiFactorActivity extends AppCompatActivity {
                 countMult = 0;
                 points += point;
                 if(evolution) {
-                    evolutionScore += point - 60 * (varMult + difficulty * 2) / varMult;
+                    evolutionScoreTour = point - 60 * (varMult + difficulty * 2) / varMult;
+                    evolutionScore += evolutionScoreTour;
                     evolutionScore = Math.max(evolutionScore, 0);
                     evolutionDifficulty();
                 }
@@ -366,7 +366,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                 countMult = 0;
                 numberOfTry++;
             }
-            setGameOver(counter == target, point);
+            setGameOver(counter == target, point, evolutionScoreTour);
         }
     }
 
@@ -396,7 +396,7 @@ public class MultiFactorActivity extends AppCompatActivity {
         return res;
     }
 
-    public void setGameOver(boolean win , int point) {
+    public void setGameOver(boolean win , int point, int evolutionScoreTour) {
         AlertDialog.Builder popup = new AlertDialog.Builder(this, R.style.MyDialogTheme);
         ViewGroup viewGroup = findViewById(android.R.id.content);
         View dialogView = LayoutInflater.from(this).inflate(id, viewGroup, false);
@@ -458,8 +458,16 @@ public class MultiFactorActivity extends AppCompatActivity {
             int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
             linearLayout.setBackground(getDrawable(resId));
 
-            TextView score_dialog = dialogView.findViewById(R.id.text_score_mj);
-            score_dialog.setText("" + points);
+            TextView scoreDialog = dialogView.findViewById(R.id.text_score_mj);
+            TextView totalScoreDialog = dialogView.findViewById(R.id.text_point_mj1);
+            if(evolution) {
+                scoreDialog.setText("" + evolutionScoreTour);
+                totalScoreDialog.setText("" + evolutionScore);
+            }
+            else {
+                scoreDialog.setText("" + point);
+                totalScoreDialog.setText("" + points);
+            }
         }
         else {
             if (sound_effect_state){
@@ -498,6 +506,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                     difficulte = new Intent(getApplicationContext(), DifficileActivity.class);
                 }
                 startActivity(difficulte);
+                alertDialog.dismiss();
                 finish();
             }
         });
@@ -556,6 +565,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                     difficulte = new Intent(getApplicationContext(), DifficileActivity.class);
                 }
                 startActivity(difficulte);
+                alertDialog.dismiss();
                 finish();
             }
         });
@@ -563,8 +573,8 @@ public class MultiFactorActivity extends AppCompatActivity {
         reprendre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                alertDialog.dismiss();
                 back.setColorFilter(Color.argb(0, 0, 0, 0));
+                alertDialog.dismiss();
             }
         });
         alertDialog.setCancelable(false);
@@ -601,7 +611,9 @@ public class MultiFactorActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        soundtheme.pause();
+        if (sound_theme_state) {
+            soundtheme.pause();
+        }
     }
 
     @Override
@@ -612,4 +624,77 @@ public class MultiFactorActivity extends AppCompatActivity {
             soundtheme.start();
         }
     }
+
+    /*private void compareScore() {
+        rDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String player1;
+                String player2;
+                int scorePlayer1;
+                int scorePlayer2;
+                final Room room = new Room();
+                final Field[] fields = room.getClass().getDeclaredFields();
+                player1 = (String) dataSnapshot.child(fields[1].getName()).getValue();
+                player2 = (String) dataSnapshot.child(fields[2].getName()).getValue();
+                scorePlayer1 = Math.toIntExact((Long) dataSnapshot.child(fields[3].getName()).getValue());
+                scorePlayer2 = Math.toIntExact((Long) dataSnapshot.child(fields[4].getName()).getValue());
+                DatabaseReference refUsers = database.getReference("users");
+                AlertDialog.Builder finiDefi = new AlertDialog.Builder(mathemaQuizzActivity);
+                if (scorePlayer1 > scorePlayer2) {
+                    refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            int oldPoints = Math.toIntExact((Long) snapshot.child(player1).child("victoiresMathemaquizz").getValue());
+                            int newPoints = oldPoints + 1;
+                            refUsers.child(player1).child("victoiresMathemaquizz").setValue(newPoints);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {}
+                    });
+
+                    finiDefi.setTitle("Dommage");
+                    finiDefi.setMessage("Vous avez perdu avec" + scorePlayer1 + " pts contre " + scorePlayer2 + "pts");
+                    finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            rDatabase.removeValue();
+                            finish();
+                        }
+                    });
+                    finiDefi.show();
+                } else {
+                    refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            int oldPoints = Math.toIntExact((Long) snapshot.child(player2).child("victoiresMathemaquizz").getValue());
+                            int newPoints = oldPoints + 1;
+                            refUsers.child(player2).child("victoiresMathemaquizz").setValue(newPoints);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {}
+                    });
+
+
+                    finiDefi.setTitle("Bravo");
+                    finiDefi.setMessage("Vous avez perdu avec " + scorePlayer1 + " pts contre " + scorePlayer2 + " pts");
+                    finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            rDatabase.removeValue();
+                            finish();
+                        }
+                    });
+                    finiDefi.show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }*/
 }
