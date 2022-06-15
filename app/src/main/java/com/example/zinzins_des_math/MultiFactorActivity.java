@@ -49,7 +49,7 @@ public class MultiFactorActivity extends AppCompatActivity {
     private int counter = 0;
     private int countMult = 0;
     private int evolutionScore = 0;
-    private int difficulty, target;
+    private int difficulty, target, multiTurn;
     private Bundle extras;
     private String defi, role, roomName, difficultyString;
     private int id = R.layout.custom_popup_endgame;
@@ -74,18 +74,21 @@ public class MultiFactorActivity extends AppCompatActivity {
     public static final String ETAT_SOUND_EFFECT = "etat_sound_effect";
 
 
-    public void loadData(){
+    public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         sound_theme_state = sharedPreferences.getBoolean(ETAT_SOUND_THEME, true);
         sound_effect_state = sharedPreferences.getBoolean(ETAT_SOUND_EFFECT, true);
-
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_multifactor);
+        loadData();
+
         fAuth = FirebaseAuth.getInstance();
         if (fAuth.getCurrentUser() != null) {
+            multiTurn = 0;
             extras = getIntent().getExtras();
             if (extras != null) {
                 defi = extras.getString("defi");
@@ -409,6 +412,10 @@ public class MultiFactorActivity extends AppCompatActivity {
 
         String positive;
         if(win) {
+            if (fAuth.getCurrentUser() != null) {
+                multiTurn++;
+            }
+
             LinearLayout linearLayout = dialogView.findViewById(R.id.layout_popup_victoire);
 
             if (sound_effect_state){
@@ -420,39 +427,41 @@ public class MultiFactorActivity extends AppCompatActivity {
                 soundtheme.setVolume(0.2f, 0.2f);
             }
 
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            DatabaseReference mDatabase = database.getReference("users").child(user.getUid());
-            mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    int dbScore;
-                    final User utilisateur = new User();
-                    final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                    switch (getIntent().getFlags()) {
-                        case 0 :
-                            dbScore = Math.toIntExact((long) dataSnapshot.child(fields[5].getName()).getValue());
-                            if (dbScore < points)
-                                mDatabase.child("scoreMultifactorFacile").setValue(points);
-                            break;
-                        case 1 :
-                            dbScore = Math.toIntExact((long) dataSnapshot.child(fields[6].getName()).getValue());
-                            if (dbScore < points)
-                                mDatabase.child("scoreMultifactorMoyen").setValue(points);
-                            break;
-                        case 2 :
-                            dbScore = Math.toIntExact((long) dataSnapshot.child(fields[4].getName()).getValue());
-                            if (dbScore < points)
-                                mDatabase.child("scoreMultifactorDifficile").setValue(points);
-                            break;
+            if (fAuth.getCurrentUser() != null) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                DatabaseReference mDatabase = database.getReference("users").child(user.getUid());
+                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        int dbScore;
+                        final User utilisateur = new User();
+                        final Field[] fields = utilisateur.getClass().getDeclaredFields();
+                        switch (getIntent().getFlags()) {
+                            case 0:
+                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[5].getName()).getValue());
+                                if (dbScore < points)
+                                    mDatabase.child("scoreMultifactorFacile").setValue(points);
+                                break;
+                            case 1:
+                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[6].getName()).getValue());
+                                if (dbScore < points)
+                                    mDatabase.child("scoreMultifactorMoyen").setValue(points);
+                                break;
+                            case 2:
+                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[4].getName()).getValue());
+                                if (dbScore < points)
+                                    mDatabase.child("scoreMultifactorDifficile").setValue(points);
+                                break;
+                        }
                     }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
+                    }
+                });
+            }
 
             String imagePopup = "victoire_mj1_" + difficultyString;
             int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
@@ -467,6 +476,62 @@ public class MultiFactorActivity extends AppCompatActivity {
             else {
                 scoreDialog.setText("" + point);
                 totalScoreDialog.setText("" + points);
+            }
+            if (fAuth.getCurrentUser() != null && multiTurn == 5) {
+                uDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        int dbScore;
+                        final User utilisateur = new User();
+                        final Field[] fields = utilisateur.getClass().getDeclaredFields();
+                        switch (getIntent().getFlags()) {
+                            case 0:
+                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[2].getName()).getValue());
+                                if (dbScore < points)
+                                    uDatabase.child("scoreMathemaquizzFacile").setValue(points);
+                                if (defi != null) {
+                                    if (role.equals("host")) {
+                                        rDatabase.child("scorePlayer1").setValue(points);
+                                    } else if (role.equals("client")) {
+                                        rDatabase.child("scorePlayer2").setValue(points);
+                                        compareScore();
+                                    }
+                                }
+                                break;
+                            case 1:
+                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[3].getName()).getValue());
+                                if (dbScore < points)
+                                    uDatabase.child("scoreMathemaquizzMoyen").setValue(points);
+                                if (defi != null) {
+                                    if (role.equals("host")) {
+                                        rDatabase.child("scorePlayer1").setValue(points);
+                                    } else if (role.equals("client")) {
+                                        rDatabase.child("scorePlayer2").setValue(points);
+                                        compareScore();
+                                    }
+                                }
+                                break;
+                            case 2:
+                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[1].getName()).getValue());
+                                if (dbScore < points)
+                                    uDatabase.child("scoreMathemaquizzDifficile").setValue(points);
+                                if (defi != null) {
+                                    if (role.equals("host")) {
+                                        rDatabase.child("scorePlayer1").setValue(points);
+                                    } else if (role.equals("client")) {
+                                        rDatabase.child("scorePlayer2").setValue(points);
+                                        compareScore();
+                                    }
+                                }
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         }
         else {
@@ -525,8 +590,11 @@ public class MultiFactorActivity extends AppCompatActivity {
                 alertDialog.dismiss();
             }
         });
-        alertDialog.setCancelable(false);
-        alertDialog.show();
+
+        if(fAuth.getCurrentUser() == null || multiTurn < 5) {
+            alertDialog.setCancelable(false);
+            alertDialog.show();
+        }
     }
 
     public void setQuitPopup() {
@@ -625,7 +693,7 @@ public class MultiFactorActivity extends AppCompatActivity {
         }
     }
 
-    /*private void compareScore() {
+    private void compareScore() {
         rDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -640,7 +708,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                 scorePlayer1 = Math.toIntExact((Long) dataSnapshot.child(fields[3].getName()).getValue());
                 scorePlayer2 = Math.toIntExact((Long) dataSnapshot.child(fields[4].getName()).getValue());
                 DatabaseReference refUsers = database.getReference("users");
-                AlertDialog.Builder finiDefi = new AlertDialog.Builder(mathemaQuizzActivity);
+                AlertDialog.Builder finiDefi = new AlertDialog.Builder(getApplicationContext());
                 if (scorePlayer1 > scorePlayer2) {
                     refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -696,5 +764,5 @@ public class MultiFactorActivity extends AppCompatActivity {
 
             }
         });
-    }*/
+    }
 }
