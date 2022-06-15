@@ -71,6 +71,10 @@ public class RoomListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_list);
         loadData();
+        if (sound_theme_state) {
+            SplashScreenActivity.general_sound.start();
+        }
+
         toLeaderboard = findViewById(R.id.toLeaderboard);
         toLeaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
