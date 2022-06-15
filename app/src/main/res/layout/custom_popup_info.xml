@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/layout_popup_info"
-        android:layout_width="388dp"
+        android:layout_width="match_parent"
         android:layout_height="238dp"
         android:background="@drawable/mathemaquizz_info"
         android:orientation="vertical"
