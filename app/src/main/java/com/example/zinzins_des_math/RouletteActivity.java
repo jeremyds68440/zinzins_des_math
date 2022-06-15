@@ -10,11 +10,15 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.RotateAnimation;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import java.util.Random;
@@ -34,6 +38,7 @@ public class RouletteActivity extends AppCompatActivity {
     private ImageView fleche;
     private ImageView lancerBtn;
     private ImageView back_roulette;
+    private String difficultyString;
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String ETAT_SOUND_THEME = "etat_sound_theme";
@@ -63,16 +68,25 @@ public class RouletteActivity extends AppCompatActivity {
 
         //Backgrounds
         switch(getIntent().getFlags()){
+            case 0 :
+                rootRoulette.setBackground(getDrawable(R.drawable.background_roulette_facile));
+                fleche.setImageResource(R.drawable.fleche_roulette_facile);
+                wheel.setImageResource(R.drawable.roulette);
+                difficultyString = "facile";
+                lancerBtn.setImageResource(R.drawable.lancer_roulette);
+                break;
             case 1 :
                 rootRoulette.setBackground(getDrawable(R.drawable.accueil_roulette_moyen));
                 fleche.setImageResource(R.drawable.fleche_roulette_moyen);
                 wheel.setImageResource(R.drawable.roulette_moy);
+                difficultyString = "moyen";
                 lancerBtn.setImageResource(R.drawable.lancer_roulette_difficile);
                 break;
             case 2 :
                 rootRoulette.setBackground(getDrawable(R.drawable.accueil_roulette_difficile));
                 fleche.setImageResource(R.drawable.fleche_roulette_difficile);
                 wheel.setImageResource(R.drawable.roulette_diff);
+                difficultyString = "difficile";
                 lancerBtn.setImageResource(R.drawable.lancer_roulette_difficile);
                 break;
         }
@@ -196,12 +210,24 @@ public class RouletteActivity extends AppCompatActivity {
     }
 
     public void setBackPopup() {
-        AlertDialog.Builder quit = new AlertDialog.Builder(rouletteActivity);
-        quit.setTitle("Quitter");
-        quit.setMessage("Es-tu sûr(e) de vouloir quitter le jeu ? " );
-        quit.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView_back = LayoutInflater.from(this).inflate(R.layout.custom_popup_back, viewGroup, false);
+        builder.setView(dialogView_back);
+        AlertDialog alertDialog = builder.create();
+
+
+        Button quitter = dialogView_back.findViewById(R.id.button_quitter);
+        Button repJeu = dialogView_back.findViewById((R.id.button_rep_jeu));
+        LinearLayout popup_back = dialogView_back.findViewById((R.id.layout_popup_back));
+
+        String imagePopup = "quitter_mj3_" + difficultyString;
+        int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
+        popup_back.setBackground(getDrawable(resId));
+
+        quitter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
                 Intent difficulte;
                 switch (getIntent().getFlags()) {
                     case 0:
@@ -218,19 +244,19 @@ public class RouletteActivity extends AppCompatActivity {
                 }
                 startActivity(difficulte);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                alertDialog.dismiss();
                 finish();
             }
         });
 
-        quit.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+        repJeu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
+            public void onClick(View v) {
+                back_roulette.setColorFilter(Color.argb(0, 0, 0, 0));
+                alertDialog.dismiss();
             }
         });
-        quit.show();
+        alertDialog.setCancelable(false);
+        alertDialog.show();
     }
-
-
-
 }
