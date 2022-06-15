@@ -194,6 +194,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                         soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.mathemaquizz_sound);
                         soundtheme.setVolume(1f, 1f);
                         soundtheme.start();
+                        SplashScreenActivity.general_sound.pause();
                     }
 
                     if(sound_effect_state) {
@@ -321,6 +322,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         super.onResume();
         if (sound_theme_state) {
             soundtheme.setVolume(1f, 1f);
+            SplashScreenActivity.general_sound.pause();
             soundtheme.start();
         }
 
