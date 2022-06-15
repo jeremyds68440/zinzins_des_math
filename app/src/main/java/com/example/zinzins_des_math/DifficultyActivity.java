@@ -35,7 +35,6 @@ public class DifficultyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_difficulty);
-        this.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.zinzin_sound);
         loadData();
         this.back = findViewById(R.id.back);
         this.easy = findViewById(R.id.facile);
@@ -48,21 +47,6 @@ public class DifficultyActivity extends AppCompatActivity {
         actionClickImage(this.medium, MoyenActivity.class);
         actionClickImage(this.hard, DifficileActivity.class);
         actionClickImage(this.IA, LevelActivity.class);
-
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        mediaPlayer.pause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(sound_theme_state){
-            mediaPlayer.start();
-        }
 
     }
 
