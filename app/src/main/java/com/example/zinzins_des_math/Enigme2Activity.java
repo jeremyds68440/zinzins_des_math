@@ -5,11 +5,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +39,7 @@ public class Enigme2Activity extends AppCompatActivity {
     private String valueRepByDifficulty;
     private String expliByDifficulty = "";
     private int imgByDifficulty;
+    private String difficultyString;
     public ConstraintLayout root;
     private ImageView back;
 
@@ -56,6 +60,7 @@ public class Enigme2Activity extends AppCompatActivity {
                 repByDifficulty = "8";
                 valueRepByDifficulty = "8";
                 imgByDifficulty = R.drawable.img_enigme2_facile ;
+                difficultyString = "facile";
                 root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
@@ -66,6 +71,7 @@ public class Enigme2Activity extends AppCompatActivity {
                         "2e étage = 4e étage = 9cm3\n" +
                         "Le tout = 3 x 21 + 2 x 9 = 81 cm3\n";
                 imgByDifficulty = R.drawable.img_enigme_2;
+                difficultyString = "moyen";
                 root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
@@ -74,6 +80,7 @@ public class Enigme2Activity extends AppCompatActivity {
                 valueRepByDifficulty = "2016";
                 expliByDifficulty = "Explication : Deux jours après la récolte , les pastèques sont constituées de 90% d'eau pour un poids total de 1814,4 kg. Cela correspond à 10% de matière sèche , soit : 10% * 1814,4 = 181,44 kg Le jour de la récolte , la quantité de matière sèche était aussi de 181,44 kg. Or , à ce moment-là , les pastèques contiennent 91% d'eau : 181,44 * 100/9 = 2016 kg.";
                 imgByDifficulty = R.drawable.defis2;
+                difficultyString = "difficile";
                 root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }
@@ -112,50 +119,68 @@ public class Enigme2Activity extends AppCompatActivity {
                     if (cpt==3){
                         cpt=0;
                         //Toast.makeText(Enigme1Activity.this, "Veux-tu la réponse?" , Toast.LENGTH_SHORT).show();
-                        AlertDialog.Builder echec = new AlertDialog.Builder(enigmeActivity);
-                        echec.setTitle("Oops !");
-                        echec.setMessage("Tu as épuisé le nombre de tentatives. Tu peux retenter ta chance ou voir la solution." );
-                        echec.setPositiveButton("Réessayer", new DialogInterface.OnClickListener() {
+                        AlertDialog.Builder echec = new AlertDialog.Builder(enigmeActivity, R.style.MyDialogTheme);
+                        ViewGroup viewGroup = findViewById(android.R.id.content);
+                        View dialogView = LayoutInflater.from(enigmeActivity).inflate(R.layout.custom_popup_back, viewGroup, false);
+                        echec.setView(dialogView);
+                        AlertDialog alertDialog = echec.create();
+
+                        Button reponse = dialogView.findViewById(R.id.button_quitter);
+                        Button reprendre = dialogView.findViewById((R.id.button_rep_jeu));
+                        LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_back));
+
+                        String imagePopup = "perdu_mj3_" + difficultyString;
+                        int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
+                        popup_back.setBackground(getDrawable(resId));
+
+                        reprendre.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
+                            public void onClick(View v) {
+                                alertDialog.dismiss();
                             }
                         });
-                        echec.setNegativeButton("Voir la solution", new DialogInterface.OnClickListener() {
+
+                        reponse.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onClick(View v) {
                                 explication.setEnabled(true);
                                 inputAnswer.setInputType(InputType.TYPE_CLASS_NUMBER);
                                 InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-
+                                alertDialog.dismiss();
                             }
                         });
-                        echec.show();
+                        alertDialog.show();
                     }
 
                 } else {
                     //score++;
                     cpt = 0 ;
-                    AlertDialog.Builder success = new AlertDialog.Builder(enigmeActivity);
-                    success.setTitle("Bravo !");
-                    success.setMessage("Tu as trouvé la bonne réponse." );
-                    success.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    AlertDialog.Builder success = new AlertDialog.Builder(enigmeActivity, R.style.MyDialogTheme);
+                    ViewGroup viewGroup = findViewById(android.R.id.content);
+                    View dialogView = LayoutInflater.from(enigmeActivity).inflate(R.layout.custom_popup_mj3_victoire, viewGroup, false);
+                    success.setView(dialogView);
+                    AlertDialog alertDialog = success.create();
+
+                    Button quitter = dialogView.findViewById(R.id.button_quitter_mj3);
+                    LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_victoire_mj3));
+
+                    String imagePopup = "victoire_mj3_" + difficultyString;
+                    int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
+                    popup_back.setBackground(getDrawable(resId));
+
+                    quitter.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            setBackButton();
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getApplicationContext(), RouletteActivity.class);
+                            intent.setFlags(getIntent().getFlags());
+                            startActivity(intent);
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                            alertDialog.dismiss();
+                            finish();
                         }
                     });
-                    success.setNegativeButton("Voir la solution", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            explication.setEnabled(true);
-                            inputAnswer.setInputType(InputType.TYPE_CLASS_NUMBER);
-                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                        }
-                    });
-                    success.show();
+                    alertDialog.show();
 
                 }
 
@@ -215,12 +240,39 @@ public class Enigme2Activity extends AppCompatActivity {
     };
 
     public void setBackButton(){
-        Intent intent;
-        System.out.println(getIntent().getFlags());
-        intent = new Intent(getApplicationContext(), RouletteActivity.class);
-        intent.setFlags(getIntent().getFlags());
-        startActivity(intent);
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        finish();
+        AlertDialog.Builder retour = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.custom_popup_back, viewGroup, false);
+        retour.setView(dialogView);
+        AlertDialog alertDialog = retour.create();
+
+        Button quitter = dialogView.findViewById(R.id.button_quitter);
+        Button reprendre = dialogView.findViewById((R.id.button_rep_jeu));
+        LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_back));
+
+        String imagePopup = "quitter_mj3_" + difficultyString;
+        int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
+        popup_back.setBackground(getDrawable(resId));
+
+        quitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RouletteActivity.class);
+                intent.setFlags(getIntent().getFlags());
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                alertDialog.dismiss();
+                finish();
+            }
+        });
+
+        reprendre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                back.setColorFilter(Color.argb(0, 0, 0, 0));
+            }
+        });
+        alertDialog.show();
     }
 }
