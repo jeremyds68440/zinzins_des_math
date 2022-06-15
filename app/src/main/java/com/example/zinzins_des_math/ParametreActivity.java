@@ -22,7 +22,7 @@ import java.lang.reflect.Field;
 
 public class ParametreActivity extends AppCompatActivity {
 
-    TextView username, scoreMathemaquizzFacile;
+    TextView username, scoreMathemaquizzFacile, mail;
     Switch switch_sound_theme;
     Switch switch_sound_effect;
 
@@ -56,6 +56,7 @@ public class ParametreActivity extends AppCompatActivity {
     }
 
     FirebaseUser user;
+    FirebaseUser email;
     DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,8 @@ public class ParametreActivity extends AppCompatActivity {
         switch_sound_effect = (Switch) findViewById(R.id.effect_etat);
         username = (TextView) findViewById(R.id.nomUtil);
         scoreMathemaquizzFacile = (TextView) findViewById(R.id.scoreMathemaquizz);
+        mail = (TextView) findViewById(R.id.mailUtil);
+
 
         loadData();
         updateViews();

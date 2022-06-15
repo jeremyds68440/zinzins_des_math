@@ -367,7 +367,7 @@ public class MultiFactorActivity extends AppCompatActivity {
         difficulty = 0;
         int varMult = (difficulty+2)*2;
         int palier = 600 * (varMult + difficulty*2)/varMult;
-        while(evolutionScore > palier) {
+        while(evolutionScore >= palier) {
             difficulty++;
             varMult = (difficulty+2)*2;
             palier += 600 * (varMult + difficulty*2)/varMult;
