@@ -362,8 +362,9 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                         break;
                     case 3:
                         main = new Intent(getApplicationContext(), LevelActivity.class);
+                        break;
                     default:
-                        main = new Intent(getApplicationContext(), DifficileActivity.class);
+                        throw new IllegalStateException("Unexpected value: " + getIntent().getFlags());
                 }
                 startActivity(main);
                 temps.cancel();
@@ -522,4 +523,5 @@ public class MathemaQuizzActivity extends AppCompatActivity {
             }
         });
     }
+
 }
