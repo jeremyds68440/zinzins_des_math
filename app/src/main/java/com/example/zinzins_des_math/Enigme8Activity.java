@@ -37,6 +37,7 @@ public class Enigme8Activity extends AppCompatActivity {
     private String expliByDifficulty = "";
     private int imgByDifficulty;
     public ConstraintLayout root;
+    private ImageView back;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -76,8 +77,7 @@ public class Enigme8Activity extends AppCompatActivity {
         inputAnswer = findViewById(R.id.answer_attempt);
         submit_answer_btn= findViewById(R.id.submit_answer_btn);
         explication = findViewById(R.id.explication);
-
-
+        back = findViewById(R.id.back_enigme);
 
 
         //L'image

@@ -9,7 +9,7 @@
     android:id="@+id/rootRoulette">
 
     <ImageView
-        android:id="@+id/back_enigme"
+        android:id="@+id/back_roulette"
         android:layout_width="@dimen/wight_backbutton"
         android:layout_height="@dimen/height_backbutton"
         android:layout_marginLeft="30dp"
