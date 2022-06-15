@@ -107,15 +107,21 @@ public class Equation {
             }else  if (g.getNumberCorrect() < 6) {
                 this.firstNbr = randomNbr.nextInt(maxNbr);
                 this.secondNbr = randomNbr.nextInt(maxNbr);
-                this.thirdNbr = randomNbr.nextInt(maxNbr);
+                this.thirdNbr = randomNbr.nextInt(10);
                 this.answer = this.firstNbr + this.secondNbr * this.thirdNbr;
                 this.equationPhrase = firstNbr + "+" + secondNbr + "*" + thirdNbr;
-            }else if (g.getNumberCorrect() < 6) {
-                this.firstNbr = randomNbr.nextInt(20);
-                this.secondNbr = randomNbr.nextInt(20);
+            }else if (g.getNumberCorrect() < 9) {
+                this.firstNbr = randomNbr.nextInt(30);
+                this.secondNbr = randomNbr.nextInt(30);
                 this.answer = this.firstNbr * this.secondNbr;
                 this.equationPhrase = firstNbr + "*" + secondNbr;
-            }else  if (g.getNumberCorrect() < 9) {
+            }else  if (g.getNumberCorrect() < 20) {
+                this.firstNbr = randomNbr.nextInt(maxNbr);
+                this.secondNbr = randomNbr.nextInt(maxNbr);
+                this.thirdNbr = randomNbr.nextInt(10);
+                this.answer = this.firstNbr + this.secondNbr * this.thirdNbr;
+                this.equationPhrase = firstNbr + "+" + secondNbr + "*" + thirdNbr;
+            }else  if (g.getNumberCorrect() >= 20) {
                 this.firstNbr = randomNbr.nextInt(maxNbr);
                 this.secondNbr = randomNbr.nextInt(maxNbr);
                 this.thirdNbr = randomNbr.nextInt(maxNbr);

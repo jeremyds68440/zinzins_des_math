@@ -378,10 +378,29 @@ public class MathemaQuizzActivity extends AppCompatActivity {
             difficultyString = "difficile";
             g.newEquationDifficile(g);
         } else if (difficulty == 3) {
-            bg.setBackground(getDrawable(R.drawable.bg_quizz_facile));
-            nuage_equation.setImageDrawable(getDrawable(R.drawable.grosnuage));
-            equation.setTextColor(getColor(R.color.black));
-            difficultyString = "facile";
+            temps.cancel();
+            if (g.getNumberCorrect() < 3) {
+                bg.setBackground(getDrawable(R.drawable.bg_quizz_facile));
+                nuage_equation.setImageDrawable(getDrawable(R.drawable.grosnuage));
+                equation.setTextColor(getColor(R.color.black));
+            }else  if (g.getNumberCorrect() < 6) {
+                bg.setBackground(getDrawable(R.drawable.bg_quizz_moyen));
+                nuage_equation.setImageDrawable(getDrawable(R.drawable.grosnuage_quizz_moyen));
+                equation.setTextColor(getColor(R.color.black));
+            }else if (g.getNumberCorrect() < 9) {
+                equation.setTextColor(getColor(R.color.white));
+                bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
+                nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
+            }else  if (g.getNumberCorrect() < 12) {
+                equation.setTextColor(getColor(R.color.white));
+                bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
+                nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
+            }else  if (g.getNumberCorrect() >= 12) {
+                equation.setTextColor(getColor(R.color.white));
+                bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
+                nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
+            }
+            difficultyString = "Evolution";
             g.newEquationEvolution(g);
         }
 
