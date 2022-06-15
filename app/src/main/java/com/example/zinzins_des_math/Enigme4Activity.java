@@ -147,12 +147,7 @@ public class Enigme4Activity extends AppCompatActivity {
                     success.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            switch(getIntent().getFlags()){
-                                case 0 :
-                                case 1 :
-                                case 2 :
-
-                            }
+                            setBackButton();
                         }
                     });
                     success.setNegativeButton("Voir la solution", new DialogInterface.OnClickListener() {
@@ -189,6 +184,13 @@ public class Enigme4Activity extends AppCompatActivity {
             }
         });
 
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setBackButton();
+            }
+        });
+
     }
 
     @Override
@@ -215,4 +217,14 @@ public class Enigme4Activity extends AppCompatActivity {
 
         }
     };
+
+    public void setBackButton(){
+        Intent intent;
+        System.out.println(getIntent().getFlags());
+        intent = new Intent(getApplicationContext(), RouletteActivity.class);
+        intent.setFlags(getIntent().getFlags());
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish();
+    }
 }
