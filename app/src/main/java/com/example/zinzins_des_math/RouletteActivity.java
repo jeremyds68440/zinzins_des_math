@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -33,11 +34,27 @@ public class RouletteActivity extends AppCompatActivity {
     private ImageView lancerBtn;
     private ImageView back_roulette;
 
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String ETAT_SOUND_THEME = "etat_sound_theme";
+    public static final String ETAT_SOUND_EFFECT = "etat_sound_effect";
+
+    private boolean sound_theme_state;
+    private boolean sound_effect_state;
+
+    private MediaPlayer bouton_sound;
+
+    public void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        sound_theme_state = sharedPreferences.getBoolean(ETAT_SOUND_THEME, true);
+        sound_effect_state = sharedPreferences.getBoolean(ETAT_SOUND_EFFECT, true);
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roulette);
-
+        loadData();
         rootRoulette = findViewById(R.id.rootRoulette);
         wheel = findViewById(R.id.wheel);
         fleche = findViewById(R.id.flecheRoulette);
@@ -63,12 +80,18 @@ public class RouletteActivity extends AppCompatActivity {
         final ImageView startBtn = findViewById(R.id.startBtn);
         this.wheel = findViewById(R.id.wheel);
         back_roulette = findViewById(R.id.back_roulette);
+        startBtn.setColorFilter(Color.argb(0, 0, 0, 0));
 
         getDegreeForSectors();
 
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(sound_effect_state){
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
+                startBtn.setColorFilter(Color.argb(80, 0, 0, 0));
                 spin();
             }
         });
@@ -76,6 +99,11 @@ public class RouletteActivity extends AppCompatActivity {
         back_roulette.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(sound_effect_state){
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
+                back_roulette.setColorFilter(Color.argb(80, 0, 0, 0));
                 setBackPopup();
             }
         });
