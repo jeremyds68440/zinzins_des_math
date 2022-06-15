@@ -76,25 +76,7 @@ public class RouletteActivity extends AppCompatActivity {
         back_roulette.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (getIntent().getFlags()) {
-                    case 0:
-                        Intent facile = new Intent(getApplicationContext(), FacileActivity.class);
-                        startActivity(facile);
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                        finish();
-                        break;
-                    case 1:
-                        Intent moyen = new Intent(getApplicationContext(), MoyenActivity.class);
-                        startActivity(moyen);
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                        finish();
-                        break;
-                    case 2:
-                        Intent difficile = new Intent(getApplicationContext(), DifficileActivity.class);
-                        startActivity(difficile);
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                        finish();
-                }
+                setBackPopup();
             }
         });
 
@@ -209,31 +191,33 @@ public class RouletteActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        setBackPopup();
+    }
+
+    public void setBackPopup() {
         AlertDialog.Builder quit = new AlertDialog.Builder(rouletteActivity);
         quit.setTitle("Quitter");
         quit.setMessage("Es-tu sûr(e) de vouloir quitter le jeu ? " );
         quit.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Intent difficulte;
                 switch (getIntent().getFlags()) {
                     case 0:
-                        Intent facile = new Intent(getApplicationContext(), FacileActivity.class);
-                        startActivity(facile);
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                        finish();
+                        difficulte = new Intent(getApplicationContext(), FacileActivity.class);
                         break;
                     case 1:
-                        Intent moyen = new Intent(getApplicationContext(), MoyenActivity.class);
-                        startActivity(moyen);
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                        finish();
+                        difficulte = new Intent(getApplicationContext(), MoyenActivity.class);
                         break;
                     case 2:
-                        Intent difficile = new Intent(getApplicationContext(), DifficileActivity.class);
-                        startActivity(difficile);
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                        finish();
+                        difficulte = new Intent(getApplicationContext(), DifficileActivity.class);
+                        break;
+                    default:
+                        difficulte = new Intent(getApplicationContext(), DifficultyActivity.class);
                 }
+                startActivity(difficulte);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
             }
         });
 
