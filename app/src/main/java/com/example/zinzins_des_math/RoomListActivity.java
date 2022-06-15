@@ -188,30 +188,6 @@ public class RoomListActivity extends AppCompatActivity {
                                 roomGame.setValue("MathemaquizzDifficile");
                                 addRoomEventListener(MathemaQuizzActivity.class,2,"host", roomName);
                                 return true;
-                            case R.id.roomRouletteFacile:
-                                roomName = username+" : "+"Roulette Facile";
-                                roomRef = database.getReference("rooms/"+roomName+"/player1");
-                                roomRef.setValue(user.getUid());
-                                roomGame = database.getReference("rooms/"+roomName+"/jeu");
-                                roomGame.setValue("RouletteFacile");
-                                addRoomEventListener(RouletteActivity.class,0,"host", roomName);
-                                return true;
-                            case R.id.roomRouletteMoyen:
-                                roomName = username+" : "+"Roulette Moyen";
-                                roomRef = database.getReference("rooms/"+roomName+"/player1");
-                                roomRef.setValue(user.getUid());
-                                roomGame = database.getReference("rooms/"+roomName+"/jeu");
-                                roomGame.setValue("RouletteMoyen");
-                                addRoomEventListener(RouletteActivity.class,1,"host", roomName);
-                                return true;
-                            case R.id.roomRouletteDifficile:
-                                roomName = username+" : "+"Roulette Difficile";
-                                roomRef = database.getReference("rooms/"+roomName+"/player1");
-                                roomRef.setValue(user.getUid());
-                                roomGame = database.getReference("rooms/"+roomName+"/jeu");
-                                roomGame.setValue("RouletteDifficile");
-                                addRoomEventListener(RouletteActivity.class,2,"host", roomName);
-                                return true;
                         }
                         return false;
                     }

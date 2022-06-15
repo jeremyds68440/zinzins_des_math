@@ -18,13 +18,4 @@
     <item
         android:id="@+id/roomMathemaquizzDifficile"
         android:title="Mathemaquizz Difficile"/>
-    <item
-        android:id="@+id/roomRouletteFacile"
-        android:title="Roulette Facile"/>
-    <item
-        android:id="@+id/roomRouletteMoyen"
-        android:title="Roulette Moyen"/>
-    <item
-        android:id="@+id/roomRouletteDifficile"
-        android:title="Roulette Difficile"/>
 </menu>
