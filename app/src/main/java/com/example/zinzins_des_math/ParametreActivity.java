@@ -160,6 +160,12 @@ public class ParametreActivity extends AppCompatActivity {
                         bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
                         bouton_sound.start();
                     }
+                    loadData();
+                    if (sound_theme_state) {
+                        mediaPlayer.start();
+                    }else{
+                        mediaPlayer.pause();
+                    }
                 }
             });
 
