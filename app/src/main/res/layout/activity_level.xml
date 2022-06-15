@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_enigme_9"
+    android:background="@drawable/bg_evolution"
     tools:context=".LevelActivity">
 
     <TextView
@@ -15,7 +15,7 @@
         android:fontFamily="@font/nirmala_b"
         android:text="EVOLUTION"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="50dp"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout3"
         app:layout_constraintEnd_toEndOf="parent"
