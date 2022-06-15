@@ -488,7 +488,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                             case 0:
                                 dbScore = Math.toIntExact((long) dataSnapshot.child(fields[2].getName()).getValue());
                                 if (dbScore < points)
-                                    uDatabase.child("scoreMathemaquizzFacile").setValue(points);
+                                    uDatabase.child("scoreMultifactorFacile").setValue(points);
                                 if (defi != null) {
                                     if (role.equals("host")) {
                                         rDatabase.child("scorePlayer1").setValue(points);
@@ -501,7 +501,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                             case 1:
                                 dbScore = Math.toIntExact((long) dataSnapshot.child(fields[3].getName()).getValue());
                                 if (dbScore < points)
-                                    uDatabase.child("scoreMathemaquizzMoyen").setValue(points);
+                                    uDatabase.child("scoreMultifactorMoyen").setValue(points);
                                 if (defi != null) {
                                     if (role.equals("host")) {
                                         rDatabase.child("scorePlayer1").setValue(points);
@@ -514,7 +514,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                             case 2:
                                 dbScore = Math.toIntExact((long) dataSnapshot.child(fields[1].getName()).getValue());
                                 if (dbScore < points)
-                                    uDatabase.child("scoreMathemaquizzDifficile").setValue(points);
+                                    uDatabase.child("scoreMultifactorDifficile").setValue(points);
                                 if (defi != null) {
                                     if (role.equals("host")) {
                                         rDatabase.child("scorePlayer1").setValue(points);
@@ -660,7 +660,7 @@ public class MultiFactorActivity extends AppCompatActivity {
         while(target == ancienTarget) {
             target = 1;
             int i = 0;
-            while (i < difficulty + 2 || target < Math.pow(10, difficulty + 1)) {
+            while((i < difficulty + 2 || target < Math.pow(10, difficulty + 1)) && target < Integer.MAX_VALUE/10) {
                 target *= (int) (Math.random() * 9) + 2;
                 i++;
             }
@@ -713,9 +713,9 @@ public class MultiFactorActivity extends AppCompatActivity {
                     refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            int oldPoints = Math.toIntExact((Long) snapshot.child(player1).child("victoiresMathemaquizz").getValue());
+                            int oldPoints = Math.toIntExact((Long) snapshot.child(player1).child("victoiresMultifactor").getValue());
                             int newPoints = oldPoints + 1;
-                            refUsers.child(player1).child("victoiresMathemaquizz").setValue(newPoints);
+                            refUsers.child(player1).child("victoiresMultifactor").setValue(newPoints);
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {}
@@ -736,9 +736,9 @@ public class MultiFactorActivity extends AppCompatActivity {
                     refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            int oldPoints = Math.toIntExact((Long) snapshot.child(player2).child("victoiresMathemaquizz").getValue());
+                            int oldPoints = Math.toIntExact((Long) snapshot.child(player2).child("victoiresMultifactor").getValue());
                             int newPoints = oldPoints + 1;
-                            refUsers.child(player2).child("victoiresMathemaquizz").setValue(newPoints);
+                            refUsers.child(player2).child("victoiresMultifactor").setValue(newPoints);
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {}
