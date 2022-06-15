@@ -7,6 +7,18 @@
     android:background="@drawable/sinscrire_bg"
     tools:context=".RegisterActivity">
 
+    <ImageView
+        android:id="@+id/back_to_parametre2"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_baseline_arrow_back_ios_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.048" />
+
     <EditText
         android:id="@+id/registerEmail"
         android:layout_width="wrap_content"
