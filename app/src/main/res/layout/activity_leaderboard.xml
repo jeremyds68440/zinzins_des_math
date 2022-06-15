@@ -9,7 +9,6 @@
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="93dp">
 
-
     <ImageView
         android:id="@+id/back_menu2"
         android:layout_width="@dimen/wight_backbutton"
@@ -21,10 +20,113 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TableLayout
+        android:id="@+id/tableLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/leadSolo"
+                    android:layout_width="134dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="20dp"
+                    app:srcCompat="@drawable/bouton_solo" />
+
+                <ImageView
+                    android:id="@+id/leadMulti"
+                    android:layout_width="134dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/bouton_multi" />
+            </LinearLayout>
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/leadMultifactor"
+                    android:layout_width="134dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="20dp"
+                    app:srcCompat="@drawable/multifactor" />
+
+                <ImageView
+                    android:id="@+id/leadMathemaquizz"
+                    android:layout_width="134dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/mathemaquizz" />
+            </LinearLayout>
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+
+            <LinearLayout
+                android:gravity="center">
+                <ImageView
+                    android:id="@+id/leadFacile"
+                    android:layout_width="110dp"
+                    android:layout_height="35dp"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@drawable/facile" />
+
+                <ImageView
+                    android:id="@+id/leadMoyen"
+                    android:layout_width="110dp"
+                    android:layout_height="35dp"
+                    android:layout_marginRight="10dp"
+                    app:srcCompat="@drawable/moyen" />
+
+                <ImageView
+                    android:id="@+id/leadDifficile"
+                    android:layout_width="110dp"
+                    android:layout_height="35dp"
+                    app:srcCompat="@drawable/difficile" />
+            </LinearLayout>
+        </TableRow>
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/titleLeaderboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choisissez un mode, un jeu puis une difficulté"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/leaderboard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout2" />
+
     <ListView
         android:id="@+id/leaderboard"
-        android:layout_width="wrap_content"
-        android:layout_height="465dp"
+        android:layout_width="match_parent"
+        android:layout_height="426dp"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,93 +135,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <ImageView
-        android:id="@+id/leadMultifactor"
-        android:layout_width="134dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="19dp"
-        app:layout_constraintEnd_toStartOf="@+id/leadMathemaquizz"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/leadSolo"
-        app:srcCompat="@drawable/multifactor" />
-
-    <ImageView
-        android:id="@+id/leadMathemaquizz"
-        android:layout_width="134dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/leadMulti"
-        app:srcCompat="@drawable/mathemaquizz" />
-
-    <ImageView
-        android:id="@+id/leadMoyen"
-        android:layout_width="134dp"
-        android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/leadDifficile"
-        app:layout_constraintHorizontal_bias="0.444"
-        app:layout_constraintStart_toEndOf="@+id/leadFacile"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.259"
-        app:srcCompat="@drawable/moyen" />
-
-    <ImageView
-        android:id="@+id/leadFacile"
-        android:layout_width="134dp"
-        android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26"
-        app:srcCompat="@drawable/facile" />
-
-    <ImageView
-        android:id="@+id/leadDifficile"
-        android:layout_width="134dp"
-        android:layout_height="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26"
-        app:srcCompat="@drawable/difficile" />
-
-    <TextView
-        android:id="@+id/titleLeaderboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Choisissez un jeu puis une difficulté"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.331" />
-
-    <ImageView
-        android:id="@+id/leadSolo"
-        android:layout_width="134dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="104dp"
-        app:layout_constraintEnd_toStartOf="@+id/leadMulti"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bouton_solo" />
-
-    <ImageView
-        android:id="@+id/leadMulti"
-        android:layout_width="134dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bouton_multi" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

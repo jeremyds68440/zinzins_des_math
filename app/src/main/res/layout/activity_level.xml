@@ -7,21 +7,19 @@
     android:background="@drawable/bg_evolution"
     tools:context=".LevelActivity">
 
-    <TextView
+
+    <ImageView
         android:id="@+id/textView_difficile3"
-        android:layout_width="321dp"
-        android:layout_height="97dp"
+        android:layout_width="221dp"
+        android:layout_height="64dp"
         android:layout_marginTop="68dp"
-        android:fontFamily="@font/nirmala_b"
-        android:text="EVOLUTION"
+        android:background="@drawable/evolution_titre"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="50dp"
         app:layout_constraintBottom_toTopOf="@+id/tableLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.62" />
+        app:layout_constraintVertical_bias="0.373" />
 
     <ImageView
         android:id="@+id/back_to_evolution"
