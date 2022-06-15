@@ -29,7 +29,7 @@ import java.lang.reflect.Field;
 
 public class ParametreActivity extends AppCompatActivity {
 
-    TextView username, scoreMathemaquizzFacile, mail;
+    TextView username, mail;
     ImageView avatar;
     Switch switch_sound_theme;
     Switch switch_sound_effect;
@@ -78,7 +78,6 @@ public class ParametreActivity extends AppCompatActivity {
             switch_sound_theme = (Switch) findViewById(R.id.Sound_etat);
             switch_sound_effect = (Switch) findViewById(R.id.effect_etat);
             username = (TextView) findViewById(R.id.nomUtil);
-            scoreMathemaquizzFacile = (TextView) findViewById(R.id.scoreMathemaquizz);
             mail = (TextView) findViewById(R.id.mailUtil);
             avatar = (ImageView) findViewById(R.id.avatarUser);
             this.mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.zinzin_sound);
@@ -127,7 +126,6 @@ public class ParametreActivity extends AppCompatActivity {
                     final Field[] fields = utilisateur.getClass().getDeclaredFields();
                     username.setText((String) dataSnapshot.child(fields[10].getName()).getValue());
                     mail.setText((String) dataSnapshot.child(fields[0].getName()).getValue());
-                    scoreMathemaquizzFacile.setText(Long.toString((Long) dataSnapshot.child(fields[2].getName()).getValue()));
                     int idAvatar = Math.toIntExact((Long) dataSnapshot.child(fields[14].getName()).getValue());
                     switch (idAvatar) {
                         case 0:
