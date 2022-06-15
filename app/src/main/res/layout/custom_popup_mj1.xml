@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+
+    <LinearLayout
+        android:id="@+id/layout_popup_victoire"
+        android:layout_width="match_parent"
+        android:layout_height="201dp"
+        android:background="@drawable/victoire_mj1_facile"
+        android:orientation="vertical"
+        android:padding="16dp"  >
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp">
+
+            <TableRow
+                android:layout_marginLeft="220dp">
+                <TextView
+                    android:id="@+id/text_score_mj"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="25dp"
+                    android:fontFamily="@string/font3"
+                    android:textColor="@color/white" />
+            </TableRow>
+            <TableRow
+                android:layout_marginLeft="220dp"
+                android:layout_marginTop="3dp">
+                <TextView
+                    android:id="@+id/text_point_mj1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="25dp"
+                    android:fontFamily="@string/font3"
+                    android:textColor="@color/white" />
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_quitter"
+                android:layout_width="170dp"
+                android:layout_height="64dp"
+                android:background="@android:color/transparent"
+                android:textColor="#FFF" />
+
+            <Button
+                android:id="@+id/button_rep_jeu"
+                android:layout_width="170dp"
+                android:layout_height="64dp"
+                android:background="@android:color/transparent"
+                android:textColor="#FFF" />
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
