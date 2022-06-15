@@ -19,18 +19,57 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.103" />
 
-    <TextView
-        android:id="@+id/nomUtil"
-        android:layout_width="233dp"
-        android:layout_height="20dp"
-        android:fontFamily="@font/nirmala_b"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="@+id/scoreMathemaquizz"
+    <TableLayout
+        android:layout_width="396dp"
+        android:layout_height="59dp"
+        app:layout_constraintBottom_toTopOf="@+id/logout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.788"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.71" />
+        app:layout_constraintTop_toBottomOf="@+id/avatarUser">
+
+        <TableRow>
+            <TextView
+                android:id="@+id/nomUtil"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@string/font"
+                android:textColor="@color/white"
+                android:layout_marginLeft="130dp"
+                android:text="salut"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/scoreMathemaquizz"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.788"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.71" />
+
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/mailUtil"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@string/font"
+                android:textColor="@color/white"
+                android:layout_marginLeft="200dp"
+                android:text="salut"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/scoreMathemaquizz"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.788"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.71" />
+        </TableRow>
+
+
+    </TableLayout>
+
+
+
+
 
     <TextView
         android:id="@+id/scoreMathemaquizz"
@@ -93,16 +132,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.285" />
 
-    <TextView
-        android:id="@+id/mailUtil"
-        android:layout_width="160dp"
-        android:layout_height="26dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.788"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.652" />
 
     <ImageView
         android:id="@+id/avatarUser"
@@ -112,5 +141,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.523" />
+        app:layout_constraintVertical_bias="0.512" />
 </androidx.constraintlayout.widget.ConstraintLayout>
