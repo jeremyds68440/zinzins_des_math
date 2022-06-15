@@ -22,7 +22,7 @@
     <TableLayout
         android:layout_width="396dp"
         android:layout_height="70dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="13dp"
         app:layout_constraintBottom_toTopOf="@+id/logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.466"
