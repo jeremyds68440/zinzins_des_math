@@ -482,7 +482,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             int oldPoints = Math.toIntExact((Long) snapshot.child(player1).child("victoiresMathemaquizz").getValue());
-                            int newPoints = oldPoints + 1;
+                            int newPoints = oldPoints - 1;
                             refUsers.child(player1).child("victoiresMathemaquizz").setValue(newPoints);
                         }
                         @Override
@@ -505,7 +505,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             int oldPoints = Math.toIntExact((Long) snapshot.child(player2).child("victoiresMathemaquizz").getValue());
-                            int newPoints = oldPoints + 1;
+                            int newPoints = oldPoints - 1;
                             refUsers.child(player2).child("victoiresMathemaquizz").setValue(newPoints);
                         }
                         @Override

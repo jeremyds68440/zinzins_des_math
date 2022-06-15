@@ -452,8 +452,8 @@ public class MultiFactorActivity extends AppCompatActivity {
                         switch (getIntent().getFlags()) {
                             case 0:
                                 dbScore = Math.toIntExact((long) dataSnapshot.child(fields[5].getName()).getValue());
-                                if (dbScore < points)
-                                    uDatabase.child("scoreMultifactorFacile").setValue(points);
+                                if (dbScore > -points)
+                                    uDatabase.child("scoreMultifactorFacile").setValue(-points);
                                 if (defi != null && multiTurn == 5) {
                                     if (role.equals("host")) {
                                         rDatabase.child("scorePlayer1").setValue(points);
@@ -465,8 +465,8 @@ public class MultiFactorActivity extends AppCompatActivity {
                                 break;
                             case 1:
                                 dbScore = Math.toIntExact((long) dataSnapshot.child(fields[6].getName()).getValue());
-                                if (dbScore < points)
-                                    uDatabase.child("scoreMultifactorMoyen").setValue(points);
+                                if (dbScore > -points)
+                                    uDatabase.child("scoreMultifactorMoyen").setValue(-points);
                                 if (defi != null && multiTurn == 5) {
                                     if (role.equals("host")) {
                                         rDatabase.child("scorePlayer1").setValue(points);
@@ -478,8 +478,8 @@ public class MultiFactorActivity extends AppCompatActivity {
                                 break;
                             case 2:
                                 dbScore = Math.toIntExact((long) dataSnapshot.child(fields[4].getName()).getValue());
-                                if (dbScore < points)
-                                    uDatabase.child("scoreMultifactorDifficile").setValue(points);
+                                if (dbScore > -points)
+                                    uDatabase.child("scoreMultifactorDifficile").setValue(-points);
                                 if (defi != null && multiTurn == 5) {
                                     if (role.equals("host")) {
                                         rDatabase.child("scorePlayer1").setValue(points);
@@ -694,7 +694,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             int oldPoints = Math.toIntExact((Long) snapshot.child(player1).child("victoiresMultifactor").getValue());
-                            int newPoints = oldPoints + 1;
+                            int newPoints = oldPoints - 1;
                             refUsers.child(player1).child("victoiresMultifactor").setValue(newPoints);
                         }
                         @Override
@@ -718,7 +718,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             int oldPoints = Math.toIntExact((Long) snapshot.child(player2).child("victoiresMultifactor").getValue());
-                            int newPoints = oldPoints + 1;
+                            int newPoints = oldPoints - 1;
                             refUsers.child(player2).child("victoiresMultifactor").setValue(newPoints);
                         }
                         @Override
