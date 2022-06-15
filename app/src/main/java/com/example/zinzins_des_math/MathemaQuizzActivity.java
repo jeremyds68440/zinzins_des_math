@@ -83,13 +83,15 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         int dbScore;
+                        int actualScore;
                         final User utilisateur = new User();
                         final Field[] fields = utilisateur.getClass().getDeclaredFields();
                         switch (getIntent().getFlags()) {
                             case 0:
                                 dbScore = Math.toIntExact((long) dataSnapshot.child(fields[2].getName()).getValue());
-                                if (dbScore < Integer.parseInt((String) score.getText()))
-                                    uDatabase.child("scoreMathemaquizzFacile").setValue(Integer.parseInt((String) score.getText()));
+                                actualScore = -Integer.parseInt((String) score.getText());
+                                if (dbScore > actualScore)
+                                    uDatabase.child("scoreMathemaquizzFacile").setValue(actualScore);
                                 if (defi != null) {
                                     if (role.equals("host")) {
                                         rDatabase.child("scorePlayer1").setValue(Integer.parseInt((String) score.getText()));
@@ -101,8 +103,9 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                                 break;
                             case 1:
                                 dbScore = Math.toIntExact((long) dataSnapshot.child(fields[3].getName()).getValue());
-                                if (dbScore < Integer.parseInt((String) score.getText()))
-                                    uDatabase.child("scoreMathemaquizzMoyen").setValue(Integer.parseInt((String) score.getText()));
+                                actualScore = -Integer.parseInt((String) score.getText());
+                                if (dbScore > actualScore)
+                                    uDatabase.child("scoreMathemaquizzMoyen").setValue(actualScore);
                                 if (defi != null) {
                                     if (role.equals("host")) {
                                         rDatabase.child("scorePlayer1").setValue(Integer.parseInt((String) score.getText()));
@@ -114,8 +117,9 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                                 break;
                             case 2:
                                 dbScore = Math.toIntExact((long) dataSnapshot.child(fields[1].getName()).getValue());
-                                if (dbScore < Integer.parseInt((String) score.getText()))
-                                    uDatabase.child("scoreMathemaquizzDifficile").setValue(Integer.parseInt((String) score.getText()));
+                                actualScore = -Integer.parseInt((String) score.getText());
+                                if (dbScore > actualScore)
+                                    uDatabase.child("scoreMathemaquizzDifficile").setValue(actualScore);
                                 if (defi != null) {
                                     if (role.equals("host")) {
                                         rDatabase.child("scorePlayer1").setValue(Integer.parseInt((String) score.getText()));

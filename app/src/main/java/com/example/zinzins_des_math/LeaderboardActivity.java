@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,16 +24,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class LeaderboardActivity extends AppCompatActivity {
 
     ImageView leadMultifactor,leadMathemaquizz, leadRoulette,leadFacile,leadMoyen,leadDifficile;
     TextView titleLeaderboard;
+    FirebaseDatabase database;
     DatabaseReference mDatabase;
     ListView listView;
     ArrayList<String> arrayList = new ArrayList<>();
@@ -288,7 +293,8 @@ public class LeaderboardActivity extends AppCompatActivity {
                 final User utilisateur = new User();
                 final Field[] fields = utilisateur.getClass().getDeclaredFields();
                 String username = (String) dataSnapshot.child(fields[10].getName()).getValue();
-                String value =  Long.toString((long) dataSnapshot.child(fields[dbNumber].getName()).getValue());
+                Long newValue = (Long) dataSnapshot.child(fields[dbNumber].getName()).getValue();
+                String value =  Long.toString(-newValue);
                 arrayList.add(username +" : "+ value);
                 arrayAdapter.notifyDataSetChanged();
             }
@@ -318,7 +324,8 @@ public class LeaderboardActivity extends AppCompatActivity {
                 final User utilisateur = new User();
                 final Field[] fields = utilisateur.getClass().getDeclaredFields();
                 String username = (String) dataSnapshot.child(fields[10].getName()).getValue();
-                String value =  Long.toString((long) dataSnapshot.child(fields[dbNumber].getName()).getValue());
+                Long newValue = (Long) dataSnapshot.child(fields[dbNumber].getName()).getValue();
+                String value =  Long.toString(-newValue);
                 arrayList.add(username +" : "+ value);
                 arrayAdapter.notifyDataSetChanged();
             }
@@ -348,7 +355,8 @@ public class LeaderboardActivity extends AppCompatActivity {
                 final User utilisateur = new User();
                 final Field[] fields = utilisateur.getClass().getDeclaredFields();
                 String username = (String) dataSnapshot.child(fields[10].getName()).getValue();
-                String value =  Long.toString((long) dataSnapshot.child(fields[dbNumber].getName()).getValue());
+                Long newValue = (Long) dataSnapshot.child(fields[dbNumber].getName()).getValue();
+                String value =  Long.toString(-newValue);
                 arrayList.add(username +" : "+ value);
                 arrayAdapter.notifyDataSetChanged();
             }
