@@ -557,7 +557,7 @@ public class MultiFactorActivity extends AppCompatActivity {
             }
         });
 
-        if(defi != null) {
+        if(defi == null) {
             alertDialog.setCancelable(false);
             alertDialog.show();
         }
