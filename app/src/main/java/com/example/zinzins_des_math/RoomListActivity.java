@@ -300,6 +300,19 @@ public class RoomListActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void onBackPressed() {
+        if (sound_effect_state) {
+            bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+            bouton_sound.start();
+        }
+        back.setColorFilter(Color.argb(80, 0, 0, 0));
+        Intent main = new Intent(getApplicationContext(), ChooseSoloMultiActivity.class);
+        startActivity(main);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        finish();
+    }
+
     @Override
     protected void onPause() {
         super.onPause();
