@@ -37,6 +37,7 @@ public class Enigme8Activity extends AppCompatActivity {
     private String expliByDifficulty = "";
     private int imgByDifficulty;
     public ConstraintLayout root;
+    private ImageView back;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -51,7 +52,7 @@ public class Enigme8Activity extends AppCompatActivity {
                 questByDifficulty = "2A + B = 2C + A = 2B + 2C = 3B + A = 10. Quelle est la valeur de B ?";
                 repByDifficulty = "2";
                 valueRepByDifficulty = "2";
-                //imgByDifficulty =  ;
+                imgByDifficulty = R.drawable.img_enigme8_facile ;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
@@ -76,10 +77,8 @@ public class Enigme8Activity extends AppCompatActivity {
         inputAnswer = findViewById(R.id.answer_attempt);
         submit_answer_btn= findViewById(R.id.submit_answer_btn);
         explication = findViewById(R.id.explication);
+        back = findViewById(R.id.back_enigme);
 
-
-        //Titre de l'énigme
-        titre.setText("Enigme 7");
 
         //L'image
         image.setImageResource(imgByDifficulty);

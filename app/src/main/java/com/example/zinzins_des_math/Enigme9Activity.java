@@ -37,6 +37,7 @@ public class Enigme9Activity extends AppCompatActivity {
     private String expliByDifficulty = "";
     private int imgByDifficulty;
     public ConstraintLayout root;
+    private ImageView back;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -51,7 +52,7 @@ public class Enigme9Activity extends AppCompatActivity {
                 questByDifficulty = "Cinq machines sont capables de rédiger cinq articles en cinq minutes. Avec ce rythme de production, en combien de temps 100 machines peuvent-elles écrire 100 articles ?";
                 repByDifficulty = "5 minutes";
                 valueRepByDifficulty = "5";
-                //imgByDifficulty =  ;
+                imgByDifficulty = R.drawable.img_enigme9_facile ;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
 
                 break;
@@ -79,10 +80,8 @@ public class Enigme9Activity extends AppCompatActivity {
         inputAnswer = findViewById(R.id.answer_attempt);
         submit_answer_btn= findViewById(R.id.submit_answer_btn);
         explication = findViewById(R.id.explication);
+        back = findViewById(R.id.back_enigme);
 
-
-        //Titre de l'énigme
-        titre.setText("Enigme 9");
 
         //L'image
         image.setImageResource(imgByDifficulty);

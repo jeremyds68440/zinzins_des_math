@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -48,6 +49,7 @@ public class Enigme1Activity extends AppCompatActivity {
     private String expliByDifficulty = "";
     private int imgByDifficulty;
     public ConstraintLayout root;
+    private ImageView back;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -92,10 +94,9 @@ public class Enigme1Activity extends AppCompatActivity {
         inputAnswer = findViewById(R.id.answer_attempt);
         submit_answer_btn= findViewById(R.id.submit_answer_btn);
         explication = findViewById(R.id.explication);
+        back = findViewById(R.id.back_enigme);
 
 
-        //Titre de l'énigme
-        titre.setText("Enigme 1");
 
         //L'image
         image.setImageResource(imgByDifficulty);
@@ -191,15 +192,41 @@ public class Enigme1Activity extends AppCompatActivity {
             }
         });
 
-    }
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (getIntent().getFlags()) {
+                    case 0:
+                        Intent rouletteF = new Intent(getApplicationContext(), RouletteActivity.class);
+                        startActivity(rouletteF);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                    case 1:
+                        Intent rouletteM = new Intent(getApplicationContext(), RouletteActivity.class);
+                        startActivity(rouletteM);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                    case 2:
+                        Intent rouletteD = new Intent(getApplicationContext(), RouletteActivity.class);
+                        startActivity(rouletteD);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                }
+            }
+        });
 
+
+
+
+    }
+/*
     @Override
     public void onBackPressed() {
         Intent roulette = new Intent(getApplicationContext(), RouletteActivity.class);
         startActivity(roulette);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
-    }
+    }*/
 
     private final TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -217,4 +244,6 @@ public class Enigme1Activity extends AppCompatActivity {
 
         }
     };
+
+
 }

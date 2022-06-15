@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
 import java.util.Random;
 
 
@@ -24,16 +28,41 @@ public class RouletteActivity extends AppCompatActivity {
     private RouletteActivity rouletteActivity = this;
     int cpt1 = 0;
     int cpt2 = 0;
+    public RelativeLayout rootRoulette;
+    private ImageView fleche;
+    private ImageView lancerBtn;
+    private ImageView back_roulette;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roulette);
 
+        rootRoulette = findViewById(R.id.rootRoulette);
+        wheel = findViewById(R.id.wheel);
+        fleche = findViewById(R.id.flecheRoulette);
+        lancerBtn = findViewById(R.id.startBtn);
+
+        //Backgrounds
+        switch(getIntent().getFlags()){
+            case 1 :
+                rootRoulette.setBackground(getDrawable(R.drawable.accueil_roulette_moyen));
+                fleche.setImageResource(R.drawable.fleche_roulette_moyen);
+                wheel.setImageResource(R.drawable.roulette);
+                lancerBtn.setImageResource(R.drawable.lancer_roulette_difficile);
+                break;
+            case 2 :
+                rootRoulette.setBackground(getDrawable(R.drawable.accueil_roulette_difficile));
+                fleche.setImageResource(R.drawable.fleche_roulette_difficile);
+                wheel.setImageResource(R.drawable.roulette);
+                lancerBtn.setImageResource(R.drawable.lancer_roulette_difficile);
+                break;
+        }
+
 
         final ImageView startBtn = findViewById(R.id.startBtn);
         this.wheel = findViewById(R.id.wheel);
-        final ImageView backBtn = findViewById(R.id.back_enigme);
+        back_roulette = findViewById(R.id.back_roulette);
 
         getDegreeForSectors();
 
@@ -44,7 +73,7 @@ public class RouletteActivity extends AppCompatActivity {
             }
         });
 
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        back_roulette.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch (getIntent().getFlags()) {
@@ -69,6 +98,7 @@ public class RouletteActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void spin() {
@@ -86,7 +116,7 @@ public class RouletteActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 //Toast.makeText(RouletteActivity.this, "Enigme" + sectors[sectors.length - (degree + 1)], Toast.LENGTH_SHORT).show();
-                Intent enigme1 = new Intent(getApplicationContext(), Enigme5Activity.class);
+                Intent enigme1 = new Intent(getApplicationContext(), Enigme1Activity.class);
                 enigme1.setFlags(getIntent().getFlags());
                 startActivity(enigme1);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -215,4 +245,7 @@ public class RouletteActivity extends AppCompatActivity {
         });
         quit.show();
     }
+
+
+
 }

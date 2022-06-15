@@ -37,6 +37,7 @@ public class Enigme4Activity extends AppCompatActivity {
     private String expliByDifficulty = "";
     private int imgByDifficulty;
     public ConstraintLayout root;
+    private ImageView back;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -53,7 +54,7 @@ public class Enigme4Activity extends AppCompatActivity {
                         "Au 2ème arrêt, il monte 9 personnes de moins qu'au 1er arrêt. Combien reste-t-il de places dans ce car? \n";
                 repByDifficulty = "54 places";
                 valueRepByDifficulty = "54";
-                //imgByDifficulty =  ;
+                imgByDifficulty = R.drawable.img_enigme4_facile ;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
@@ -89,9 +90,8 @@ public class Enigme4Activity extends AppCompatActivity {
         inputAnswer = findViewById(R.id.answer_attempt);
         submit_answer_btn= findViewById(R.id.submit_answer_btn);
         explication = findViewById(R.id.explication);
+        back = findViewById(R.id.back_enigme);
 
-        //Titre de l'énigme
-        titre.setText("Enigme 4");
 
         //L'image
         image.setImageResource(imgByDifficulty);
