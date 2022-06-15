@@ -412,24 +412,28 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                 bg.setBackground(getDrawable(R.drawable.bg_quizz_facile));
                 nuage_equation.setImageDrawable(getDrawable(R.drawable.grosnuage));
                 equation.setTextColor(getColor(R.color.black));
+                difficultyString = "facile";
             }else  if (g.getScore() < 100) {
                 bg.setBackground(getDrawable(R.drawable.bg_quizz_moyen));
                 nuage_equation.setImageDrawable(getDrawable(R.drawable.grosnuage_quizz_moyen));
                 equation.setTextColor(getColor(R.color.black));
+                difficultyString = "moyen";
             }else if (g.getScore() < 150) {
                 equation.setTextColor(getColor(R.color.white));
                 bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
                 nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
+                difficultyString = "difficile";
             }else  if (g.getScore() < 200) {
                 equation.setTextColor(getColor(R.color.white));
                 bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
                 nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
-            }else  if (g.getScore() >= 200) {
+                difficultyString = "difficile";
+            }else {
                 equation.setTextColor(getColor(R.color.white));
                 bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
                 nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
+                difficultyString = "difficile";
             }
-            difficultyString = "Evolution";
             g.newEquationEvolution(g);
         }
 
