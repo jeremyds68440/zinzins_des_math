@@ -123,7 +123,7 @@ public class RoomListActivity extends AppCompatActivity {
             public void onDataChange (@NonNull DataSnapshot dataSnapshot){
                 final User utilisateur = new User();
                 final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                username = (String) dataSnapshot.child(fields[10].getName()).getValue();
+                username = (String) dataSnapshot.child(fields[7].getName()).getValue();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}

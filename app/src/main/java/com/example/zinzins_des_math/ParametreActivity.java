@@ -97,7 +97,7 @@ public class ParametreActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             final User utilisateur = new User();
                             final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                            int idAvatar = Math.toIntExact((Long) dataSnapshot.child(fields[14].getName()).getValue());
+                            int idAvatar = Math.toIntExact((Long) dataSnapshot.child(fields[10].getName()).getValue());
                             switch (idAvatar) {
                                 case 0:
                                     mDatabase.child("zAvatar").setValue(1);
@@ -128,9 +128,9 @@ public class ParametreActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     final User utilisateur = new User();
                     final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                    username.setText((String) dataSnapshot.child(fields[10].getName()).getValue());
+                    username.setText((String) dataSnapshot.child(fields[7].getName()).getValue());
                     mail.setText((String) dataSnapshot.child(fields[0].getName()).getValue());
-                    int idAvatar = Math.toIntExact((Long) dataSnapshot.child(fields[14].getName()).getValue());
+                    int idAvatar = Math.toIntExact((Long) dataSnapshot.child(fields[10].getName()).getValue());
                     switch (idAvatar) {
                         case 0:
                             avatar.setImageDrawable(getDrawable(getResources().getIdentifier("avatar_bleu", "drawable", getPackageName())));

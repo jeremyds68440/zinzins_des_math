@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     final User utilisateur = new User();
                     final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                    int idAvatar = Math.toIntExact((Long) dataSnapshot.child(fields[14].getName()).getValue());
+                    int idAvatar = Math.toIntExact((Long) dataSnapshot.child(fields[10].getName()).getValue());
                     switch (idAvatar) {
                         case 0:
                             Logo_Profile.setImageDrawable(getDrawable(getResources().getIdentifier("logo_bleu_blanc", "drawable", getPackageName())));

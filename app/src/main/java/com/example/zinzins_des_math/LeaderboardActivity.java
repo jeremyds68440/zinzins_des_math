@@ -261,7 +261,7 @@ public class LeaderboardActivity extends AppCompatActivity {
                         leadMultifactor.setColorFilter(Color.argb(80, 0, 0, 0));
                         leadMathemaquizz.setColorFilter(Color.argb(0, 0, 0, 0));
                         titleLeaderboard.setText("Classement Multifactor Facile");
-                        showMultifactor("Multifactor", 12);
+                        showMultifactor("Multifactor", 9);
                     }
                 });
                 leadMathemaquizz.setOnClickListener(new View.OnClickListener() {
@@ -274,7 +274,7 @@ public class LeaderboardActivity extends AppCompatActivity {
                         leadMultifactor.setColorFilter(Color.argb(0, 0, 0, 0));
                         leadMathemaquizz.setColorFilter(Color.argb(80, 0, 0, 0));
                         titleLeaderboard.setText("Classement Victoires Mathemaquizz");
-                        showMathemaquizz("Mathemaquizz", 11);
+                        showMathemaquizz("Mathemaquizz", 8);
 
                     }
                 });
@@ -298,7 +298,7 @@ public class LeaderboardActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 final User utilisateur = new User();
                 final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                String username = (String) dataSnapshot.child(fields[10].getName()).getValue();
+                String username = (String) dataSnapshot.child(fields[7].getName()).getValue();
                 Long newValue = (Long) dataSnapshot.child(fields[dbNumber].getName()).getValue();
                 String value =  Long.toString(-newValue);
                 arrayList.add(username +" : "+ value);
@@ -329,7 +329,7 @@ public class LeaderboardActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 final User utilisateur = new User();
                 final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                String username = (String) dataSnapshot.child(fields[10].getName()).getValue();
+                String username = (String) dataSnapshot.child(fields[7].getName()).getValue();
                 Long newValue = (Long) dataSnapshot.child(fields[dbNumber].getName()).getValue();
                 String value =  Long.toString(-newValue);
                 arrayList.add(username +" : "+ value);
@@ -360,7 +360,7 @@ public class LeaderboardActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 final User utilisateur = new User();
                 final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                String username = (String) dataSnapshot.child(fields[10].getName()).getValue();
+                String username = (String) dataSnapshot.child(fields[7].getName()).getValue();
                 Long newValue = (Long) dataSnapshot.child(fields[dbNumber].getName()).getValue();
                 String value =  Long.toString(-newValue);
                 arrayList.add(username +" : "+ value);
@@ -391,7 +391,7 @@ public class LeaderboardActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 final User utilisateur = new User();
                 final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                String username = (String) dataSnapshot.child(fields[10].getName()).getValue();
+                String username = (String) dataSnapshot.child(fields[7].getName()).getValue();
                 Long newValue = (Long) dataSnapshot.child(fields[dbNumber].getName()).getValue();
                 String value =  Long.toString(-newValue);
                 arrayList.add(username +" : "+ value);
@@ -422,7 +422,7 @@ public class LeaderboardActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String previousChildName) {
                 final User utilisateur = new User();
                 final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                String username = (String) dataSnapshot.child(fields[10].getName()).getValue();
+                String username = (String) dataSnapshot.child(fields[7].getName()).getValue();
                 Long newValue = (Long) dataSnapshot.child(fields[dbNumber].getName()).getValue();
                 String value =  Long.toString(-newValue);
                 arrayList.add(username +" : "+ value);

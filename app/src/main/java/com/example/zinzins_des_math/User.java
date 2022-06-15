@@ -12,25 +12,14 @@ public class User {
     public int scoreMultifactorDifficile;
     public int scoreMultifactorFacile;
     public int scoreMultifactorMoyen;
-    public int scoreRouletteDifficile;
-    public int scoreRouletteFacile;
-    public int scoreRouletteMoyen;
     public String username;
     public int victoiresMathemaquizz;
     public int victoiresMultifactor;
-    public int victoiresRoulette;
     public int zAvatar;
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
-
-    /*public User(String email, int scoreMathemaquizz, int scoreMultifactor, String username) {
-        this.email = email;
-        this.scoreMathemaquizz = scoreMathemaquizz;
-        this.scoreMultifactor = scoreMultifactor;
-        this.username = username;
-    }*/
 
     public String getEmail() {
         return email;
@@ -88,30 +77,6 @@ public class User {
         this.scoreMultifactorDifficile = scoreMultifactorDifficile;
     }
 
-    public int getScoreRouletteFacile() {
-        return scoreRouletteFacile;
-    }
-
-    public void setScoreRouletteFacile(int scoreRouletteFacile) {
-        this.scoreRouletteFacile = scoreRouletteFacile;
-    }
-
-    public int getScoreRouletteMoyen() {
-        return scoreRouletteMoyen;
-    }
-
-    public void setScoreRouletteMoyen(int scoreRouletteMoyen) {
-        this.scoreRouletteMoyen = scoreRouletteMoyen;
-    }
-
-    public int getScoreRouletteDifficile() {
-        return scoreRouletteDifficile;
-    }
-
-    public void setScoreRouletteDifficile(int scoreRouletteDifficile) {
-        this.scoreRouletteDifficile = scoreRouletteDifficile;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -134,14 +99,6 @@ public class User {
 
     public void setVictoiresMultifactor(int victoiresMultifactor) {
         this.victoiresMultifactor = victoiresMultifactor;
-    }
-
-    public int getVictoiresRoulette() {
-        return victoiresRoulette;
-    }
-
-    public void setVictoiresRoulette(int victoiresRoulette) {
-        this.victoiresRoulette = victoiresRoulette;
     }
 
     public int getzAvatar() {
