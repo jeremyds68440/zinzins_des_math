@@ -426,20 +426,64 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         rDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String player1;
+                String player2;
                 int scorePlayer1;
                 int scorePlayer2;
                 final Room room = new Room();
                 final Field[] fields = room.getClass().getDeclaredFields();
+                player1 = (String) dataSnapshot.child(fields[1].getName()).getValue();
+                player2 = (String) dataSnapshot.child(fields[2].getName()).getValue();
                 scorePlayer1 = Math.toIntExact((Long) dataSnapshot.child(fields[3].getName()).getValue());
                 scorePlayer2 = Math.toIntExact((Long) dataSnapshot.child(fields[4].getName()).getValue());
+                DatabaseReference refUsers = database.getReference("users");
                 AlertDialog.Builder finiDefi = new AlertDialog.Builder(mathemaQuizzActivity);
                 if (scorePlayer1 > scorePlayer2) {
+                    refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            int oldPoints = Math.toIntExact((Long) snapshot.child(player1).child("victoiresMathemaquizz").getValue());
+                            int newPoints = oldPoints + 1;
+                            refUsers.child(player1).child("victoiresMathemaquizz").setValue(newPoints);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {}
+                    });
+
                     finiDefi.setTitle("Dommage");
                     finiDefi.setMessage("Vous avez perdu avec" + scorePlayer1 + " pts contre " + scorePlayer2 + "pts");
+                    finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            rDatabase.removeValue();
+                            finish();
+                        }
+                    });
                     finiDefi.show();
                 } else {
+                    refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            int oldPoints = Math.toIntExact((Long) snapshot.child(player2).child("victoiresMathemaquizz").getValue());
+                            int newPoints = oldPoints + 1;
+                            refUsers.child(player2).child("victoiresMathemaquizz").setValue(newPoints);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {}
+                    });
+
+
                     finiDefi.setTitle("Bravo");
-                    finiDefi.setMessage("Vous avez gagné avec" + scorePlayer1 + " pts contre " + scorePlayer2 + "pts");
+                    finiDefi.setMessage("Vous avez perdu avec " + scorePlayer1 + " pts contre " + scorePlayer2 + " pts");
+                    finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            rDatabase.removeValue();
+                            finish();
+                        }
+                    });
                     finiDefi.show();
                 }
             }

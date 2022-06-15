@@ -118,4 +118,28 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public int getVictoiresMathemaquizz() {
+        return victoiresMathemaquizz;
+    }
+
+    public void setVictoiresMathemaquizz(int victoiresMathemaquizz) {
+        this.victoiresMathemaquizz = victoiresMathemaquizz;
+    }
+
+    public int getVictoiresMultifactor() {
+        return victoiresMultifactor;
+    }
+
+    public void setVictoiresMultifactor(int victoiresMultifactor) {
+        this.victoiresMultifactor = victoiresMultifactor;
+    }
+
+    public int getVictoiresRoulette() {
+        return victoiresRoulette;
+    }
+
+    public void setVictoiresRoulette(int victoiresRoulette) {
+        this.victoiresRoulette = victoiresRoulette;
+    }
 }
