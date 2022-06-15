@@ -5,6 +5,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -35,6 +38,22 @@ public class LeaderboardActivity extends AppCompatActivity {
     ArrayList<String> arrayList = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
 
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String ETAT_SOUND_THEME = "etat_sound_theme";
+    public static final String ETAT_SOUND_EFFECT = "etat_sound_effect";
+
+    private boolean sound_theme_state;
+    private boolean sound_effect_state;
+
+    private MediaPlayer bouton_sound;
+
+    public void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        sound_theme_state = sharedPreferences.getBoolean(ETAT_SOUND_THEME, true);
+        sound_effect_state = sharedPreferences.getBoolean(ETAT_SOUND_EFFECT, true);
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -49,11 +68,16 @@ public class LeaderboardActivity extends AppCompatActivity {
         leadFacile = (ImageView) findViewById(R.id.leadFacile);
         leadMoyen = (ImageView) findViewById(R.id.leadMoyen);
         leadDifficile = (ImageView) findViewById(R.id.leadDifficile);
-
+        loadData();
         ImageView back = findViewById(R.id.back_menu2);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(sound_effect_state){
+                    MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
+                back.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent multi = new Intent(getApplicationContext(), MultiplayerActivity.class);
                 startActivity(multi);
                 finish();
@@ -62,9 +86,29 @@ public class LeaderboardActivity extends AppCompatActivity {
         leadMultifactor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(sound_effect_state){
+                    MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
+                leadMultifactor.setColorFilter(Color.argb(80, 0, 0, 0));
+                leadMathemaquizz.setColorFilter(Color.argb(0, 0, 0, 0));
+                leadRoulette.setColorFilter(Color.argb(0, 0, 0, 0));
+
+                leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
+                leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
+                leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
+
                 leadFacile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(sound_effect_state){
+                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                            bouton_sound.start();
+                        }
+                        leadFacile.setColorFilter(Color.argb(80, 0, 0, 0));
+                        leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
+
                         titleLeaderboard.setText("Classement Multifactor Facile");
                         showFacile("Multifactor", 5);
                     }
@@ -72,6 +116,14 @@ public class LeaderboardActivity extends AppCompatActivity {
                 leadMoyen.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(sound_effect_state){
+                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                            bouton_sound.start();
+                        }
+                        leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadMoyen.setColorFilter(Color.argb(80, 0, 0, 0));
+                        leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
+
                         titleLeaderboard.setText("Classement Multifactor Moyen");
                         showMoyen("Multifactor", 6);
                     }
@@ -79,6 +131,14 @@ public class LeaderboardActivity extends AppCompatActivity {
                 leadDifficile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(sound_effect_state){
+                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                            bouton_sound.start();
+                        }
+                        leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadDifficile.setColorFilter(Color.argb(80, 0, 0, 0));
+
                         titleLeaderboard.setText("Classement Multifactor Difficile");
                         showDifficile("Multifactor", 4);
                     }
@@ -88,9 +148,29 @@ public class LeaderboardActivity extends AppCompatActivity {
         leadMathemaquizz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(sound_effect_state){
+                    MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
+                leadMultifactor.setColorFilter(Color.argb(0, 0, 0, 0));
+                leadMathemaquizz.setColorFilter(Color.argb(80, 0, 0, 0));
+                leadRoulette.setColorFilter(Color.argb(0, 0, 0, 0));
+
+                leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
+                leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
+                leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
+
                 leadFacile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(sound_effect_state){
+                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                            bouton_sound.start();
+                        }
+                        leadFacile.setColorFilter(Color.argb(80, 0, 0, 0));
+                        leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
+
                         titleLeaderboard.setText("Classement Mathemaquizz Facile");
                         showFacile("Mathemaquizz", 2);
                     }
@@ -98,6 +178,14 @@ public class LeaderboardActivity extends AppCompatActivity {
                 leadMoyen.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(sound_effect_state){
+                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                            bouton_sound.start();
+                        }
+                        leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadMoyen.setColorFilter(Color.argb(80, 0, 0, 0));
+                        leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
+
                         titleLeaderboard.setText("Classement Mathemaquizz Moyen");
                         showMoyen("Mathemaquizz", 3);
                     }
@@ -105,6 +193,14 @@ public class LeaderboardActivity extends AppCompatActivity {
                 leadDifficile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(sound_effect_state){
+                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                            bouton_sound.start();
+                        }
+                        leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadDifficile.setColorFilter(Color.argb(80, 0, 0, 0));
+
                         titleLeaderboard.setText("Classement Mathemaquizz Difficile");
                         showDifficile("Mathemaquizz", 1);
                     }
@@ -114,9 +210,29 @@ public class LeaderboardActivity extends AppCompatActivity {
         leadRoulette.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(sound_effect_state){
+                    MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
+                leadMultifactor.setColorFilter(Color.argb(0, 0, 0, 0));
+                leadMathemaquizz.setColorFilter(Color.argb(0, 0, 0, 0));
+                leadRoulette.setColorFilter(Color.argb(80, 0, 0, 0));
+
+                leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
+                leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
+                leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
+
                 leadFacile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(sound_effect_state){
+                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                            bouton_sound.start();
+                        }
+                        leadFacile.setColorFilter(Color.argb(80, 0, 0, 0));
+                        leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
+
                         titleLeaderboard.setText("Classement Roulette Facile");
                         showFacile("Roulette", 8);
                     }
@@ -124,6 +240,14 @@ public class LeaderboardActivity extends AppCompatActivity {
                 leadMoyen.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(sound_effect_state){
+                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                            bouton_sound.start();
+                        }
+                        leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadMoyen.setColorFilter(Color.argb(80, 0, 0, 0));
+                        leadDifficile.setColorFilter(Color.argb(0, 0, 0, 0));
+
                         titleLeaderboard.setText("Classement Roulette Moyen");
                         showMoyen("Roulette", 9);
                     }
@@ -131,6 +255,14 @@ public class LeaderboardActivity extends AppCompatActivity {
                 leadDifficile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        if(sound_effect_state){
+                            MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                            bouton_sound.start();
+                        }
+                        leadFacile.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadMoyen.setColorFilter(Color.argb(0, 0, 0, 0));
+                        leadDifficile.setColorFilter(Color.argb(80, 0, 0, 0));
+
                         titleLeaderboard.setText("Classement Roulette Difficile");
                         showDifficile("Roulette", 7);
                     }

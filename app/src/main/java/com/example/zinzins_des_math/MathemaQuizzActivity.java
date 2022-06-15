@@ -281,6 +281,10 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(sound_effect_state){
+                    MediaPlayer bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
                 back.setColorFilter(Color.argb(80, 0, 0, 0));
                 setQuitPopup();
             }
