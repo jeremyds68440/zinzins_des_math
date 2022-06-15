@@ -11,19 +11,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class FacileActivity extends AppCompatActivity {
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String ETAT_SOUND_THEME = "etat_sound_theme";
     public static final String ETAT_SOUND_EFFECT = "etat_sound_effect";
-
-    private TextView difficultyString;
 
     private boolean sound_theme_state;
     private boolean sound_effect_state;
@@ -47,10 +42,10 @@ public class FacileActivity extends AppCompatActivity {
         ImageView mathemaquizz = findViewById(R.id.mathemaquizz_facile);
         ImageView roulette = findViewById(R.id.roulette_facile);
 
-        actionClickImagefacile(back, DifficultyActivity.class,12);
-        actionClickImagefacile(multifactor, MultiFactorActivity.class,0);
-        actionClickImagefacile(mathemaquizz, MathemaQuizzActivity.class,0);
-        actionClickImagefacile(roulette, RouletteActivity.class,0);
+        actionClickImageFacile(back, DifficultyActivity.class,12);
+        actionClickImageFacile(multifactor, MultiFactorActivity.class,0);
+        actionClickImageFacile(mathemaquizz, MathemaQuizzActivity.class,0);
+        actionClickImageFacile(roulette, RouletteActivity.class,0);
 
         ImageView infoMultifactor = findViewById(R.id.info_multifactor_facile);
         ImageView infoMathemaquizz = findViewById(R.id.info_mathemaquizz_facile);
@@ -62,7 +57,7 @@ public class FacileActivity extends AppCompatActivity {
 
     }
 
-    private void actionClickImagefacile(ImageView button, Class act, int difficulty) {
+    private void actionClickImageFacile(ImageView button, Class act, int difficulty) {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,10 +80,11 @@ public class FacileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 button.setColorFilter(Color.argb(80, 0, 0, 0));
-                createPopupInfo(gameName, button);
+                createPopupInfo(gameName);
             }
         });
     }
+
     public void onBackPressed() {
         Intent intent = new Intent(getApplicationContext(), DifficultyActivity.class);
         startActivity(intent);
@@ -96,7 +92,7 @@ public class FacileActivity extends AppCompatActivity {
         finish();
     }
 
-    private void createPopupInfo(String gameName, ImageView button){
+    private void createPopupInfo(String gameName){
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
         ViewGroup viewGroup = findViewById(android.R.id.content);
         View dialogView_back = LayoutInflater.from(this).inflate(R.layout.custom_popup_info, viewGroup, false);
@@ -114,10 +110,8 @@ public class FacileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
-                button.setColorFilter(Color.argb(0, 0, 0, 0));
             }
         });
         alertDialog.show();
-
     }
 }
