@@ -64,10 +64,11 @@ public class Enigme3Activity extends AppCompatActivity {
                 root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
-                questByDifficulty = "";
-                repByDifficulty = "";
-                expliByDifficulty = "";
-                //imgByDifficulty = ;
+                questByDifficulty = "On dispose d'une urne contenant 17 jetons numérotés de 1 à 17. Quel est le nombre minimum de jetons qu'il faut tirer pour être sûr de pouvoir faire 18 en ajoutant les numéros d'un certain nombre des jetons tirés ?";
+                repByDifficulty = "10 jetons";
+                valueRepByDifficulty = "10";
+                expliByDifficulty = "Explication : Avec 9 jetons , on ne pourra pas faire 18 si l'on tire 17;16;15;14 ;13;12;11;10;9. Avec 10 jetons , on pourra toujours faire 18 puisque deux d'entre eux auront toujours leur somme égale à 18. En effet : sur 17 jetons , huit portent des numéros de 1 à 8 et huit autres des numéros de 10 à 17. Or 18 – 8 = 10 ; 18 – 7 = 11 ; 18 – 6 =12 ; …... ; 18 - 2 = 16 ; 18 – 1 = 17. Donc si on tire 10 jetons , on trouvera parmi eux au moins un couple du type ( n ; 18 – n ) dont la somme fait 18.";
+                imgByDifficulty = R.drawable.defis3;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }

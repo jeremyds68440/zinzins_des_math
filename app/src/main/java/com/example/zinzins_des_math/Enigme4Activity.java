@@ -76,10 +76,17 @@ public class Enigme4Activity extends AppCompatActivity {
                 root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
-                questByDifficulty = "";
-                repByDifficulty = "";
-                expliByDifficulty = "";
-                //imgByDifficulty = ;
+                questByDifficulty = "Une entreprise souhaite obtenir une estimation de la proportion de personnes de plus de 60 ans parmi ses clients, au niveau de confiance de 95%, avec un intervalle d’amplitude inférieure à 0, 05. Quel est le nombre minimum de clients à interroger ?";
+                repByDifficulty = "1600 clients";
+                valueRepByDifficulty = "1600";
+                expliByDifficulty = "Explication : \n" +
+                        "Un intervalle de confiance au niveau de confiance 95% est [ f − 1 /√n , f + 1/√n]  où f est la fréquence de personnes de plus de 60 ans observée dans l’échantillon et n est l’effectif de l’échantillon. L’amplitude de cet intervalle de confiance est 2/√n. \n" +
+                        "2/√n <= 0, 05\n" +
+                        "⇔ 2/√n <= 5/100 \n" +
+                        "⇔ √n/2 >= 100/5 \n" +
+                        "⇔ √n >= 40 \n" +
+                        "⇔ n >= 1600\n";
+                imgByDifficulty = R.drawable.defis4;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }

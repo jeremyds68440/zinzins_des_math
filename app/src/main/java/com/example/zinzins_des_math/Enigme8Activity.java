@@ -63,10 +63,14 @@ public class Enigme8Activity extends AppCompatActivity {
                 root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
-                questByDifficulty = "";
-                repByDifficulty = "";
-                expliByDifficulty = "";
-                //imgByDifficulty = ;
+                questByDifficulty = "Toutes mes économies, soit 270 000 € sont placées à la banque sur trois comptes A, B et C. La répartition est la suivante : les deux-tiers sur le compte A, 15% sur le compte B et le reste sur le compte C. Combien y a-t-il en euros sur le compte C ?";
+                repByDifficulty = "49 500 €";
+                valueRepByDifficulty = "49500";
+                expliByDifficulty = "Explication :\n" +
+                        "270 000 x (2/3) = 180 000 \n" +
+                        "270 000 x 0,15 = 40 500\n" +
+                        "270 000 - 180 000 - 40 500 = 49 500\n";
+                imgByDifficulty = R.drawable.defis8;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }

@@ -66,10 +66,11 @@ public class Enigme9Activity extends AppCompatActivity {
                 root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
-                questByDifficulty = "";
-                repByDifficulty = "";
-                expliByDifficulty = "";
-                //imgByDifficulty = ;
+                questByDifficulty = "On multiplie tous les entiers de 1 jusqu’à 176 800. Puis on additionne tous les chiffres qui composent le résultat obtenu. On additionne ensuite tous les chiffres qui composent ce nouveau résultat. On répète l’opération plusieurs fois. Au bout d’un certain \"temps\", on tombe sur un résultat inférieur à 16. Lequel ?";
+                repByDifficulty = "9";
+                valueRepByDifficulty = "9";
+                expliByDifficulty = "Explication : Il suffit de multiplier les premiers entiers (pas la peine d'aller jusqu'à 176 800 !) et d'effectuer l'algorithme proposé. Quel que soit le nombre de facteurs pris au départ, le résultat reste toujours le même, 9 !";
+                //imgByDifficulty = R.drawable.defis9;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }

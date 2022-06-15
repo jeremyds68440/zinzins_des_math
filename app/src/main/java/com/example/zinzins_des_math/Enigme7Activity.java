@@ -63,15 +63,16 @@ public class Enigme7Activity extends AppCompatActivity {
                         "Combien de minutes faut-il pour couper une bûche en 13 morceaux  ?\n";
                 repByDifficulty = "17 min";
                 valueRepByDifficulty = "17";
-                expliByDifficulty = "Explication :  Pour couper une bûche en 13 morceaux, il faut faire 12 coupes prenant chacune 1min25s, soit : 12 x 1 min 25s = 17 min";
+                expliByDifficulty = "Explication :  Pour couper une bûche en 13 morceaux, il faut faire 12 coupes prenant chacune 1min25s, soit : 12 x 1 min 25s = 17 min.";
                 imgByDifficulty = R.drawable.img_enigme_7;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
-                questByDifficulty = "";
-                repByDifficulty = "";
-                expliByDifficulty = "";
-                //imgByDifficulty = ;
+                questByDifficulty = "Voici une suite logique de nombres : 7 ; 21 ; 18 ; 72 ; 68… Quel est le nombre suivant ?";
+                repByDifficulty = "340";
+                valueRepByDifficulty = "340";
+                expliByDifficulty = "Explication : On multiplie par 3, puis on soustrait 3, puis on multiplie par 4, puis on soustrait 4, etc. Et 68 x 5 = 340.";
+                imgByDifficulty = R.drawable.defis7;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }

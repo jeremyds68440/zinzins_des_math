@@ -64,10 +64,11 @@ public class Enigme5Activity extends AppCompatActivity {
                 root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
-                questByDifficulty = "";
-                repByDifficulty = "";
-                expliByDifficulty = "";
-                //imgByDifficulty = ;
+                questByDifficulty = "Je viens d’écrire sur une feuille tous les nombres de 100 à 400. Combien de fois ai-je écrit le chiffre 2 ?";
+                repByDifficulty = "160 fois";
+                valueRepByDifficulty = "160";
+                expliByDifficulty = "Explication : 20 entre 100 et 199, 120 entre 200 et 299, 20 entre 300 et 400.";
+                imgByDifficulty = R.drawable.defis5;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }

@@ -69,10 +69,11 @@ public class Enigme2Activity extends AppCompatActivity {
                 root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
-                questByDifficulty = "";
-                repByDifficulty = "";
-                expliByDifficulty = "";
-                //imgByDifficulty = ;
+                questByDifficulty = "Gaston a récolté ses pastèques. Elles sont bien juteuses et constituées de 91% d'eau. Il les stocke dans un hangar durant deux jours. Lorsqu'il souhaite les vendre , il s'aperçoit que ses pastèques ne contiennent plus que 90% d'eau pour un poids total de 1814,4 kg. Quel était le poids des pastèques avant stockage ?";
+                repByDifficulty = "2016 kg";
+                valueRepByDifficulty = "2016";
+                expliByDifficulty = "Explication : Deux jours après la récolte , les pastèques sont constituées de 90% d'eau pour un poids total de 1814,4 kg. Cela correspond à 10% de matière sèche , soit : 10% * 1814,4 = 181,44 kg Le jour de la récolte , la quantité de matière sèche était aussi de 181,44 kg. Or , à ce moment-là , les pastèques contiennent 91% d'eau : 181,44 * 100/9 = 2016 kg.";
+                imgByDifficulty = R.drawable.defis2;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }

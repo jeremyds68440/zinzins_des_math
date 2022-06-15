@@ -79,10 +79,18 @@ public class Enigme1Activity extends AppCompatActivity {
                 root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
-                questByDifficulty = "";
-                repByDifficulty = "";
-                expliByDifficulty = "";
-                //imgByDifficulty = ;
+                questByDifficulty = "Le code de sécurité de mon portable est un carré parfait. Si sa racine baissait d'une unité , il baisserait lui-même de 85. Quel est-il?";
+                repByDifficulty = "1849";
+                valueRepByDifficulty = "1849";
+                expliByDifficulty = "Explication : Notons x la racine du code.\n" +
+                        " ( x – 1 )² = x² – 85\n" +
+                        " 85 = x² - ( x – 1 )² \n" +
+                        " 85 = x² - ( x² – 2x + 1 )\n" +
+                        " 85 = 2x – 1\n" +
+                        " 86 = 2x\n" +
+                        " 43 = x\n" +
+                        " Mon code est donc 43² = 1849\n";
+                imgByDifficulty = R.drawable.defis1;
                 root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }
