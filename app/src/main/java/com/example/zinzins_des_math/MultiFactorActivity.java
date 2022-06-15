@@ -14,6 +14,7 @@ import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -427,42 +428,6 @@ public class MultiFactorActivity extends AppCompatActivity {
                 soundtheme.setVolume(0.2f, 0.2f);
             }
 
-            if (fAuth.getCurrentUser() != null) {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                DatabaseReference mDatabase = database.getReference("users").child(user.getUid());
-                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        int dbScore;
-                        final User utilisateur = new User();
-                        final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                        switch (getIntent().getFlags()) {
-                            case 0:
-                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[5].getName()).getValue());
-                                if (dbScore < points)
-                                    mDatabase.child("scoreMultifactorFacile").setValue(points);
-                                break;
-                            case 1:
-                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[6].getName()).getValue());
-                                if (dbScore < points)
-                                    mDatabase.child("scoreMultifactorMoyen").setValue(points);
-                                break;
-                            case 2:
-                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[4].getName()).getValue());
-                                if (dbScore < points)
-                                    mDatabase.child("scoreMultifactorDifficile").setValue(points);
-                                break;
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
-
             String imagePopup = "victoire_mj1_" + difficultyString;
             int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
             linearLayout.setBackground(getDrawable(resId));
@@ -486,10 +451,10 @@ public class MultiFactorActivity extends AppCompatActivity {
                         final Field[] fields = utilisateur.getClass().getDeclaredFields();
                         switch (getIntent().getFlags()) {
                             case 0:
-                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[2].getName()).getValue());
+                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[5].getName()).getValue());
                                 if (dbScore < points)
                                     uDatabase.child("scoreMultifactorFacile").setValue(points);
-                                if (defi != null) {
+                                if (defi != null && multiTurn == 5) {
                                     if (role.equals("host")) {
                                         rDatabase.child("scorePlayer1").setValue(points);
                                     } else if (role.equals("client")) {
@@ -499,10 +464,10 @@ public class MultiFactorActivity extends AppCompatActivity {
                                 }
                                 break;
                             case 1:
-                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[3].getName()).getValue());
+                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[6].getName()).getValue());
                                 if (dbScore < points)
                                     uDatabase.child("scoreMultifactorMoyen").setValue(points);
-                                if (defi != null) {
+                                if (defi != null && multiTurn == 5) {
                                     if (role.equals("host")) {
                                         rDatabase.child("scorePlayer1").setValue(points);
                                     } else if (role.equals("client")) {
@@ -512,10 +477,10 @@ public class MultiFactorActivity extends AppCompatActivity {
                                 }
                                 break;
                             case 2:
-                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[1].getName()).getValue());
+                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[4].getName()).getValue());
                                 if (dbScore < points)
                                     uDatabase.child("scoreMultifactorDifficile").setValue(points);
-                                if (defi != null) {
+                                if (defi != null && multiTurn == 5) {
                                     if (role.equals("host")) {
                                         rDatabase.child("scorePlayer1").setValue(points);
                                     } else if (role.equals("client")) {
@@ -556,7 +521,7 @@ public class MultiFactorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent difficulte;
                 if(extras != null) {
-                    difficulte = new Intent(getApplicationContext(), RoomListActivity.class);
+                    difficulte = new Intent(getApplicationContext(), FacileActivity.class);
                 }
                 else if(evolution) {
                     difficulte = new Intent(getApplicationContext(), LevelActivity.class);
@@ -591,9 +556,21 @@ public class MultiFactorActivity extends AppCompatActivity {
             }
         });
 
-        if(fAuth.getCurrentUser() == null || multiTurn < 5) {
+        if(fAuth.getCurrentUser() == null) {
             alertDialog.setCancelable(false);
             alertDialog.show();
+        }
+        else if(multiTurn < 5) {
+            if(win) {
+                newTarget();
+            }
+            resetCounter();
+            unBlocked();
+        }
+        else if(role.equals("host")) {
+            Intent retour = new Intent(getApplicationContext(), FacileActivity.class);
+            startActivity(retour);
+            finish();
         }
     }
 
@@ -618,7 +595,7 @@ public class MultiFactorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent difficulte;
                 if(extras != null) {
-                    difficulte = new Intent(getApplicationContext(), RoomListActivity.class);
+                    difficulte = new Intent(getApplicationContext(), FacileActivity.class);
                 }
                 else if(evolution) {
                     difficulte = new Intent(getApplicationContext(), LevelActivity.class);
@@ -708,7 +685,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                 scorePlayer1 = Math.toIntExact((Long) dataSnapshot.child(fields[3].getName()).getValue());
                 scorePlayer2 = Math.toIntExact((Long) dataSnapshot.child(fields[4].getName()).getValue());
                 DatabaseReference refUsers = database.getReference("users");
-                AlertDialog.Builder finiDefi = new AlertDialog.Builder(getApplicationContext());
+                AlertDialog.Builder finiDefi = new AlertDialog.Builder(MultiFactorActivity.this);
                 if (scorePlayer1 > scorePlayer2) {
                     refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -720,17 +697,18 @@ public class MultiFactorActivity extends AppCompatActivity {
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {}
                     });
-
                     finiDefi.setTitle("Dommage");
-                    finiDefi.setMessage("Vous avez perdu avec" + scorePlayer1 + " pts contre " + scorePlayer2 + "pts");
+                    finiDefi.setMessage("Vous avez perdu avec " + scorePlayer2 + " pts contre " + scorePlayer1 + " pts");
                     finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
                             rDatabase.removeValue();
+                            Intent back = new Intent(getApplicationContext(), RoomListActivity.class);
+                            startActivity(back);
                             finish();
                         }
                     });
+                    finiDefi.setCancelable(false);
                     finiDefi.show();
                 } else {
                     refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -743,22 +721,21 @@ public class MultiFactorActivity extends AppCompatActivity {
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {}
                     });
-
-
                     finiDefi.setTitle("Bravo");
-                    finiDefi.setMessage("Vous avez perdu avec " + scorePlayer1 + " pts contre " + scorePlayer2 + " pts");
+                    finiDefi.setMessage("Vous avez perdu avec " + scorePlayer2 + " pts contre " + scorePlayer1 + " pts");
                     finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
                             rDatabase.removeValue();
+                            Intent back = new Intent(getApplicationContext(), RoomListActivity.class);
+                            startActivity(back);
                             finish();
                         }
                     });
+                    finiDefi.setCancelable(false);
                     finiDefi.show();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
