@@ -37,9 +37,6 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     Button btn_ans0, btn_ans1, btn_ans2, btn_ans3,reprendre,quitter,reprendre_endgame,quitter_endgame;
     MediaPlayer soundtheme, chrono;
 
-    View dialogView_back, dialogView_endgame;
-    LinearLayout popup_back, popup_endgame;
-
     TextView equation, timer, score, soluaff, score_dialog;
     ProgressBar progresstimer;
     ConstraintLayout bg;
@@ -136,14 +133,14 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
             AlertDialog.Builder fini = new AlertDialog.Builder(mathemaQuizzActivity, R.style.MyDialogTheme);
             ViewGroup viewGroup = findViewById(android.R.id.content);
-            dialogView_endgame = LayoutInflater.from(mathemaQuizzActivity).inflate(R.layout.custom_popup_endgame, viewGroup, false);
+            View dialogView_endgame = LayoutInflater.from(mathemaQuizzActivity).inflate(R.layout.custom_popup_endgame, viewGroup, false);
             fini.setView(dialogView_endgame);
             AlertDialog alertDialog = fini.create();
 
             score_dialog = dialogView_endgame.findViewById(R.id.text_score_mj2);
             quitter_endgame = dialogView_endgame.findViewById(R.id.button_quitter_endgame);
             reprendre_endgame = dialogView_endgame.findViewById((R.id.button_rep_jeu_endgame));
-            popup_endgame = dialogView_endgame.findViewById((R.id.layout_popup_endGame));
+            LinearLayout popup_endgame = dialogView_endgame.findViewById((R.id.layout_popup_endGame));
 
             String imagePopup = "fin_mj2_" + difficultyString;
             int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
@@ -315,14 +312,14 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     private void setQuitPopup(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
         ViewGroup viewGroup = findViewById(android.R.id.content);
-        dialogView_back = LayoutInflater.from(this).inflate(R.layout.custom_popup_back, viewGroup, false);
+        View dialogView_back = LayoutInflater.from(this).inflate(R.layout.custom_popup_back, viewGroup, false);
         builder.setView(dialogView_back);
         AlertDialog alertDialog = builder.create();
 
 
         quitter = dialogView_back.findViewById(R.id.button_quitter);
         reprendre = dialogView_back.findViewById((R.id.button_rep_jeu));
-        popup_back = dialogView_back.findViewById((R.id.layout_popup_back));
+        LinearLayout popup_back = dialogView_back.findViewById((R.id.layout_popup_back));
 
         String imagePopup = "quitter_mj2_" + difficultyString;
         int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
