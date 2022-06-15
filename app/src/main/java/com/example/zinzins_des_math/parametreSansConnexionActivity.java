@@ -132,6 +132,11 @@ public class parametreSansConnexionActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void onBackPressed() {
+        setQuitPopup();
+    }
+
     private void setQuitPopup() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);

@@ -7,19 +7,16 @@ android:layout_height="match_parent"
 android:background="@drawable/accueil_bg"
 tools:context=".MainActivity">
 
-<ImageView
-    android:id="@+id/logo_blanc"
-    android:layout_width="147dp"
-    android:layout_height="153dp"
-    android:layout_marginTop="84dp"
-    app:layout_constraintBottom_toTopOf="@+id/jouer"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.497"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:srcCompat="@drawable/logo_blanc" />
+    <ImageView
+        android:id="@+id/Logo_profile"
+        android:layout_width="147dp"
+        android:layout_height="153dp"
+        android:layout_marginTop="148dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-<ImageView
+    <ImageView
     android:id="@+id/jouer"
     android:layout_width="176dp"
     android:layout_height="79dp"
