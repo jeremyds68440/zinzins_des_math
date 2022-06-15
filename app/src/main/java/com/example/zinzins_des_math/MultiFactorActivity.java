@@ -9,14 +9,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,23 +48,19 @@ public class MultiFactorActivity extends AppCompatActivity {
     private int numberOfTry = 1;
     private int counter = 0;
     private int countMult = 0;
-    private int difficulty;
-    private int target;
     private int evolutionScore = 0;
+    private int difficulty, target;
     private Bundle extras;
-    private String defi;
-    private String role;
-    private String roomName;
-    private TextView targetCount;
-    private TextView scoreCount;
+    private String defi, role, roomName, difficultyString;
+    private int id = R.layout.custom_popup_endgame;
+    private TextView targetCount, scoreCount;
     private LinearLayout layout;
-    private ImageView scorePlace;
-    private ImageView targetPlace;
-    private ImageView gridBackground;
+    private ImageView scorePlace, targetPlace, gridBackground, back;
 
 
     private boolean blocked = false;
     private boolean evolution = false;
+    private boolean sound_theme_state, sound_effect_state;
     private ArrayList<Integer> iterBubble;
     private FirebaseDatabase database;
     private FirebaseUser user;
@@ -76,8 +76,7 @@ public class MultiFactorActivity extends AppCompatActivity {
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String ETAT_SOUND_THEME = "etat_sound_theme";
     public static final String ETAT_SOUND_EFFECT = "etat_sound_effect";
-    private boolean sound_theme_state;
-    private boolean sound_effect_state;
+
 
     public void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -130,7 +129,7 @@ public class MultiFactorActivity extends AppCompatActivity {
 
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)getResources().getDimension(R.dimen.wight_backbutton), (int)getResources().getDimension(R.dimen.height_backbutton));
         params.setMargins((int)(16*displayrealMetrics.density),(int)(44*displayrealMetrics.density),0,0);
-        ImageView back = new ImageView(getApplicationContext());
+        back = new ImageView(getApplicationContext());
         back.setLayoutParams(params);
         back.setImageResource(R.drawable.ic_baseline_arrow_back_ios_24);
         back.setOnClickListener(new View.OnClickListener() {
@@ -303,18 +302,21 @@ public class MultiFactorActivity extends AppCompatActivity {
             layout.setBackground(getDrawable(R.drawable.multifactor_bg_facile));
             scorePlace.setImageResource(R.drawable.multifactor_score_facile);
             targetPlace.setImageResource(R.drawable.multifactor_target_facile);
+            difficultyString = "facile";
             gridBackground.setImageResource(R.drawable.multifactor_terrain_facile);
         }
         else if(difficulty == 1) {
             layout.setBackground(getDrawable(R.drawable.multifactor_bg_moyen));
             scorePlace.setImageResource(R.drawable.multifactor_score_moyen);
             targetPlace.setImageResource(R.drawable.multifactor_target_moyen);
+            difficultyString = "moyen";
             gridBackground.setImageResource(R.drawable.multifactor_terrain_moyen);
         }
         else {
             layout.setBackground(getDrawable(R.drawable.multifactor_bg_difficile));
             scorePlace.setImageResource(R.drawable.multifactor_score_difficile);
             targetPlace.setImageResource(R.drawable.multifactor_target_difficile);
+            difficultyString = "difficile";
             gridBackground.setImageResource(R.drawable.multifactor_terrain_difficile);
         }
     }
@@ -352,8 +354,11 @@ public class MultiFactorActivity extends AppCompatActivity {
                 numberOfTry = 1;
                 countMult = 0;
                 points += point;
-                evolutionScore += point - 60 * (varMult + difficulty*2)/varMult;
-                evolutionDifficulty();
+                if(evolution) {
+                    evolutionScore += point - 60 * (varMult + difficulty * 2) / varMult;
+                    evolutionScore = Math.max(evolutionScore, 0);
+                    evolutionDifficulty();
+                }
             }
             else {
                 countMult = 0;
@@ -390,7 +395,16 @@ public class MultiFactorActivity extends AppCompatActivity {
     }
 
     public void setGameOver(boolean win , int point) {
-        AlertDialog.Builder popup = new AlertDialog.Builder(this);
+        AlertDialog.Builder popup = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(this).inflate(id, viewGroup, false);
+        popup.setView(dialogView);
+        AlertDialog alertDialog = popup.create();
+
+        Button quitter = dialogView.findViewById(R.id.button_quitter);
+        Button reprendre = dialogView.findViewById((R.id.button_rep_jeu));
+        LinearLayout linearLayout = dialogView.findViewById((R.id.layout_popup_endGame));
+
         String positive;
         if(win) {
             if (sound_effect_state){
@@ -435,10 +449,15 @@ public class MultiFactorActivity extends AppCompatActivity {
 
                 }
             });
-            scoreCount.setTextColor(context.getResources().getColor(R.color.win));
-            popup.setTitle("Bravo !");
-            popup.setMessage("Cible atteinte !\nVous avez gagné " + point + " points.\nVous avez " + points + " points au total.");
-            positive = "Continuer";
+
+            id = R.layout.custom_popup_endgame;
+
+            String imagePopup = "victoire_mj1_" + difficultyString;
+            int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
+            linearLayout.setBackground(getDrawable(resId));
+
+            TextView score_dialog = dialogView.findViewById(R.id.text_score_mj);
+            score_dialog.setText(points);
         }
         else {
             if (sound_effect_state){
@@ -449,14 +468,41 @@ public class MultiFactorActivity extends AppCompatActivity {
             if (sound_theme_state) {
                 soundtheme.setVolume(Float.parseFloat(getString(R.string.sound_0_2)),Float.parseFloat(getString(R.string.sound_0_2)));
             }
-            scoreCount.setTextColor(context.getResources().getColor(R.color.lose));
-            popup.setTitle("Perdu !");
-            popup.setMessage("Cible dépassée !");
-            positive = "Réssayer";
+
+            id = R.layout.custom_popup_back;
+
+            String imagePopup = "perdu_mj1_" + difficultyString;
+            int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
+            linearLayout.setBackground(getDrawable(resId));
+
         }
-        popup.setPositiveButton(positive, new DialogInterface.OnClickListener() {
+
+        quitter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
+                Intent difficulte;
+                if(extras != null) {
+                    difficulte = new Intent(getApplicationContext(), RoomListActivity.class);
+                }
+                else if(evolution) {
+                    difficulte = new Intent(getApplicationContext(), LevelActivity.class);
+                }
+                else if(difficulty == 0) {
+                    difficulte = new Intent(getApplicationContext(), FacileActivity.class);
+                }
+                else if(difficulty == 1) {
+                    difficulte = new Intent(getApplicationContext(), MoyenActivity.class);
+                }
+                else {
+                    difficulte = new Intent(getApplicationContext(), DifficileActivity.class);
+                }
+                startActivity(difficulte);
+                finish();
+            }
+        });
+        reprendre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 if(win) {
                     newTarget();
                 }
@@ -466,44 +512,32 @@ public class MultiFactorActivity extends AppCompatActivity {
                 }
                 resetCounter();
                 unBlocked();
+                alertDialog.dismiss();
             }
         });
-        popup.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent difficulte;
-                if(extras != null) {
-                    difficulte = new Intent(getApplicationContext(), RoomListActivity.class);
-                }
-                else if(evolution) {
-                    difficulte = new Intent(getApplicationContext(), LevelActivity.class);
-                }
-                else if(difficulty == 0) {
-                    difficulte = new Intent(getApplicationContext(), FacileActivity.class);
-                }
-                else if(difficulty == 1) {
-                    difficulte = new Intent(getApplicationContext(), MoyenActivity.class);
-                }
-                else {
-                    difficulte = new Intent(getApplicationContext(), DifficileActivity.class);
-                }
-                startActivity(difficulte);
-                finish();
-            }
-        });
-
         popup.setCancelable(false);
-        popup.show();
+        alertDialog.show();
     }
 
     public void setQuitPopup() {
-        AlertDialog.Builder quit = new AlertDialog.Builder(this);
-        quit.setTitle("Quitter");
-        quit.setMessage("Êtes-vous sûre de vouloir quitter ?");
-        quit.setNegativeButton("Retour", null);
-        quit.setPositiveButton("Quitter", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView_back = LayoutInflater.from(this).inflate(R.layout.custom_popup_back, viewGroup, false);
+        builder.setView(dialogView_back);
+        AlertDialog alertDialog = builder.create();
+
+
+        Button quitter = dialogView_back.findViewById(R.id.button_quitter);
+        Button reprendre = dialogView_back.findViewById((R.id.button_rep_jeu));
+        LinearLayout popup_back = dialogView_back.findViewById((R.id.layout_popup_back));
+
+        String imagePopup = "quitter_mj1_" + difficultyString;
+        int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
+        popup_back.setBackground(getDrawable(resId));
+
+        quitter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v) {
                 Intent difficulte;
                 if(extras != null) {
                     difficulte = new Intent(getApplicationContext(), RoomListActivity.class);
@@ -524,7 +558,15 @@ public class MultiFactorActivity extends AppCompatActivity {
                 finish();
             }
         });
-        quit.show();
+
+        reprendre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                back.setColorFilter(Color.argb(0, 0, 0, 0));
+            }
+        });
+        alertDialog.show();
     }
 
     public void resetCounter() {

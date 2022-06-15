@@ -34,10 +34,10 @@ import java.lang.reflect.Field;
 
 public class MathemaQuizzActivity extends AppCompatActivity {
 
-    Button btn_ans0, btn_ans1, btn_ans2, btn_ans3,reprendre,quitter,reprendre_endgame,quitter_endgame;
+    Button btn_ans0, btn_ans1, btn_ans2, btn_ans3;
     MediaPlayer soundtheme, chrono;
 
-    TextView equation, timer, score, soluaff, score_dialog;
+    TextView equation, timer, score, soluaff;
     ProgressBar progresstimer;
     ConstraintLayout bg;
     ImageView nuage_equation,back;
@@ -141,9 +141,9 @@ public class MathemaQuizzActivity extends AppCompatActivity {
             fini.setView(dialogView_endgame);
             AlertDialog alertDialog = fini.create();
 
-            score_dialog = dialogView_endgame.findViewById(R.id.text_score_mj2);
-            quitter_endgame = dialogView_endgame.findViewById(R.id.button_quitter_endgame);
-            reprendre_endgame = dialogView_endgame.findViewById((R.id.button_rep_jeu_endgame));
+            TextView score_dialog = dialogView_endgame.findViewById(R.id.text_score_mj);
+            Button quitter_endgame = dialogView_endgame.findViewById(R.id.button_quitter);
+            Button reprendre_endgame = dialogView_endgame.findViewById((R.id.button_rep_jeu));
             LinearLayout popup_endgame = dialogView_endgame.findViewById((R.id.layout_popup_endGame));
 
             String imagePopup = "fin_mj2_" + difficultyString;
@@ -332,8 +332,8 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         AlertDialog alertDialog = builder.create();
 
 
-        quitter = dialogView_back.findViewById(R.id.button_quitter);
-        reprendre = dialogView_back.findViewById((R.id.button_rep_jeu));
+        Button quitter = dialogView_back.findViewById(R.id.button_quitter);
+        Button reprendre = dialogView_back.findViewById((R.id.button_rep_jeu));
         LinearLayout popup_back = dialogView_back.findViewById((R.id.layout_popup_back));
 
         String imagePopup = "quitter_mj2_" + difficultyString;
