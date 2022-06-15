@@ -3,10 +3,17 @@ package com.example.zinzins_des_math;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -25,6 +32,8 @@ public class ParametreActivity extends AppCompatActivity {
     TextView username, scoreMathemaquizzFacile, mail;
     Switch switch_sound_theme;
     Switch switch_sound_effect;
+
+    private MediaPlayer bouton_sound;
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String ETAT_SOUND_THEME = "etat_sound_theme";
@@ -94,6 +103,10 @@ public class ParametreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveData();
+                if(sound_effect_state){
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
             }
         });
 
@@ -101,9 +114,26 @@ public class ParametreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveData();
+                if(sound_effect_state){
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
             }
         });
 
+        ImageView back = findViewById(R.id.back_to_main);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(sound_effect_state){
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
+                back.setColorFilter(Color.argb(80, 0, 0, 0));
+                setQuitPopup();
+            }
+        });
 
     }
 
@@ -112,12 +142,15 @@ public class ParametreActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), MainActivity.class));
         finish();
     }
-
+    
     public void onBackPressed() {
+        setQuitPopup();
+    }
+
+    private void setQuitPopup() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
     }
-
 }
