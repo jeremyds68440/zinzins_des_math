@@ -222,6 +222,7 @@ public class ParametreActivity extends AppCompatActivity {
         super.onResume();
         if(sound_theme_state){
             mediaPlayer.start();
+            SplashScreenActivity.general_sound.pause();
         }
 
     }

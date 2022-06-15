@@ -20,6 +20,7 @@ import java.nio.channels.InterruptedByTimeoutException;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
+    public static MediaPlayer oui;
     private final int SPLASH_SCREEN_TIME = 3000;
     private ProgressBar loading;
 
@@ -30,8 +31,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     private boolean sound_theme_state;
     private boolean sound_effect_state;
 
-    private MediaPlayer soundtheme;
-
+    public static MediaPlayer general_sound;
     public void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         sound_theme_state = sharedPreferences.getBoolean(ETAT_SOUND_THEME, true);
@@ -44,9 +44,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         loadData();
-        this.soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.theme_zinzins_lofi);
+        this.general_sound = MediaPlayer.create(getApplicationContext(), R.raw.theme_zinzins_lofi);
         if (sound_theme_state) {
-            soundtheme.start();
+            general_sound.setLooping(true);
+            general_sound.start();
         }
         this.loading = (ProgressBar) findViewById(R.id.loading);
 

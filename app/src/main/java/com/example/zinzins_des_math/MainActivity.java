@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         this.settings = findViewById(R.id.parametres);
         Logo_Profile = (ImageView) findViewById(R.id.Logo_profile);
 
+        SplashScreenActivity.general_sound.start();
 
         fAuth = FirebaseAuth.getInstance();
         loadData();
