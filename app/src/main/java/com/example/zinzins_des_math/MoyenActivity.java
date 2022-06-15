@@ -36,6 +36,10 @@ public class MoyenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_moyen);
         loadData();
+        if (sound_theme_state) {
+            SplashScreenActivity.general_sound.start();
+        }
+
         ImageView back = findViewById(R.id.back_to_moyen);
         ImageView multifactor = findViewById(R.id.multifactor_moyen);
         ImageView mathemaquizz = findViewById(R.id.mathemaquizz_moyen);

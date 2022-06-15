@@ -52,10 +52,13 @@ public class MainActivity extends AppCompatActivity {
         this.jouer = findViewById(R.id.jouer);
         this.settings = findViewById(R.id.parametres);
         Logo_Profile = (ImageView) findViewById(R.id.Logo_profile);
-
-
         fAuth = FirebaseAuth.getInstance();
+
         loadData();
+        if (sound_theme_state) {
+            SplashScreenActivity.general_sound.start();
+        }
+
         actionClickImage(this.jouer, ChooseSoloMultiActivity.class);
         if (fAuth.getCurrentUser() != null) {
             actionClickImage(this.settings, ParametreActivity.class);

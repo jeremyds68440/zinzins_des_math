@@ -43,6 +43,10 @@ public class LevelActivity extends AppCompatActivity {
         ImageView mathemaquizz = findViewById(R.id.mathemaquizz_evolution);
         ImageView roulette = findViewById(R.id.roulette_evolution);
         loadData();
+        if (sound_theme_state) {
+            SplashScreenActivity.general_sound.start();
+        }
+
         actionClickImageEvolution(back, DifficultyActivity.class,12);
         actionClickImageEvolution(multifactor, MultiFactorActivity.class,3);
         actionClickImageEvolution(mathemaquizz, MathemaQuizzActivity.class,3);

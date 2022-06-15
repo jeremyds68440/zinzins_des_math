@@ -67,6 +67,7 @@ public class RouletteActivity extends AppCompatActivity {
         fleche = findViewById(R.id.flecheRoulette);
         lancerBtn = findViewById(R.id.startBtn);
         if (sound_theme_state) {
+            SplashScreenActivity.general_sound.pause();
             this.soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.roulette_sound);
         }
 
@@ -281,6 +282,7 @@ public class RouletteActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (sound_theme_state) {
+            SplashScreenActivity.general_sound.pause();
             soundtheme.start();
         }
     }

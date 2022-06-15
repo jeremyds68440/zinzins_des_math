@@ -413,7 +413,7 @@ public class MultiFactorActivity extends AppCompatActivity {
 
         String positive;
         if(win) {
-            if (fAuth.getCurrentUser() != null) {
+            if (defi != null) {
                 multiTurn++;
             }
 
@@ -442,7 +442,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                 scoreDialog.setText("" + point);
                 totalScoreDialog.setText("" + points);
             }
-            if (fAuth.getCurrentUser() != null && multiTurn == 5) {
+            if (fAuth.getCurrentUser() != null) {
                 uDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -548,6 +548,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                 }
 
                 if (sound_theme_state) {
+                    SplashScreenActivity.general_sound.pause();
                     soundtheme.setVolume(Float.parseFloat(getString(R.string.sound_on)),Float.parseFloat(getString(R.string.sound_on)));
                 }
                 resetCounter();
@@ -556,7 +557,7 @@ public class MultiFactorActivity extends AppCompatActivity {
             }
         });
 
-        if(fAuth.getCurrentUser() == null) {
+        if(defi == null) {
             alertDialog.setCancelable(false);
             alertDialog.show();
         }
@@ -665,7 +666,9 @@ public class MultiFactorActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (sound_theme_state) {
+            SplashScreenActivity.general_sound.pause();
             soundtheme.setVolume(Float.parseFloat(getString(R.string.sound_on)), Float.parseFloat(getString(R.string.sound_on)));
+            soundtheme.setLooping(true);
             soundtheme.start();
         }
     }
