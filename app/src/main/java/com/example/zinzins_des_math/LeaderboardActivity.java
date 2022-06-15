@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -48,6 +49,16 @@ public class LeaderboardActivity extends AppCompatActivity {
         leadFacile = (ImageView) findViewById(R.id.leadFacile);
         leadMoyen = (ImageView) findViewById(R.id.leadMoyen);
         leadDifficile = (ImageView) findViewById(R.id.leadDifficile);
+
+        ImageView back = findViewById(R.id.back_menu2);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent multi = new Intent(getApplicationContext(), MultiplayerActivity.class);
+                startActivity(multi);
+                finish();
+            }
+        });
         leadMultifactor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,6 +137,12 @@ public class LeaderboardActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    public void onBackPressed() {
+        Intent multi = new Intent(getApplicationContext(), MultiplayerActivity.class);
+        startActivity(multi);
+        finish();
     }
 
     public void showFacile(String game, int dbNumber){
