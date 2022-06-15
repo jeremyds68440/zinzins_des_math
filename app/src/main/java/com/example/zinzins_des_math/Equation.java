@@ -156,7 +156,7 @@ public class Equation {
                 this.equationPhrase = firstNbr + "+" + secondNbr + "*" + thirdNbr;
 
             }else  if (g.getScore() >= 200) {
-                int type_de_calcule = randomNbr.nextInt(4);
+                int type_de_calcule = randomNbr.nextInt(3);
                 if ((type_de_calcule == 1)){
                     this.firstNbr = randomNbr.nextInt(maxNbr);
                     this.secondNbr = randomNbr.nextInt(maxNbr);
@@ -169,7 +169,7 @@ public class Equation {
                     this.thirdNbr = randomNbr.nextInt(maxNbr);
                     this.answer = this.firstNbr - this.secondNbr * this.thirdNbr;
                     this.equationPhrase = firstNbr + "-" + secondNbr + "*" + thirdNbr;
-                }else if(type_de_calcule == 3){
+                }else{
                     this.firstNbr = randomNbr.nextInt(100);
                     this.secondNbr = randomNbr.nextInt(100);
                     this.thirdNbr = randomNbr.nextInt(100);

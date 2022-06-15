@@ -406,6 +406,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
             temps.cancel();
             timer.setVisibility(View.INVISIBLE);
             progresstimer.setVisibility(View.INVISIBLE);
+
             if (g.getScore() < 50) {
                 bg.setBackground(getDrawable(R.drawable.bg_quizz_facile));
                 nuage_equation.setImageDrawable(getDrawable(R.drawable.grosnuage));
