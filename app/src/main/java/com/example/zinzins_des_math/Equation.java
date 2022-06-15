@@ -167,7 +167,7 @@ public class Equation {
                     this.firstNbr = randomNbr.nextInt(maxNbr);
                     this.secondNbr = randomNbr.nextInt(maxNbr);
                     this.thirdNbr = randomNbr.nextInt(maxNbr);
-                    this.answer = this.firstNbr + this.secondNbr * this.thirdNbr;
+                    this.answer = this.firstNbr - this.secondNbr * this.thirdNbr;
                     this.equationPhrase = firstNbr + "-" + secondNbr + "*" + thirdNbr;
                 }else if(type_de_calcule == 3){
                     this.firstNbr = randomNbr.nextInt(100);
