@@ -48,9 +48,9 @@ public class LevelActivity extends AppCompatActivity {
         actionClickImageEvolution(mathemaquizz, MathemaQuizzActivity.class,3);
         actionClickImageEvolution(roulette, RouletteActivity.class,3);
 
-        ImageView infoMultifactor = findViewById(R.id.info_multifactor_facile);
-        ImageView infoMathemaquizz = findViewById(R.id.info_mathemaquizz_facile);
-        ImageView infoRoulette = findViewById(R.id.info_roulette_facile);
+        ImageView infoMultifactor = findViewById(R.id.info_multifactor_evolution);
+        ImageView infoMathemaquizz = findViewById(R.id.info_mathemaquizz_evolution);
+        ImageView infoRoulette = findViewById(R.id.info_roulette_evolution);
 
         actionClickInfo(infoMultifactor, "multifactor");
         actionClickInfo(infoMathemaquizz, "mathemaquizz");
@@ -81,7 +81,7 @@ public class LevelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 button.setColorFilter(Color.argb(80, 0, 0, 0));
-                createPopupInfo(gameName);
+                createPopupInfo(gameName, button);
             }
         });
     }
@@ -93,7 +93,7 @@ public class LevelActivity extends AppCompatActivity {
         finish();
     }
 
-    private void createPopupInfo(String gameName){
+    private void createPopupInfo(String gameName, ImageView button){
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
         ViewGroup viewGroup = findViewById(android.R.id.content);
         View dialogView_back = LayoutInflater.from(this).inflate(R.layout.custom_popup_info, viewGroup, false);
@@ -111,6 +111,7 @@ public class LevelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
+                button.setColorFilter(Color.argb(0,0,0,0));
             }
         });
         alertDialog.show();
