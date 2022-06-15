@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         this.settings = findViewById(R.id.parametres);
         fAuth = FirebaseAuth.getInstance();
         loadData();
-        actionClickImage(this.jouer, choosesolomultiActivity.class);
+        actionClickImage(this.jouer, ChooseSoloMultiActivity.class);
         if (fAuth.getCurrentUser() != null) {
             actionClickImage(this.settings, ParametreActivity.class);
         }else{

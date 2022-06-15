@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class choosesolomultiActivity extends AppCompatActivity {
+public class ChooseSoloMultiActivity extends AppCompatActivity {
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String ETAT_SOUND_THEME = "etat_sound_theme";
     public static final String ETAT_SOUND_EFFECT = "etat_sound_effect";
@@ -85,7 +85,7 @@ public class choosesolomultiActivity extends AppCompatActivity {
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     finish();
                 }else{
-                    Toast.makeText(choosesolomultiActivity.this, "Connectez vous dans les paramètres pour accéder", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChooseSoloMultiActivity.this, "Connectez vous dans les paramètres pour accéder", Toast.LENGTH_SHORT).show();
                 }
             }
         });

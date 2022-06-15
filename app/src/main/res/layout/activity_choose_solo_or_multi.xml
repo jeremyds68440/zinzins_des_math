@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_choix_mode_de_jeu"
-    tools:context=".choosesolomultiActivity">
+    tools:context=".ChooseSoloMultiActivity">
 
     <ImageView
         android:id="@+id/choix_mode_de_jeu_back"

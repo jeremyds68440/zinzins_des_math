@@ -36,7 +36,7 @@ public class MultiplayerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 back.setColorFilter(Color.argb(80, 0, 0, 0));
-                Intent main = new Intent(getApplicationContext(), choosesolomultiActivity.class);
+                Intent main = new Intent(getApplicationContext(), ChooseSoloMultiActivity.class);
                 startActivity(main);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();

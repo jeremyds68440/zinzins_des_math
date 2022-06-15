@@ -38,7 +38,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".choosesolomultiActivity"
+            android:name=".ChooseSoloMultiActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

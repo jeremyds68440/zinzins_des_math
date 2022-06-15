@@ -42,7 +42,7 @@ public class DifficultyActivity extends AppCompatActivity {
         this.hard = findViewById(R.id.difficile);
         this.IA = findViewById(R.id.evolution);
 
-        actionClickImage(this.back, choosesolomultiActivity.class);
+        actionClickImage(this.back, ChooseSoloMultiActivity.class);
         actionClickImage(this.easy, FacileActivity.class);
         actionClickImage(this.medium, MoyenActivity.class);
         actionClickImage(this.hard, DifficileActivity.class);
@@ -68,7 +68,7 @@ public class DifficultyActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        Intent intent = new Intent(getApplicationContext(), choosesolomultiActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ChooseSoloMultiActivity.class);
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
