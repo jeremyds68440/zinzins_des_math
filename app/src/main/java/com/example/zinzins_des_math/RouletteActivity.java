@@ -47,7 +47,8 @@ public class RouletteActivity extends AppCompatActivity {
     private boolean sound_theme_state;
     private boolean sound_effect_state;
 
-    private MediaPlayer bouton_sound,soundtheme;
+    private MediaPlayer bouton_sound,soundtheme,enigmesound;
+
 
     public void loadData(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
@@ -184,6 +185,10 @@ public class RouletteActivity extends AppCompatActivity {
                         throw new IllegalStateException("Unexpected value: " + sectors[sectors.length - (degree + 1)]);
                 }
                 enigme.setFlags(getIntent().getFlags());
+                if(sound_effect_state) {
+                    enigmesound = MediaPlayer.create(getApplicationContext(), R.raw.enigme_sound);
+                    enigmesound.start();
+                }
                 startActivity(enigme);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
@@ -247,9 +252,7 @@ public class RouletteActivity extends AppCompatActivity {
                     default:
                         difficulte = new Intent(getApplicationContext(), DifficultyActivity.class);
                 }
-                if (sound_theme_state) {
-                    soundtheme.pause();
-                }
+
                 startActivity(difficulte);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 alertDialog.dismiss();
@@ -266,6 +269,14 @@ public class RouletteActivity extends AppCompatActivity {
         });
         alertDialog.setCancelable(false);
         alertDialog.show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (sound_theme_state) {
+            soundtheme.pause();
+        }
     }
 
     @Override
