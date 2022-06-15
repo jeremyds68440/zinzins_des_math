@@ -283,7 +283,7 @@ public class LeaderboardActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        Intent multi = new Intent(getApplicationContext(), MultiplayerActivity.class);
+        Intent multi = new Intent(getApplicationContext(), RoomListActivity.class);
         startActivity(multi);
         finish();
     }
@@ -441,5 +441,20 @@ public class LeaderboardActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (sound_theme_state) {
+            SplashScreenActivity.general_sound.pause();
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (sound_theme_state) {
+            SplashScreenActivity.general_sound.start();
+
+        }
     }
 }
