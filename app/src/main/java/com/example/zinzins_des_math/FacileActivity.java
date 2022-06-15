@@ -119,4 +119,20 @@ public class FacileActivity extends AppCompatActivity {
         });
         alertDialog.show();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (sound_theme_state) {
+            SplashScreenActivity.general_sound.pause();
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (sound_theme_state) {
+            SplashScreenActivity.general_sound.start();
+
+        }
+    }
 }

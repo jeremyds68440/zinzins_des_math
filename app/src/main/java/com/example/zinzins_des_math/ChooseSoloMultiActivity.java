@@ -91,11 +91,26 @@ public class ChooseSoloMultiActivity extends AppCompatActivity {
         });
     }
 
-
     public void onBackPressed() {
         Intent difficulty = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(difficulty);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (sound_theme_state) {
+            SplashScreenActivity.general_sound.pause();
+        }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (sound_theme_state) {
+            SplashScreenActivity.general_sound.start();
+
+        }
     }
 }
