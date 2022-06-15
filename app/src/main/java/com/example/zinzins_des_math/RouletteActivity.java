@@ -1,6 +1,7 @@
 package com.example.zinzins_des_math;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -29,7 +30,7 @@ public class RouletteActivity extends AppCompatActivity {
     private RouletteActivity rouletteActivity = this;
     int cpt1 = 0;
     int cpt2 = 0;
-    public RelativeLayout rootRoulette;
+    public ConstraintLayout rootRoulette;
     private ImageView fleche;
     private ImageView lancerBtn;
     private ImageView back_roulette;

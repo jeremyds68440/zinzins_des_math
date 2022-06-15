@@ -1,32 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/background_roulette_facile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RouletteActivity"
+    tools:context=".DifficileActivity"
     android:id="@+id/rootRoulette">
 
     <ImageView
         android:id="@+id/back_roulette"
         android:layout_width="@dimen/wight_backbutton"
         android:layout_height="@dimen/height_backbutton"
-        android:layout_marginLeft="30dp"
         android:layout_marginTop="44dp"
         android:src="@drawable/ic_baseline_arrow_back_ios_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/flecheRoulette"
-        android:layout_width="40dp"
-        android:layout_height="60dp"
-        android:layout_marginLeft="175dp"
-        android:layout_marginTop="190dp"
-        android:src="@drawable/fleche_roulette_facile" />
 
     <TableLayout
         android:layout_width="wrap_content"
@@ -35,21 +26,34 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="240dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="28dp">
-
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="30dp">
+            android:layout_marginBottom="15dp">
+
+            <ImageView
+                android:id="@+id/flecheRoulette"
+                android:layout_width="20dp"
+                android:layout_height="25dp"
+                android:src="@drawable/fleche_roulette_facile" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/wheel"
-                android:layout_width="wrap_content"
+                android:layout_width="15dp"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
@@ -58,7 +62,8 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp">
 
             <ImageView
                 android:id="@+id/startBtn"
@@ -66,10 +71,9 @@
                 android:layout_height="63dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerInside"
-                android:layout_marginTop="40dp"
                 android:src="@drawable/lancer_roulette" />
         </TableRow>
     </TableLayout>
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
