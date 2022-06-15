@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,15 +50,35 @@ public class RoomListActivity extends AppCompatActivity {
     DatabaseReference roomGame;
     DatabaseReference roomsRef;
 
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String ETAT_SOUND_THEME = "etat_sound_theme";
+    public static final String ETAT_SOUND_EFFECT = "etat_sound_effect";
+
+    private boolean sound_theme_state;
+    private boolean sound_effect_state;
+
+    private MediaPlayer bouton_sound;
+
+    public void loadData(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        sound_theme_state = sharedPreferences.getBoolean(ETAT_SOUND_THEME, true);
+        sound_effect_state = sharedPreferences.getBoolean(ETAT_SOUND_EFFECT, true);
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room_list);
-
+        loadData();
         toLeaderboard = findViewById(R.id.toLeaderboard);
         toLeaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (sound_effect_state) {
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
                 back.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent main = new Intent(getApplicationContext(), LeaderboardActivity.class);
                 startActivity(main);
@@ -69,6 +91,10 @@ public class RoomListActivity extends AppCompatActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (sound_effect_state) {
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
                 back.setColorFilter(Color.argb(80, 0, 0, 0));
                 Intent main = new Intent(getApplicationContext(), ChooseSoloMultiActivity.class);
                 startActivity(main);
@@ -102,6 +128,10 @@ public class RoomListActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (sound_effect_state) {
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
                 button.setText("CREATING ROOM");
                 button.setEnabled(false);
                 PopupMenu game = new PopupMenu(RoomListActivity.this, v);
@@ -194,6 +224,10 @@ public class RoomListActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (sound_effect_state) {
+                    bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                    bouton_sound.start();
+                }
                 String toRoomName = roomsList.get(position);
                 String[] extract = toRoomName.split(" : ");
                 roomName = extract[0];
