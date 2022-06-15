@@ -46,6 +46,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     FirebaseUser user;
     DatabaseReference uDatabase;
     DatabaseReference rDatabase;
+    FirebaseAuth fAuth;
 
     private MathemaQuizzActivity mathemaQuizzActivity;
     Bundle extras;
@@ -76,60 +77,63 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
         @Override
         public void onFinish() {
-            uDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    int dbScore;
-                    final User utilisateur = new User();
-                    final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                    switch (getIntent().getFlags()) {
-                        case 0:
-                            dbScore = Math.toIntExact((long) dataSnapshot.child(fields[2].getName()).getValue());
-                            if (dbScore < Integer.parseInt((String) score.getText()))
-                                uDatabase.child("scoreMathemaquizzFacile").setValue(Integer.parseInt((String) score.getText()));
-                            if (defi!=null) {
-                                if (role.equals("host")) {
-                                    rDatabase.child("scorePlayer1").setValue(Integer.parseInt((String) score.getText()));
-                                } else if (role.equals("client")) {
-                                    rDatabase.child("scorePlayer2").setValue(Integer.parseInt((String) score.getText()));
-                                    compareScore();
+            fAuth = FirebaseAuth.getInstance();
+            if (fAuth.getCurrentUser() != null) {
+                uDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        int dbScore;
+                        final User utilisateur = new User();
+                        final Field[] fields = utilisateur.getClass().getDeclaredFields();
+                        switch (getIntent().getFlags()) {
+                            case 0:
+                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[2].getName()).getValue());
+                                if (dbScore < Integer.parseInt((String) score.getText()))
+                                    uDatabase.child("scoreMathemaquizzFacile").setValue(Integer.parseInt((String) score.getText()));
+                                if (defi != null) {
+                                    if (role.equals("host")) {
+                                        rDatabase.child("scorePlayer1").setValue(Integer.parseInt((String) score.getText()));
+                                    } else if (role.equals("client")) {
+                                        rDatabase.child("scorePlayer2").setValue(Integer.parseInt((String) score.getText()));
+                                        compareScore();
+                                    }
                                 }
-                            }
-                            break;
-                        case 1:
-                            dbScore = Math.toIntExact((long) dataSnapshot.child(fields[3].getName()).getValue());
-                            if (dbScore < Integer.parseInt((String) score.getText()))
-                                uDatabase.child("scoreMathemaquizzMoyen").setValue(Integer.parseInt((String) score.getText()));
-                            if (defi!=null) {
-                                if (role.equals("host")) {
-                                    rDatabase.child("scorePlayer1").setValue(Integer.parseInt((String) score.getText()));
-                                } else if (role.equals("client")) {
-                                    rDatabase.child("scorePlayer2").setValue(Integer.parseInt((String) score.getText()));
-                                    compareScore();
+                                break;
+                            case 1:
+                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[3].getName()).getValue());
+                                if (dbScore < Integer.parseInt((String) score.getText()))
+                                    uDatabase.child("scoreMathemaquizzMoyen").setValue(Integer.parseInt((String) score.getText()));
+                                if (defi != null) {
+                                    if (role.equals("host")) {
+                                        rDatabase.child("scorePlayer1").setValue(Integer.parseInt((String) score.getText()));
+                                    } else if (role.equals("client")) {
+                                        rDatabase.child("scorePlayer2").setValue(Integer.parseInt((String) score.getText()));
+                                        compareScore();
+                                    }
                                 }
-                            }
-                            break;
-                        case 2:
-                            dbScore = Math.toIntExact((long) dataSnapshot.child(fields[1].getName()).getValue());
-                            if (dbScore < Integer.parseInt((String) score.getText()))
-                                uDatabase.child("scoreMathemaquizzDifficile").setValue(Integer.parseInt((String) score.getText()));
-                            if (defi!=null) {
-                                if (role.equals("host")) {
-                                    rDatabase.child("scorePlayer1").setValue(Integer.parseInt((String) score.getText()));
-                                } else if (role.equals("client")) {
-                                    rDatabase.child("scorePlayer2").setValue(Integer.parseInt((String) score.getText()));
-                                    compareScore();
+                                break;
+                            case 2:
+                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[1].getName()).getValue());
+                                if (dbScore < Integer.parseInt((String) score.getText()))
+                                    uDatabase.child("scoreMathemaquizzDifficile").setValue(Integer.parseInt((String) score.getText()));
+                                if (defi != null) {
+                                    if (role.equals("host")) {
+                                        rDatabase.child("scorePlayer1").setValue(Integer.parseInt((String) score.getText()));
+                                    } else if (role.equals("client")) {
+                                        rDatabase.child("scorePlayer2").setValue(Integer.parseInt((String) score.getText()));
+                                        compareScore();
+                                    }
                                 }
-                            }
-                            break;
+                                break;
+                        }
                     }
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            });
+                    }
+                });
+            }
 
             AlertDialog.Builder fini = new AlertDialog.Builder(mathemaQuizzActivity, R.style.MyDialogTheme);
             ViewGroup viewGroup = findViewById(android.R.id.content);
@@ -203,17 +207,20 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_game);
-        extras = getIntent().getExtras();
-        if (extras != null) {
-            defi = extras.getString("defi");
-            role = extras.getString("role");
-            roomName = extras.getString("roomName");
+        fAuth = FirebaseAuth.getInstance();
+        if (fAuth.getCurrentUser() != null) {
+            extras = getIntent().getExtras();
+            if (extras != null) {
+                defi = extras.getString("defi");
+                role = extras.getString("role");
+                roomName = extras.getString("roomName");
+            }
+            database = FirebaseDatabase.getInstance();
+            user = FirebaseAuth.getInstance().getCurrentUser();
+            uDatabase = database.getReference("users").child(user.getUid());
+            if (defi != null)
+                rDatabase = database.getReference("rooms").child(roomName);
         }
-        database = FirebaseDatabase.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        uDatabase = database.getReference("users").child(user.getUid());
-        if(defi != null)
-            rDatabase = database.getReference("rooms").child(roomName);
         temps.start();
 
         this.soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.mathemaquizz_sound);
