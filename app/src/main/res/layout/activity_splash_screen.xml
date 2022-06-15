@@ -7,27 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".SplashScreenActivity">
 
-    <ImageView
-        android:id="@+id/logo_icon"
-        android:layout_width="147dp"
-        android:layout_height="153dp"
-        android:src="@drawable/logo_blanc"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
-
     <ProgressBar
         android:id="@+id/loading"
-        android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:indeterminateTint="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logo_icon" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <!--style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
