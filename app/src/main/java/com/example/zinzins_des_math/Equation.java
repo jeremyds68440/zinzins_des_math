@@ -15,12 +15,18 @@ public class Equation {
         if (difficulty == 0){
             this.maxNbr = maxNbr;
             Random randomNbr = new Random();
-
-            this.firstNbr = randomNbr.nextInt(maxNbr);
-            this.secondNbr = randomNbr.nextInt(maxNbr);
-            this.answer = this.firstNbr + this.secondNbr;
-            this.equationPhrase = firstNbr + "+" + secondNbr;
-
+            int type_de_calcule = randomNbr.nextInt(2);
+            if (type_de_calcule == 1) {
+                this.firstNbr = randomNbr.nextInt(maxNbr);
+                this.secondNbr = randomNbr.nextInt(maxNbr);
+                this.answer = this.firstNbr + this.secondNbr;
+                this.equationPhrase = firstNbr + "+" + secondNbr;
+            }else{
+                this.firstNbr = randomNbr.nextInt(maxNbr);
+                this.secondNbr = randomNbr.nextInt(maxNbr);
+                this.answer = this.firstNbr - this.secondNbr;
+                this.equationPhrase = firstNbr + "-" + secondNbr;
+            }
             this.answerSol = randomNbr.nextInt(4);
             this.answerArray = new int[] {0,1,2,3};
 
@@ -38,17 +44,23 @@ public class Equation {
             this.maxNbr = maxNbr;
             Random randomNbr = new Random();
 
-            int type_de_calcule = randomNbr.nextInt(2);
+            int type_de_calcule = randomNbr.nextInt(3);
             if (type_de_calcule == 1) {
                 this.firstNbr = randomNbr.nextInt(maxNbr);
                 this.secondNbr = randomNbr.nextInt(maxNbr);
                 this.answer = this.firstNbr + this.secondNbr;
                 this.equationPhrase = firstNbr + "+" + secondNbr;
-            }else{
+            }else if (type_de_calcule == 2){
                 this.firstNbr = randomNbr.nextInt(10);
                 this.secondNbr = randomNbr.nextInt(10);
                 this.answer = this.firstNbr * this.secondNbr;
                 this.equationPhrase = firstNbr + "*" + secondNbr;
+            }else{
+                this.firstNbr = randomNbr.nextInt(maxNbr);
+                this.secondNbr = randomNbr.nextInt(maxNbr);
+                this.thirdNbr = randomNbr.nextInt(50);
+                this.answer = this.firstNbr - this.secondNbr + this.thirdNbr;
+                this.equationPhrase = firstNbr + "-" + secondNbr + "+" + thirdNbr;
             }
 
             this.answerSol = randomNbr.nextInt(4);
@@ -99,34 +111,72 @@ public class Equation {
             this.maxNbr = maxNbr;
             Random randomNbr = new Random();
 
-            if (g.getNumberCorrect() < 3) {
-                this.firstNbr = randomNbr.nextInt(maxNbr);
-                this.secondNbr = randomNbr.nextInt(maxNbr);
-                this.answer = this.firstNbr + this.secondNbr;
-                this.equationPhrase = firstNbr + "+" + secondNbr ;
-            }else  if (g.getNumberCorrect() < 6) {
-                this.firstNbr = randomNbr.nextInt(maxNbr);
-                this.secondNbr = randomNbr.nextInt(maxNbr);
-                this.thirdNbr = randomNbr.nextInt(10);
-                this.answer = this.firstNbr + this.secondNbr * this.thirdNbr;
-                this.equationPhrase = firstNbr + "+" + secondNbr + "*" + thirdNbr;
-            }else if (g.getNumberCorrect() < 9) {
+            if (g.getScore() < 50) {
+                int type_de_calcule = randomNbr.nextInt(2);
+                if (type_de_calcule == 1) {
+                    this.firstNbr = randomNbr.nextInt(maxNbr);
+                    this.secondNbr = randomNbr.nextInt(maxNbr);
+                    this.answer = this.firstNbr + this.secondNbr;
+                    this.equationPhrase = firstNbr + "+" + secondNbr;
+                }else{
+                    this.firstNbr = randomNbr.nextInt(maxNbr);
+                    this.secondNbr = randomNbr.nextInt(maxNbr);
+                    this.answer = this.firstNbr - this.secondNbr;
+                    this.equationPhrase = firstNbr + "-" + secondNbr;
+                }
+
+            }else  if (g.getScore() < 100) {
+
+                int type_de_calcule = randomNbr.nextInt(2);
+                if(type_de_calcule == 1){
+                    this.firstNbr = randomNbr.nextInt(maxNbr);
+                    this.secondNbr = randomNbr.nextInt(maxNbr);
+                    this.thirdNbr = randomNbr.nextInt(10);
+                    this.answer = this.firstNbr + this.secondNbr * this.thirdNbr;
+                    this.equationPhrase = firstNbr + "+" + secondNbr + "*" + thirdNbr;
+                }else{
+                    this.firstNbr = randomNbr.nextInt(maxNbr);
+                    this.secondNbr = randomNbr.nextInt(maxNbr);
+                    this.thirdNbr = randomNbr.nextInt(10);
+                    this.answer = this.firstNbr - this.secondNbr * this.thirdNbr;
+                    this.equationPhrase = firstNbr + "-" + secondNbr + "*" + thirdNbr;
+                }
+
+            }else if (g.getScore() < 150) {
                 this.firstNbr = randomNbr.nextInt(30);
                 this.secondNbr = randomNbr.nextInt(30);
                 this.answer = this.firstNbr * this.secondNbr;
                 this.equationPhrase = firstNbr + "*" + secondNbr;
-            }else  if (g.getNumberCorrect() < 20) {
+
+            }else  if (g.getScore() < 200) {
                 this.firstNbr = randomNbr.nextInt(maxNbr);
                 this.secondNbr = randomNbr.nextInt(maxNbr);
                 this.thirdNbr = randomNbr.nextInt(10);
                 this.answer = this.firstNbr + this.secondNbr * this.thirdNbr;
                 this.equationPhrase = firstNbr + "+" + secondNbr + "*" + thirdNbr;
-            }else  if (g.getNumberCorrect() >= 20) {
-                this.firstNbr = randomNbr.nextInt(maxNbr);
-                this.secondNbr = randomNbr.nextInt(maxNbr);
-                this.thirdNbr = randomNbr.nextInt(maxNbr);
-                this.answer = this.firstNbr + this.secondNbr * this.thirdNbr;
-                this.equationPhrase = firstNbr + "+" + secondNbr + "*" + thirdNbr;
+
+            }else  if (g.getScore() >= 200) {
+                int type_de_calcule = randomNbr.nextInt(4);
+                if ((type_de_calcule == 1)){
+                    this.firstNbr = randomNbr.nextInt(maxNbr);
+                    this.secondNbr = randomNbr.nextInt(maxNbr);
+                    this.thirdNbr = randomNbr.nextInt(maxNbr);
+                    this.answer = this.firstNbr + this.secondNbr * this.thirdNbr;
+                    this.equationPhrase = firstNbr + "+" + secondNbr + "*" + thirdNbr;
+                }else if(type_de_calcule == 2){
+                    this.firstNbr = randomNbr.nextInt(maxNbr);
+                    this.secondNbr = randomNbr.nextInt(maxNbr);
+                    this.thirdNbr = randomNbr.nextInt(maxNbr);
+                    this.answer = this.firstNbr + this.secondNbr * this.thirdNbr;
+                    this.equationPhrase = firstNbr + "-" + secondNbr + "*" + thirdNbr;
+                }else if(type_de_calcule == 3){
+                    this.firstNbr = randomNbr.nextInt(100);
+                    this.secondNbr = randomNbr.nextInt(100);
+                    this.thirdNbr = randomNbr.nextInt(100);
+                    this.answer = this.firstNbr * this.secondNbr * this.thirdNbr;
+                    this.equationPhrase = firstNbr + "*" + secondNbr + "*" + thirdNbr;
+                }
+
             }
 
 

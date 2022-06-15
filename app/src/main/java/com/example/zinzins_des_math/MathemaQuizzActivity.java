@@ -185,12 +185,17 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                     nextTurn();
                     temps.start();
 
-                    soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.mathemaquizz_sound);
-                    chrono = MediaPlayer.create(getApplicationContext(), R.raw.chrono_sound);
-                    soundtheme.setVolume(1f, 1f);
-                    soundtheme.start();
-                    chrono.setVolume(0.2f, 0.2f);
-                    chrono.start();
+                    if(sound_theme_state) {
+                        soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.mathemaquizz_sound);
+                        soundtheme.setVolume(1f, 1f);
+                        soundtheme.start();
+                    }
+
+                    if(sound_effect_state) {
+                        chrono = MediaPlayer.create(getApplicationContext(), R.raw.chrono_sound);
+                        chrono.setVolume(0.2f, 0.2f);
+                        chrono.start();
+                    }
 
                     g.setNumberCorrect(0);
                     g.setNumberIncorrect(0);
@@ -397,23 +402,25 @@ public class MathemaQuizzActivity extends AppCompatActivity {
             g.newEquationDifficile(g);
         } else if (difficulty == 3) {
             temps.cancel();
-            if (g.getNumberCorrect() < 3) {
+            timer.setVisibility(View.INVISIBLE);
+            progresstimer.setVisibility(View.INVISIBLE);
+            if (g.getScore() < 50) {
                 bg.setBackground(getDrawable(R.drawable.bg_quizz_facile));
                 nuage_equation.setImageDrawable(getDrawable(R.drawable.grosnuage));
                 equation.setTextColor(getColor(R.color.black));
-            }else  if (g.getNumberCorrect() < 6) {
+            }else  if (g.getScore() < 100) {
                 bg.setBackground(getDrawable(R.drawable.bg_quizz_moyen));
                 nuage_equation.setImageDrawable(getDrawable(R.drawable.grosnuage_quizz_moyen));
                 equation.setTextColor(getColor(R.color.black));
-            }else if (g.getNumberCorrect() < 9) {
+            }else if (g.getScore() < 150) {
                 equation.setTextColor(getColor(R.color.white));
                 bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
                 nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
-            }else  if (g.getNumberCorrect() < 12) {
+            }else  if (g.getScore() < 200) {
                 equation.setTextColor(getColor(R.color.white));
                 bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
                 nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
-            }else  if (g.getNumberCorrect() >= 12) {
+            }else  if (g.getScore() >= 200) {
                 equation.setTextColor(getColor(R.color.white));
                 bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
                 nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
