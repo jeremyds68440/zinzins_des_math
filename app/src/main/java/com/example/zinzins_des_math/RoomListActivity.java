@@ -273,7 +273,7 @@ public class RoomListActivity extends AppCompatActivity {
                 roomsList.clear();
                 Iterable<DataSnapshot> rooms = dataSnapshot.getChildren();
                 for (DataSnapshot snapshot : rooms) {
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, roomsList);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.custom_textview, roomsList);
                     listView.setAdapter(adapter);
                     roomsList.add(snapshot.getKey());
 
