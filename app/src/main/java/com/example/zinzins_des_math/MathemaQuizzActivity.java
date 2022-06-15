@@ -13,9 +13,12 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -31,13 +34,24 @@ import java.lang.reflect.Field;
 
 public class MathemaQuizzActivity extends AppCompatActivity {
 
-    Button btn_ans0,btn_ans1,btn_ans2,btn_ans3;
-    MediaPlayer soundtheme,chrono;
+    Button btn_ans0, btn_ans1, btn_ans2, btn_ans3,reprendre,quitter,reprendre_endgame,quitter_endgame;
+    MediaPlayer soundtheme, chrono;
 
-    TextView equation,timer,score,soluaff;
+    View dialogView_back, dialogView_endgame;
+    LinearLayout popup_back, popup_endgame;
+
+    TextView equation, timer, score, soluaff, score_dialog;
     ProgressBar progresstimer;
     ConstraintLayout bg;
-    ImageView nuage_equation;
+    ImageView nuage_equation,back;
+    String defi, role, roomName, difficultyString;
+    FirebaseDatabase database;
+    FirebaseUser user;
+    DatabaseReference uDatabase;
+    DatabaseReference rDatabase;
+
+    private MathemaQuizzActivity mathemaQuizzActivity;
+    Bundle extras;
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String ETAT_SOUND_THEME = "etat_sound_theme";
     public static final String ETAT_SOUND_EFFECT = "etat_sound_effect";
@@ -45,8 +59,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     private boolean sound_theme_state;
     private boolean sound_effect_state;
 
-    private MathemaQuizzActivity mathemaQuizzActivity;
-    public void loadData(){
+    public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         sound_theme_state = sharedPreferences.getBoolean(ETAT_SOUND_THEME, true);
         sound_effect_state = sharedPreferences.getBoolean(ETAT_SOUND_EFFECT, true);
@@ -55,7 +68,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
     Game g = new Game();
     int secondsRemaining = 30;
-    CountDownTimer temps = new CountDownTimer(30000,1000) {
+    CountDownTimer temps = new CountDownTimer(30000, 1000) {
         @SuppressLint("SetTextI18n")
         @Override
         public void onTick(long millisUntilFinished) {
@@ -66,31 +79,51 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
         @Override
         public void onFinish() {
-            AlertDialog.Builder fini = new AlertDialog.Builder(mathemaQuizzActivity);
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            DatabaseReference mDatabase = database.getReference("users").child(user.getUid());
-            mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            uDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     int dbScore;
                     final User utilisateur = new User();
                     final Field[] fields = utilisateur.getClass().getDeclaredFields();
                     switch (getIntent().getFlags()) {
-                        case 0 :
+                        case 0:
                             dbScore = Math.toIntExact((long) dataSnapshot.child(fields[2].getName()).getValue());
                             if (dbScore < Integer.parseInt((String) score.getText()))
-                                mDatabase.child("scoreMathemaquizzFacile").setValue(Integer.parseInt((String) score.getText()));
+                                uDatabase.child("scoreMathemaquizzFacile").setValue(Integer.parseInt((String) score.getText()));
+                            if (defi!=null) {
+                                if (role.equals("host")) {
+                                    rDatabase.child("scorePlayer1").setValue(Integer.parseInt((String) score.getText()));
+                                } else if (role.equals("client")) {
+                                    rDatabase.child("scorePlayer2").setValue(Integer.parseInt((String) score.getText()));
+                                    compareScore();
+                                }
+                            }
                             break;
-                        case 1 :
+                        case 1:
                             dbScore = Math.toIntExact((long) dataSnapshot.child(fields[3].getName()).getValue());
                             if (dbScore < Integer.parseInt((String) score.getText()))
-                                mDatabase.child("scoreMathemaquizzMoyen").setValue(Integer.parseInt((String) score.getText()));
+                                uDatabase.child("scoreMathemaquizzMoyen").setValue(Integer.parseInt((String) score.getText()));
+                            if (defi!=null) {
+                                if (role.equals("host")) {
+                                    rDatabase.child("scorePlayer1").setValue(Integer.parseInt((String) score.getText()));
+                                } else if (role.equals("client")) {
+                                    rDatabase.child("scorePlayer2").setValue(Integer.parseInt((String) score.getText()));
+                                    compareScore();
+                                }
+                            }
                             break;
-                        case 2 :
+                        case 2:
                             dbScore = Math.toIntExact((long) dataSnapshot.child(fields[1].getName()).getValue());
                             if (dbScore < Integer.parseInt((String) score.getText()))
-                                mDatabase.child("scoreMathemaquizzDifficile").setValue(Integer.parseInt((String) score.getText()));
+                                uDatabase.child("scoreMathemaquizzDifficile").setValue(Integer.parseInt((String) score.getText()));
+                            if (defi!=null) {
+                                if (role.equals("host")) {
+                                    rDatabase.child("scorePlayer1").setValue(Integer.parseInt((String) score.getText()));
+                                } else if (role.equals("client")) {
+                                    rDatabase.child("scorePlayer2").setValue(Integer.parseInt((String) score.getText()));
+                                    compareScore();
+                                }
+                            }
                             break;
                     }
                 }
@@ -100,12 +133,49 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
                 }
             });
-            fini.setTitle("Bien joué");
-            fini.setMessage("Vous avez fait : " + score.getText() + " pts" );
-            fini.setPositiveButton("Réssayer", new DialogInterface.OnClickListener() {
+
+            AlertDialog.Builder fini = new AlertDialog.Builder(mathemaQuizzActivity, R.style.MyDialogTheme);
+            ViewGroup viewGroup = findViewById(android.R.id.content);
+            dialogView_endgame = LayoutInflater.from(mathemaQuizzActivity).inflate(R.layout.custom_popup_endgame, viewGroup, false);
+            fini.setView(dialogView_endgame);
+            AlertDialog alertDialog = fini.create();
+
+            score_dialog = dialogView_endgame.findViewById(R.id.text_score_mj2);
+            quitter_endgame = dialogView_endgame.findViewById(R.id.button_quitter_endgame);
+            reprendre_endgame = dialogView_endgame.findViewById((R.id.button_rep_jeu_endgame));
+            popup_endgame = dialogView_endgame.findViewById((R.id.layout_popup_endGame));
+
+            String imagePopup = "fin_mj2_" + difficultyString;
+            int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
+            popup_endgame.setBackground(getDrawable(resId));
+
+            score_dialog.setText(score.getText());
+
+            quitter_endgame.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    secondsRemaining =30;
+                public void onClick(View v) {
+                    switch (getIntent().getFlags()) {
+                        case 0:
+                            Intent main = new Intent(getApplicationContext(), FacileActivity.class);
+                            startActivity(main);
+                            break;
+                        case 1:
+                            main = new Intent(getApplicationContext(), MoyenActivity.class);
+                            startActivity(main);
+                            break;
+                        case 2:
+                            main = new Intent(getApplicationContext(), DifficileActivity.class);
+                            startActivity(main);
+                            break;
+                    }
+                    temps.cancel();
+                    finish();
+                }
+            });
+            reprendre_endgame.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    secondsRemaining = 30;
                     g = new Game();
                     nextTurn();
                     temps.start();
@@ -120,28 +190,29 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                     g.setNumberCorrect(0);
                     g.setNumberIncorrect(0);
                     score.setText(Integer.toString(g.getScore()));
+                    alertDialog.dismiss();
+                    back.setColorFilter(Color.argb(0, 0, 0, 0));
                 }
             });
-            fini.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent difficulte = new Intent(getApplicationContext(), DifficultyActivity.class);
-                    startActivity(difficulte);
-                    temps.cancel();
-                    finish();
-                }
-            });
-
-            fini.setCancelable(false);
-            fini.show();
+            alertDialog.show();
         }
-
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_game);
+        extras = getIntent().getExtras();
+        if (extras != null) {
+            defi = extras.getString("defi");
+            role = extras.getString("role");
+            roomName = extras.getString("roomName");
+        }
+        database = FirebaseDatabase.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        uDatabase = database.getReference("users").child(user.getUid());
+        if(defi != null)
+            rDatabase = database.getReference("rooms").child(roomName);
         temps.start();
 
         this.soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.mathemaquizz_sound);
@@ -204,7 +275,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
             }
         });
 
-        ImageView back = findViewById(R.id.second_game_back2);
+        back = findViewById(R.id.second_game_back2);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,12 +297,12 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (sound_theme_state){
+        if (sound_theme_state) {
             soundtheme.setVolume(1f, 1f);
             soundtheme.start();
         }
 
-        if (sound_effect_state){
+        if (sound_effect_state) {
             chrono.setVolume(0.2f, 0.2f);
             chrono.start();
         }
@@ -242,23 +313,34 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     }
 
     private void setQuitPopup(){
-        AlertDialog.Builder quit = new AlertDialog.Builder(this);
-        quit.setTitle("Quitter");
-        quit.setMessage("Êtes-vous sûre de vouloir quitter ?");
-        quit.setNegativeButton("Retour", null);
-        quit.setPositiveButton("Quitter", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyDialogTheme);
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        dialogView_back = LayoutInflater.from(this).inflate(R.layout.custom_popup_back, viewGroup, false);
+        builder.setView(dialogView_back);
+        AlertDialog alertDialog = builder.create();
+
+
+        quitter = dialogView_back.findViewById(R.id.button_quitter);
+        reprendre = dialogView_back.findViewById((R.id.button_rep_jeu));
+        popup_back = dialogView_back.findViewById((R.id.layout_popup_back));
+
+        String imagePopup = "quitter_mj2_" + difficultyString;
+        int resId = getResources().getIdentifier(imagePopup, "drawable", getPackageName());
+        popup_back.setBackground(getDrawable(resId));
+
+        quitter.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (getIntent().getFlags()){
-                    case 0 :
+            public void onClick(View v) {
+                switch (getIntent().getFlags()) {
+                    case 0:
                         Intent main = new Intent(getApplicationContext(), FacileActivity.class);
                         startActivity(main);
                         break;
-                    case 1 :
+                    case 1:
                         main = new Intent(getApplicationContext(), MoyenActivity.class);
                         startActivity(main);
                         break;
-                    case 2 :
+                    case 2:
                         main = new Intent(getApplicationContext(), DifficileActivity.class);
                         startActivity(main);
                         break;
@@ -267,32 +349,46 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                 finish();
             }
         });
-        quit.show();
+
+        reprendre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                back.setColorFilter(Color.argb(0, 0, 0, 0));
+            }
+        });
+        alertDialog.show();
+
     }
-    private void nextTurn(){
+
+    private void nextTurn() {
 
         int difficulty = getIntent().getFlags();
-        if(difficulty == 0){
+        if (difficulty == 0) {
             bg.setBackground(getDrawable(R.drawable.bg_quizz_facile));
+            difficultyString = "facile";
             g.newEquationFacile(g);
-        }else if(difficulty == 1){
+        } else if (difficulty == 1) {
             bg.setBackground(getDrawable(R.drawable.bg_quizz_moyen));
             nuage_equation.setImageDrawable(getDrawable(R.drawable.grosnuage_quizz_moyen));
             equation.setTextColor(getColor(R.color.white));
+            difficultyString = "moyen";
             g.newEquationMoyen(g);
-        }else if(difficulty == 2){
+        } else if (difficulty == 2) {
             bg.setBackground(getDrawable(R.drawable.bg_quizz_difficile));
             nuage_equation.setImageDrawable(getDrawable(R.drawable.quizz_grosnuage_difficile));
             equation.setTextColor(getColor(R.color.white));
+            difficultyString = "difficile";
             g.newEquationDifficile(g);
-        }else if(difficulty == 3){
+        } else if (difficulty == 3) {
             bg.setBackground(getDrawable(R.drawable.bg_quizz_facile));
             nuage_equation.setImageDrawable(getDrawable(R.drawable.grosnuage));
             equation.setTextColor(getColor(R.color.black));
+            difficultyString = "facile";
             g.newEquationEvolution(g);
         }
 
-        int [] answer = g.getCurrentEquation().getAnswerArray();
+        int[] answer = g.getCurrentEquation().getAnswerArray();
         btn_ans0.setText(Integer.toString(answer[0]));
         btn_ans1.setText(Integer.toString(answer[1]));
         btn_ans2.setText(Integer.toString(answer[2]));
@@ -300,15 +396,42 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
 
         equation.setText(g.getCurrentEquation().getEquationPhrase());
-        soluaff.setText(g.getNumberCorrect() + "/" + (g.getTotalEquations()-1));
-        if(g.getScore() < 0){
+        soluaff.setText(g.getNumberCorrect() + "/" + (g.getTotalEquations() - 1));
+        if (g.getScore() < 0) {
             g.setNumberIncorrect(0);
             g.setNumberCorrect(0);
             g.setScore(0);
             score.setText(Integer.toString(g.getScore()));
         }
 
-
     }
 
+    private void compareScore() {
+        rDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int scorePlayer1;
+                int scorePlayer2;
+                final Room room = new Room();
+                final Field[] fields = room.getClass().getDeclaredFields();
+                scorePlayer1 = Math.toIntExact((Long) dataSnapshot.child(fields[3].getName()).getValue());
+                scorePlayer2 = Math.toIntExact((Long) dataSnapshot.child(fields[4].getName()).getValue());
+                AlertDialog.Builder finiDefi = new AlertDialog.Builder(mathemaQuizzActivity);
+                if (scorePlayer1 > scorePlayer2) {
+                    finiDefi.setTitle("Dommage");
+                    finiDefi.setMessage("Vous avez perdu avec" + scorePlayer1 + " pts contre " + scorePlayer2 + "pts");
+                    finiDefi.show();
+                } else {
+                    finiDefi.setTitle("Bravo");
+                    finiDefi.setMessage("Vous avez gagné avec" + scorePlayer1 + " pts contre " + scorePlayer2 + "pts");
+                    finiDefi.show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }

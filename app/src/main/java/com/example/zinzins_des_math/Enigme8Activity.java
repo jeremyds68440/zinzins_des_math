@@ -14,10 +14,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class Enigme8Activity extends AppCompatActivity {
 
@@ -34,6 +36,7 @@ public class Enigme8Activity extends AppCompatActivity {
     private String valueRepByDifficulty;
     private String expliByDifficulty = "";
     private int imgByDifficulty;
+    public ConstraintLayout root;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -41,6 +44,7 @@ public class Enigme8Activity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
+        root = findViewById(R.id.root);
 
         switch(getIntent().getFlags()){
             case 0 :
@@ -48,18 +52,21 @@ public class Enigme8Activity extends AppCompatActivity {
                 repByDifficulty = "2";
                 valueRepByDifficulty = "2";
                 //imgByDifficulty =  ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
                 questByDifficulty = "Sept personnes se rencontrent et se serrent la main. Sachant que chaque personne a donné la main une et une seule fois à chaque autre personne, combien de poignées de mains y a-t-il eu ?";
                 repByDifficulty = "21 poignées de main";
                 valueRepByDifficulty = "21";
                 imgByDifficulty = R.drawable.img_enigme_8;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
                 questByDifficulty = "";
                 repByDifficulty = "";
                 expliByDifficulty = "";
                 //imgByDifficulty = ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }
 

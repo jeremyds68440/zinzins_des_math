@@ -16,6 +16,9 @@ public class User {
     public int scoreRouletteFacile;
     public int scoreRouletteMoyen;
     public String username;
+    public int victoiresMathemaquizz;
+    public int victoiresMultifactor;
+    public int victoiresRoulette;
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)

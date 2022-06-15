@@ -20,6 +20,7 @@
 
 
     <TableLayout
+        android:id="@+id/tableLayout4"
         android:layout_width="@dimen/wight_imageview"
         android:layout_height="190dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -54,4 +55,15 @@
                 tools:layout_editor_absoluteY="371dp" />
         </TableRow>
     </TableLayout>
+
+    <ImageView
+        android:id="@+id/toDuel"
+        android:layout_width="262dp"
+        android:layout_height="143dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout4"
+        app:srcCompat="@drawable/bouton_multi" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

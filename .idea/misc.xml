@@ -4,23 +4,28 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2585" />
-        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/drawable/cusotm_progress_bg.xml" value="0.262" />
+        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/drawable/classement_button.xml" value="0.266" />
         <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2585" />
-        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_choose_solo_or_multi.xml" value="0.286231884057971" />
-        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_difficile.xml" value="0.286231884057971" />
+        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_choose_solo_or_multi.xml" value="0.1" />
+        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_difficile.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_difficulty.xml" value="0.35989583333333336" />
-        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_facile.xml" value="0.286231884057971" />
-        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_first_game.xml" value="0.35989583333333336" />
-        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_games.xml" value="0.35989583333333336" />
+        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_enigme1.xml" value="0.1" />
+        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_facile.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_games.xml" value="0.1" />
         <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_jeux.xml" value="0.286231884057971" />
         <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_leaderboard.xml" value="0.35989583333333336" />
-        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_level.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_login.xml" value="0.35989583333333336" />
+        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_level.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_login.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_main.xml" value="0.286231884057971" />
         <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_moyen.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_multiplayer.xml" value="0.286231884057971" />
+        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_multifactor.xml" value="0.25" />
+        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_multiplayer.xml" value="0.4466666666666667" />
+        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_parametre.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_register.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_roulette.xml" value="0.17502532928064843" />
         <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_scroll_menu.xml" value="0.35989583333333336" />
-        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_second_game.xml" value="0.22" />
+        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_second_game.xml" value="0.1" />
+        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_splash_screen.xml" value="0.17502532928064843" />
         <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.166" />
         <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/drawable/ic_launcher_background.xml" value="0.183" />
         <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/layout/activity_difficulty.xml" value="0.16666666666666666" />
@@ -34,14 +39,25 @@
         <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/layout/activity_second_game.xml" value="0.18333333333333332" />
         <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/layout/activity_splash_screen.xml" value="0.18333333333333332" />
         <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/layout/test.xml" value="0.10461956521739131" />
-        <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_facile.xml" value="0.30978260869565216" />
+        <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_choose_solo_or_multi.xml" value="0.30978260869565216" />
+        <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_connexion.xml" value="0.30978260869565216" />
+        <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_difficile.xml" value="0.33" />
+        <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_difficulty.xml" value="0.30978260869565216" />
+        <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_enigme1.xml" value="0.30978260869565216" />
+        <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_facile.xml" value="0.5" />
+        <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_leaderboard.xml" value="0.33" />
+        <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_level.xml" value="0.33" />
+        <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_login.xml" value="0.30978260869565216" />
         <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_main.xml" value="0.30978260869565216" />
+        <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_moyen.xml" value="0.30978260869565216" />
+        <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_multiplayer.xml" value="0.30978260869565216" />
+        <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_parametre.xml" value="0.33" />
+        <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_register.xml" value="0.25" />
+        <entry key="..\:/Users/jerem/zinzins_des_math/app/src/main/res/layout/activity_second_game.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/klara/StudioProjects/zinzins_des_math/app/src/main/res/layout/activity_difficulty.xml" value="0.14749893116716545" />
         <entry key="..\:/Users/klara/StudioProjects/zinzins_des_math/app/src/main/res/layout/activity_enigme1.xml" value="0.22" />
         <entry key="..\:/Users/klara/StudioProjects/zinzins_des_math/app/src/main/res/layout/activity_roulette.xml" value="0.1" />
         <entry key="..\:/Users/klara/StudioProjects/zinzins_des_math/app/src/main/res/layout/activity_second_game.xml" value="0.1796875" />
-        <entry key="..\:/Users/lucad/StudioProjects/zinzins_des_math/app/src/main/res/layout/activity_facile.xml" value="0.25" />
-        <entry key="..\:/Users/lucad/StudioProjects/zinzins_des_math/app/src/main/res/layout/activity_parametre.xml" value="0.264" />
       </map>
     </option>
   </component>
@@ -50,5 +66,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>

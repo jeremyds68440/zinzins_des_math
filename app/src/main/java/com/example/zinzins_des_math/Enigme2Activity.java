@@ -14,10 +14,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class Enigme2Activity extends AppCompatActivity {
 
@@ -34,6 +36,7 @@ public class Enigme2Activity extends AppCompatActivity {
     private String valueRepByDifficulty;
     private String expliByDifficulty = "";
     private int imgByDifficulty;
+    public ConstraintLayout root;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -42,6 +45,8 @@ public class Enigme2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
 
+        root = findViewById(R.id.root);
+
         switch(getIntent().getFlags()){
 
             case 0 :
@@ -49,6 +54,7 @@ public class Enigme2Activity extends AppCompatActivity {
                 repByDifficulty = "8";
                 valueRepByDifficulty = "8";
                 imgByDifficulty = R.drawable.img_enigme2_facile ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
                 questByDifficulty = "Un cube a des arêtes de 5cm. On perfore ce cube de part en part : chaque trou a la forme d’un parallélépipède rectangle dont la section est un carré de 1cm de côté. Les douze trous ainsi formés sont disposés « régulièrement » comme l’indique la figure ci-contre. Quel est le volume total du cube ainsi perforé en cm3 .";
@@ -58,12 +64,14 @@ public class Enigme2Activity extends AppCompatActivity {
                         "2e étage = 4e étage = 9cm3\n" +
                         "Le tout = 3 x 21 + 2 x 9 = 81 cm3\n";
                 imgByDifficulty = R.drawable.img_enigme_2;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
                 questByDifficulty = "";
                 repByDifficulty = "";
                 expliByDifficulty = "";
                 //imgByDifficulty = ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }
 

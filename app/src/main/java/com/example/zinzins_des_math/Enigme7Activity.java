@@ -14,10 +14,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class Enigme7Activity extends AppCompatActivity {
 
@@ -34,6 +36,7 @@ public class Enigme7Activity extends AppCompatActivity {
     private String valueRepByDifficulty;
     private String expliByDifficulty = "";
     private int imgByDifficulty;
+    public ConstraintLayout root;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -42,6 +45,7 @@ public class Enigme7Activity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enigme1);
+        root = findViewById(R.id.root);
 
         switch(getIntent().getFlags()){
 
@@ -51,6 +55,7 @@ public class Enigme7Activity extends AppCompatActivity {
                 valueRepByDifficulty = "3";
 
                 //imgByDifficulty =  ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_facile));
                 break;
             case 1 :
                 questByDifficulty = "Il faut 1min25s pour couper une bûche en deux. \n" +
@@ -59,12 +64,14 @@ public class Enigme7Activity extends AppCompatActivity {
                 valueRepByDifficulty = "17";
                 expliByDifficulty = "Explication :  Pour couper une bûche en 13 morceaux, il faut faire 12 coupes prenant chacune 1min25s, soit : 12 x 1 min 25s = 17 min";
                 imgByDifficulty = R.drawable.img_enigme_7;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
                 questByDifficulty = "";
                 repByDifficulty = "";
                 expliByDifficulty = "";
                 //imgByDifficulty = ;
+                root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }
 

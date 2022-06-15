@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/enigme_bg_facile"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/root">
 
     <LinearLayout
         android:layout_width="409dp"
@@ -60,7 +61,8 @@
                 android:lines="1"
                 android:inputType="number"
                 android:hint="@string/reponse_enigme"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/submit_answer_btn"

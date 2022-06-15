@@ -33,6 +33,7 @@ public class RouletteActivity extends AppCompatActivity {
 
         final ImageView startBtn = findViewById(R.id.startBtn);
         this.wheel = findViewById(R.id.wheel);
+        final ImageView backBtn = findViewById(R.id.back_enigme);
 
         getDegreeForSectors();
 
@@ -40,6 +41,31 @@ public class RouletteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 spin();
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (getIntent().getFlags()) {
+                    case 0:
+                        Intent facile = new Intent(getApplicationContext(), FacileActivity.class);
+                        startActivity(facile);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                        break;
+                    case 1:
+                        Intent moyen = new Intent(getApplicationContext(), MoyenActivity.class);
+                        startActivity(moyen);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                        break;
+                    case 2:
+                        Intent difficile = new Intent(getApplicationContext(), DifficileActivity.class);
+                        startActivity(difficile);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                        finish();
+                }
             }
         });
 
@@ -60,12 +86,12 @@ public class RouletteActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 //Toast.makeText(RouletteActivity.this, "Enigme" + sectors[sectors.length - (degree + 1)], Toast.LENGTH_SHORT).show();
-                /*Intent enigme1 = new Intent(getApplicationContext(), Enigme4Activity.class);
+                Intent enigme1 = new Intent(getApplicationContext(), Enigme5Activity.class);
                 enigme1.setFlags(getIntent().getFlags());
                 startActivity(enigme1);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
-                */
+                /*
                 switch (sectors[sectors.length - (degree + 1)]){
                     case "1" :
                         Intent enigme1 = new Intent(getApplicationContext(), Enigme1Activity.class);
@@ -130,7 +156,7 @@ public class RouletteActivity extends AppCompatActivity {
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                         finish();
                         break;
-                }
+                }*/
             }
 
             @Override
