@@ -21,8 +21,8 @@
 
     <TableLayout
         android:layout_width="396dp"
-        android:layout_height="59dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="6dp"
         app:layout_constraintBottom_toTopOf="@+id/logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.466"
@@ -32,7 +32,7 @@
         <TableRow>
             <TextView
                 android:id="@+id/nomUtil"
-                android:layout_width="match_parent"
+                android:layout_width="170dp"
                 android:layout_height="match_parent"
                 android:fontFamily="@string/font"
                 android:textColor="@color/white"
@@ -47,10 +47,11 @@
                 app:layout_constraintVertical_bias="0.71" />
 
         </TableRow>
-        <TableRow>
+        <TableRow
+            android:layout_marginTop="2dp">
             <TextView
                 android:id="@+id/mailUtil"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:fontFamily="@string/font"
                 android:textColor="@color/white"
@@ -67,10 +68,6 @@
 
 
     </TableLayout>
-
-
-
-
 
     <TextView
         android:id="@+id/scoreMathemaquizz"
