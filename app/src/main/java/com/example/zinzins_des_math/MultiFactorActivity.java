@@ -89,9 +89,9 @@ public class MultiFactorActivity extends AppCompatActivity {
 
         fAuth = FirebaseAuth.getInstance();
         if (fAuth.getCurrentUser() != null) {
-            multiTurn = 0;
             extras = getIntent().getExtras();
             if (extras != null) {
+                multiTurn = 0;
                 defi = extras.getString("defi");
                 role = extras.getString("role");
                 roomName = extras.getString("roomName");
@@ -569,7 +569,7 @@ public class MultiFactorActivity extends AppCompatActivity {
             unBlocked();
         }
         else if(role.equals("host")) {
-            Intent retour = new Intent(getApplicationContext(), FacileActivity.class);
+            Intent retour = new Intent(getApplicationContext(), RoomListActivity.class);
             startActivity(retour);
             finish();
         }
