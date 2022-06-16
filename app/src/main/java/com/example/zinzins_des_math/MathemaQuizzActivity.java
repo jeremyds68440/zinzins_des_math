@@ -521,8 +521,8 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                     LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_back));
                     popup_back.setBackground(getDrawable(R.drawable.popup_defaite_mj2));
 
-                    votreScore.setText(scorePlayer2);
-                    monScore.setText(scorePlayer1);
+                    votreScore.setText("" + scorePlayer2);
+                    monScore.setText("" + scorePlayer1);
 
                     quitter.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -562,8 +562,8 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                     LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_back));
                     popup_back.setBackground(getDrawable(R.drawable.popup_egalite_mj2));
 
-                    votreScore.setText(scorePlayer2);
-                    monScore.setText(scorePlayer1);
+                    votreScore.setText("" + scorePlayer2);
+                    monScore.setText("" + scorePlayer1);
 
                     quitter.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -600,8 +600,8 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                     LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_multi2));
                     popup_back.setBackground(getDrawable(R.drawable.popup_victoire_mj2));
 
-                    votreScore.setText(scorePlayer2);
-                    monScore.setText(scorePlayer1);
+                    votreScore.setText("" + scorePlayer2);
+                    monScore.setText("" + scorePlayer1);
 
                     quitter.setOnClickListener(new View.OnClickListener() {
                         @Override
