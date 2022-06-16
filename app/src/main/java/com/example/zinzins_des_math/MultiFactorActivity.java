@@ -713,7 +713,36 @@ public class MultiFactorActivity extends AppCompatActivity {
                     });
                     finiDefi.setCancelable(false);
                     finiDefi.show();
-                } else {
+                }
+                else if(scorePlayer1 == scorePlayer2) {
+                    refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            int oldPoints1 = Math.toIntExact((Long) snapshot.child(player1).child("victoiresMultifactor").getValue());
+                            int newPoints1 = oldPoints1 - 1;
+                            int oldPoints2 = Math.toIntExact((Long) snapshot.child(player2).child("victoiresMultifactor").getValue());
+                            int newPoints2 = oldPoints2 - 1;
+                            refUsers.child(player1).child("victoiresMultifactor").setValue(newPoints1);
+                            refUsers.child(player2).child("victoiresMultifactor").setValue(newPoints2);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {}
+                    });
+                    finiDefi.setTitle("Match nul");
+                    finiDefi.setMessage("Vous avez fait égalité avec un socre de " + scorePlayer2 + " pts");
+                    finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            rDatabase.removeValue();
+                            Intent back = new Intent(getApplicationContext(), RoomListActivity.class);
+                            startActivity(back);
+                            finish();
+                        }
+                    });
+                    finiDefi.setCancelable(false);
+                    finiDefi.show();
+                }
+                else {
                     refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -725,7 +754,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {}
                     });
                     finiDefi.setTitle("Bravo");
-                    finiDefi.setMessage("Vous avez perdu avec " + scorePlayer2 + " pts contre " + scorePlayer1 + " pts");
+                    finiDefi.setMessage("Vous avez gagné avec " + scorePlayer2 + " pts contre " + scorePlayer1 + " pts");
                     finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

@@ -501,7 +501,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                     });
 
                     finiDefi.setTitle("Dommage");
-                    finiDefi.setMessage("Vous avez perdu avec" + scorePlayer1 + " pts contre " + scorePlayer2 + "pts");
+                    finiDefi.setMessage("Vous avez perdu avec" + scorePlayer2 + " pts contre " + scorePlayer1 + "pts");
                     finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -511,7 +511,36 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                         }
                     });
                     finiDefi.show();
-                } else {
+                }
+                else if(scorePlayer1 == scorePlayer2) {
+                    refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            int oldPoints1 = Math.toIntExact((Long) snapshot.child(player1).child("victoiresMathemaquizz").getValue());
+                            int newPoints1 = oldPoints1 - 1;
+                            int oldPoints2 = Math.toIntExact((Long) snapshot.child(player2).child("victoiresMathemaquizz").getValue());
+                            int newPoints2 = oldPoints2 - 1;
+                            refUsers.child(player1).child("victoiresMathemaquizz").setValue(newPoints1);
+                            refUsers.child(player2).child("victoiresMathemaquizz").setValue(newPoints2);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {}
+                    });
+
+
+                    finiDefi.setTitle("Match nul");
+                    finiDefi.setMessage("Vous avez fait égalité avec un score de " + scorePlayer2 + " pts");
+                    finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            rDatabase.removeValue();
+                            finish();
+                        }
+                    });
+                    finiDefi.show();
+                }
+                else {
                     refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -525,7 +554,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
 
                     finiDefi.setTitle("Bravo");
-                    finiDefi.setMessage("Vous avez perdu avec " + scorePlayer1 + " pts contre " + scorePlayer2 + " pts");
+                    finiDefi.setMessage("Vous avez gagné avec " + scorePlayer2 + " pts contre " + scorePlayer1 + " pts");
                     finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
