@@ -699,19 +699,34 @@ public class MultiFactorActivity extends AppCompatActivity {
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {}
                     });
-                    finiDefi.setTitle("Dommage");
-                    finiDefi.setMessage("Vous avez perdu avec " + scorePlayer2 + " pts contre " + scorePlayer1 + " pts");
-                    finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+
+                    AlertDialog.Builder defaite = new AlertDialog.Builder(MultiFactorActivity.this, R.style.MyDialogTheme);
+                    ViewGroup viewGroup = findViewById(android.R.id.content);
+                    View dialogView = LayoutInflater.from(MultiFactorActivity.this).inflate(R.layout.custom_popup_multi1, viewGroup, false);
+                    defaite.setView(dialogView);
+                    AlertDialog alertDialog = defaite.create();
+
+                    TextView votreScore = dialogView.findViewById(R.id.text_votre_score1);
+                    TextView monScore = dialogView.findViewById(R.id.text_son_score1);
+                    Button quitter = dialogView.findViewById((R.id.button_quitter_multi1));
+                    LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_back));
+                    popup_back.setBackground(getDrawable(R.drawable.popup_defaite_mj1));
+
+                    votreScore.setText("" + scorePlayer2);
+                    monScore.setText("" + scorePlayer1);
+
+                    quitter.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            rDatabase.removeValue();
+                        public void onClick(View v) {
                             Intent back = new Intent(getApplicationContext(), RoomListActivity.class);
                             startActivity(back);
+                            rDatabase.removeValue();
+                            alertDialog.dismiss();
                             finish();
                         }
                     });
-                    finiDefi.setCancelable(false);
-                    finiDefi.show();
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();
                 }
                 else if(scorePlayer1 == scorePlayer2) {
                     refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -727,19 +742,34 @@ public class MultiFactorActivity extends AppCompatActivity {
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {}
                     });
-                    finiDefi.setTitle("Match nul");
-                    finiDefi.setMessage("Vous avez fait égalité avec un score de " + scorePlayer2 + " pts");
-                    finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+
+                    AlertDialog.Builder nul = new AlertDialog.Builder(MultiFactorActivity.this, R.style.MyDialogTheme);
+                    ViewGroup viewGroup = findViewById(android.R.id.content);
+                    View dialogView = LayoutInflater.from(MultiFactorActivity.this).inflate(R.layout.custom_popup_multi1, viewGroup, false);
+                    nul.setView(dialogView);
+                    AlertDialog alertDialog = nul.create();
+
+                    TextView votreScore = dialogView.findViewById(R.id.text_votre_score1);
+                    TextView monScore = dialogView.findViewById(R.id.text_son_score1);
+                    Button quitter = dialogView.findViewById((R.id.button_quitter_multi1));
+                    LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_back));
+                    popup_back.setBackground(getDrawable(R.drawable.popup_egalite_mj1));
+
+                    votreScore.setText("" + scorePlayer2);
+                    monScore.setText("" + scorePlayer1);
+
+                    quitter.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onClick(View v) {
                             rDatabase.removeValue();
                             Intent back = new Intent(getApplicationContext(), RoomListActivity.class);
                             startActivity(back);
+                            alertDialog.dismiss();
                             finish();
                         }
                     });
-                    finiDefi.setCancelable(false);
-                    finiDefi.show();
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();
                 }
                 else {
                     refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -752,19 +782,34 @@ public class MultiFactorActivity extends AppCompatActivity {
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {}
                     });
-                    finiDefi.setTitle("Bravo");
-                    finiDefi.setMessage("Vous avez gagné avec " + scorePlayer2 + " pts contre " + scorePlayer1 + " pts");
-                    finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+
+                    AlertDialog.Builder bravo = new AlertDialog.Builder(MultiFactorActivity.this, R.style.MyDialogTheme);
+                    ViewGroup viewGroup = findViewById(android.R.id.content);
+                    View dialogView = LayoutInflater.from(MultiFactorActivity.this).inflate(R.layout.custom_popup_multi1, viewGroup, false);
+                    bravo.setView(dialogView);
+                    AlertDialog alertDialog = bravo.create();
+
+                    TextView votreScore = dialogView.findViewById(R.id.text_votre_score1);
+                    TextView monScore = dialogView.findViewById(R.id.text_son_score1);
+                    Button quitter = dialogView.findViewById((R.id.button_quitter_multi1));
+                    LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_multi1));
+                    popup_back.setBackground(getDrawable(R.drawable.popup_victoire_mj1));
+
+                    votreScore.setText("" + scorePlayer2);
+                    monScore.setText("" + scorePlayer1);
+
+                    quitter.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onClick(View v) {
                             rDatabase.removeValue();
                             Intent back = new Intent(getApplicationContext(), RoomListActivity.class);
                             startActivity(back);
+                            alertDialog.dismiss();
                             finish();
                         }
                     });
-                    finiDefi.setCancelable(false);
-                    finiDefi.show();
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();
                 }
             }
             @Override

@@ -40,7 +40,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     Button btn_ans0, btn_ans1, btn_ans2, btn_ans3;
     MediaPlayer soundtheme, chrono;
 
-    TextView equation, timer, score, soluaff;
+    TextView equation, timer, score;
     ProgressBar progresstimer;
     ConstraintLayout bg;
     ImageView nuage_equation,back;
@@ -257,7 +257,6 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         timer = findViewById(R.id.timer);
         equation = findViewById(R.id.equation);
         score = findViewById(R.id.score);
-        soluaff = findViewById(R.id.answersolus);
         bg = findViewById(R.id.bg_math_quizz);
         nuage_equation = findViewById(R.id.nuage_enigme);
         loadData();
@@ -471,7 +470,6 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
 
         equation.setText(g.getCurrentEquation().getEquationPhrase());
-        soluaff.setText(g.getNumberCorrect() + "/" + (g.getTotalEquations() - 1));
         if (g.getScore() < 0) {
             g.setNumberIncorrect(0);
             g.setNumberCorrect(0);
@@ -509,11 +507,11 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {}
                     });
 
-                    AlertDialog.Builder nul = new AlertDialog.Builder(mathemaQuizzActivity, R.style.MyDialogTheme);
+                    AlertDialog.Builder defaite = new AlertDialog.Builder(mathemaQuizzActivity, R.style.MyDialogTheme);
                     ViewGroup viewGroup = findViewById(android.R.id.content);
                     View dialogView = LayoutInflater.from(mathemaQuizzActivity).inflate(R.layout.custom_popup_multi2, viewGroup, false);
-                    nul.setView(dialogView);
-                    AlertDialog alertDialog = nul.create();
+                    defaite.setView(dialogView);
+                    AlertDialog alertDialog = defaite.create();
 
                     TextView votreScore = dialogView.findViewById(R.id.text_votre_score2);
                     TextView monScore = dialogView.findViewById(R.id.text_son_score2);
@@ -527,8 +525,10 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                     quitter.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            alertDialog.dismiss();
+                            Intent back = new Intent(getApplicationContext(), RoomListActivity.class);
+                            startActivity(back);
                             rDatabase.removeValue();
+                            alertDialog.dismiss();
                             finish();
                         }
                     });
@@ -568,8 +568,10 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                     quitter.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            alertDialog.dismiss();
+                            Intent back = new Intent(getApplicationContext(), RoomListActivity.class);
+                            startActivity(back);
                             rDatabase.removeValue();
+                            alertDialog.dismiss();
                             finish();
                         }
                     });
@@ -606,8 +608,10 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                     quitter.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            alertDialog.dismiss();
+                            Intent back = new Intent(getApplicationContext(), RoomListActivity.class);
+                            startActivity(back);
                             rDatabase.removeValue();
+                            alertDialog.dismiss();
                             finish();
                         }
                     });
