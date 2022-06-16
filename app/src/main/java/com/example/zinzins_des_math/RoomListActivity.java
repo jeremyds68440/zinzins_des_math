@@ -288,6 +288,7 @@ public class RoomListActivity extends AppCompatActivity {
                 intent.putExtra("role",role);
                 intent.putExtra("roomName", roomName);
                 startActivity(intent);
+                finish();
             }
 
             @Override
