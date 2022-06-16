@@ -6,4 +6,5 @@
     android:gravity="center"
     android:padding="15dp"
     android:textSize="15sp"
+    android:fontFamily="@font/nirmala_b"
     android:layout_height="fill_parent"/>
