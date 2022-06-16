@@ -89,7 +89,7 @@ public class ParametreActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (sound_effect_state) {
-                        bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
+                        bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.change_avatar_sound);
                         bouton_sound.start();
                     }
                     mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -166,6 +166,7 @@ public class ParametreActivity extends AppCompatActivity {
                     }
                     loadData();
                     if (sound_theme_state) {
+                        mediaPlayer.setLooping(true);
                         mediaPlayer.start();
                     }else{
                         mediaPlayer.pause();
@@ -235,6 +236,7 @@ public class ParametreActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if(sound_theme_state){
+            mediaPlayer.setLooping(true);
             mediaPlayer.start();
             SplashScreenActivity.general_sound.pause();
         }

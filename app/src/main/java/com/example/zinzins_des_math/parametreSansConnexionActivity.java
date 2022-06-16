@@ -118,6 +118,13 @@ public class parametreSansConnexionActivity extends AppCompatActivity {
                     bouton_sound = MediaPlayer.create(getApplicationContext(), R.raw.bouton_sound);
                     bouton_sound.start();
                 }
+                loadData();
+                if (sound_theme_state) {
+                    mediaPlayer.setLooping(true);
+                    mediaPlayer.start();
+                }else{
+                    mediaPlayer.pause();
+                }
             }
         });
 
@@ -154,6 +161,7 @@ public class parametreSansConnexionActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if(sound_theme_state){
+            mediaPlayer.setLooping(true);
             mediaPlayer.start();
         }
 
