@@ -219,6 +219,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                 }
             });
             if(defi == null) {
+                alertDialog.setCancelable(false);
                 alertDialog.show();
             }
         }
@@ -515,8 +516,8 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
                     TextView votreScore = dialogView.findViewById(R.id.text_votre_score2);
                     TextView monScore = dialogView.findViewById(R.id.text_son_score2);
-                    Button quitter = dialogView.findViewById(R.id.button_quitter_multi2);
-                    LinearLayout popup_back = dialogView.findViewById(R.id.layout_popup_multi2);
+                    Button quitter = dialogView.findViewById((R.id.button_quitter_multi2));
+                    LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_back));
                     popup_back.setBackground(getDrawable(R.drawable.popup_defaite_mj2));
 
                     votreScore.setText("" + scorePlayer2);
@@ -558,8 +559,8 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
                     TextView votreScore = dialogView.findViewById(R.id.text_votre_score2);
                     TextView monScore = dialogView.findViewById(R.id.text_son_score2);
-                    Button quitter = dialogView.findViewById(R.id.button_quitter_multi2);
-                    LinearLayout popup_back = dialogView.findViewById(R.id.layout_popup_multi2);
+                    Button quitter = dialogView.findViewById((R.id.button_quitter_multi2));
+                    LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_back));
                     popup_back.setBackground(getDrawable(R.drawable.popup_egalite_mj2));
 
                     votreScore.setText("" + scorePlayer2);
@@ -598,8 +599,8 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
                     TextView votreScore = dialogView.findViewById(R.id.text_votre_score2);
                     TextView monScore = dialogView.findViewById(R.id.text_son_score2);
-                    Button quitter = dialogView.findViewById(R.id.button_quitter_multi2);
-                    LinearLayout popup_back = dialogView.findViewById(R.id.layout_popup_multi2);
+                    Button quitter = dialogView.findViewById((R.id.button_quitter_multi2));
+                    LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_multi2));
                     popup_back.setBackground(getDrawable(R.drawable.popup_victoire_mj2));
 
                     votreScore.setText("" + scorePlayer2);
