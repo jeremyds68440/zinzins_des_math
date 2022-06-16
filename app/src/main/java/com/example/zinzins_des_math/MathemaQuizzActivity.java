@@ -356,21 +356,26 @@ public class MathemaQuizzActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent main;
-                switch (getIntent().getFlags()) {
-                    case 0:
-                        main = new Intent(getApplicationContext(), FacileActivity.class);
-                        break;
-                    case 1:
-                        main = new Intent(getApplicationContext(), MoyenActivity.class);
-                        break;
-                    case 2:
-                        main = new Intent(getApplicationContext(), DifficileActivity.class);
-                        break;
-                    case 3:
-                        main = new Intent(getApplicationContext(), LevelActivity.class);
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + getIntent().getFlags());
+                if(defi != null) {
+                    main = new Intent(getApplicationContext(), RoomListActivity.class);
+                }
+                else {
+                    switch (getIntent().getFlags()) {
+                        case 0:
+                            main = new Intent(getApplicationContext(), FacileActivity.class);
+                            break;
+                        case 1:
+                            main = new Intent(getApplicationContext(), MoyenActivity.class);
+                            break;
+                        case 2:
+                            main = new Intent(getApplicationContext(), DifficileActivity.class);
+                            break;
+                        case 3:
+                            main = new Intent(getApplicationContext(), LevelActivity.class);
+                            break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + getIntent().getFlags());
+                    }
                 }
                 startActivity(main);
                 temps.cancel();
@@ -413,6 +418,12 @@ public class MathemaQuizzActivity extends AppCompatActivity {
             temps.cancel();
             timer.setVisibility(View.INVISIBLE);
             progresstimer.setVisibility(View.INVISIBLE);
+
+            chrono.stop();
+            if(sound_theme_state) {
+                soundtheme.setLooping(true);
+                soundtheme.start();
+            }
 
             if (g.getScore() < 50) {
                 bg.setBackground(getDrawable(R.drawable.bg_quizz_facile));
