@@ -70,12 +70,12 @@ public class Enigme6Activity extends AppCompatActivity {
                 root.setBackground(getDrawable(R.drawable.enigme_bg_moyen));
                 break;
             case 2 :
-                questByDifficulty = "Charline va en vélo chez son grand-père qui habite au sommet d’un col. A l’aller elle monte le col à 20 km/h et au retour, elle le descend à 60 km/h. Quelle est sa vitesse moyenne sur le trajet aller-retour ?";
+                questByDifficulty = "Charline va à vélo chez son grand-père qui habite au sommet d’un col. A l’aller elle monte le col à 20 km/h et au retour, elle le descend à 60 km/h. Quelle est sa vitesse moyenne sur le trajet aller-retour ?";
                 repByDifficulty = "30 km/h";
                 valueRepByDifficulty = "30";
                 expliByDifficulty = "Explication : En prenant, par exemple, une distance de 60 km, elle va mettre 3 heures à l’aller puis une heure au retour. Elle va donc parcourir 120 km (60+60) en 4 heures. Donc sa vitesse moyenne sera 120 / 4 = 30 km/h.";
                 imgByDifficulty = R.drawable.defis6;
-                difficultyString = "difficle";
+                difficultyString = "difficile";
                 root.setBackground(getDrawable(R.drawable.enigme_bg_difficile));
                 break;
         }
