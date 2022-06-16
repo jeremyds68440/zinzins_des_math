@@ -69,18 +69,6 @@
                 tools:layout_editor_absoluteY="371dp" />
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/roulette_evolution"
-                android:layout_width="@dimen/wight_imageview"
-                android:layout_height="@dimen/height_imageview"
-                app:srcCompat="@drawable/roulette_boutton"
-                tools:layout_editor_absoluteX="32dp"
-                tools:layout_editor_absoluteY="568dp" />
-        </TableRow>
     </TableLayout>
 
     <TableLayout
@@ -121,19 +109,6 @@
 
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/info_roulette_evolution"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/ic_menu_info_details"
-                tools:layout_editor_absoluteX="319dp"
-                tools:layout_editor_absoluteY="631dp" />
-
-        </TableRow>
     </TableLayout>
 
 

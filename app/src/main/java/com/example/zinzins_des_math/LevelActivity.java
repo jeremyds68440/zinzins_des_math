@@ -41,7 +41,6 @@ public class LevelActivity extends AppCompatActivity {
         ImageView back = findViewById(R.id.back_to_evolution);
         ImageView multifactor = findViewById(R.id.multifactor_evolution);
         ImageView mathemaquizz = findViewById(R.id.mathemaquizz_evolution);
-        ImageView roulette = findViewById(R.id.roulette_evolution);
         loadData();
         if (sound_theme_state) {
             SplashScreenActivity.general_sound.start();
@@ -50,16 +49,12 @@ public class LevelActivity extends AppCompatActivity {
         actionClickImageEvolution(back, DifficultyActivity.class,12);
         actionClickImageEvolution(multifactor, MultiFactorActivity.class,3);
         actionClickImageEvolution(mathemaquizz, MathemaQuizzActivity.class,3);
-        actionClickImageEvolution(roulette, RouletteActivity.class,3);
 
         ImageView infoMultifactor = findViewById(R.id.info_multifactor_evolution);
         ImageView infoMathemaquizz = findViewById(R.id.info_mathemaquizz_evolution);
-        ImageView infoRoulette = findViewById(R.id.info_roulette_evolution);
 
         actionClickInfo(infoMultifactor, "multifactor");
         actionClickInfo(infoMathemaquizz, "mathemaquizz");
-        actionClickInfo(infoRoulette, "roulette");
-
     }
 
     private void actionClickImageEvolution(ImageView button, Class act, int difficulty) {

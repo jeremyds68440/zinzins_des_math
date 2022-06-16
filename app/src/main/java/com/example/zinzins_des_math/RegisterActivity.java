@@ -28,6 +28,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Field;
+
 public class RegisterActivity extends AppCompatActivity {
 
     EditText registerEmail, registerPassword, registerUsername;
@@ -98,12 +100,36 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = registerEmail.getText().toString();
                 String password = registerPassword.getText().toString().trim();
                 String username = registerUsername.getText().toString();
-                if(TextUtils.isEmpty(username) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
-                    Toast.makeText(getApplicationContext(), "Remplir tous les champs", Toast.LENGTH_LONG).show();
-                    return;
-                } else {
-                    registerUser(email, username, password);
-                }
+                mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Iterable<DataSnapshot> utilisateurs = dataSnapshot.getChildren();
+                        for (DataSnapshot snapshot : utilisateurs) {
+                            final User utilisateur = new User();
+                            final Field[] fields = utilisateur.getClass().getDeclaredFields();
+                            String userName = (String) snapshot.child(fields[7].getName()).getValue();
+                            Log.e("RegisterActivity",userName);
+                            if (userName.equals(username)){
+                                registerUsername.setText("");
+                                registerEmail.setText("");
+                                registerPassword.setText("");
+                                Toast.makeText(getApplicationContext(), "Ce nom est déjà prit", Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                        }
+                        if(TextUtils.isEmpty(username) || TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+                            Toast.makeText(getApplicationContext(), "Remplir tous les champs", Toast.LENGTH_LONG).show();
+                            return;
+                        } else {
+                            registerUser(email, username, password);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
         });
 
