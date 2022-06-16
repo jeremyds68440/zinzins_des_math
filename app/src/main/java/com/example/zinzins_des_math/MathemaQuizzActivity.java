@@ -517,6 +517,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                             finish();
                         }
                     });
+                    finiDefi.setCancelable(false);
                     finiDefi.show();
                 }
                 else if(scorePlayer1 == scorePlayer2) {
@@ -545,6 +546,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                             finish();
                         }
                     });
+                    finiDefi.setCancelable(false);
                     finiDefi.show();
                 }
                 else {
@@ -570,9 +572,9 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                             finish();
                         }
                     });
+                    finiDefi.setCancelable(false);
                     finiDefi.show();
                 }
-                finiDefi.setCancelable(false);
             }
 
             @Override
