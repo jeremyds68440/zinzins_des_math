@@ -133,7 +133,9 @@ public class RouletteActivity extends AppCompatActivity {
     }
 
     private void spin() {
+
         degree = random.nextInt(sectors.length - 1);
+
 
         RotateAnimation rotateAnimation = new RotateAnimation(0, (360 * sectors.length) + sectorDegrees[degree], RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
         rotateAnimation.setDuration(3600);
@@ -147,12 +149,12 @@ public class RouletteActivity extends AppCompatActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 //Toast.makeText(RouletteActivity.this, "Enigme" + sectors[sectors.length - (degree + 1)], Toast.LENGTH_SHORT).show();
-                Intent enigme1 = new Intent(getApplicationContext(), Enigme1Activity.class);
+                /*Intent enigme1 = new Intent(getApplicationContext(), Enigme1Activity.class);
                 enigme1.setFlags(getIntent().getFlags());
                 startActivity(enigme1);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
-                /*
+                */
                 Intent enigme;
                 switch (sectors[sectors.length - (degree + 1)]){
                     case "1" :
@@ -192,7 +194,7 @@ public class RouletteActivity extends AppCompatActivity {
                 }
                 startActivity(enigme);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();*/
+                finish();
 
             }
 
@@ -286,4 +288,5 @@ public class RouletteActivity extends AppCompatActivity {
             soundtheme.start();
         }
     }
+
 }
