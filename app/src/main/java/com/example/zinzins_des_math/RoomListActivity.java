@@ -150,6 +150,7 @@ public class RoomListActivity extends AppCompatActivity {
                                 roomRef.setValue(user.getUid());
                                 roomGame = database.getReference("rooms/"+roomName+"/jeu");
                                 roomGame.setValue("MultifactorFacile");
+                                database.getReference("rooms/"+roomName+"/scorePlayer1").setValue(0);
                                 addRoomEventListener(MultiFactorActivity.class,0,"host", roomName);
                                 return true;
                             case R.id.roomMultifactorMoyen:
@@ -158,6 +159,7 @@ public class RoomListActivity extends AppCompatActivity {
                                 roomRef.setValue(user.getUid());
                                 roomGame = database.getReference("rooms/"+roomName+"/jeu");
                                 roomGame.setValue("MultifactorMoyen");
+                                database.getReference("rooms/"+roomName+"/scorePlayer1").setValue(0);
                                 addRoomEventListener(MultiFactorActivity.class,1,"host", roomName);
                                 return true;
                             case R.id.roomMultifactorDifficile:
@@ -166,6 +168,7 @@ public class RoomListActivity extends AppCompatActivity {
                                 roomRef.setValue(user.getUid());
                                 roomGame = database.getReference("rooms/"+roomName+"/jeu");
                                 roomGame.setValue("MultifactorDifficile");
+                                database.getReference("rooms/"+roomName+"/scorePlayer1").setValue(0);
                                 addRoomEventListener(MultiFactorActivity.class,2,"host", roomName);
                                 return true;
                             case R.id.roomMathemaquizzFacile:
@@ -174,6 +177,7 @@ public class RoomListActivity extends AppCompatActivity {
                                 roomRef.setValue(user.getUid());
                                 roomGame = database.getReference("rooms/"+roomName+"/jeu");
                                 roomGame.setValue("MathemaquizzFacile");
+                                database.getReference("rooms/"+roomName+"/scorePlayer1").setValue(0);
                                 addRoomEventListener(MathemaQuizzActivity.class,0,"host", roomName);
                                 return true;
                             case R.id.roomMathemaquizzMoyen:
@@ -182,6 +186,7 @@ public class RoomListActivity extends AppCompatActivity {
                                 roomRef.setValue(user.getUid());
                                 roomGame = database.getReference("rooms/"+roomName+"/jeu");
                                 roomGame.setValue("MathemaquizzMoyen");
+                                database.getReference("rooms/"+roomName+"/scorePlayer1").setValue(0);
                                 addRoomEventListener(MathemaQuizzActivity.class,1,"host", roomName);
                                 return true;
                             case R.id.roomMathemaquizzDifficile:
@@ -190,6 +195,7 @@ public class RoomListActivity extends AppCompatActivity {
                                 roomRef.setValue(user.getUid());
                                 roomGame = database.getReference("rooms/"+roomName+"/jeu");
                                 roomGame.setValue("MathemaquizzDifficile");
+                                database.getReference("rooms/"+roomName+"/scorePlayer1").setValue(0);
                                 addRoomEventListener(MathemaQuizzActivity.class,2,"host", roomName);
                                 return true;
                         }
