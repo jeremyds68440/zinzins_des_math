@@ -729,7 +729,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {}
                     });
                     finiDefi.setTitle("Match nul");
-                    finiDefi.setMessage("Vous avez fait égalité avec un socre de " + scorePlayer2 + " pts");
+                    finiDefi.setMessage("Vous avez fait égalité avec un score de " + scorePlayer2 + " pts");
                     finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
