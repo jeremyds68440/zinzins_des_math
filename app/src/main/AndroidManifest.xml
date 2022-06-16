@@ -44,10 +44,6 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MultiplayerActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".MathemaQuizzActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -71,10 +67,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ParametreActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".GamesActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
