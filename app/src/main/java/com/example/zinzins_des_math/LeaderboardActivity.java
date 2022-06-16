@@ -260,7 +260,7 @@ public class LeaderboardActivity extends AppCompatActivity {
                         }
                         leadMultifactor.setColorFilter(Color.argb(80, 0, 0, 0));
                         leadMathemaquizz.setColorFilter(Color.argb(0, 0, 0, 0));
-                        titleLeaderboard.setText("Classement Multifactor Facile");
+                        titleLeaderboard.setText("Classement Victoires Multifactor");
                         showMultifactor("Multifactor", 9);
                     }
                 });
