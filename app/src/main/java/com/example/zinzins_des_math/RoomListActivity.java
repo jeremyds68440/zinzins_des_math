@@ -276,7 +276,7 @@ public class RoomListActivity extends AppCompatActivity {
     }
 
     private void addRoomEventListener(Class jeu, int difficulty, String role, String roomName){
-        roomRef.addValueEventListener(new ValueEventListener() {
+        roomRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 button.setText("Create room");
