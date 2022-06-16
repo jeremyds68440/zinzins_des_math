@@ -85,7 +85,7 @@ public class ChooseSoloMultiActivity extends AppCompatActivity {
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     finish();
                 }else{
-                    Toast.makeText(ChooseSoloMultiActivity.this, "Connectez vous dans les paramètres pour accéder", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ChooseSoloMultiActivity.this, "Connectez vous dans les paramètres pour accéder au multijoueur", Toast.LENGTH_SHORT).show();
                 }
             }
         });
