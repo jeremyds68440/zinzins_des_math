@@ -138,6 +138,11 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                     }
                 });
             }
+            if(defi != null && role.equals("host")) {
+                Intent quit = new Intent(getApplicationContext(), RoomListActivity.class);
+                startActivity(quit);
+                finish();
+            }
 
             AlertDialog.Builder fini = new AlertDialog.Builder(mathemaQuizzActivity, R.style.MyDialogTheme);
             ViewGroup viewGroup = findViewById(android.R.id.content);
@@ -210,7 +215,9 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                     back.setColorFilter(Color.argb(0, 0, 0, 0));
                 }
             });
-            alertDialog.show();
+            if(defi == null) {
+                alertDialog.show();
+            }
         }
     };
 
@@ -565,6 +572,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                     });
                     finiDefi.show();
                 }
+                finiDefi.setCancelable(false);
             }
 
             @Override
