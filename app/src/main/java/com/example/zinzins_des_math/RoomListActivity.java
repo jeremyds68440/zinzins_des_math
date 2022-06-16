@@ -214,44 +214,57 @@ public class RoomListActivity extends AppCompatActivity {
                 roomName = extract[0];
                 gameName = extract[1];
                 roomRef = database.getReference("rooms/"+toRoomName+"/player2");
-                switch (gameName){
-                    case "Multifactor Facile":
-                        roomRef.setValue(user.getUid());
-                        addRoomEventListener(MultiFactorActivity.class,0,"client", toRoomName);
-                        break;
-                    case "Multifactor Moyen":
-                        roomRef.setValue(user.getUid());
-                        addRoomEventListener(MultiFactorActivity.class,1,"client", toRoomName);
-                        break;
-                    case "Multifactor Difficile":
-                        roomRef.setValue(user.getUid());
-                        addRoomEventListener(MultiFactorActivity.class,2,"client", toRoomName);
-                        break;
-                    case "Mathemaquizz Facile":
-                        roomRef.setValue(user.getUid());
-                        addRoomEventListener(MathemaQuizzActivity.class,0,"client", toRoomName);
-                        break;
-                    case "Mathemaquizz Moyen":
-                        roomRef.setValue(user.getUid());
-                        addRoomEventListener(MathemaQuizzActivity.class,1,"client", toRoomName);
-                        break;
-                    case "Mathemaquizz Difficile":
-                        roomRef.setValue(user.getUid());
-                        addRoomEventListener(MathemaQuizzActivity.class,2,"client", toRoomName);
-                        break;
-                    case "Roulette Facile":
-                        roomRef.setValue(user.getUid());
-                        addRoomEventListener(RouletteActivity.class,0,"client", toRoomName);
-                        break;
-                    case "Roulette Moyen":
-                        roomRef.setValue(user.getUid());
-                        addRoomEventListener(RouletteActivity.class,1,"client", toRoomName);
-                        break;
-                    case "Roulette Difficile":
-                        roomRef.setValue(user.getUid());
-                        addRoomEventListener(RouletteActivity.class,2,"client", toRoomName);
-                        break;
-                }
+                database.getReference("rooms/"+toRoomName).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(!user.getUid().equals(snapshot.child("player1").getValue())){
+                            switch (gameName){
+                                case "Multifactor Facile":
+                                    roomRef.setValue(user.getUid());
+                                    addRoomEventListener(MultiFactorActivity.class,0,"client", toRoomName);
+                                    break;
+                                case "Multifactor Moyen":
+                                    roomRef.setValue(user.getUid());
+                                    addRoomEventListener(MultiFactorActivity.class,1,"client", toRoomName);
+                                    break;
+                                case "Multifactor Difficile":
+                                    roomRef.setValue(user.getUid());
+                                    addRoomEventListener(MultiFactorActivity.class,2,"client", toRoomName);
+                                    break;
+                                case "Mathemaquizz Facile":
+                                    roomRef.setValue(user.getUid());
+                                    addRoomEventListener(MathemaQuizzActivity.class,0,"client", toRoomName);
+                                    break;
+                                case "Mathemaquizz Moyen":
+                                    roomRef.setValue(user.getUid());
+                                    addRoomEventListener(MathemaQuizzActivity.class,1,"client", toRoomName);
+                                    break;
+                                case "Mathemaquizz Difficile":
+                                    roomRef.setValue(user.getUid());
+                                    addRoomEventListener(MathemaQuizzActivity.class,2,"client", toRoomName);
+                                    break;
+                                case "Roulette Facile":
+                                    roomRef.setValue(user.getUid());
+                                    addRoomEventListener(RouletteActivity.class,0,"client", toRoomName);
+                                    break;
+                                case "Roulette Moyen":
+                                    roomRef.setValue(user.getUid());
+                                    addRoomEventListener(RouletteActivity.class,1,"client", toRoomName);
+                                    break;
+                                case "Roulette Difficile":
+                                    roomRef.setValue(user.getUid());
+                                    addRoomEventListener(RouletteActivity.class,2,"client", toRoomName);
+                                    break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
             }
         });
         addRoomsEventListener();
