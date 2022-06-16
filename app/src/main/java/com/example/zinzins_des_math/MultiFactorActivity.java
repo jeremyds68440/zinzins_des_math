@@ -708,8 +708,8 @@ public class MultiFactorActivity extends AppCompatActivity {
 
                     TextView votreScore = dialogView.findViewById(R.id.text_votre_score1);
                     TextView monScore = dialogView.findViewById(R.id.text_son_score1);
-                    Button quitter = dialogView.findViewById((R.id.button_quitter_multi1));
-                    LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_back));
+                    Button quitter = dialogView.findViewById(R.id.button_quitter_multi1);
+                    LinearLayout popup_back = dialogView.findViewById(R.id.layout_popup_multi1);
                     popup_back.setBackground(getDrawable(R.drawable.popup_defaite_mj1));
 
                     votreScore.setText("" + scorePlayer2);
@@ -751,8 +751,8 @@ public class MultiFactorActivity extends AppCompatActivity {
 
                     TextView votreScore = dialogView.findViewById(R.id.text_votre_score1);
                     TextView monScore = dialogView.findViewById(R.id.text_son_score1);
-                    Button quitter = dialogView.findViewById((R.id.button_quitter_multi1));
-                    LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_back));
+                    Button quitter = dialogView.findViewById(R.id.button_quitter_multi1);
+                    LinearLayout popup_back = dialogView.findViewById(R.id.layout_popup_multi1);
                     popup_back.setBackground(getDrawable(R.drawable.popup_egalite_mj1));
 
                     votreScore.setText("" + scorePlayer2);
@@ -791,8 +791,8 @@ public class MultiFactorActivity extends AppCompatActivity {
 
                     TextView votreScore = dialogView.findViewById(R.id.text_votre_score1);
                     TextView monScore = dialogView.findViewById(R.id.text_son_score1);
-                    Button quitter = dialogView.findViewById((R.id.button_quitter_multi1));
-                    LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_multi1));
+                    Button quitter = dialogView.findViewById(R.id.button_quitter_multi1);
+                    LinearLayout popup_back = dialogView.findViewById(R.id.layout_popup_multi1);
                     popup_back.setBackground(getDrawable(R.drawable.popup_victoire_mj1));
 
                     votreScore.setText("" + scorePlayer2);
