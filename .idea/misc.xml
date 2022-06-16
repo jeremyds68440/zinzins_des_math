@@ -7,11 +7,6 @@
         <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2585" />
         <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_jeux.xml" value="0.286231884057971" />
         <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/activity_main.xml" value="0.286231884057971" />
-        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/custom_popup_mj1.xml" value="0.35989583333333336" />
-        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/custom_popup_mj3_victoire.xml" value="0.35989583333333336" />
-        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/custom_popup_multi1.xml" value="0.35885416666666664" />
-        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/custom_popup_multi2.xml" value="0.29444444444444445" />
-        <entry key="..\:/Users/albig/Documents/AndroidStudio/zinzins_des_math/app/src/main/res/layout/custom_popup_multijoueur.xml" value="0.35885416666666664" />
         <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.166" />
         <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/drawable/ic_launcher_background.xml" value="0.183" />
         <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/layout/activity_difficile.xml" value="0.1" />
@@ -33,6 +28,8 @@
         <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/layout/activity_second_game.xml" value="0.18333333333333332" />
         <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/layout/activity_splash_screen.xml" value="0.18333333333333332" />
         <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/layout/custom_popup_mj1.xml" value="0.25" />
+        <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/layout/custom_popup_multi1.xml" value="0.25" />
+        <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/layout/custom_popup_multi2.xml" value="0.25" />
         <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/layout/custom_textview.xml" value="0.24895833333333334" />
         <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/layout/test.xml" value="0.10461956521739131" />
         <entry key="..\:/Users/henne/AndroidStudioProjects/zinzins_des_math/app/src/main/res/menu/menu_popup.xml" value="0.25" />
