@@ -196,6 +196,7 @@ public class RoomListActivity extends AppCompatActivity {
                         return false;
                     }
                 });
+                button.setEnabled(true);
                 game.show();
             }
         });
