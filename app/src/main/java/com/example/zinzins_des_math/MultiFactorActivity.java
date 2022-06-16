@@ -410,7 +410,6 @@ public class MultiFactorActivity extends AppCompatActivity {
         Button quitter = dialogView.findViewById(R.id.button_quitter);
         Button reprendre = dialogView.findViewById((R.id.button_rep_jeu));
 
-
         String positive;
         if(win) {
             if (defi != null) {

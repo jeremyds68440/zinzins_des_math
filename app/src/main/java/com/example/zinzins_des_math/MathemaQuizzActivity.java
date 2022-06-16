@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,9 +14,11 @@ import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -350,7 +353,6 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         builder.setView(dialogView_back);
         AlertDialog alertDialog = builder.create();
 
-
         Button quitter = dialogView_back.findViewById(R.id.button_quitter);
         Button reprendre = dialogView_back.findViewById((R.id.button_rep_jeu));
         LinearLayout popup_back = dialogView_back.findViewById((R.id.layout_popup_back));
@@ -507,18 +509,31 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {}
                     });
 
-                    finiDefi.setTitle("Dommage");
-                    finiDefi.setMessage("Vous avez perdu avec" + scorePlayer2 + " pts contre " + scorePlayer1 + "pts");
-                    finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+                    AlertDialog.Builder nul = new AlertDialog.Builder(mathemaQuizzActivity, R.style.MyDialogTheme);
+                    ViewGroup viewGroup = findViewById(android.R.id.content);
+                    View dialogView = LayoutInflater.from(mathemaQuizzActivity).inflate(R.layout.custom_popup_multi2, viewGroup, false);
+                    nul.setView(dialogView);
+                    AlertDialog alertDialog = nul.create();
+
+                    TextView votreScore = dialogView.findViewById(R.id.text_votre_score2);
+                    TextView monScore = dialogView.findViewById(R.id.text_son_score2);
+                    Button quitter = dialogView.findViewById((R.id.button_quitter_multi2));
+                    LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_back));
+                    popup_back.setBackground(getDrawable(R.drawable.popup_defaite_mj2));
+
+                    votreScore.setText(scorePlayer2);
+                    monScore.setText(scorePlayer1);
+
+                    quitter.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
                             rDatabase.removeValue();
                             finish();
                         }
                     });
-                    finiDefi.setCancelable(false);
-                    finiDefi.show();
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();
                 }
                 else if(scorePlayer1 == scorePlayer2) {
                     refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -535,19 +550,31 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {}
                     });
 
+                    AlertDialog.Builder nul = new AlertDialog.Builder(mathemaQuizzActivity, R.style.MyDialogTheme);
+                    ViewGroup viewGroup = findViewById(android.R.id.content);
+                    View dialogView = LayoutInflater.from(mathemaQuizzActivity).inflate(R.layout.custom_popup_multi2, viewGroup, false);
+                    nul.setView(dialogView);
+                    AlertDialog alertDialog = nul.create();
 
-                    finiDefi.setTitle("Match nul");
-                    finiDefi.setMessage("Vous avez fait égalité avec un score de " + scorePlayer2 + " pts");
-                    finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+                    TextView votreScore = dialogView.findViewById(R.id.text_votre_score2);
+                    TextView monScore = dialogView.findViewById(R.id.text_son_score2);
+                    Button quitter = dialogView.findViewById((R.id.button_quitter_multi2));
+                    LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_back));
+                    popup_back.setBackground(getDrawable(R.drawable.popup_egalite_mj2));
+
+                    votreScore.setText(scorePlayer2);
+                    monScore.setText(scorePlayer1);
+
+                    quitter.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
                             rDatabase.removeValue();
                             finish();
                         }
                     });
-                    finiDefi.setCancelable(false);
-                    finiDefi.show();
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();
                 }
                 else {
                     refUsers.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -561,19 +588,31 @@ public class MathemaQuizzActivity extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {}
                     });
 
+                    AlertDialog.Builder bravo = new AlertDialog.Builder(mathemaQuizzActivity, R.style.MyDialogTheme);
+                    ViewGroup viewGroup = findViewById(android.R.id.content);
+                    View dialogView = LayoutInflater.from(mathemaQuizzActivity).inflate(R.layout.custom_popup_multi2, viewGroup, false);
+                    bravo.setView(dialogView);
+                    AlertDialog alertDialog = bravo.create();
 
-                    finiDefi.setTitle("Bravo");
-                    finiDefi.setMessage("Vous avez gagné avec " + scorePlayer2 + " pts contre " + scorePlayer1 + " pts");
-                    finiDefi.setNegativeButton("Quitter", new DialogInterface.OnClickListener() {
+                    TextView votreScore = dialogView.findViewById(R.id.text_votre_score2);
+                    TextView monScore = dialogView.findViewById(R.id.text_son_score2);
+                    Button quitter = dialogView.findViewById((R.id.button_quitter_multi2));
+                    LinearLayout popup_back = dialogView.findViewById((R.id.layout_popup_multi2));
+                    popup_back.setBackground(getDrawable(R.drawable.popup_victoire_mj2));
+
+                    votreScore.setText(scorePlayer2);
+                    monScore.setText(scorePlayer1);
+
+                    quitter.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
+                        public void onClick(View v) {
+                            alertDialog.dismiss();
                             rDatabase.removeValue();
                             finish();
                         }
                     });
-                    finiDefi.setCancelable(false);
-                    finiDefi.show();
+                    alertDialog.setCancelable(false);
+                    alertDialog.show();
                 }
             }
 
