@@ -40,7 +40,7 @@ public class MathemaQuizzActivity extends AppCompatActivity {
     Button btn_ans0, btn_ans1, btn_ans2, btn_ans3;
     MediaPlayer soundtheme, chrono;
 
-    TextView equation, timer, score, soluaff;
+    TextView equation, timer, score;
     ProgressBar progresstimer;
     ConstraintLayout bg;
     ImageView nuage_equation,back;
@@ -257,7 +257,6 @@ public class MathemaQuizzActivity extends AppCompatActivity {
         timer = findViewById(R.id.timer);
         equation = findViewById(R.id.equation);
         score = findViewById(R.id.score);
-        soluaff = findViewById(R.id.answersolus);
         bg = findViewById(R.id.bg_math_quizz);
         nuage_equation = findViewById(R.id.nuage_enigme);
         loadData();
@@ -471,7 +470,6 @@ public class MathemaQuizzActivity extends AppCompatActivity {
 
 
         equation.setText(g.getCurrentEquation().getEquationPhrase());
-        soluaff.setText(g.getNumberCorrect() + "/" + (g.getTotalEquations() - 1));
         if (g.getScore() < 0) {
             g.setNumberIncorrect(0);
             g.setNumberCorrect(0);
