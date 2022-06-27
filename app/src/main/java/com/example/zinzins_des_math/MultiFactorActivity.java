@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -20,7 +18,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -50,36 +47,27 @@ public class MultiFactorActivity extends AppCompatActivity {
     private int counter = 0;
     private int countMult = 0;
     private int evolutionScore = 0;
-    private int difficulty, target, multiTurn;
-    private Bundle extras;
-    private String defi, role, roomName, difficultyString;
     private int id = R.layout.custom_popup_endgame;
+    private int difficulty, target, multiTurn, dbPlace;
+    private String defi, role, difficultyString;
     private TextView targetCount, scoreCount;
     private LinearLayout layout;
     private ImageView scorePlace, targetPlace, gridBackground, back;
     private boolean blocked = false;
     private boolean evolution = false;
     private boolean sound_theme_state, sound_effect_state;
+    private boolean multi = false;
     private ArrayList<Integer> iterBubble;
     private FirebaseDatabase database;
-    private FirebaseUser user;
     private FirebaseAuth fAuth;
     private DatabaseReference uDatabase, rDatabase;
-    private MediaPlayer soundtheme, soundgood, soundvrong;
-    public int BUBBLECOLUMN = 190;
-    public int BUBBLEROW = 190;
+    private MediaPlayer soundtheme;
+    public int bubbleSize = 190;
     public static final int NUMBERBUBBLEROW = 6;
     public static final int NUMBERBUBBLECOLUMN = 4;
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String ETAT_SOUND_THEME = "etat_sound_theme";
     public static final String ETAT_SOUND_EFFECT = "etat_sound_effect";
-
-
-    public void loadData() {
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        sound_theme_state = sharedPreferences.getBoolean(ETAT_SOUND_THEME, true);
-        sound_effect_state = sharedPreferences.getBoolean(ETAT_SOUND_EFFECT, true);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,156 +75,168 @@ public class MultiFactorActivity extends AppCompatActivity {
         setContentView(R.layout.activity_multifactor);
         loadData();
 
-        fAuth = FirebaseAuth.getInstance();
-        if (fAuth.getCurrentUser() != null) {
-            extras = getIntent().getExtras();
-            if (extras != null) {
-                multiTurn = 0;
-                defi = extras.getString("defi");
-                role = extras.getString("role");
-                roomName = extras.getString("roomName");
-            }
-            database = FirebaseDatabase.getInstance();
-            user = FirebaseAuth.getInstance().getCurrentUser();
-            uDatabase = database.getReference("users").child(user.getUid());
-            if (defi != null)
-                rDatabase = database.getReference("rooms").child(roomName);
-        }
-
-        iterBubble = new ArrayList<>();
-        for(int i = 0; i < 10; i++) {
-            iterBubble.add(0);
-        }
+        connection();
+        setMulti();
+        context = getApplicationContext();
 
         if (sound_theme_state) {
-            this.soundtheme = MediaPlayer.create(getApplicationContext(), R.raw.multifactor_sound);
+            soundtheme = MediaPlayer.create(context, R.raw.multifactor_sound);
         }
-        context = getApplicationContext();
 
         DisplayMetrics displayrealMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getRealMetrics(displayrealMetrics);
-
         Resources resources = context.getResources();
         int resourcesId = resources.getIdentifier("navigation_bar_height", "dimen", "android");
-        int height = displayrealMetrics.heightPixels - resources.getDimensionPixelSize(resourcesId);
-        int width = displayrealMetrics.widthPixels;
-
-
-        Rect rectangle = new Rect();
-        Window window = getWindow();
-        window.getDecorView().getWindowVisibleDisplayFrame(rectangle);
-
+        int windowHeight = displayrealMetrics.heightPixels - resources.getDimensionPixelSize(resourcesId);
+        int windowWidth = displayrealMetrics.widthPixels;
 
         layout = findViewById(R.id.multifactor);
 
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams((int)getResources().getDimension(R.dimen.wight_backbutton), (int)getResources().getDimension(R.dimen.height_backbutton));
-        params.setMargins((int)(16*displayrealMetrics.density),(int)(44*displayrealMetrics.density),0,0);
-        back = new ImageView(getApplicationContext());
-        back.setLayoutParams(params);
-        back.setImageResource(R.drawable.ic_baseline_arrow_back_ios_24);
+        int backHeight = (int)getResources().getDimension(R.dimen.height_backbutton);
+        int backMarginTop = (int)(44*displayrealMetrics.density);
+        int imageHeight = 107;
+        int relativeHeight = 220;
+        int topHeight = backHeight + backMarginTop + imageHeight*2 + relativeHeight * 2 + relativeHeight/8 * 2 + (int)(relativeHeight/3.3) * 2;
+
+        while(topHeight < (int)(windowHeight * 0.47)) {
+            imageHeight++;
+            relativeHeight++;
+            topHeight = backHeight + backMarginTop + imageHeight*2 + relativeHeight * 2 + relativeHeight/8 * 2 + (int)(relativeHeight/3.3) * 2;
+        }
+
+        while(topHeight >= (int)(windowHeight * 0.47)) {
+            imageHeight--;
+            relativeHeight--;
+            topHeight = backHeight + backMarginTop + imageHeight*2 + relativeHeight * 2 + relativeHeight/8 * 2 + (int)(relativeHeight/3.3) * 2;
+        }
+
+        int gridBgHeight = windowHeight - topHeight;
+
+        back = setImageView(new ImageView(context), (int)getResources().getDimension(R.dimen.wight_backbutton), backHeight, (int)(16*displayrealMetrics.density), backMarginTop, 0, 0, R.drawable.ic_baseline_arrow_back_ios_24);;
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setQuitPopup();
             }
         });
-        layout.addView(back);
 
-        ImageView scoreImage = new ImageView(getApplicationContext());
-        params = new LinearLayout.LayoutParams(width, 107);
-        scoreImage.setLayoutParams(params);
-        scoreImage.setImageResource(R.drawable.multifactor_scoretext);
+        ImageView scoreImage = setImageView(new ImageView(context), windowWidth, imageHeight, 0, 0, 0, 0, R.drawable.multifactor_scoretext);
+        RelativeLayout relativeScore = setRelativeLayout(windowWidth, relativeHeight, 0, relativeHeight/8, 0, (int)(relativeHeight/3.3));
+        ImageView targetImage = setImageView(new ImageView(context), windowWidth, imageHeight, 0, 0, 0, 0, R.drawable.multifactor_targettext);
+        RelativeLayout relativeTarget = setRelativeLayout(windowWidth, relativeHeight, 0, relativeHeight/8, 0, (int)(relativeHeight/3.3));
+        RelativeLayout gridLayout = setRelativeLayout(windowWidth, gridBgHeight, 0, 0, 0, 14);
 
-        layout.addView(scoreImage);
-
-        RelativeLayout relativeScore = new RelativeLayout(getApplicationContext());
-        RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(width, 220);
-        relativeParams.setMargins(0, 27, 0, 66);
-        relativeScore.setLayoutParams(relativeParams);
-
-        layout.addView(relativeScore);
-
-        scorePlace = new ImageView(getApplicationContext());
-        params = new LinearLayout.LayoutParams(width, 220);
-        scorePlace.setLayoutParams(params);
-
+        scorePlace = setImageView(new ImageView(context), windowWidth, relativeHeight, 0, 0, 0, 0, 0);
+        scoreCount = setTextView(windowWidth, relativeHeight);
         relativeScore.addView(scorePlace);
-
-        scoreCount = new TextView(getApplicationContext());
-        params = new LinearLayout.LayoutParams(width, 220);
-        scoreCount.setLayoutParams(params);
-        scoreCount.setGravity(Gravity.CENTER);
-        scoreCount.setTextColor(context.getResources().getColor(R.color.first_game_text));
-        scoreCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
-
         relativeScore.addView(scoreCount);
 
-        ImageView targetImage = new ImageView(getApplicationContext());
-        params = new LinearLayout.LayoutParams(width, 107);
-        targetImage.setLayoutParams(params);
-        targetImage.setImageResource(R.drawable.multifactor_targettext);
-
-        layout.addView(targetImage);
-
-        RelativeLayout relativeTarget = new RelativeLayout(getApplicationContext());
-        relativeParams = new RelativeLayout.LayoutParams(width, 220);
-        relativeParams.setMargins(0, 27, 0, 55);
-        relativeTarget.setLayoutParams(relativeParams);
-
-        layout.addView(relativeTarget);
-
-        targetPlace = new ImageView(getApplicationContext());
-        params = new LinearLayout.LayoutParams(width, 220);
-        targetPlace.setLayoutParams(params);
-
+        targetPlace = setImageView(new ImageView(context), windowWidth, relativeHeight, 0, 0, 0, 0, 0);
+        targetCount = setTextView(windowWidth, relativeHeight);
         relativeTarget.addView(targetPlace);
-
-        targetCount = new TextView(getApplicationContext());
-        params = new LinearLayout.LayoutParams(width, 220);
-        targetCount.setLayoutParams(params);
-        targetCount.setGravity(Gravity.CENTER);
-        targetCount.setTextColor(context.getResources().getColor(R.color.first_game_text));
-        targetCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
-
         relativeTarget.addView(targetCount);
 
-        int gridBgHeight = height - 849 - (int)(44*displayrealMetrics.density) - (int)getResources().getDimension(R.dimen.height_backbutton);
+        gridBackground = setImageView(new ImageView(context), windowWidth, gridBgHeight, 0, 0, 0, 0, 0);
 
-        RelativeLayout gridLayout = new RelativeLayout(getApplicationContext());
-        relativeParams = new RelativeLayout.LayoutParams(width, gridBgHeight);
-        relativeParams.setMargins(0,0,0,14);
-        gridLayout.setLayoutParams(relativeParams);
+        setDifficulty();
+        setBubbleSize(gridBgHeight);
+        newTarget();
+        resetCounter();
 
-        gridBackground = new ImageView(getApplicationContext());
-        params = new LinearLayout.LayoutParams(width, gridBgHeight);
-        gridBackground.setLayoutParams(params);
+        List<BubbleItem> bubbles = setBubbleList();
 
+        RelativeLayout.LayoutParams gridParams = new RelativeLayout.LayoutParams(NUMBERBUBBLECOLUMN*bubbleSize+100,bubbleSize*NUMBERBUBBLEROW);
+        gridParams.setMargins((windowWidth - (NUMBERBUBBLECOLUMN*bubbleSize+70))/2,(gridBgHeight - bubbleSize*NUMBERBUBBLEROW)/2,0,0);
+        GridView grid = new GridView(context);
+        grid.setNumColumns(NUMBERBUBBLECOLUMN);
+        grid.setLayoutParams(gridParams);
+        grid.setAdapter(new BubbleItemAdapter(this, bubbles));
+
+        gridLayout.addView(gridBackground);
+        gridLayout.addView(grid);
+
+        layout.addView(back);
+        layout.addView(scoreImage);
+        layout.addView(relativeScore);
+        layout.addView(targetImage);
+        layout.addView(relativeTarget);
+        layout.addView(gridLayout);
+    }
+
+    public void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        sound_theme_state = sharedPreferences.getBoolean(ETAT_SOUND_THEME, true);
+        sound_effect_state = sharedPreferences.getBoolean(ETAT_SOUND_EFFECT, true);
+    }
+
+    public void connection() {
+        fAuth = FirebaseAuth.getInstance();
+        if (fAuth.getCurrentUser() != null) {
+            database = FirebaseDatabase.getInstance();
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            uDatabase = database.getReference("users").child(user.getUid());
+        }
+    }
+
+    public void setMulti() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            multi = true;
+            multiTurn = 0;
+            defi = extras.getString("defi");
+            role = extras.getString("role");
+            String roomName = extras.getString("roomName");
+            rDatabase = database.getReference("rooms").child(roomName);
+        }
+    }
+
+    public RelativeLayout setRelativeLayout(int width, int height, int marginLeft, int marginTop, int marginRight, int marginBottom) {
+        RelativeLayout relativeLayout = new RelativeLayout(context);
+        RelativeLayout.LayoutParams relativeParams = new RelativeLayout.LayoutParams(width, height);
+        relativeParams.setMargins(marginLeft, marginTop, marginRight, marginBottom);
+        relativeLayout.setLayoutParams(relativeParams);
+        return relativeLayout;
+    }
+
+    public ImageView setImageView(ImageView view, int width, int height, int marginLeft, int marginTop, int marginRight, int marginBottom, int imageId) {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
+        params.setMargins(marginLeft, marginTop, marginRight, marginBottom);
+        view.setLayoutParams(params);
+        if(imageId != 0) {
+            view.setImageResource(imageId);
+        }
+        return view;
+    }
+
+    public TextView setTextView(int width, int height) {
+        TextView view = new TextView(context);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
+        view.setLayoutParams(params);
+        view.setGravity(Gravity.CENTER);
+        view.setTextColor(getColor(R.color.first_game_text));
+        view.setTextSize(TypedValue.COMPLEX_UNIT_SP, 50);
+        return view;
+    }
+
+    public void setDifficulty() {
         difficulty = getIntent().getFlags();
         if(difficulty == 3) {
             evolution = true;
             difficulty = 0;
         }
         setDifficultyTheme();
+    }
 
-        while(BUBBLEROW*NUMBERBUBBLEROW < gridBgHeight-70) {
-            BUBBLECOLUMN++;
-            BUBBLEROW++;
-        }
-
-        while(BUBBLEROW*NUMBERBUBBLEROW > gridBgHeight-70) {
-            BUBBLECOLUMN--;
-            BUBBLEROW--;
-        }
-
-        context = getApplicationContext();
-
-        newTarget();
-        resetCounter();
-
+    public List<BubbleItem> setBubbleList() {
         List<BubbleItem> bubbles = new ArrayList<>();
-        ImageView number;
         int notPlaced = 0;
         int random;
+
+        iterBubble = new ArrayList<>();
+        for(int i = 0; i < 10; i++) {
+            iterBubble.add(0);
+        }
+
         for(int i = 0; i < NUMBERBUBBLECOLUMN*NUMBERBUBBLEROW; i++) {
             random = (int) (Math.random()*8+2);
             while(i > NUMBERBUBBLECOLUMN*NUMBERBUBBLEROW/2 && notPlaced != -1 && notPlaced != random) {
@@ -246,18 +246,16 @@ public class MultiFactorActivity extends AppCompatActivity {
             iterBubble.set(random, iterBubble.get(random) + 1);
             bubbles.add(new BubbleItem(random));
         }
+        return bubbles;
+    }
 
-        RelativeLayout.LayoutParams gridParams = new RelativeLayout.LayoutParams(NUMBERBUBBLECOLUMN*BUBBLECOLUMN+100,BUBBLEROW*NUMBERBUBBLEROW);
-        RelativeLayout.LayoutParams bgParams = new RelativeLayout.LayoutParams(width,BUBBLEROW*NUMBERBUBBLEROW + 100);
-        gridParams.setMargins((width - (NUMBERBUBBLECOLUMN*BUBBLECOLUMN+70))/2,(gridBgHeight - BUBBLEROW*NUMBERBUBBLEROW)/2,0,0);
-        GridView grid = new GridView(getApplicationContext());
-        grid.setNumColumns(NUMBERBUBBLECOLUMN);
-        grid.setLayoutParams(gridParams);
-        grid.setAdapter(new BubbleItemAdapter(this, bubbles));
-
-        gridLayout.addView(gridBackground);
-        gridLayout.addView(grid);
-        layout.addView(gridLayout);
+    public void setBubbleSize(int gridBgHeight) {
+        while(bubbleSize*NUMBERBUBBLEROW < gridBgHeight-70) {
+            bubbleSize++;
+        }
+        while(bubbleSize*NUMBERBUBBLEROW > gridBgHeight-70) {
+            bubbleSize--;
+        }
     }
 
     public int numberNotPlaced() {
@@ -287,12 +285,14 @@ public class MultiFactorActivity extends AppCompatActivity {
                 lessPlaced.add(i);
             }
         }
-        int candidate;
-        if(timePlaced == 0 && (lessPlaced.get(0) == 2 || lessPlaced.get(0) == 3 || lessPlaced.get(0) == 5 || lessPlaced.get(0) == 7)) {
-            candidate = lessPlaced.get(0);
-            iterBubble.set(candidate, iterBubble.get(candidate) + 1);
+        int candidate = 0;
+        for(int i = 0; i < lessPlaced.size(); i++) {
+            if(timePlaced == 0 && (lessPlaced.get(i) == 2 || lessPlaced.get(i) == 3 || lessPlaced.get(i) == 5 || lessPlaced.get(i) == 7)) {
+                candidate = lessPlaced.get(i);
+                iterBubble.set(candidate, 1);
+            }
         }
-        else {
+        if(candidate == 0) {
             candidate = (int) (Math.random() * 8 + 2);
             iterBubble.set(candidate, iterBubble.get(candidate) + 1);
         }
@@ -301,28 +301,26 @@ public class MultiFactorActivity extends AppCompatActivity {
 
     public void setDifficultyTheme() {
         if(difficulty == 0) {
-            layout.setBackground(getDrawable(R.drawable.multifactor_bg_facile));
-            scorePlace.setImageResource(R.drawable.multifactor_score_facile);
-            targetPlace.setImageResource(R.drawable.multifactor_target_facile);
             difficultyString = "facile";
-            gridBackground.setImageResource(R.drawable.multifactor_terrain_facile);
+            dbPlace = 5;
         }
         else if(difficulty == 1) {
-            layout.setBackground(getDrawable(R.drawable.multifactor_bg_moyen));
-            scorePlace.setImageResource(R.drawable.multifactor_score_moyen);
-            targetPlace.setImageResource(R.drawable.multifactor_target_moyen);
             difficultyString = "moyen";
-            gridBackground.setImageResource(R.drawable.multifactor_terrain_moyen);
+            dbPlace = 6;
         }
         else {
-            layout.setBackground(getDrawable(R.drawable.multifactor_bg_difficile));
-            scorePlace.setImageResource(R.drawable.multifactor_score_difficile);
-            targetPlace.setImageResource(R.drawable.multifactor_target_difficile);
             difficultyString = "difficile";
-            gridBackground.setImageResource(R.drawable.multifactor_terrain_difficile);
+            dbPlace = 4;
         }
+        int resId = getResources().getIdentifier("multifactor_bg_" + difficultyString, "drawable", getPackageName());
+        layout.setBackground(getDrawable(resId));
+        resId = getResources().getIdentifier("multifactor_score_" + difficultyString, "drawable", getPackageName());
+        scorePlace.setImageResource(resId);
+        resId = getResources().getIdentifier("multifactor_target_" + difficultyString, "drawable", getPackageName());
+        targetPlace.setImageResource(resId);
+        resId = getResources().getIdentifier("multifactor_terrain_" + difficultyString, "drawable", getPackageName());
+        gridBackground.setImageResource(resId);
     }
-
 
     public void onBackPressed() {
         setQuitPopup();
@@ -354,9 +352,8 @@ public class MultiFactorActivity extends AppCompatActivity {
             if(counter == target) {
                 id = R.layout.custom_popup_mj1;
                 int varMult = (difficulty+2)*2;
-                point += 120 * ((float)(varMult - countMult + getMinMult() + difficulty*2) /varMult/ numberOfTry);
+                point = (int)(120 * ((float)(varMult - countMult + getMinMult() + difficulty*2) /varMult/ numberOfTry));
                 numberOfTry = 1;
-                countMult = 0;
                 points += point;
                 if(evolution) {
                     evolutionScoreTour = point - 60 * (varMult + difficulty * 2) / varMult;
@@ -367,22 +364,22 @@ public class MultiFactorActivity extends AppCompatActivity {
             }
             else {
                 id = R.layout.custom_popup_back;
-                countMult = 0;
                 numberOfTry++;
             }
+            countMult = 0;
             setGameOver(counter == target, point, evolutionScoreTour);
         }
     }
 
     public void evolutionDifficulty() {
-        difficulty = 0;
-        int varMult = (difficulty+2)*2;
-        int palier = 600 * (varMult + difficulty*2)/varMult;
-        while(evolutionScore >= palier) {
+        Log.e("MultiFactorActivity", "Pk je suis dans evolutionDifficulty ?");
+        difficulty = -1;
+        int varMult, palier;
+        do {
             difficulty++;
             varMult = (difficulty+2)*2;
-            palier += 600 * (varMult + difficulty*2)/varMult;
-        }
+            palier = 600 * (varMult + difficulty*2)/varMult;
+        } while(evolutionScore >= palier);
         setDifficultyTheme();
     }
 
@@ -410,16 +407,15 @@ public class MultiFactorActivity extends AppCompatActivity {
         Button quitter = dialogView.findViewById(R.id.button_quitter);
         Button reprendre = dialogView.findViewById((R.id.button_rep_jeu));
 
-        String positive;
         if(win) {
-            if (defi != null) {
+            if (multi) {
                 multiTurn++;
             }
 
             LinearLayout linearLayout = dialogView.findViewById(R.id.layout_popup_victoire);
 
             if (sound_effect_state){
-                this.soundgood = MediaPlayer.create(getApplicationContext(), R.raw.good_sound);
+                MediaPlayer soundgood = MediaPlayer.create(context, R.raw.good_sound);
                 soundgood.start();
             }
 
@@ -448,46 +444,16 @@ public class MultiFactorActivity extends AppCompatActivity {
                         int dbScore;
                         final User utilisateur = new User();
                         final Field[] fields = utilisateur.getClass().getDeclaredFields();
-                        switch (getIntent().getFlags()) {
-                            case 0:
-                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[5].getName()).getValue());
-                                if (dbScore > -points)
-                                    uDatabase.child("scoreMultifactorFacile").setValue(-points);
-                                if (defi != null && multiTurn == 5) {
-                                    if (role.equals("host")) {
-                                        rDatabase.child("scorePlayer1").setValue(points);
-                                    } else if (role.equals("client")) {
-                                        rDatabase.child("scorePlayer2").setValue(points);
-                                        compareScore();
-                                    }
-                                }
-                                break;
-                            case 1:
-                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[6].getName()).getValue());
-                                if (dbScore > -points)
-                                    uDatabase.child("scoreMultifactorMoyen").setValue(-points);
-                                if (defi != null && multiTurn == 5) {
-                                    if (role.equals("host")) {
-                                        rDatabase.child("scorePlayer1").setValue(points);
-                                    } else if (role.equals("client")) {
-                                        rDatabase.child("scorePlayer2").setValue(points);
-                                        compareScore();
-                                    }
-                                }
-                                break;
-                            case 2:
-                                dbScore = Math.toIntExact((long) dataSnapshot.child(fields[4].getName()).getValue());
-                                if (dbScore > -points)
-                                    uDatabase.child("scoreMultifactorDifficile").setValue(-points);
-                                if (defi != null && multiTurn == 5) {
-                                    if (role.equals("host")) {
-                                        rDatabase.child("scorePlayer1").setValue(points);
-                                    } else if (role.equals("client")) {
-                                        rDatabase.child("scorePlayer2").setValue(points);
-                                        compareScore();
-                                    }
-                                }
-                                break;
+                        dbScore = Math.toIntExact((long) dataSnapshot.child(fields[dbPlace].getName()).getValue());
+                        if (dbScore > -points)
+                            uDatabase.child("scoreMultifactor" + difficultyString.substring(0, 1).toUpperCase() + difficultyString.substring(1)).setValue(-points);
+                        if (multi && multiTurn == 5) {
+                            if (role.equals("host")) {
+                                rDatabase.child("scorePlayer1").setValue(points);
+                            } else if (role.equals("client")) {
+                                rDatabase.child("scorePlayer2").setValue(points);
+                                compareScore();
+                            }
                         }
                     }
 
@@ -500,8 +466,8 @@ public class MultiFactorActivity extends AppCompatActivity {
         }
         else {
             if (sound_effect_state){
-                this.soundvrong = MediaPlayer.create(getApplicationContext(), R.raw.vrong_sound);
-                soundvrong.start();
+                MediaPlayer soundwrong = MediaPlayer.create(context, R.raw.vrong_sound);
+                soundwrong.start();
             }
 
             if (sound_theme_state) {
@@ -519,20 +485,20 @@ public class MultiFactorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent difficulte;
-                if(extras != null) {
-                    difficulte = new Intent(getApplicationContext(), RoomListActivity.class);
+                if(multi) {
+                    difficulte = new Intent(context, RoomListActivity.class);
                 }
                 else if(evolution) {
-                    difficulte = new Intent(getApplicationContext(), LevelActivity.class);
+                    difficulte = new Intent(context, LevelActivity.class);
                 }
                 else if(difficulty == 0) {
-                    difficulte = new Intent(getApplicationContext(), FacileActivity.class);
+                    difficulte = new Intent(context, FacileActivity.class);
                 }
                 else if(difficulty == 1) {
-                    difficulte = new Intent(getApplicationContext(), MoyenActivity.class);
+                    difficulte = new Intent(context, MoyenActivity.class);
                 }
                 else {
-                    difficulte = new Intent(getApplicationContext(), DifficileActivity.class);
+                    difficulte = new Intent(context, DifficileActivity.class);
                 }
                 startActivity(difficulte);
                 alertDialog.dismiss();
@@ -568,7 +534,7 @@ public class MultiFactorActivity extends AppCompatActivity {
             unBlocked();
         }
         else if(role.equals("host")) {
-            Intent retour = new Intent(getApplicationContext(), RoomListActivity.class);
+            Intent retour = new Intent(context, RoomListActivity.class);
             startActivity(retour);
             finish();
         }
@@ -594,20 +560,20 @@ public class MultiFactorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent difficulte;
-                if(extras != null) {
-                    difficulte = new Intent(getApplicationContext(), RoomListActivity.class);
+                if(multi) {
+                    difficulte = new Intent(context, RoomListActivity.class);
                 }
                 else if(evolution) {
-                    difficulte = new Intent(getApplicationContext(), LevelActivity.class);
+                    difficulte = new Intent(context, LevelActivity.class);
                 }
                 else if(difficulty == 0) {
-                    difficulte = new Intent(getApplicationContext(), FacileActivity.class);
+                    difficulte = new Intent(context, FacileActivity.class);
                 }
                 else if(difficulty == 1) {
-                    difficulte = new Intent(getApplicationContext(), MoyenActivity.class);
+                    difficulte = new Intent(context, MoyenActivity.class);
                 }
                 else {
-                    difficulte = new Intent(getApplicationContext(), DifficileActivity.class);
+                    difficulte = new Intent(context, DifficileActivity.class);
                 }
                 startActivity(difficulte);
                 alertDialog.dismiss();
@@ -718,7 +684,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                     quitter.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent back = new Intent(getApplicationContext(), RoomListActivity.class);
+                            Intent back = new Intent(context, RoomListActivity.class);
                             startActivity(back);
                             rDatabase.removeValue();
                             alertDialog.dismiss();
@@ -762,7 +728,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             rDatabase.removeValue();
-                            Intent back = new Intent(getApplicationContext(), RoomListActivity.class);
+                            Intent back = new Intent(context, RoomListActivity.class);
                             startActivity(back);
                             alertDialog.dismiss();
                             finish();
@@ -802,7 +768,7 @@ public class MultiFactorActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             rDatabase.removeValue();
-                            Intent back = new Intent(getApplicationContext(), RoomListActivity.class);
+                            Intent back = new Intent(context, RoomListActivity.class);
                             startActivity(back);
                             alertDialog.dismiss();
                             finish();

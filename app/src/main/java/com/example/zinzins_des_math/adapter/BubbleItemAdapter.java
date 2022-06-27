@@ -44,7 +44,7 @@ public class BubbleItemAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView image = new ImageView(context);
-        ViewGroup.LayoutParams params = new ActionBar.LayoutParams(context.BUBBLECOLUMN ,context.BUBBLEROW);
+        ViewGroup.LayoutParams params = new ActionBar.LayoutParams(context.bubbleSize ,context.bubbleSize);
 
         BubbleItem bubble = getItem(position);
         image.setLayoutParams(params);
