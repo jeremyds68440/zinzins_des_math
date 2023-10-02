@@ -16,4 +16,4 @@ https://github.com/jeremyds68440/zinzins_des_math/assets/103835746/71083fbb-2f4c
 
 ## Installation
 
-Jeu disponible sur anptoide
+Jeu disponible sur aptoide
